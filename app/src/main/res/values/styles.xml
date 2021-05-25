@@ -59,6 +59,10 @@
     </style>
 
 
-
+    <!--onboarding designs-->
+    <style name="MyButton" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorControlHighlight">@color/blue_100</item>
+        <item name="colorButtonNormal">@color/blue_500</item>
+    </style>
 
 </resources>

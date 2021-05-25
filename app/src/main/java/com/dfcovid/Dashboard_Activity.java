@@ -47,7 +47,8 @@ public class Dashboard_Activity extends AppCompatActivity {
     Class_GetUserHospitalList class_getUserHospitalList;
     String Date_time;
     Button Add_bt;
-    EditText edt_fromdate,fromdateseterror_TV;
+    EditText fromdateseterror_TV;
+    TextView edt_fromdate;
     String FromDate,ToDate;
     private int mYear, mMonth, mDay;
     private int cYear, cMonth, cDay;
@@ -71,10 +72,12 @@ public class Dashboard_Activity extends AppCompatActivity {
         hospital_list_SP=(Spinner)findViewById(R.id.hospital_list_SP);
         date_time_TV=(TextView)findViewById(R.id.date_time_TV);
         Add_bt=(Button)findViewById(R.id.Add_bt);
-        edt_fromdate=(EditText) findViewById(R.id.edt_fromdate);
-        fromdateseterror_TV=(EditText) findViewById(R.id.edt_fromdate);
+        edt_fromdate=(TextView) findViewById(R.id.edt_fromdate);
+        fromdateseterror_TV=(EditText) findViewById(R.id.fromdateseterror_TV);
         lv_summary = (ListView) findViewById(R.id.lv_summary);
 
+        edt_fromdate.setEnabled(false);
+        edt_fromdate.setFocusable(false);
         dashboard_list =new ArrayList<Class_DashboardHospitalData_List>();
 
         dashboardHospitalListViewAdapter = new DashboardHospitalListViewAdapter(Dashboard_Activity.this, dashboard_list);
