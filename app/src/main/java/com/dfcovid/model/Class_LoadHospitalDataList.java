@@ -30,7 +30,7 @@ public class Class_LoadHospitalDataList {
     private String outsideDistrcitABARK;
     @SerializedName("Total_AB_ARK")
     @Expose
-    private Object totalABARK;
+    private String totalABARK;
     @SerializedName("Within_District")
     @Expose
     private String withinDistrict;
@@ -153,11 +153,11 @@ public class Class_LoadHospitalDataList {
         this.outsideDistrcitABARK = outsideDistrcitABARK;
     }
 
-    public Object getTotalABARK() {
+    public String getTotalABARK() {
         return totalABARK;
     }
 
-    public void setTotalABARK(Object totalABARK) {
+    public void setTotalABARK(String totalABARK) {
         this.totalABARK = totalABARK;
     }
 
