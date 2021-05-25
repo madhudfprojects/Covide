@@ -9,6 +9,11 @@
     <color name="white">#FFFFFFFF</color>
 
 
+    <color name="ratingActive">#FFC300</color>
+    <color name="green_500">#259b24</color>
+    <color name="blue_100">#d0d9ff</color>
+    <color name="blue_500">#5677fc</color>
+
     <color name="colorPrimary">#E07F7F</color>
     <color name="colorPrimaryDark">#E08D8D</color>
     <color name="colorAccent">#EEADAD</color>
