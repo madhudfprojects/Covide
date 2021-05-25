@@ -61,7 +61,7 @@ public class Activity_pinlogin extends AppCompatActivity {
                     if(validation())
                     {
 
-                        Intent i = new Intent(Activity_pinlogin.this,HomeActivity.class);
+                        Intent i = new Intent(Activity_pinlogin.this,Dashboard_Activity.class);
                         startActivity(i);
                         finish();
                     }

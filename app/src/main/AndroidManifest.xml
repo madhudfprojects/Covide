@@ -38,6 +38,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar" />
         <activity android:name="com.dfcovid.HomeActivity" />
+        <activity
+            android:name="com.dfcovid.Dashboard_Activity" />
+
+        <activity
+            android:name="com.dfcovid.MainActivity2" />
+
     </application>
 
 </manifest>

@@ -59,14 +59,6 @@
     </style>
 
 
-    <!--onboarding designs-->
-    <style name="MyButton" parent="Theme.AppCompat.Light">
-        <item name="colorControlHighlight">@color/blue_100</item>
-        <item name="colorButtonNormal">@color/blue_500</item>
-    </style>
 
-    <style name="DatePickerTheme" parent="Theme.AppCompat.Light.Dialog">
-        <item name="colorAccent">@color/colorPrimaryDark</item>
-    </style>
 
 </resources>

@@ -149,7 +149,7 @@
             android:gravity="left"
             android:text="+Add"
             android:textColor="@color/white"
-            android:theme="@style/MyButton" />
+            style="@style/MyButton" />
     </LinearLayout>
 
     <ListView

@@ -2,6 +2,7 @@ package com.dfcovid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -40,6 +41,7 @@ public class Activity_confirmpin extends AppCompatActivity {
         otp3_et=(EditText) findViewById(R.id.otp3_et);
         otp4_et=(EditText) findViewById(R.id.otp4_et);
 
+        sharedpreference_usercredential_Obj=getSharedPreferences(sharedpreference_usercredential, Context.MODE_PRIVATE);
 
         submit_pin_bt.setOnClickListener(new View.OnClickListener()
         {
@@ -51,7 +53,7 @@ public class Activity_confirmpin extends AppCompatActivity {
                 editor_obj.putString(KeyValue_isuser_setpin, "yes");
                 editor_obj.commit();
 
-                Intent i = new Intent(Activity_confirmpin.this,HomeActivity.class);
+                Intent i = new Intent(Activity_confirmpin.this,Dashboard_Activity.class);
                 startActivity(i);
                 finish();
 
