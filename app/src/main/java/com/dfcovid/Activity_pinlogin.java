@@ -1,24 +1,56 @@
 package com.dfcovid;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.dfcovid.remote.Class_ApiUtils;
+import com.dfcovid.remote.Interface_userservice;
+import com.google.gson.Gson;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 //import com.covid.R;
 
-public class Activity_pinlogin extends AppCompatActivity {
+public class Activity_pinlogin extends AppCompatActivity
+{
+
+
+    public static final String sharedpreference_usercredential = "sharedpreferencebook_usercredential";
+    public static final String KeyValue_userid = "KeyValue_userid";
+    public static final String KeyValue_username = "KeyValue_username";
+    public static final String KeyValue_user_mailid = "KeyValue_user_mailid";
+    public static final String KeyValue_usercategory = "KeyValue_usercategory";
+    public static final String KeyValue_usercellno = "KeyValue_usercellno";
+    public static final String KeyValue_isuser_setpin = "KeyValue_isuser_setpin";
+
+
+    SharedPreferences sharedpreference_usercredential_Obj;
+    SharedPreferences.Editor editor_obj;
 
     TextView forgotpin_tv;
     EditText otp1_et,otp2_et,otp3_et,otp4_et;
+
+    Class_InternetDectector internetDectector;
+    Boolean isInternetPresent = false;
+
+    String str_userID,str_username,str_loginpin;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -32,6 +64,9 @@ public class Activity_pinlogin extends AppCompatActivity {
 
 
 
+        sharedpreference_usercredential_Obj=getSharedPreferences(sharedpreference_usercredential, Context.MODE_PRIVATE);
+        str_userID= sharedpreference_usercredential_Obj.getString(KeyValue_userid, "").trim();
+        str_username= sharedpreference_usercredential_Obj.getString(KeyValue_username, "").trim();
 
 
         //otp4_et
@@ -60,10 +95,21 @@ public class Activity_pinlogin extends AppCompatActivity {
 
                     if(validation())
                     {
+                        internetDectector = new Class_InternetDectector(getApplicationContext());
+                        isInternetPresent = internetDectector.isConnectingToInternet();
+                        if (isInternetPresent)
+                        {
 
-                        Intent i = new Intent(Activity_pinlogin.this,Dashboard_Activity.class);
-                        startActivity(i);
-                        finish();
+                            str_loginpin=otp1_et.getText().toString()+
+                                    otp2_et.getText().toString()+
+                                    otp3_et.getText().toString()+
+                                    otp4_et.getText().toString();
+
+                            AsyncTask_ValidateUserPIN();
+
+                        }
+
+
                     }
 
 
@@ -95,7 +141,11 @@ public class Activity_pinlogin extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int id)
                     {
-                        Intent i = new Intent(Activity_pinlogin.this,MainActivity.class);
+                        editor_obj = sharedpreference_usercredential_Obj.edit();
+                        editor_obj.putString(KeyValue_isuser_setpin, "");
+                        editor_obj.commit();
+
+                        Intent i = new Intent(Activity_pinlogin.this, MainActivity.class);
                         startActivity(i);
                         finish();
                     }
@@ -120,7 +170,8 @@ public class Activity_pinlogin extends AppCompatActivity {
 
             }
         });
-    }
+
+    }//On create
 
 
 
@@ -154,4 +205,94 @@ public class Activity_pinlogin extends AppCompatActivity {
         return (b_otp1 && b_otp2 && b_otp3 );
     }
 
-}
+
+
+
+
+
+    public void AsyncTask_ValidateUserPIN()
+    {
+
+        final ProgressDialog progressDialog;
+        progressDialog = new ProgressDialog(Activity_pinlogin.this);
+        progressDialog.setMessage("Loading....");
+        progressDialog.setTitle("Please wait fetching Details....");
+        progressDialog.setCancelable(false);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+
+
+
+        Class_loginPinrequest request = new Class_loginPinrequest();
+        request.setUsername(str_username);
+        request.setPIN(str_loginpin);
+
+
+        Interface_userservice userService;
+        userService = Class_ApiUtils.getUserService();
+        Call<Class_normalloginresponse> call = userService.Post_ValidateUserPIN(request);
+
+        Log.e("TAG", "pinreq : " + new Gson().toJson(request));
+
+        call.enqueue(new Callback<Class_normalloginresponse>() {
+            @Override
+            public void onResponse(Call<Class_normalloginresponse> call, Response<Class_normalloginresponse> response)
+            {
+                Log.e("response", response.toString());
+
+                Log.e("TAG", "pinRes: " + new Gson().toJson(response));
+                Log.e("tag","PinResponse body"+ String.valueOf(response.body()));
+                //   DefaultResponse error1 = ErrorUtils.parseError(response);
+               /* Log.e("response new:",error1.getMsg());
+                Log.e("response new status:", String.valueOf(error1.getstatus()));*/
+
+                Class_normalloginresponse user_object;
+                user_object = (Class_normalloginresponse) response.body();
+
+                if (response.isSuccessful())
+                {
+
+                    progressDialog.dismiss();
+
+                    Toast.makeText(Activity_pinlogin.this, "PIN Success", Toast.LENGTH_SHORT).show();
+
+                    Intent i = new Intent(Activity_pinlogin.this, HomeActivity.class);
+                    startActivity(i);
+                    finish();
+
+
+
+                } else {
+
+
+                    DefaultResponse error = ErrorUtils.parseError(response);
+                    // … and use it to show error information
+
+                    // … or just log the issue like we’re doing :)
+                    Log.d("responseerror", error.getMsg());
+
+                    Toast.makeText(Activity_pinlogin.this, "Wrong PIN", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t)
+            {
+
+                Log.d("retrofiteerror", t.toString());
+                Toast.makeText(Activity_pinlogin.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });// end of call
+
+    }
+
+
+
+
+
+
+
+
+
+}//end of class
