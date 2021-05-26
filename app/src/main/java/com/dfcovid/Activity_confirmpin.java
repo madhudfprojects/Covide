@@ -257,6 +257,7 @@ public class Activity_confirmpin extends AppCompatActivity {
 
                         }else{
 
+                            progressDialog.dismiss();
                             Toast.makeText(Activity_confirmpin.this, "WS:Error", Toast.LENGTH_SHORT).show();
 
                         }
