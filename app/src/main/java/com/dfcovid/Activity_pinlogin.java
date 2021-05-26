@@ -254,19 +254,11 @@ public class Activity_pinlogin extends AppCompatActivity
 
                     progressDialog.dismiss();
 
-                    String str_status=user_object.getMessage().trim().toString();
+                    Toast.makeText(Activity_pinlogin.this, "PIN Success", Toast.LENGTH_SHORT).show();
 
-                    if(str_status.equalsIgnoreCase("Success")) {
-
-                        Toast.makeText(Activity_pinlogin.this, "PIN Success", Toast.LENGTH_SHORT).show();
-
-                        Intent i = new Intent(Activity_pinlogin.this, HomeActivity.class);
-                        startActivity(i);
-                        finish();
-                    }
-                    else{
-                        Toast.makeText(Activity_pinlogin.this, "Wrong PIN", Toast.LENGTH_SHORT).show();
-                    }
+                    Intent i = new Intent(Activity_pinlogin.this, HomeActivity.class);
+                    startActivity(i);
+                    finish();
 
 
 
