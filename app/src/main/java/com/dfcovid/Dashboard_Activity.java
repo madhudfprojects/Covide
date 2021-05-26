@@ -179,8 +179,14 @@ public class Dashboard_Activity extends AppCompatActivity {
                 //   obj_Class_Project_FundMain = (Class_Project_FundMain) spin_ticketStatus.getSelectedItem();
 
                 class_getUserHospitalList = (Class_GetUserHospitalList) hospital_list_SP.getSelectedItem();
-                Date_time = class_getUserHospitalList.getEntryDate().toString();
-                date_time_TV.setText(Date_time);
+
+                if(class_getUserHospitalList.getEntryDate()==null||class_getUserHospitalList.getEntryDate().equalsIgnoreCase("")) {
+                    date_time_TV.setText("");
+                }else{
+                    Date_time = class_getUserHospitalList.getEntryDate().toString();
+                    Log.e("tag","Date_time="+Date_time);
+                    date_time_TV.setText(Date_time);
+                }
                 str_hospitelId = class_getUserHospitalList.getHospitalId().toString();
                 str_SelectedHospitalName = class_getUserHospitalList.getHospitalName().toString();
 
