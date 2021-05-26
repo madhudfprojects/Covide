@@ -337,7 +337,7 @@ public class Activity_pinlogin extends AppCompatActivity
                         finish();
                     }
                     else{
-                       
+
                         Toast toast = Toast.makeText(getApplicationContext(), "Wrong PIN", Toast.LENGTH_LONG);
                         TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
                         toastMessage.setTextColor(Color.RED);
