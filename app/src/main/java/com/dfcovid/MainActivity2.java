@@ -2,7 +2,9 @@ package com.dfcovid;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,6 +41,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import static com.dfcovid.Activity_confirmpin.KeyValue_userid;
+import static com.dfcovid.Activity_confirmpin.sharedpreference_usercredential;
+
 public class MainActivity2 extends AppCompatActivity {
     Boolean isInternetPresent = false;
     Class_InternetDectector internetDectector;
@@ -55,11 +60,14 @@ public class MainActivity2 extends AppCompatActivity {
             str_OutsideDistrcitABARK="",str_TotalABARK="",str_WithinDistrict="",str_OutsideDistrict="",
             str_TotalPatients="",str_getRemdesivirGivenWithinDistrict="",
             str_getRemdesivirGivenOutsideDistrict="",str_getTotalRemdesivirGiven="",str_getAvailableRemdesivir="",
-            str_getAvailableOxygenLiters="",sp_strHospital_ID="",str_currentdate="",str_fetched_hospital="",str_fetched_hospitalID="";
+            str_getAvailableOxygenLiters="",sp_strHospital_ID="",str_currentdate="",str_userID="",str_fetched_hospital="",str_fetched_hospitalID="";
     Spinner hospital_list_SP;
     Button edit_BT,disable_bt,save_BTN;
     EditText exp_beds_ET,actual_beds_ET,ox_beds_ET,icu_beds_ET,ventilator_ET,ABARKDWD_ET,ABARK_Outside_ET,ABARK_ET,Dharwad_ET,Outside_DWD_ET,Patient_ET,beds_occupied_within_dwd_ICU_ET,beds_occupied_within_dwd_oxygen_ET,beds_occupied_within_dwd_ventilator_ET,beds_occupied_out_dwd_ICU_ET,beds_occupied_out_dwd_oxygen_ET,beds_occupied_out_dwd_vent_ET,patientsdischrged_within_dwd_ICU_ET,patientsdischrged_within_dwd_oxygen_ET,patientsdischrged_within_dwd_vent_ET,patientsdischrged_outside_dwd_ICU_ET,patientsdischrged_out_dwd_oxy_ET,patientsdischrged_out_dwd_vent_ET,deaths_ICU_ET,deaths_oxy_ET,deaths_vent_ET, Rem_withinDWD_ET,Rem_Outside_DWD_ET,Remdesivir_Given_ET,Remdesivir_Available_ET,Oxygen_in_Litres_ET;
     RelativeLayout rel2,rel3,rel4,rel5,rel6;
+
+    SharedPreferences sharedpreference_usercredential_Obj;
+    SharedPreferences.Editor editor_obj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +77,10 @@ public class MainActivity2 extends AppCompatActivity {
         internetDectector = new Class_InternetDectector(getApplicationContext());
         isInternetPresent = internetDectector.isConnectingToInternet();
         userService1 = Class_ApiUtils.getUserService();
+
+        sharedpreference_usercredential_Obj=getSharedPreferences(sharedpreference_usercredential, Context.MODE_PRIVATE);
+        str_userID= sharedpreference_usercredential_Obj.getString(KeyValue_userid, "").trim();
+        Log.e("str_userID",str_userID);
 
         Bundle extras = getIntent().getExtras();
 //        if (extras != null) {
@@ -584,7 +596,8 @@ public class MainActivity2 extends AppCompatActivity {
 
         request.setEntry_Date(str_currentdate);
         request.setUser_Type("");
-        request.setUser_ID("4");//change user ID later
+        Log.e("str_userID1",str_userID);
+        request.setUser_ID(str_userID);//change user ID=4 later
         request.setCreated_Date("");
         request.setICU_Bed_Type("ICU Bed");
         request.setICU_Bed_Type_Id("3");
