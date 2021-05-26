@@ -344,10 +344,13 @@ public class Dashboard_Activity extends AppCompatActivity {
 
                     } else {
                         progressDoalog.dismiss();
-
-                    }
+                                           }
                 } else {
                     progressDoalog.dismiss();
+                    dashboard_list.clear();
+                    dashboardHospitalListViewAdapter.notifyDataSetChanged();
+                    Toast.makeText(Dashboard_Activity.this, "Hospital Data Not Found", Toast.LENGTH_SHORT).show();
+
                     Log.e("Entered resp else", "");
                     DefaultResponse error = ErrorUtils.parseError(response);
                     // … and use it to show error information
