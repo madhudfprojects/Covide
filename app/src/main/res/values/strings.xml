@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DF Covide</string>
+    <string name="app_name">DF COVID</string>
 
     <string name="forgotpin"><font fgcolor='#FFFF3B30'>Forgot PIN</font></string> <!--red-->
 
