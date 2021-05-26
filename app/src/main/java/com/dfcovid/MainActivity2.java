@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -83,12 +85,12 @@ public class MainActivity2 extends AppCompatActivity {
         Log.e("str_userID",str_userID);
 
         Bundle extras = getIntent().getExtras();
-//        if (extras != null) {
-//            str_fetched_hospital = extras.getString("hospitalname");
-//            str_fetched_hospitalID = extras.getString("hospID");
-//            Log.e("str_fetched_hospital",str_fetched_hospital);
-//            LoadHospitalData(str_fetched_hospitalID);
-//        }
+        if (extras != null) {
+            str_fetched_hospital = extras.getString("hospital");
+            str_fetched_hospitalID = extras.getString("hospitalId");
+            Log.e("str_fetched_hospital",str_fetched_hospital);
+            LoadHospitalData(str_fetched_hospitalID);
+        }
         //button
         edit_BT=(Button)findViewById(R.id.edit_BT);
         disable_bt=(Button)findViewById(R.id.disable_bt);
@@ -134,6 +136,165 @@ public class MainActivity2 extends AppCompatActivity {
         rel4=(RelativeLayout)findViewById(R.id.rel4);
         rel5=(RelativeLayout)findViewById(R.id.rel5);
         rel6=(RelativeLayout)findViewById(R.id.rel6);
+
+        ABARKDWD_ET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                int ABARK_WithinDWD= 0,ABARK_OutsideDWD=0;
+
+                if(ABARKDWD_ET.getText().toString().equals("")){
+                    ABARK_WithinDWD=0;
+                    ABARK_OutsideDWD=0;
+                }else{
+                    try {
+                        ABARK_WithinDWD= Integer.parseInt(ABARKDWD_ET.getText().toString());
+                        ABARK_OutsideDWD= Integer.parseInt(ABARK_Outside_ET.getText().toString());
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                }
+
+                int total_ABARK=ABARK_WithinDWD+ABARK_OutsideDWD;
+                Log.e("total_ABARK", String.valueOf(total_ABARK));
+                ABARK_ET.setText(String.valueOf(total_ABARK));
+            }
+        });
+
+
+
+        ABARK_Outside_ET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                int ABARK_WithinDWD= 0,ABARK_OutsideDWD=0;
+
+                if(ABARKDWD_ET.getText().toString().equals("")){
+                    ABARK_WithinDWD=0;
+                    ABARK_OutsideDWD=0;
+                }else{
+                    try {
+                        ABARK_WithinDWD= Integer.parseInt(ABARKDWD_ET.getText().toString());
+                        ABARK_OutsideDWD= Integer.parseInt(ABARK_Outside_ET.getText().toString());
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                }
+
+                int total_ABARK=ABARK_WithinDWD+ABARK_OutsideDWD;
+                Log.e("total_ABARK", String.valueOf(total_ABARK));
+                ABARK_ET.setText(String.valueOf(total_ABARK));
+            }
+        });
+
+
+        Rem_withinDWD_ET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                //int ABARK_WithinDWD= 0,ABARK_OutsideDWD=0;
+                int Rem_withinDWD= 0;
+                int Rem_Outside_DWD= 0;
+
+                if(ABARKDWD_ET.getText().toString().equals("")){
+                    Rem_withinDWD=0;
+                    Rem_Outside_DWD=0;
+                }else{
+                    try {
+//                        ABARK_WithinDWD= Integer.parseInt(ABARKDWD_ET.getText().toString());
+//                        ABARK_OutsideDWD= Integer.parseInt(ABARK_Outside_ET.getText().toString());
+         Rem_withinDWD= Integer.parseInt(Rem_withinDWD_ET.getText().toString());
+         Rem_Outside_DWD= Integer.parseInt(Rem_Outside_DWD_ET.getText().toString());
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                }
+
+                int total_REM_GIVEN=Rem_withinDWD+Rem_Outside_DWD;
+                Log.e("total_REM_GIVEN", String.valueOf(total_REM_GIVEN));
+                Remdesivir_Given_ET.setText(String.valueOf(total_REM_GIVEN));
+            }
+        });
+
+
+        Rem_Outside_DWD_ET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                //int ABARK_WithinDWD= 0,ABARK_OutsideDWD=0;
+                int Rem_withinDWD= 0;
+                int Rem_Outside_DWD= 0;
+
+                if(ABARKDWD_ET.getText().toString().equals("")){
+                    Rem_withinDWD=0;
+                    Rem_Outside_DWD=0;
+                }else{
+                    try {
+//                        ABARK_WithinDWD= Integer.parseInt(ABARKDWD_ET.getText().toString());
+//                        ABARK_OutsideDWD= Integer.parseInt(ABARK_Outside_ET.getText().toString());
+                        Rem_withinDWD= Integer.parseInt(Rem_withinDWD_ET.getText().toString());
+                        Rem_Outside_DWD= Integer.parseInt(Rem_Outside_DWD_ET.getText().toString());
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                }
+
+                int total_REM_GIVEN=Rem_withinDWD+Rem_Outside_DWD;
+                Log.e("total_REM_GIVEN", String.valueOf(total_REM_GIVEN));
+                Remdesivir_Given_ET.setText(String.valueOf(total_REM_GIVEN));
+            }
+        });
+
+
+
+
+
+
+
 
         edit_BT.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -265,7 +426,7 @@ public class MainActivity2 extends AppCompatActivity {
                         ArrayAdapter<Class_GetUserHospitalList> dataAdapter_edu = new ArrayAdapter<Class_GetUserHospitalList>(MainActivity2.this, R.layout.support_simple_spinner_dropdown_item, arrayObj_class_studentpaymentresp);
 //                        dataAdapter_edu.setDropDownViewResource(R.layout.spinnercenterstyle);
                         hospital_list_SP.setAdapter(dataAdapter_edu);
-                        // hospital_list_SP.setSelection(getIndex(hospital_list_SP, str_fetched_hospital));
+                        hospital_list_SP.setSelection(getIndex(hospital_list_SP, str_fetched_hospital));
                       //  LoadHospitalData("42");
 //                        if(str_fetched_hospital.equals("")) {
 //                            LoadHospitalData(sp_strHospital_ID);
@@ -551,6 +712,7 @@ public class MainActivity2 extends AppCompatActivity {
         int ABARK_OutsideDWD= Integer.parseInt(ABARK_Outside_ET.getText().toString());
         int total_ABARK=ABARK_WithinDWD+ABARK_OutsideDWD;
         Log.e("total_ABARK", String.valueOf(total_ABARK));
+       // ABARK_ET.setText(String.valueOf(total_ABARK));
         request.setTotal_AB_ARK(String.valueOf(total_ABARK));//ABARK_ET.getText().toString()
         request.setWithin_District(Dharwad_ET.getText().toString());
         request.setOutside_District(Outside_DWD_ET.getText().toString());
