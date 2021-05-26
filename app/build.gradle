@@ -5,7 +5,7 @@ android {
     buildToolsVersion "30.0.3"
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
-        applicationId "com.covid"
+        applicationId "com.dfcovid"
         minSdkVersion 15
         targetSdkVersion 30
         versionCode 1

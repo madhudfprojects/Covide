@@ -1,0 +1,93 @@
+{
+  "project_info": {
+    "project_number": "107319673479",
+    "firebase_url": "https://dfindia-80060.firebaseio.com",
+    "project_id": "dfindia-80060",
+    "storage_bucket": "dfindia-80060.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:107319673479:android:125f991ab8899f1c546e22",
+        "android_client_info": {
+          "package_name": "com.dfcovid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "107319673479-frt1i3dnt7kvnn1jk530occk0n7qt1lk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dfcovid",
+            "certificate_hash": "6a22b9f289d8a4cc8899dc224ff931ee034380b0"
+          }
+        },
+        {
+          "client_id": "107319673479-jtqvne3ldo5lvk09jps60vmt7fndfg2k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dfcovid",
+            "certificate_hash": "7fec91b3d13647692a141499440e0358cec4291f"
+          }
+        },
+        {
+          "client_id": "107319673479-lqbgusg9mlh93pdiet05t9rl0c5t3eli.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dfcovid",
+            "certificate_hash": "142c4f0e03d4eb35f074d49d050115b27b12632f"
+          }
+        },
+        {
+          "client_id": "107319673479-i0i9k5j0uojjdnlbe3nlhtv302ncg3ra.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5g3Re6qkj0r9Lo2wxarsgtpHEzUmRjm4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "107319673479-i0i9k5j0uojjdnlbe3nlhtv302ncg3ra.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:107319673479:android:28ae388faa11f70d546e22",
+        "android_client_info": {
+          "package_name": "com.dfindia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "107319673479-i0i9k5j0uojjdnlbe3nlhtv302ncg3ra.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5g3Re6qkj0r9Lo2wxarsgtpHEzUmRjm4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "107319673479-i0i9k5j0uojjdnlbe3nlhtv302ncg3ra.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
