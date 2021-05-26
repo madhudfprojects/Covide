@@ -1,8 +1,11 @@
 package com.dfcovid.remote;
 
 
+import com.dfcovid.Class_forgotrequest;
+import com.dfcovid.Class_loginPinrequest;
 import com.dfcovid.Class_loginrequest;
 import com.dfcovid.Class_normalloginresponse;
+import com.dfcovid.Class_pinrequest;
 import com.dfcovid.model.Class_DashboardHospitalData;
 import com.dfcovid.model.Class_Get_LoadHospitalDataResponse;
 import com.dfcovid.model.Class_Get_UserHospitalListResponse;
@@ -37,6 +40,25 @@ public interface Interface_userservice {
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("Authentication/Post_ValidateNormalLogin")
     Call<Class_normalloginresponse>Post_ValidateNormalLogin(@Body Class_loginrequest request);
+
+
+    //https://covid.dfindia.org/api/Authentication/Post_UpdateUserPIN
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("Authentication/Post_UpdateUserPIN")
+    Call<Class_normalloginresponse>Post_UpdateUserPIN(@Body Class_pinrequest request);
+
+
+    //https://covid.dfindia.org/api/Authentication/Post_ValidateUserPIN
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("Authentication/Post_ValidateUserPIN")
+    Call<Class_normalloginresponse>Post_ValidateUserPIN(@Body Class_loginPinrequest request);
+
+
+    //https://covid.dfindia.org/Api/Authentication/Post_ForgetPassword
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("Authentication/Post_ForgetPassword")
+    Call<Class_normalloginresponse>Post_ForgetPassword(@Body Class_forgotrequest request);
+
 
     @GET("Authentication/Get_UserHospitalList")
     Call<Class_Get_UserHospitalListResponse>GetUserHospitalList(@Query("User_ID") String UserId);
