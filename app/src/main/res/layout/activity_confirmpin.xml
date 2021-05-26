@@ -190,18 +190,38 @@
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-            <Button
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="30dp"
+                android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/reset_pin_bt"
+                android:layout_marginLeft="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="  Re-set PIN  "
+                android:background="@drawable/background_round"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
+            <Button
+                android:layout_marginLeft="30dp"
                 android:id="@+id/submit_pin_bt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+
                 android:layout_gravity="center"
                 android:text="  Submit PIN  "
                 android:background="@drawable/background_round"
                 android:textColor="@color/white"
                 android:textSize="15dp" />
 
+            </LinearLayout>
 
 
 
