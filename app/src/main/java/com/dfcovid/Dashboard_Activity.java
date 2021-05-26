@@ -68,7 +68,7 @@ public class Dashboard_Activity extends AppCompatActivity {
 
     SharedPreferences sharedpreference_usercredential_Obj;
     SharedPreferences.Editor editor_obj;
-    String str_userID,str_username,str_loginpin,str_hospitelId;
+    String str_userID,str_username,str_loginpin,str_hospitelId="",str_SelectedHospitalName="";
 
     ListView lv_summary;
     @Override
@@ -188,6 +188,7 @@ public class Dashboard_Activity extends AppCompatActivity {
                     date_time_TV.setText(Date_time);
                 }
                 str_hospitelId = class_getUserHospitalList.getHospitalId().toString();
+                str_SelectedHospitalName = class_getUserHospitalList.getHospitalName().toString();
 
                 Get_LoadHospitalDashboard();
                 // Toast.makeText(getApplicationContext(),"str_Programsid: "+str_programid,Toast.LENGTH_SHORT).show();
@@ -203,6 +204,8 @@ public class Dashboard_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Dashboard_Activity.this,MainActivity2.class);
+                i.putExtra("hospitalId",str_hospitelId);
+                i.putExtra("hospital",str_SelectedHospitalName);
                 startActivity(i);
             }
         });
