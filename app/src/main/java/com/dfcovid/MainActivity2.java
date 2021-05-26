@@ -53,20 +53,20 @@ public class MainActivity2 extends AppCompatActivity {
     Class_GetUserHospitalList[] arrayObj_class_studentpaymentresp;
     Class_LoadHospitalDataList[] arrayObj_class_loadhospitaldata;
     Class_GetUserHospitalList obj_Class_GetUserHospitalList;
-    String str_ox="",str_icu="",str_ventilator="",str_ox_ID="",str_icu_ID="",str_ventilator_ID="",str_ox_BedOccupiedWithinDistrict="",str_icu_BedOccupiedWithinDistrict="",str_ventilator_BedOccupiedWithinDistrict="",str_ox_BedOccupiedOutsideDistrict="",str_icu_BedOccupiedOutsideDistrict="",str_ventilator_BedOccupiedOutsideDistrict="",
-            str_ox_PatientDischargedWithinDistrict="",str_icu_PatientDischargedWithinDistrict="",
-            str_ventilator_PatientDischargedWithinDistrict="",str_ox_PatientDischargedOutsideDistrict="",
-            str_icu_PatientDischargedOutsideDistrict="",str_ventilator_PatientDischargedOutsideDistrict="",
-            str_ox_TotalDeath="",str_icu_TotalDeath="",str_ventilator_TotalDeath="",str_ExpectedBeds="",
-            str_actualBeds="",str_oxBeds="",str_ICUBeds="",str_Ventilators="",str_WithinDistrcitABARK="",
-            str_OutsideDistrcitABARK="",str_TotalABARK="",str_WithinDistrict="",str_OutsideDistrict="",
-            str_TotalPatients="",str_getRemdesivirGivenWithinDistrict="",
-            str_getRemdesivirGivenOutsideDistrict="",str_getTotalRemdesivirGiven="",str_getAvailableRemdesivir="",
-            str_getAvailableOxygenLiters="",sp_strHospital_ID="",str_currentdate="",str_userID="",str_fetched_hospital="",str_fetched_hospitalID="";
+    String str_ox = "", str_icu = "", str_ventilator = "", str_ox_ID = "", str_icu_ID = "", str_ventilator_ID = "", str_ox_BedOccupiedWithinDistrict = "", str_icu_BedOccupiedWithinDistrict = "", str_ventilator_BedOccupiedWithinDistrict = "", str_ox_BedOccupiedOutsideDistrict = "", str_icu_BedOccupiedOutsideDistrict = "", str_ventilator_BedOccupiedOutsideDistrict = "",
+            str_ox_PatientDischargedWithinDistrict = "", str_icu_PatientDischargedWithinDistrict = "",
+            str_ventilator_PatientDischargedWithinDistrict = "", str_ox_PatientDischargedOutsideDistrict = "",
+            str_icu_PatientDischargedOutsideDistrict = "", str_ventilator_PatientDischargedOutsideDistrict = "",
+            str_ox_TotalDeath = "", str_icu_TotalDeath = "", str_ventilator_TotalDeath = "", str_ExpectedBeds = "",
+            str_actualBeds = "", str_oxBeds = "", str_ICUBeds = "", str_Ventilators = "", str_WithinDistrcitABARK = "",
+            str_OutsideDistrcitABARK = "", str_TotalABARK = "", str_WithinDistrict = "", str_OutsideDistrict = "",
+            str_TotalPatients = "", str_getRemdesivirGivenWithinDistrict = "",
+            str_getRemdesivirGivenOutsideDistrict = "", str_getTotalRemdesivirGiven = "", str_getAvailableRemdesivir = "",
+            str_getAvailableOxygenLiters = "", sp_strHospital_ID = "", str_currentdate = "", str_userID = "", str_fetched_hospital = "", str_fetched_hospitalID = "";
     Spinner hospital_list_SP;
-    Button edit_BT,disable_bt,save_BTN;
-    EditText exp_beds_ET,actual_beds_ET,ox_beds_ET,icu_beds_ET,ventilator_ET,ABARKDWD_ET,ABARK_Outside_ET,ABARK_ET,Dharwad_ET,Outside_DWD_ET,Patient_ET,beds_occupied_within_dwd_ICU_ET,beds_occupied_within_dwd_oxygen_ET,beds_occupied_within_dwd_ventilator_ET,beds_occupied_out_dwd_ICU_ET,beds_occupied_out_dwd_oxygen_ET,beds_occupied_out_dwd_vent_ET,patientsdischrged_within_dwd_ICU_ET,patientsdischrged_within_dwd_oxygen_ET,patientsdischrged_within_dwd_vent_ET,patientsdischrged_outside_dwd_ICU_ET,patientsdischrged_out_dwd_oxy_ET,patientsdischrged_out_dwd_vent_ET,deaths_ICU_ET,deaths_oxy_ET,deaths_vent_ET, Rem_withinDWD_ET,Rem_Outside_DWD_ET,Remdesivir_Given_ET,Remdesivir_Available_ET,Oxygen_in_Litres_ET;
-    RelativeLayout rel2,rel3,rel4,rel5,rel6;
+    Button edit_BT, disable_bt, save_BTN;
+    EditText exp_beds_ET, actual_beds_ET, ox_beds_ET, icu_beds_ET, ventilator_ET, ABARKDWD_ET, ABARK_Outside_ET, ABARK_ET, Dharwad_ET, Outside_DWD_ET, Patient_ET, beds_occupied_within_dwd_ICU_ET, beds_occupied_within_dwd_oxygen_ET, beds_occupied_within_dwd_ventilator_ET, beds_occupied_out_dwd_ICU_ET, beds_occupied_out_dwd_oxygen_ET, beds_occupied_out_dwd_vent_ET, patientsdischrged_within_dwd_ICU_ET, patientsdischrged_within_dwd_oxygen_ET, patientsdischrged_within_dwd_vent_ET, patientsdischrged_outside_dwd_ICU_ET, patientsdischrged_out_dwd_oxy_ET, patientsdischrged_out_dwd_vent_ET, deaths_ICU_ET, deaths_oxy_ET, deaths_vent_ET, Rem_withinDWD_ET, Rem_Outside_DWD_ET, Remdesivir_Given_ET, Remdesivir_Available_ET, Oxygen_in_Litres_ET;
+    RelativeLayout rel2, rel3, rel4, rel5, rel6;
 
     SharedPreferences sharedpreference_usercredential_Obj;
     SharedPreferences.Editor editor_obj;
@@ -80,62 +80,63 @@ public class MainActivity2 extends AppCompatActivity {
         isInternetPresent = internetDectector.isConnectingToInternet();
         userService1 = Class_ApiUtils.getUserService();
 
-        sharedpreference_usercredential_Obj=getSharedPreferences(sharedpreference_usercredential, Context.MODE_PRIVATE);
-        str_userID= sharedpreference_usercredential_Obj.getString(KeyValue_userid, "").trim();
-        Log.e("str_userID",str_userID);
+        sharedpreference_usercredential_Obj = getSharedPreferences(sharedpreference_usercredential, Context.MODE_PRIVATE);
+        str_userID = sharedpreference_usercredential_Obj.getString(KeyValue_userid, "").trim();
+        Log.e("str_userID", str_userID);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             str_fetched_hospital = extras.getString("hospital");
             str_fetched_hospitalID = extras.getString("hospitalId");
-            Log.e("str_fetched_hospital",str_fetched_hospital);
+            Log.e("str_fetched_hospital", str_fetched_hospital);
+            Log.e("str_fetched_hospitalID", str_fetched_hospitalID);
             LoadHospitalData(str_fetched_hospitalID);
         }
         //button
-        edit_BT=(Button)findViewById(R.id.edit_BT);
-        disable_bt=(Button)findViewById(R.id.disable_bt);
-        save_BTN=(Button)findViewById(R.id.save_BTN);
+        edit_BT = (Button) findViewById(R.id.edit_BT);
+        disable_bt = (Button) findViewById(R.id.disable_bt);
+        save_BTN = (Button) findViewById(R.id.save_BTN);
         //spinner
-        hospital_list_SP=(Spinner)findViewById(R.id.hospital_list_SP);
+        hospital_list_SP = (Spinner) findViewById(R.id.hospital_list_SP);
         //Edittext
-        exp_beds_ET=(EditText)findViewById(R.id.exp_beds_ET);
-        actual_beds_ET=(EditText)findViewById(R.id.actual_beds_ET);
-        ox_beds_ET=(EditText)findViewById(R.id.ox_beds_ET);
-        icu_beds_ET=(EditText)findViewById(R.id.icu_beds_ET);
-        ventilator_ET=(EditText)findViewById(R.id.ventilator_ET);
-        ABARKDWD_ET=(EditText)findViewById(R.id.ABARKDWD_ET);
-        ABARK_Outside_ET=(EditText)findViewById(R.id.ABARK_Outside_ET);
-        ABARK_ET=(EditText)findViewById(R.id.ABARK_ET);
-        Dharwad_ET=(EditText)findViewById(R.id.Dharwad_ET);
-        Outside_DWD_ET=(EditText)findViewById(R.id.Outside_DWD_ET);
-        Patient_ET=(EditText)findViewById(R.id.Patient_ET);
-        beds_occupied_within_dwd_ICU_ET=(EditText)findViewById(R.id.beds_occupied_within_dwd_ICU_ET);
-        beds_occupied_within_dwd_oxygen_ET=(EditText)findViewById(R.id.beds_occupied_within_dwd_oxygen_ET);
-        beds_occupied_within_dwd_ventilator_ET=(EditText)findViewById(R.id.beds_occupied_within_dwd_ventilator_ET);
-        beds_occupied_out_dwd_ICU_ET=(EditText)findViewById(R.id.beds_occupied_out_dwd_ICU_ET);
-        beds_occupied_out_dwd_oxygen_ET=(EditText)findViewById(R.id.beds_occupied_out_dwd_oxygen_ET);
-        beds_occupied_out_dwd_vent_ET=(EditText)findViewById(R.id.beds_occupied_out_dwd_vent_ET);
-        patientsdischrged_within_dwd_ICU_ET=(EditText)findViewById(R.id.patientsdischrged_within_dwd_ICU_ET);
-        patientsdischrged_within_dwd_oxygen_ET=(EditText)findViewById(R.id.patientsdischrged_within_dwd_oxygen_ET);
-        patientsdischrged_within_dwd_vent_ET=(EditText)findViewById(R.id.patientsdischrged_within_dwd_vent_ET);
-        patientsdischrged_outside_dwd_ICU_ET=(EditText)findViewById(R.id.patientsdischrged_outside_dwd_ICU_ET);
-        patientsdischrged_out_dwd_oxy_ET=(EditText)findViewById(R.id.patientsdischrged_out_dwd_oxy_ET);
-        patientsdischrged_out_dwd_vent_ET=(EditText)findViewById(R.id.patientsdischrged_out_dwd_vent_ET);
-        deaths_ICU_ET=(EditText)findViewById(R.id.deaths_ICU_ET);
-        deaths_oxy_ET=(EditText)findViewById(R.id.deaths_oxy_ET);
-        deaths_vent_ET=(EditText)findViewById(R.id.deaths_vent_ET);
-        Rem_withinDWD_ET=(EditText)findViewById(R.id.Rem_withinDWD_ET);
-        Rem_Outside_DWD_ET=(EditText)findViewById(R.id.Rem_Outside_DWD_ET);
-        Remdesivir_Given_ET=(EditText)findViewById(R.id.Remdesivir_Given_ET);
-        Remdesivir_Available_ET=(EditText)findViewById(R.id.Remdesivir_Available_ET);
-        Oxygen_in_Litres_ET=(EditText)findViewById(R.id.Oxygen_in_Litres_ET);
+        exp_beds_ET = (EditText) findViewById(R.id.exp_beds_ET);
+        actual_beds_ET = (EditText) findViewById(R.id.actual_beds_ET);
+        ox_beds_ET = (EditText) findViewById(R.id.ox_beds_ET);
+        icu_beds_ET = (EditText) findViewById(R.id.icu_beds_ET);
+        ventilator_ET = (EditText) findViewById(R.id.ventilator_ET);
+        ABARKDWD_ET = (EditText) findViewById(R.id.ABARKDWD_ET);
+        ABARK_Outside_ET = (EditText) findViewById(R.id.ABARK_Outside_ET);
+        ABARK_ET = (EditText) findViewById(R.id.ABARK_ET);
+        Dharwad_ET = (EditText) findViewById(R.id.Dharwad_ET);
+        Outside_DWD_ET = (EditText) findViewById(R.id.Outside_DWD_ET);
+        Patient_ET = (EditText) findViewById(R.id.Patient_ET);
+        beds_occupied_within_dwd_ICU_ET = (EditText) findViewById(R.id.beds_occupied_within_dwd_ICU_ET);
+        beds_occupied_within_dwd_oxygen_ET = (EditText) findViewById(R.id.beds_occupied_within_dwd_oxygen_ET);
+        beds_occupied_within_dwd_ventilator_ET = (EditText) findViewById(R.id.beds_occupied_within_dwd_ventilator_ET);
+        beds_occupied_out_dwd_ICU_ET = (EditText) findViewById(R.id.beds_occupied_out_dwd_ICU_ET);
+        beds_occupied_out_dwd_oxygen_ET = (EditText) findViewById(R.id.beds_occupied_out_dwd_oxygen_ET);
+        beds_occupied_out_dwd_vent_ET = (EditText) findViewById(R.id.beds_occupied_out_dwd_vent_ET);
+        patientsdischrged_within_dwd_ICU_ET = (EditText) findViewById(R.id.patientsdischrged_within_dwd_ICU_ET);
+        patientsdischrged_within_dwd_oxygen_ET = (EditText) findViewById(R.id.patientsdischrged_within_dwd_oxygen_ET);
+        patientsdischrged_within_dwd_vent_ET = (EditText) findViewById(R.id.patientsdischrged_within_dwd_vent_ET);
+        patientsdischrged_outside_dwd_ICU_ET = (EditText) findViewById(R.id.patientsdischrged_outside_dwd_ICU_ET);
+        patientsdischrged_out_dwd_oxy_ET = (EditText) findViewById(R.id.patientsdischrged_out_dwd_oxy_ET);
+        patientsdischrged_out_dwd_vent_ET = (EditText) findViewById(R.id.patientsdischrged_out_dwd_vent_ET);
+        deaths_ICU_ET = (EditText) findViewById(R.id.deaths_ICU_ET);
+        deaths_oxy_ET = (EditText) findViewById(R.id.deaths_oxy_ET);
+        deaths_vent_ET = (EditText) findViewById(R.id.deaths_vent_ET);
+        Rem_withinDWD_ET = (EditText) findViewById(R.id.Rem_withinDWD_ET);
+        Rem_Outside_DWD_ET = (EditText) findViewById(R.id.Rem_Outside_DWD_ET);
+        Remdesivir_Given_ET = (EditText) findViewById(R.id.Remdesivir_Given_ET);
+        Remdesivir_Available_ET = (EditText) findViewById(R.id.Remdesivir_Available_ET);
+        Oxygen_in_Litres_ET = (EditText) findViewById(R.id.Oxygen_in_Litres_ET);
 
         //rel2
-        rel2=(RelativeLayout) findViewById(R.id.rel2);
-        rel3=(RelativeLayout)findViewById(R.id.rel3);
-        rel4=(RelativeLayout)findViewById(R.id.rel4);
-        rel5=(RelativeLayout)findViewById(R.id.rel5);
-        rel6=(RelativeLayout)findViewById(R.id.rel6);
+        rel2 = (RelativeLayout) findViewById(R.id.rel2);
+        rel3 = (RelativeLayout) findViewById(R.id.rel3);
+        rel4 = (RelativeLayout) findViewById(R.id.rel4);
+        rel5 = (RelativeLayout) findViewById(R.id.rel5);
+        rel6 = (RelativeLayout) findViewById(R.id.rel6);
 
         ABARKDWD_ET.addTextChangedListener(new TextWatcher() {
             @Override
@@ -150,28 +151,27 @@ public class MainActivity2 extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                int ABARK_WithinDWD= 0,ABARK_OutsideDWD=0;
+                int ABARK_WithinDWD = 0, ABARK_OutsideDWD = 0;
 
-                if(ABARKDWD_ET.getText().toString().equals("")){
-                    ABARK_WithinDWD=0;
-                    ABARK_OutsideDWD=0;
-                }else{
+                if (ABARKDWD_ET.getText().toString().equals("")) {
+                    ABARK_WithinDWD = 0;
+                    ABARK_OutsideDWD = 0;
+                } else {
                     try {
-                        ABARK_WithinDWD= Integer.parseInt(ABARKDWD_ET.getText().toString());
-                        ABARK_OutsideDWD= Integer.parseInt(ABARK_Outside_ET.getText().toString());
+                        ABARK_WithinDWD = Integer.parseInt(ABARKDWD_ET.getText().toString());
+                        ABARK_OutsideDWD = Integer.parseInt(ABARK_Outside_ET.getText().toString());
 
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 
                 }
 
-                int total_ABARK=ABARK_WithinDWD+ABARK_OutsideDWD;
+                int total_ABARK = ABARK_WithinDWD + ABARK_OutsideDWD;
                 Log.e("total_ABARK", String.valueOf(total_ABARK));
                 ABARK_ET.setText(String.valueOf(total_ABARK));
             }
         });
-
 
 
         ABARK_Outside_ET.addTextChangedListener(new TextWatcher() {
@@ -187,23 +187,23 @@ public class MainActivity2 extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                int ABARK_WithinDWD= 0,ABARK_OutsideDWD=0;
+                int ABARK_WithinDWD = 0, ABARK_OutsideDWD = 0;
 
-                if(ABARKDWD_ET.getText().toString().equals("")){
-                    ABARK_WithinDWD=0;
-                    ABARK_OutsideDWD=0;
-                }else{
+                if (ABARKDWD_ET.getText().toString().equals("")) {
+                    ABARK_WithinDWD = 0;
+                    ABARK_OutsideDWD = 0;
+                } else {
                     try {
-                        ABARK_WithinDWD= Integer.parseInt(ABARKDWD_ET.getText().toString());
-                        ABARK_OutsideDWD= Integer.parseInt(ABARK_Outside_ET.getText().toString());
+                        ABARK_WithinDWD = Integer.parseInt(ABARKDWD_ET.getText().toString());
+                        ABARK_OutsideDWD = Integer.parseInt(ABARK_Outside_ET.getText().toString());
 
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 
                 }
 
-                int total_ABARK=ABARK_WithinDWD+ABARK_OutsideDWD;
+                int total_ABARK = ABARK_WithinDWD + ABARK_OutsideDWD;
                 Log.e("total_ABARK", String.valueOf(total_ABARK));
                 ABARK_ET.setText(String.valueOf(total_ABARK));
             }
@@ -224,26 +224,24 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 //int ABARK_WithinDWD= 0,ABARK_OutsideDWD=0;
-                int Rem_withinDWD= 0;
-                int Rem_Outside_DWD= 0;
+                int Rem_withinDWD = 0;
+                int Rem_Outside_DWD = 0;
 
-                if(ABARKDWD_ET.getText().toString().equals("")){
-                    Rem_withinDWD=0;
-                    Rem_Outside_DWD=0;
-                }else{
+                if (ABARKDWD_ET.getText().toString().equals("")) {
+                    Rem_withinDWD = 0;
+                    Rem_Outside_DWD = 0;
+                } else {
                     try {
-//                        ABARK_WithinDWD= Integer.parseInt(ABARKDWD_ET.getText().toString());
-//                        ABARK_OutsideDWD= Integer.parseInt(ABARK_Outside_ET.getText().toString());
-         Rem_withinDWD= Integer.parseInt(Rem_withinDWD_ET.getText().toString());
-         Rem_Outside_DWD= Integer.parseInt(Rem_Outside_DWD_ET.getText().toString());
+                        Rem_withinDWD = Integer.parseInt(Rem_withinDWD_ET.getText().toString());
+                        Rem_Outside_DWD = Integer.parseInt(Rem_Outside_DWD_ET.getText().toString());
 
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 
                 }
 
-                int total_REM_GIVEN=Rem_withinDWD+Rem_Outside_DWD;
+                int total_REM_GIVEN = Rem_withinDWD + Rem_Outside_DWD;
                 Log.e("total_REM_GIVEN", String.valueOf(total_REM_GIVEN));
                 Remdesivir_Given_ET.setText(String.valueOf(total_REM_GIVEN));
             }
@@ -263,37 +261,28 @@ public class MainActivity2 extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                //int ABARK_WithinDWD= 0,ABARK_OutsideDWD=0;
-                int Rem_withinDWD= 0;
-                int Rem_Outside_DWD= 0;
+                int Rem_withinDWD = 0;
+                int Rem_Outside_DWD = 0;
 
-                if(ABARKDWD_ET.getText().toString().equals("")){
-                    Rem_withinDWD=0;
-                    Rem_Outside_DWD=0;
-                }else{
+                if (ABARKDWD_ET.getText().toString().equals("")) {
+                    Rem_withinDWD = 0;
+                    Rem_Outside_DWD = 0;
+                } else {
                     try {
-//                        ABARK_WithinDWD= Integer.parseInt(ABARKDWD_ET.getText().toString());
-//                        ABARK_OutsideDWD= Integer.parseInt(ABARK_Outside_ET.getText().toString());
-                        Rem_withinDWD= Integer.parseInt(Rem_withinDWD_ET.getText().toString());
-                        Rem_Outside_DWD= Integer.parseInt(Rem_Outside_DWD_ET.getText().toString());
+                        Rem_withinDWD = Integer.parseInt(Rem_withinDWD_ET.getText().toString());
+                        Rem_Outside_DWD = Integer.parseInt(Rem_Outside_DWD_ET.getText().toString());
 
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 
                 }
 
-                int total_REM_GIVEN=Rem_withinDWD+Rem_Outside_DWD;
+                int total_REM_GIVEN = Rem_withinDWD + Rem_Outside_DWD;
                 Log.e("total_REM_GIVEN", String.valueOf(total_REM_GIVEN));
                 Remdesivir_Given_ET.setText(String.valueOf(total_REM_GIVEN));
             }
         });
-
-
-
-
-
-
 
 
         edit_BT.setOnClickListener(new View.OnClickListener() {
@@ -356,19 +345,19 @@ public class MainActivity2 extends AppCompatActivity {
         save_BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isInternetPresent){
+                if (isInternetPresent) {
                     SaveHospitalDetails();
-                }else{
-                    Toast.makeText(MainActivity2.this,"No Internet",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity2.this, "No Internet", Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
 
-        if(isInternetPresent){
+        if (isInternetPresent) {
             GetUserHospitalList();
-        }else{
-            Toast.makeText(MainActivity2.this,"No Internet",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(MainActivity2.this, "No Internet", Toast.LENGTH_SHORT).show();
         }
 
         setcurrentdate();
@@ -388,8 +377,10 @@ public class MainActivity2 extends AppCompatActivity {
         str_currentdate = formatter.format(todayDate);
         Log.e("str_currentdate..", str_currentdate);
     }
+
     public void GetUserHospitalList() {
-        Call<Class_Get_UserHospitalListResponse> call = userService1.GetUserHospitalList("4");
+        Log.e("API..", str_userID);
+        Call<Class_Get_UserHospitalListResponse> call = userService1.GetUserHospitalList(str_userID);
 
         // Set up progress before call
         final ProgressDialog progressDoalog;
@@ -427,7 +418,7 @@ public class MainActivity2 extends AppCompatActivity {
 //                        dataAdapter_edu.setDropDownViewResource(R.layout.spinnercenterstyle);
                         hospital_list_SP.setAdapter(dataAdapter_edu);
                         hospital_list_SP.setSelection(getIndex(hospital_list_SP, str_fetched_hospital));
-                      //  LoadHospitalData("42");
+                        //  LoadHospitalData("42");
 //                        if(str_fetched_hospital.equals("")) {
 //                            LoadHospitalData(sp_strHospital_ID);
 //                        }else{
@@ -444,7 +435,7 @@ public class MainActivity2 extends AppCompatActivity {
                     // … and use it to show error information
 
                     // … or just log the issue like we’re doing :)
-                 //   Log.e("error message", error.getMsg());
+                    //   Log.e("error message", error.getMsg());
 
                     if (error.getMsg() != null) {
 
@@ -462,7 +453,6 @@ public class MainActivity2 extends AppCompatActivity {
             }
 
 
-
             @Override
             public void onFailure(Call call, Throwable t) {
                 progressDoalog.dismiss();
@@ -474,6 +464,7 @@ public class MainActivity2 extends AppCompatActivity {
         });// end of call
 
     }
+
     public int getIndex(Spinner spinner, String myString) {
         int index = 0;
         String item = null;
@@ -489,8 +480,9 @@ public class MainActivity2 extends AppCompatActivity {
         }
         return index;
     }
+
     public void LoadHospitalData(String strID) {
-        Log.e("2Hospital_ID",strID);
+        Log.e("2Hospital_ID", strID);
         Call<Class_Get_LoadHospitalDataResponse> call = userService1.LoadHospitalData(strID);
 
         // Set up progress before call
@@ -528,11 +520,11 @@ public class MainActivity2 extends AppCompatActivity {
                             innerObj_Class_academic.setICUBeds(class_loginresponse.getLst().get(i).getICUBeds());
                             innerObj_Class_academic.setVentilators(class_loginresponse.getLst().get(i).getVentilators());
 
-                            str_ExpectedBeds=class_loginresponse.getLst().get(i).getExpectedBeds();
-                            str_actualBeds=class_loginresponse.getLst().get(i).getActualBeds();
-                            str_oxBeds=class_loginresponse.getLst().get(i).getOxygenBeds();
-                            str_ICUBeds=class_loginresponse.getLst().get(i).getICUBeds();
-                            str_Ventilators=class_loginresponse.getLst().get(i).getVentilators();
+                            str_ExpectedBeds = class_loginresponse.getLst().get(i).getExpectedBeds();
+                            str_actualBeds = class_loginresponse.getLst().get(i).getActualBeds();
+                            str_oxBeds = class_loginresponse.getLst().get(i).getOxygenBeds();
+                            str_ICUBeds = class_loginresponse.getLst().get(i).getICUBeds();
+                            str_Ventilators = class_loginresponse.getLst().get(i).getVentilators();
 
                             //total beds occupied
                             innerObj_Class_academic.setWithinDistrcitABARK(class_loginresponse.getLst().get(i).getWithinDistrcitABARK());
@@ -542,12 +534,12 @@ public class MainActivity2 extends AppCompatActivity {
                             innerObj_Class_academic.setOutsideDistrict(class_loginresponse.getLst().get(i).getOutsideDistrict());
                             innerObj_Class_academic.setTotalPatients(class_loginresponse.getLst().get(i).getTotalPatients());
 
-                            str_WithinDistrcitABARK=class_loginresponse.getLst().get(i).getWithinDistrcitABARK();
-                            str_OutsideDistrcitABARK=class_loginresponse.getLst().get(i).getOutsideDistrcitABARK();
-                            str_TotalABARK=class_loginresponse.getLst().get(i).getTotalABARK();
-                            str_WithinDistrict=class_loginresponse.getLst().get(i).getWithinDistrict();
-                            str_OutsideDistrict=class_loginresponse.getLst().get(i).getOutsideDistrict();
-                            str_TotalPatients=class_loginresponse.getLst().get(i).getTotalPatients();
+                            str_WithinDistrcitABARK = class_loginresponse.getLst().get(i).getWithinDistrcitABARK();
+                            str_OutsideDistrcitABARK = class_loginresponse.getLst().get(i).getOutsideDistrcitABARK();
+                            str_TotalABARK = class_loginresponse.getLst().get(i).getTotalABARK();
+                            str_WithinDistrict = class_loginresponse.getLst().get(i).getWithinDistrict();
+                            str_OutsideDistrict = class_loginresponse.getLst().get(i).getOutsideDistrict();
+                            str_TotalPatients = class_loginresponse.getLst().get(i).getTotalPatients();
 
 
                             //beds details
@@ -559,52 +551,52 @@ public class MainActivity2 extends AppCompatActivity {
                             innerObj_Class_academic.setPatientDischargedOutsideDistrict(class_loginresponse.getLst().get(i).getPatientDischargedOutsideDistrict());
                             innerObj_Class_academic.setTotalDeath(class_loginresponse.getLst().get(i).getTotalDeath());
 
-                             str_ox=class_loginresponse.getLst().get(0).getBedType();
-                             str_icu=class_loginresponse.getLst().get(1).getBedType();
-                             str_ventilator=class_loginresponse.getLst().get(2).getBedType();
+                            str_ox = class_loginresponse.getLst().get(0).getBedType();
+                            str_icu = class_loginresponse.getLst().get(1).getBedType();
+                            str_ventilator = class_loginresponse.getLst().get(2).getBedType();
 
 
-                             str_ox_ID=class_loginresponse.getLst().get(0).getBedTypeId();
-                             str_icu_ID=class_loginresponse.getLst().get(1).getBedTypeId();
-                             str_ventilator_ID=class_loginresponse.getLst().get(2).getBedTypeId();
+                            str_ox_ID = class_loginresponse.getLst().get(0).getBedTypeId();
+                            str_icu_ID = class_loginresponse.getLst().get(1).getBedTypeId();
+                            str_ventilator_ID = class_loginresponse.getLst().get(2).getBedTypeId();
 
-                             str_ox_BedOccupiedWithinDistrict=class_loginresponse.getLst().get(0).getBedOccupiedWithinDistrict();
-                             str_icu_BedOccupiedWithinDistrict=class_loginresponse.getLst().get(1).getBedOccupiedWithinDistrict();
-                             str_ventilator_BedOccupiedWithinDistrict=class_loginresponse.getLst().get(2).getBedOccupiedWithinDistrict();
-
-
-                             str_ox_BedOccupiedOutsideDistrict=class_loginresponse.getLst().get(0).getBedOccupiedOutsideDistrict();
-                             str_icu_BedOccupiedOutsideDistrict=class_loginresponse.getLst().get(1).getBedOccupiedOutsideDistrict();
-                             str_ventilator_BedOccupiedOutsideDistrict=class_loginresponse.getLst().get(2).getBedOccupiedOutsideDistrict();
-
-                             str_ox_PatientDischargedWithinDistrict=class_loginresponse.getLst().get(0).getPatientDischargedWithinDistrict();
-                             str_icu_PatientDischargedWithinDistrict=class_loginresponse.getLst().get(1).getPatientDischargedWithinDistrict();
-                             str_ventilator_PatientDischargedWithinDistrict=class_loginresponse.getLst().get(2).getPatientDischargedWithinDistrict();
+                            str_ox_BedOccupiedWithinDistrict = class_loginresponse.getLst().get(0).getBedOccupiedWithinDistrict();
+                            str_icu_BedOccupiedWithinDistrict = class_loginresponse.getLst().get(1).getBedOccupiedWithinDistrict();
+                            str_ventilator_BedOccupiedWithinDistrict = class_loginresponse.getLst().get(2).getBedOccupiedWithinDistrict();
 
 
-                             str_ox_PatientDischargedOutsideDistrict=class_loginresponse.getLst().get(0).getPatientDischargedOutsideDistrict();
-                             str_icu_PatientDischargedOutsideDistrict=class_loginresponse.getLst().get(1).getPatientDischargedOutsideDistrict();
-                             str_ventilator_PatientDischargedOutsideDistrict=class_loginresponse.getLst().get(2).getPatientDischargedOutsideDistrict();
+                            str_ox_BedOccupiedOutsideDistrict = class_loginresponse.getLst().get(0).getBedOccupiedOutsideDistrict();
+                            str_icu_BedOccupiedOutsideDistrict = class_loginresponse.getLst().get(1).getBedOccupiedOutsideDistrict();
+                            str_ventilator_BedOccupiedOutsideDistrict = class_loginresponse.getLst().get(2).getBedOccupiedOutsideDistrict();
 
-                             str_ox_TotalDeath=class_loginresponse.getLst().get(0).getTotalDeath();
-                             str_icu_TotalDeath=class_loginresponse.getLst().get(1).getTotalDeath();
-                             str_ventilator_TotalDeath=class_loginresponse.getLst().get(2).getTotalDeath();
+                            str_ox_PatientDischargedWithinDistrict = class_loginresponse.getLst().get(0).getPatientDischargedWithinDistrict();
+                            str_icu_PatientDischargedWithinDistrict = class_loginresponse.getLst().get(1).getPatientDischargedWithinDistrict();
+                            str_ventilator_PatientDischargedWithinDistrict = class_loginresponse.getLst().get(2).getPatientDischargedWithinDistrict();
+
+
+                            str_ox_PatientDischargedOutsideDistrict = class_loginresponse.getLst().get(0).getPatientDischargedOutsideDistrict();
+                            str_icu_PatientDischargedOutsideDistrict = class_loginresponse.getLst().get(1).getPatientDischargedOutsideDistrict();
+                            str_ventilator_PatientDischargedOutsideDistrict = class_loginresponse.getLst().get(2).getPatientDischargedOutsideDistrict();
+
+                            str_ox_TotalDeath = class_loginresponse.getLst().get(0).getTotalDeath();
+                            str_icu_TotalDeath = class_loginresponse.getLst().get(1).getTotalDeath();
+                            str_ventilator_TotalDeath = class_loginresponse.getLst().get(2).getTotalDeath();
 
                             //no.of patients rem given
                             innerObj_Class_academic.setRemdesivirGivenWithinDistrict(class_loginresponse.getLst().get(i).getRemdesivirGivenWithinDistrict());
                             innerObj_Class_academic.setRemdesivirGivenOutsideDistrict(class_loginresponse.getLst().get(i).getRemdesivirGivenOutsideDistrict());
                             innerObj_Class_academic.setTotalRemdesivirGiven(class_loginresponse.getLst().get(i).getTotalRemdesivirGiven());
 
-                            str_getRemdesivirGivenWithinDistrict=class_loginresponse.getLst().get(i).getRemdesivirGivenWithinDistrict();
-                            str_getRemdesivirGivenOutsideDistrict=class_loginresponse.getLst().get(i).getRemdesivirGivenOutsideDistrict();
-                            str_getTotalRemdesivirGiven=class_loginresponse.getLst().get(i).getTotalRemdesivirGiven();
+                            str_getRemdesivirGivenWithinDistrict = class_loginresponse.getLst().get(i).getRemdesivirGivenWithinDistrict();
+                            str_getRemdesivirGivenOutsideDistrict = class_loginresponse.getLst().get(i).getRemdesivirGivenOutsideDistrict();
+                            str_getTotalRemdesivirGiven = class_loginresponse.getLst().get(i).getTotalRemdesivirGiven();
 
                             //avail of
                             innerObj_Class_academic.setAvailableRemdesivir(class_loginresponse.getLst().get(i).getAvailableRemdesivir());
                             innerObj_Class_academic.setAvailableOxygenLiters(class_loginresponse.getLst().get(i).getAvailableOxygenLiters());
 
-                            str_getAvailableRemdesivir=class_loginresponse.getLst().get(i).getAvailableRemdesivir();
-                            str_getAvailableOxygenLiters=class_loginresponse.getLst().get(i).getAvailableOxygenLiters();
+                            str_getAvailableRemdesivir = class_loginresponse.getLst().get(i).getAvailableRemdesivir();
+                            str_getAvailableOxygenLiters = class_loginresponse.getLst().get(i).getAvailableOxygenLiters();
 
 
                             Log.e("Entered s1", str_ox_ID);
@@ -694,10 +686,11 @@ public class MainActivity2 extends AppCompatActivity {
         });// end of call
 
     }
+
     public void SaveHospitalDetails() {
 
         Class_PostSaveHospitalResponseRequest request = new Class_PostSaveHospitalResponseRequest();
-        Log.e("1Hospital_ID",sp_strHospital_ID);
+        Log.e("1Hospital_ID", sp_strHospital_ID);
         request.setHospitalId(sp_strHospital_ID);
         request.setExpected_Beds(exp_beds_ET.getText().toString());
         request.setActual_Beds(actual_beds_ET.getText().toString());
@@ -708,11 +701,11 @@ public class MainActivity2 extends AppCompatActivity {
         request.setWithin_Distrcit_AB_ARK(ABARKDWD_ET.getText().toString());
         request.setOutside_Distrcit_AB_ARK(ABARK_Outside_ET.getText().toString());
 
-        int ABARK_WithinDWD= Integer.parseInt(ABARKDWD_ET.getText().toString());
-        int ABARK_OutsideDWD= Integer.parseInt(ABARK_Outside_ET.getText().toString());
-        int total_ABARK=ABARK_WithinDWD+ABARK_OutsideDWD;
+        int ABARK_WithinDWD = Integer.parseInt(ABARKDWD_ET.getText().toString());
+        int ABARK_OutsideDWD = Integer.parseInt(ABARK_Outside_ET.getText().toString());
+        int total_ABARK = ABARK_WithinDWD + ABARK_OutsideDWD;
         Log.e("total_ABARK", String.valueOf(total_ABARK));
-       // ABARK_ET.setText(String.valueOf(total_ABARK));
+        // ABARK_ET.setText(String.valueOf(total_ABARK));
         request.setTotal_AB_ARK(String.valueOf(total_ABARK));//ABARK_ET.getText().toString()
         request.setWithin_District(Dharwad_ET.getText().toString());
         request.setOutside_District(Outside_DWD_ET.getText().toString());
@@ -744,9 +737,9 @@ public class MainActivity2 extends AppCompatActivity {
         request.setRemdesivir_Given_Within_District(Rem_withinDWD_ET.getText().toString());
         request.setRemdesivir_Given_Outside_District(Rem_Outside_DWD_ET.getText().toString());
 
-        int Rem_withinDWD= Integer.parseInt(Rem_withinDWD_ET.getText().toString());
-        int Rem_Outside_DWD= Integer.parseInt(Rem_Outside_DWD_ET.getText().toString());
-        int total_REM_GIVEN=Rem_withinDWD+Rem_Outside_DWD;
+        int Rem_withinDWD = Integer.parseInt(Rem_withinDWD_ET.getText().toString());
+        int Rem_Outside_DWD = Integer.parseInt(Rem_Outside_DWD_ET.getText().toString());
+        int total_REM_GIVEN = Rem_withinDWD + Rem_Outside_DWD;
         Log.e("total_REM_GIVEN", String.valueOf(total_REM_GIVEN));
 
 //        request.setTotal_Remdesivir_Given(Remdesivir_Given_ET.getText().toString());
@@ -758,7 +751,7 @@ public class MainActivity2 extends AppCompatActivity {
 
         request.setEntry_Date(str_currentdate);
         request.setUser_Type("");
-        Log.e("str_userID1",str_userID);
+        Log.e("str_userID1", str_userID);
         request.setUser_ID(str_userID);//change user ID=4 later
         request.setCreated_Date("");
         request.setICU_Bed_Type("ICU Bed");
@@ -799,7 +792,7 @@ public class MainActivity2 extends AppCompatActivity {
                     if (class_loginresponse.getStatus()) {
 
                         Toast.makeText(MainActivity2.this, "Successfully submitted", Toast.LENGTH_SHORT).show();
-                        Intent i=new Intent(MainActivity2.this,Dashboard_Activity.class);
+                        Intent i = new Intent(MainActivity2.this, Dashboard_Activity.class);
                         startActivity(i);
                         finish();
 
@@ -822,9 +815,9 @@ public class MainActivity2 extends AppCompatActivity {
 //                        alerts_dialog_getexlistviewError();
 
                         //Toast.makeText(getActivity(), error.getMsg(), Toast.LENGTH_SHORT).show();
-                        Toast.makeText(MainActivity2.this,error.getMsg(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity2.this, error.getMsg(), Toast.LENGTH_SHORT).show();
 
-                    }else{
+                    } else {
                         //  Toast.makeText(Activity_FeesPayment.this,error.getMsg(), Toast.LENGTH_SHORT).show();
 
                     }
@@ -843,14 +836,13 @@ public class MainActivity2 extends AppCompatActivity {
         });// end of call
 
 
-
     }
 
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent i=new Intent(MainActivity2.this,Dashboard_Activity.class);
+        Intent i = new Intent(MainActivity2.this, Dashboard_Activity.class);
         startActivity(i);
         finish();
 
