@@ -32,6 +32,7 @@
                 style="@style/parent"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
+                android:text=""
                 android:hint="Email Id/MobileNo"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -43,6 +44,7 @@
                 android:id="@+id/password_et"
                 style="@style/parent"
                 android:hint="Password"
+                android:text=""
                 android:maxLines="1"
                 android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -103,7 +105,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textColor="@color/colorPrimary"
-            android:text="Developement Ver 0.1"
+            android:text="Test Ver 0.1"
             android:layout_gravity="center"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"/>
