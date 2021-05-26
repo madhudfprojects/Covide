@@ -14,19 +14,19 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-<!--        <android.support.design.widget.AppBarLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:theme="@style/Theme.COVID_APP.AppBarOverlay"-->
-<!--            tools:ignore="MissingConstraints">-->
+        <!--        <android.support.design.widget.AppBarLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:theme="@style/Theme.COVID_APP.AppBarOverlay"-->
+        <!--            tools:ignore="MissingConstraints">-->
 
-<!--            <android.support.v7.widget.Toolbar-->
-<!--                android:id="@+id/toolbar"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="?attr/actionBarSize"-->
-<!--                android:background="?attr/colorPrimary"-->
-<!--                app:popupTheme="@style/Theme.COVID_APP.PopupOverlay" />-->
-<!--        </android.support.design.widget.AppBarLayout>-->
+        <!--            <android.support.v7.widget.Toolbar-->
+        <!--                android:id="@+id/toolbar"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="?attr/actionBarSize"-->
+        <!--                android:background="?attr/colorPrimary"-->
+        <!--                app:popupTheme="@style/Theme.COVID_APP.PopupOverlay" />-->
+        <!--        </android.support.design.widget.AppBarLayout>-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,17 +34,54 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_margin="5dp"
-                android:text="Bed Details"
-                android:textColor="#8C9EFF"
-                android:textSize="18sp"
-                android:textStyle="bold" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_margin="5dp"
+                    android:text="Bed Details"
+                    android:textColor="#8C9EFF"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+
+                <ImageButton
+                    android:id="@+id/edit_BT"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:src="@drawable/edit"
+                    android:text=""
+                    android:visibility="visible"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="start"
+                    android:padding="2dp"
+                    android:background="@drawable/layout_background"/>
+
+
+                <ImageButton
+                    android:id="@+id/disable_bt"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:src="@drawable/block"
+                    android:text=""
+                    android:visibility="gone"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="start"
+                    android:padding="2dp"
+                    android:background="@drawable/layout_background"/>
+
+
+            </LinearLayout>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -64,15 +101,14 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:orientation="vertical"
-                    android:padding="10dp">
+                    android:padding="5dp"
+                    android:gravity="center">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:orientation="horizontal"
-                        android:padding="10dp"
                         android:weightSum="2">
 
 
@@ -81,7 +117,6 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
-                            android:padding="5dp"
                             tools:ignore="MissingConstraints">
 
                             <RelativeLayout
@@ -127,7 +162,6 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
-                            android:padding="5dp"
                             tools:ignore="MissingConstraints">
 
                             <RelativeLayout
@@ -182,10 +216,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:orientation="horizontal"
-                        android:padding="10dp"
                         android:weightSum="2">
 
 
@@ -194,7 +226,6 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
-                            android:padding="5dp"
                             tools:ignore="MissingConstraints">
 
                             <RelativeLayout
@@ -245,7 +276,6 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
-                            android:padding="5dp"
                             tools:ignore="MissingConstraints">
 
                             <RelativeLayout
@@ -301,10 +331,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:orientation="horizontal"
-                        android:padding="10dp"
                         android:weightSum="2">
 
 
@@ -313,7 +341,6 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
-                            android:padding="5dp"
                             tools:ignore="MissingConstraints">
 
                             <RelativeLayout
@@ -364,7 +391,6 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
-                            android:padding="5dp"
                             tools:ignore="MissingConstraints">
 
                             <RelativeLayout
@@ -412,28 +438,6 @@
                             </RelativeLayout>
 
                         </LinearLayout>
-                        <Button
-                            android:id="@+id/edit_BT"
-                            android:layout_width="50dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:background="@drawable/edit"
-                            android:text=""
-                            android:visibility="visible"
-                            android:layout_weight="1"/>
-
-                        <Button
-                            android:id="@+id/disable_bt"
-                            android:layout_width="50dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:background="@drawable/block"
-                            android:text=""
-                            android:visibility="gone"
-                            android:layout_weight="1"
-                            />
 
 
                     </LinearLayout>
@@ -451,7 +455,7 @@
                 android:layout_margin="5dp"
                 android:text="Total Beds occupied"
                 android:textColor="#8C9EFF"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
 
@@ -473,15 +477,14 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:orientation="vertical"
-                    android:padding="10dp">
+                    android:gravity="center"
+                    android:padding="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:orientation="horizontal"
-                        android:padding="10dp"
                         android:weightSum="2">
 
 
@@ -490,7 +493,6 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
-                            android:padding="5dp"
                             tools:ignore="MissingConstraints">
 
                             <RelativeLayout
@@ -540,7 +542,6 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
-                            android:padding="5dp"
                             tools:ignore="MissingConstraints">
 
                             <RelativeLayout
@@ -595,18 +596,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_gravity="center"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:orientation="horizontal"
-                        android:padding="10dp"
-                        android:weightSum="2">
+                        android:weightSum="1">
 
 
                         <LinearLayout
-                            android:layout_width="150dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:orientation="vertical"
-                            android:padding="5dp"
                             tools:ignore="MissingConstraints">
 
                             <RelativeLayout
@@ -652,22 +651,31 @@
 
                         </LinearLayout>
 
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
                         <LinearLayout
                             android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
-                            android:padding="5dp"
                             tools:ignore="MissingConstraints">
 
                             <RelativeLayout
                                 android:id="@+id/rel10"
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginRight="8dp"
-                                android:layout_weight="1">
+                                android:layout_weight="1"
+                                android:layout_marginTop="10dp">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -705,32 +713,22 @@
                         </LinearLayout>
 
 
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:padding="10dp"
-                        android:weightSum="2">
-
-
                         <LinearLayout
                             android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
-                            android:padding="5dp"
                             tools:ignore="MissingConstraints">
 
                             <RelativeLayout
                                 android:id="@+id/rel11"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp">
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="8dp"
+                                >
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -767,60 +765,59 @@
 
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="150dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:padding="5dp"
-                            tools:ignore="MissingConstraints">
 
-                            <RelativeLayout
-                                android:id="@+id/rel12"
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        tools:ignore="MissingConstraints">
+
+                        <RelativeLayout
+                            android:id="@+id/rel12"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="10dp"
+                            android:background="#EDE9E9"
+                            android:layout_weight="1">
+
+                            <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginRight="8dp"
-                                android:layout_weight="1"
-                                android:background="#EDE9E9">
+                                android:layout_height="40dp"
+                                android:background="@drawable/spinner_layout"
+                                android:orientation="horizontal">
 
-                                <LinearLayout
+                                <EditText
+                                    android:id="@+id/Patient_ET"
                                     android:layout_width="match_parent"
                                     android:layout_height="40dp"
-                                    android:background="@drawable/spinner_layout"
-                                    android:orientation="horizontal">
-
-                                    <EditText
-                                        android:id="@+id/Patient_ET"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="40dp"
-                                        android:background="@android:color/transparent"
-                                        android:enabled="false"
-                                        android:hint="Patient"
-                                        android:inputType="number"
-                                        android:padding="5dp"
-                                        android:textColor="#5C5757"
-                                        android:textSize="13sp" />
+                                    android:background="@android:color/transparent"
+                                    android:enabled="false"
+                                    android:hint="Patient"
+                                    android:inputType="number"
+                                    android:padding="5dp"
+                                    android:textColor="#5C5757"
+                                    android:textSize="13sp" />
 
 
-                                </LinearLayout>
+                            </LinearLayout>
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="15dp"
-                                    android:layout_marginTop="-4dp"
-                                    android:background="#FFFFFF"
-                                    android:paddingLeft="3dp"
-                                    android:paddingRight="3dp"
-                                    android:text="Patient"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textSize="10sp" />
-                            </RelativeLayout>
-
-                        </LinearLayout>
-
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="-4dp"
+                                android:background="#FFFFFF"
+                                android:paddingLeft="3dp"
+                                android:paddingRight="3dp"
+                                android:text="Patient"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="10sp" />
+                        </RelativeLayout>
 
                     </LinearLayout>
 
@@ -835,7 +832,7 @@
                 android:layout_margin="5dp"
                 android:text="Beds Details"
                 android:textColor="#8C9EFF"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <androidx.cardview.widget.CardView
@@ -855,7 +852,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="10dp">
+                    android:padding="10dp"
+                    android:layout_gravity="center"
+                    android:gravity="center">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -863,13 +862,12 @@
                         android:layout_weight="1"
                         android:background="#EDE9E9"
                         android:orientation="horizontal"
-                        android:padding="10dp"
                         android:weightSum="4">
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="start"
+                            android:layout_gravity="center"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
                             android:text=""
@@ -880,8 +878,8 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="start"
-                            android:layout_margin="5dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="2dp"
                             android:layout_weight="1"
                             android:text="ICU Bed"
                             android:textColor="#8C9EFF"
@@ -891,8 +889,8 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="start"
-                            android:layout_margin="5dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="2dp"
                             android:layout_weight="1"
                             android:text="Oxygen Bed"
                             android:textColor="#8C9EFF"
@@ -902,8 +900,8 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="start"
-                            android:layout_margin="5dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="2dp"
                             android:layout_weight="1"
                             android:text="Ventilator Bed"
                             android:textColor="#8C9EFF"
@@ -916,11 +914,10 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="start"
                         android:layout_margin="5dp"
                         android:background="#EDE9E9"
                         android:padding="5dp"
-                        android:text="Beds occupied"
+                        android:text=" Beds occupied"
                         android:textColor="#8C9EFF"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -930,13 +927,13 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="horizontal"
-                        android:padding="10dp"
                         android:weightSum="4">
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="start"
+                            android:layout_gravity="center"
+                            android:gravity="center"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
                             android:text="Dharwad"
@@ -1002,13 +999,13 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="horizontal"
-                        android:padding="10dp"
                         android:weightSum="4">
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="start"
+                            android:layout_gravity="center"
+                            android:gravity="center"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
                             android:text="Outside Dharwad"
@@ -1088,19 +1085,19 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="horizontal"
-                        android:padding="10dp"
                         android:weightSum="4">
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="start"
+                            android:layout_gravity="center"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
                             android:text="Dharwad"
                             android:textColor="#8C9EFF"
                             android:textSize="15sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:gravity="center"/>
 
                         <EditText
                             android:id="@+id/patientsdischrged_within_dwd_ICU_ET"
@@ -1161,13 +1158,13 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="horizontal"
-                        android:padding="10dp"
                         android:weightSum="4">
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="start"
+                            android:layout_gravity="center"
+                            android:gravity="center"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
                             android:text="Outside Dharwad"
@@ -1234,19 +1231,19 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="horizontal"
-                        android:padding="10dp"
                         android:weightSum="4">
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="start"
+                            android:layout_gravity="center"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
                             android:text="Deaths"
                             android:textColor="#8C9EFF"
                             android:textSize="15sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:gravity="center"/>
 
                         <EditText
                             android:id="@+id/deaths_ICU_ET"
@@ -1306,7 +1303,7 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:layout_margin="5dp"
@@ -1333,16 +1330,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:gravity="center"
                     android:orientation="vertical"
-                    android:padding="10dp">
+                    android:padding="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:orientation="horizontal"
-                        android:padding="10dp"
                         android:weightSum="3">
 
 
@@ -1533,7 +1529,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:orientation="vertical"
-                    android:padding="10dp">
+                    android:padding="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -1541,7 +1537,6 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:orientation="horizontal"
-                        android:padding="10dp"
                         android:weightSum="3">
 
 
@@ -1550,7 +1545,6 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
-                            android:padding="5dp"
                             tools:ignore="MissingConstraints">
 
                             <RelativeLayout
@@ -1599,7 +1593,6 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
-                            android:padding="5dp"
                             tools:ignore="MissingConstraints">
 
                             <RelativeLayout

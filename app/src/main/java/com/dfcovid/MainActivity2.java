@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -64,7 +65,8 @@ public class MainActivity2 extends AppCompatActivity {
             str_getRemdesivirGivenOutsideDistrict = "", str_getTotalRemdesivirGiven = "", str_getAvailableRemdesivir = "",
             str_getAvailableOxygenLiters = "", sp_strHospital_ID = "", str_currentdate = "", str_userID = "", str_fetched_hospital = "", str_fetched_hospitalID = "";
     Spinner hospital_list_SP;
-    Button edit_BT, disable_bt, save_BTN;
+    ImageButton edit_BT, disable_bt;
+    Button save_BTN;
     EditText exp_beds_ET, actual_beds_ET, ox_beds_ET, icu_beds_ET, ventilator_ET, ABARKDWD_ET, ABARK_Outside_ET, ABARK_ET, Dharwad_ET, Outside_DWD_ET, Patient_ET, beds_occupied_within_dwd_ICU_ET, beds_occupied_within_dwd_oxygen_ET, beds_occupied_within_dwd_ventilator_ET, beds_occupied_out_dwd_ICU_ET, beds_occupied_out_dwd_oxygen_ET, beds_occupied_out_dwd_vent_ET, patientsdischrged_within_dwd_ICU_ET, patientsdischrged_within_dwd_oxygen_ET, patientsdischrged_within_dwd_vent_ET, patientsdischrged_outside_dwd_ICU_ET, patientsdischrged_out_dwd_oxy_ET, patientsdischrged_out_dwd_vent_ET, deaths_ICU_ET, deaths_oxy_ET, deaths_vent_ET, Rem_withinDWD_ET, Rem_Outside_DWD_ET, Remdesivir_Given_ET, Remdesivir_Available_ET, Oxygen_in_Litres_ET;
     RelativeLayout rel2, rel3, rel4, rel5, rel6;
 
@@ -93,8 +95,8 @@ public class MainActivity2 extends AppCompatActivity {
             LoadHospitalData(str_fetched_hospitalID);
         }
         //button
-        edit_BT = (Button) findViewById(R.id.edit_BT);
-        disable_bt = (Button) findViewById(R.id.disable_bt);
+        edit_BT = (ImageButton) findViewById(R.id.edit_BT);
+        disable_bt = (ImageButton) findViewById(R.id.disable_bt);
         save_BTN = (Button) findViewById(R.id.save_BTN);
         //spinner
         hospital_list_SP = (Spinner) findViewById(R.id.hospital_list_SP);
