@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -228,31 +229,38 @@ public class Activity_confirmpin extends AppCompatActivity {
 
                     Log.e("TAG", "pinRes: " + new Gson().toJson(response));
                     Log.e("tag","PinResponse body"+ String.valueOf(response.body()));
-                    //   DefaultResponse error1 = ErrorUtils.parseError(response);
-               /* Log.e("response new:",error1.getMsg());
-                Log.e("response new status:", String.valueOf(error1.getstatus()));*/
+
+                    // "Status": true,
+                    //    "Message": "Success",
+                    /*"Status": false,
+                        "Message": "Invalid Username"*/
 
                     Class_normalloginresponse user_object;
                     user_object = (Class_normalloginresponse) response.body();
 
-                    if (response.isSuccessful())
-                    {
+                    if (response.isSuccessful()) {
 
+                        if (user_object.getMessage().equalsIgnoreCase("Success"))
+                        {
 
+                            progressDialog.dismiss();
 
-                        progressDialog.dismiss();
+                            Toast.makeText(Activity_confirmpin.this, "PIN Updated Successfully", Toast.LENGTH_SHORT).show();
 
-                        Toast.makeText(Activity_confirmpin.this, "PIN Updated Successfully", Toast.LENGTH_SHORT).show();
+                            editor_obj = sharedpreference_usercredential_Obj.edit();
+                            editor_obj.putString(KeyValue_isuser_setpin, "yes");
+                            editor_obj.commit();
 
-                        editor_obj = sharedpreference_usercredential_Obj.edit();
-                        editor_obj.putString(KeyValue_isuser_setpin, "yes");
-                        editor_obj.commit();
+                            Intent i = new Intent(Activity_confirmpin.this, Dashboard_Activity.class);
+                            startActivity(i);
+                            finish();
 
-                    Intent i = new Intent(Activity_confirmpin.this, Dashboard_Activity.class);
-                    startActivity(i);
-                    finish();
+                        }else{
 
+                            progressDialog.dismiss();
+                            Toast.makeText(Activity_confirmpin.this, "WS:Error", Toast.LENGTH_SHORT).show();
 
+                        }
                     } else {
 
 

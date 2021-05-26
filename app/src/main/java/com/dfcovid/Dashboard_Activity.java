@@ -320,6 +320,7 @@ public class Dashboard_Activity extends AppCompatActivity {
                         List<Class_DashboardHospitalData_List> monthContents_list = response.body().getLst();
                         Class_GetUserHospitalList[] arrayObj_Class_monthcontents = new Class_GetUserHospitalList[monthContents_list.size()];
                         array_class_dashboardHospitalData_lists = new Class_DashboardHospitalData_List[arrayObj_Class_monthcontents.length];
+                        dashboard_list.clear();
                         for (int i = 0; i < arrayObj_Class_monthcontents.length; i++) {
                             Log.e("tag","Class_DashboardHospitalData=="+ String.valueOf(class_loginresponse.getLst().get(i).getBedType()));
 
@@ -343,9 +344,13 @@ public class Dashboard_Activity extends AppCompatActivity {
 
                     } else {
                         progressDoalog.dismiss();
-                    }
+                                           }
                 } else {
                     progressDoalog.dismiss();
+                    dashboard_list.clear();
+                    dashboardHospitalListViewAdapter.notifyDataSetChanged();
+                    Toast.makeText(Dashboard_Activity.this, "Hospital Data Not Found", Toast.LENGTH_SHORT).show();
+
                     Log.e("Entered resp else", "");
                     DefaultResponse error = ErrorUtils.parseError(response);
                     // … and use it to show error information

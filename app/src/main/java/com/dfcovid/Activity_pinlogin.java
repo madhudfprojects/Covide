@@ -72,6 +72,79 @@ public class Activity_pinlogin extends AppCompatActivity
         //otp4_et
 
 
+        otp1_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2)
+            {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2)
+            {
+
+                if(otp1_et.getText().toString().length()>=1)
+                {
+                    otp2_et.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+
+
+        otp2_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2)
+            {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2)
+            {
+
+                if(otp2_et.getText().toString().length()>=1)
+                {
+                    otp3_et.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+
+
+
+        otp3_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2)
+            {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2)
+            {
+
+                if(otp3_et.getText().toString().length()>=1)
+                {
+                    otp4_et.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         otp4_et.addTextChangedListener(new TextWatcher()
         {
@@ -255,7 +328,8 @@ public class Activity_pinlogin extends AppCompatActivity
                     progressDialog.dismiss();
 
                     String str_userstatus=user_object.getMessage().trim().toString();
-                    if(str_userstatus.equalsIgnoreCase("Success")) {
+                    if(str_userstatus.equalsIgnoreCase("Success"))
+                    {
                         Toast.makeText(Activity_pinlogin.this, "PIN Success", Toast.LENGTH_SHORT).show();
 
                         Intent i = new Intent(Activity_pinlogin.this, Dashboard_Activity.class);
@@ -263,7 +337,11 @@ public class Activity_pinlogin extends AppCompatActivity
                         finish();
                     }
                     else{
-                        Toast.makeText(Activity_pinlogin.this, "Wrong PIN", Toast.LENGTH_SHORT).show();
+                       
+                        Toast toast = Toast.makeText(getApplicationContext(), "Wrong PIN", Toast.LENGTH_LONG);
+                        TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+                        toastMessage.setTextColor(Color.RED);
+                        toast.show();
                     }
 
 
