@@ -1,9 +1,11 @@
 package com.dfcovid;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -535,36 +537,36 @@ public class MainActivity extends AppCompatActivity
 
                 if (response.isSuccessful())
                 {
+                    // "Message": "Success",
+                    if (user_object.getMessage().equalsIgnoreCase("Success"))
+                    {
 
-                    Toast.makeText(MainActivity.this, user_object.getLst().get(0).getUser_Id().toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, user_object.getLst().get(0).getUser_Id().toString(), Toast.LENGTH_SHORT).show();
 
                     /*"User_Id": "76",
                         "Username": "9742392362",
                         "Password": "21232f297a57a5a743894a0e4a801fc3",
                         "User_Type": "7",*/
 
-                    String str_userid=user_object.getLst().get(0).getUser_Id().toString();
-                    String str_username=user_object.getLst().get(0).getUsername().toString();
-                    String str_userpassword=user_object.getLst().get(0).getPassword().toString();
-                    String str_usertype=user_object.getLst().get(0).getUser_Type().toString();
+                    String str_userid = user_object.getLst().get(0).getUser_Id().toString();
+                    String str_username = user_object.getLst().get(0).getUsername().toString();
+                    String str_userpassword = user_object.getLst().get(0).getPassword().toString();
+                    String str_usertype = user_object.getLst().get(0).getUser_Type().toString();
 
-                    Log.e("userID",str_userid);
-                    Log.e("username",str_username);
+                    Log.e("userID", str_userid);
+                    Log.e("username", str_username);
 
                     editor_obj = sharedpreference_usercredential_Obj.edit();
-                    editor_obj.putString(KeyValue_userid,str_userid);
-                    editor_obj.putString(KeyValue_username,str_username);
+                    editor_obj.putString(KeyValue_userid, str_userid);
+                    editor_obj.putString(KeyValue_username, str_username);
                     editor_obj.commit();
-
-
 
 
                     progressDialog.dismiss();
 
                     Toast.makeText(MainActivity.this, "successfully", Toast.LENGTH_SHORT).show();
 
-                    if (str_isuser_setpin.isEmpty())
-                    {
+                    if (str_isuser_setpin.isEmpty()) {
 
                         //  Toast.makeText(getApplicationContext(),"empty",Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(MainActivity.this, Activity_setpin.class);
@@ -577,6 +579,43 @@ public class MainActivity extends AppCompatActivity
                         finish();
                     }
 
+                }
+                    else{
+
+
+
+
+                        Toast.makeText(MainActivity.this, "Invaild Crendential", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+
+
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                        dialog.setCancelable(false);
+                        dialog.setTitle("Alert");
+                        dialog.setMessage(" Invaild Crendential \n Try once again");
+
+                        dialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id)
+                            {
+                               dialog.dismiss();
+                            }
+                        });
+
+
+                        final AlertDialog alert = dialog.create();
+                        alert.setOnShowListener(new DialogInterface.OnShowListener() {
+                            @Override
+                            public void onShow(DialogInterface arg0) {
+                                alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#004D40"));
+                            }
+                        });
+                        alert.show();
+
+
+
+
+                    }
 
                 } else {
 
