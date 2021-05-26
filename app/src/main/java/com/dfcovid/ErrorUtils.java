@@ -1,9 +1,10 @@
 package com.dfcovid;
 
+import com.dfcovid.remote.Class_RetrofitClient;
+
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 
-import com.dfcovid.remote.*;
 import okhttp3.ResponseBody;
 import retrofit2.Converter;
 import retrofit2.Response;

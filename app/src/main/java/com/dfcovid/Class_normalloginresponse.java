@@ -5,16 +5,21 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-/* "Status": true,
-           "Message": "Success",
-           "lst": [
-           {
-           "Username": "madhushree.kubsad@dfmail.org",
-           "Password": "21232f297a57a5a743894a0e4a801fc3",
-           "User_Type": "SuperAdmin"
-           }
-           ]
-           }*/
+/*
+* {
+    "Status": true,
+    "Message": "Success",
+    "lst": [
+        {
+            "User_Id": "76",
+            "Username": "9742392362",
+            "Password": "21232f297a57a5a743894a0e4a801fc3",
+            "User_Type": "NodalOfficer",
+            "PIN": null
+        }
+    ]
+}
+* */
 public class Class_normalloginresponse
   {
 

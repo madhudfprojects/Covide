@@ -4,17 +4,26 @@ package com.dfcovid;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/*"lst": [
+/*{
+    "Status": true,
+    "Message": "Success",
+    "lst": [
         {
-        "Username": "9742392362",
-        "Password": "21232f297a57a5a743894a0e4a801fc3",
-        "User_Type": "NodalOfficer"
+            "User_Id": "76",
+            "Username": "9742392362",
+            "Password": "21232f297a57a5a743894a0e4a801fc3",
+            "User_Type": "NodalOfficer",
+            "PIN": null
         }
-        ]*/
+    ]
+}*/
 public class Class_normallogin_resplist
 {
 
 
+    @SerializedName("User_Id")
+    @Expose
+    private String User_Id;
 
     @SerializedName("Username")
     @Expose
@@ -27,6 +36,15 @@ public class Class_normallogin_resplist
     @SerializedName("User_Type")
     @Expose
     private String User_Type;
+
+
+    public String getUser_Id() {
+        return User_Id;
+    }
+
+    public void setUser_Id(String user_Id) {
+        User_Id = user_Id;
+    }
 
     public String getUsername() {
         return Username;

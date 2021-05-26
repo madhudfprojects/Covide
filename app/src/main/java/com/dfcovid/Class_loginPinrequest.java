@@ -3,18 +3,17 @@ package com.dfcovid;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-
-public class Class_loginrequest
+//{"Username":"9742392362","PIN":"4321"}
+public class Class_loginPinrequest
 {
-
 
     @SerializedName("Username")
     @Expose
     private String Username;
 
-    @SerializedName("Password")
+    @SerializedName("PIN")
     @Expose
-    private String Password;
+    private String PIN;
 
     public String getUsername() {
         return Username;
@@ -24,11 +23,11 @@ public class Class_loginrequest
         Username = username;
     }
 
-    public String getPassword() {
-        return Password;
+    public String getPIN() {
+        return PIN;
     }
 
-    public void setPassword(String password) {
-        Password = password;
+    public void setPIN(String PIN) {
+        this.PIN = PIN;
     }
 }
