@@ -583,16 +583,14 @@ public class MainActivity extends AppCompatActivity
                     else{
 
 
-
-
-                        Toast.makeText(MainActivity.this, "Invaild Crendential", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "Invaild Crendential", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
 
 
                         AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
                         dialog.setCancelable(false);
-                        dialog.setTitle("Alert");
-                        dialog.setMessage(" Invaild Crendential \n Try once again");
+                        dialog.setTitle(R.string.alert);
+                        dialog.setMessage(" Invaild Crendential. \n Try once again");
 
                         dialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
@@ -691,11 +689,50 @@ public class MainActivity extends AppCompatActivity
                 if (response.isSuccessful())
                 {
 
+                    // "Status": true,
+                    //    "Message": "Success",
+                    /*"Status": false,
+                        "Message": "Invalid Username"*/
+
+                    if (user_object.getMessage().equalsIgnoreCase("Success"))
+                    {
+
+                        progressDialog.dismiss();
+
+                    //  Toast.makeText(MainActivity.this, "Password is sent to your Mail", Toast.LENGTH_SHORT).show();
+
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                    dialog.setCancelable(false);
+                    dialog.setTitle(R.string.alert);
 
 
-                    progressDialog.dismiss();
+                    dialog.setMessage(" Password is sent to your Mail \n Thank you.");
 
-                    Toast.makeText(MainActivity.this, "Password is sent to your Mail", Toast.LENGTH_SHORT).show();
+                    dialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.dismiss();
+                        }
+                    });
+
+
+                    final AlertDialog alert = dialog.create();
+                    alert.setOnShowListener(new DialogInterface.OnShowListener() {
+                        @Override
+                        public void onShow(DialogInterface arg0) {
+                            alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#004D40"));
+                        }
+                    });
+                    alert.show();
+
+
+                }else{
+                        Toast toast = Toast.makeText(getApplicationContext(), "unauthorized Email ID", Toast.LENGTH_LONG);
+                        TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+                        toastMessage.setTextColor(Color.RED);
+                        toast.show();
+                    }
+
 
                 } else {
 
