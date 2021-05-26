@@ -248,7 +248,7 @@ public class Activity_confirmpin extends AppCompatActivity {
                         editor_obj.putString(KeyValue_isuser_setpin, "yes");
                         editor_obj.commit();
 
-                    Intent i = new Intent(Activity_confirmpin.this, HomeActivity.class);
+                    Intent i = new Intent(Activity_confirmpin.this, Dashboard_Activity.class);
                     startActivity(i);
                     finish();
 

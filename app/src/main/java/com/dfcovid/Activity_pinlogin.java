@@ -256,7 +256,7 @@ public class Activity_pinlogin extends AppCompatActivity
 
                     Toast.makeText(Activity_pinlogin.this, "PIN Success", Toast.LENGTH_SHORT).show();
 
-                    Intent i = new Intent(Activity_pinlogin.this, HomeActivity.class);
+                    Intent i = new Intent(Activity_pinlogin.this, Dashboard_Activity.class);
                     startActivity(i);
                     finish();
 

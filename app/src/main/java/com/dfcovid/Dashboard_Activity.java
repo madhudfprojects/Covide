@@ -2,7 +2,9 @@ package com.dfcovid;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
@@ -60,6 +62,14 @@ public class Dashboard_Activity extends AppCompatActivity {
     private ArrayList<Class_DashboardHospitalData_List> dashboard_list;
     private ArrayList<Class_DashboardHospitalData_List> dashboarddata_list = null;
 
+    public static final String sharedpreference_usercredential = "sharedpreferencebook_usercredential";
+    public static final String KeyValue_userid = "KeyValue_userid";
+    public static final String KeyValue_username = "KeyValue_username";
+
+    SharedPreferences sharedpreference_usercredential_Obj;
+    SharedPreferences.Editor editor_obj;
+    String str_userID,str_username,str_loginpin,str_hospitelId;
+
     ListView lv_summary;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +85,12 @@ public class Dashboard_Activity extends AppCompatActivity {
         edt_fromdate=(TextView) findViewById(R.id.edt_fromdate);
         fromdateseterror_TV=(EditText) findViewById(R.id.fromdateseterror_TV);
         lv_summary = (ListView) findViewById(R.id.lv_summary);
+
+        sharedpreference_usercredential_Obj=getSharedPreferences(sharedpreference_usercredential, Context.MODE_PRIVATE);
+        str_userID= sharedpreference_usercredential_Obj.getString(KeyValue_userid, "").trim();
+        str_username= sharedpreference_usercredential_Obj.getString(KeyValue_username, "").trim();
+
+        Log.e("tAG","str_userID="+str_userID+"str_username="+str_username);
 
         edt_fromdate.setEnabled(false);
         edt_fromdate.setFocusable(false);
@@ -165,6 +181,7 @@ public class Dashboard_Activity extends AppCompatActivity {
                 class_getUserHospitalList = (Class_GetUserHospitalList) hospital_list_SP.getSelectedItem();
                 Date_time = class_getUserHospitalList.getEntryDate().toString();
                 date_time_TV.setText(Date_time);
+                str_hospitelId = class_getUserHospitalList.getHospitalId().toString();
 
                 Get_LoadHospitalDashboard();
                 // Toast.makeText(getApplicationContext(),"str_Programsid: "+str_programid,Toast.LENGTH_SHORT).show();
@@ -186,7 +203,7 @@ public class Dashboard_Activity extends AppCompatActivity {
     }
 
     public void GetUserHospitalList() {
-        Call<Class_Get_UserHospitalListResponse> call = userService1.GetUserHospitalList("4");
+        Call<Class_Get_UserHospitalListResponse> call = userService1.GetUserHospitalList(str_userID);
 
         // Set up progress before call
         final ProgressDialog progressDoalog;
@@ -269,7 +286,7 @@ public class Dashboard_Activity extends AppCompatActivity {
     }
 
     public void Get_LoadHospitalDashboard() {
-        Call<Class_DashboardHospitalData> call = userService1.Get_LoadHospitalDashboard("42");
+        Call<Class_DashboardHospitalData> call = userService1.Get_LoadHospitalDashboard(str_hospitelId);
 
         // Set up progress before call
         final ProgressDialog progressDoalog;
