@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity
 
     public static final String sharedpreference_usercredential = "sharedpreferencebook_usercredential";
     public static final String KeyValue_userid = "KeyValue_userid";
-    public static final String KeyValue_username = "KeyValue_userid";
+    public static final String KeyValue_username = "KeyValue_username";
     public static final String KeyValue_user_mailid = "KeyValue_user_mailid";
     public static final String KeyValue_usercategory = "KeyValue_usercategory";
     public static final String KeyValue_usercellno = "KeyValue_usercellno";
