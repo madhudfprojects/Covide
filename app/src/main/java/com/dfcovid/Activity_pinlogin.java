@@ -328,7 +328,8 @@ public class Activity_pinlogin extends AppCompatActivity
                     progressDialog.dismiss();
 
                     String str_userstatus=user_object.getMessage().trim().toString();
-                    if(str_userstatus.equalsIgnoreCase("Success")) {
+                    if(str_userstatus.equalsIgnoreCase("Success"))
+                    {
                         Toast.makeText(Activity_pinlogin.this, "PIN Success", Toast.LENGTH_SHORT).show();
 
                         Intent i = new Intent(Activity_pinlogin.this, Dashboard_Activity.class);
@@ -336,7 +337,11 @@ public class Activity_pinlogin extends AppCompatActivity
                         finish();
                     }
                     else{
-                        Toast.makeText(Activity_pinlogin.this, "Wrong PIN", Toast.LENGTH_SHORT).show();
+                       
+                        Toast toast = Toast.makeText(getApplicationContext(), "Wrong PIN", Toast.LENGTH_LONG);
+                        TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+                        toastMessage.setTextColor(Color.RED);
+                        toast.show();
                     }
 
 

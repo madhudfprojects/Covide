@@ -727,6 +727,7 @@ public class MainActivity extends AppCompatActivity
 
 
                 }else{
+                        progressDialog.dismiss();
                         Toast toast = Toast.makeText(getApplicationContext(), "unauthorized Email ID", Toast.LENGTH_LONG);
                         TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
                         toastMessage.setTextColor(Color.RED);
