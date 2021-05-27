@@ -445,7 +445,7 @@ public class Activity_pinlogin extends AppCompatActivity
             AlertDialog.Builder dialog = new AlertDialog.Builder(Activity_pinlogin.this);
             dialog.setCancelable(false);
             dialog.setTitle(R.string.alert);
-            dialog.setMessage("Are you sure want to Change PIN?");
+            dialog.setMessage("Are you sure you want to Change PIN?");
 
             dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 @Override

@@ -23,8 +23,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Login">
-        <activity android:name="com.dfcovid.Activity_confirmpin"></activity>
-        <activity android:name="com.dfcovid.Activity_setpin" />
+        <activity android:name="com.dfcovid.Activity_confirmpin"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="com.dfcovid.Activity_setpin"
+            android:screenOrientation="portrait"/>
         <activity android:name="com.dfcovid.MainActivity" />
 
 
@@ -40,7 +42,7 @@
         <activity
             android:name="com.dfcovid.Activity_pinlogin"
             android:screenOrientation="portrait" />
-        <activity android:name="com.dfcovid.HomeActivity" />
+        <activity android:name="com.dfcovid.HomeActivity"/>
         <activity
             android:name="com.dfcovid.Dashboard_Activity" />
 
