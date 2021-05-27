@@ -454,7 +454,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:layout_margin="5dp"
-                android:text="Total Beds occupied"
+                android:text="Total Beds Occupied"
                 android:textColor="#331478"
                 android:textSize="16sp"
                  />
@@ -486,11 +486,11 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:orientation="horizontal"
-                        android:weightSum="2">
+                        android:weightSum="3">
 
 
                         <LinearLayout
-                            android:layout_width="150dp"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
@@ -499,8 +499,7 @@
                             <RelativeLayout
                                 android:id="@+id/rel7"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                >
+                                android:layout_height="wrap_content">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -539,7 +538,7 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="150dp"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
@@ -589,31 +588,20 @@
 
                         </LinearLayout>
 
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:weightSum="1">
-
-
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            tools:ignore="MissingConstraints">
+                            tools:ignore="MissingConstraints"
+                            android:layout_weight="1"
+                            >
 
                             <RelativeLayout
                                 android:id="@+id/rel9"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:background="#EDE9E9">
+                                android:layout_height="0dp"
+                                android:background="#EDE9E9"
+                                android:layout_weight="1">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -652,9 +640,71 @@
 
                         </LinearLayout>
 
-
-
                     </LinearLayout>
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="0dp"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:gravity="center"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:orientation="horizontal"-->
+<!--                        android:weightSum="1">-->
+
+
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:orientation="vertical"-->
+<!--                            tools:ignore="MissingConstraints">-->
+
+<!--                            <RelativeLayout-->
+<!--                                android:id="@+id/rel9"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginTop="10dp"-->
+<!--                                android:background="#EDE9E9">-->
+
+<!--                                <LinearLayout-->
+<!--                                    android:layout_width="match_parent"-->
+<!--                                    android:layout_height="40dp"-->
+<!--                                    android:background="@drawable/spinner_layout_new"-->
+<!--                                    android:orientation="horizontal">-->
+
+<!--                                    <EditText-->
+<!--                                        android:id="@+id/ABARK_ET"-->
+<!--                                        android:layout_width="match_parent"-->
+<!--                                        android:layout_height="40dp"-->
+<!--                                        android:background="@android:color/transparent"-->
+<!--                                        android:enabled="false"-->
+<!--                                        android:hint="AB-ARK"-->
+<!--                                        android:text="0"-->
+<!--                                        android:inputType="number"-->
+<!--                                        android:padding="5dp"-->
+<!--                                        android:textColor="#5C5757"-->
+<!--                                        android:textSize="13sp" />-->
+
+
+<!--                                </LinearLayout>-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_marginLeft="15dp"-->
+<!--                                    android:layout_marginTop="-4dp"-->
+<!--                                    android:background="#FFFFFF"-->
+<!--                                    android:paddingLeft="3dp"-->
+<!--                                    android:paddingRight="3dp"-->
+<!--                                    android:text="AB-ARK"-->
+<!--                                    android:textColor="@color/beddetailscolor"-->
+<!--                                    android:textSize="10sp" />-->
+<!--                            </RelativeLayout>-->
+
+<!--                        </LinearLayout>-->
+
+
+
+<!--                    </LinearLayout>-->
 
 
                     <LinearLayout
@@ -662,10 +712,10 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:orientation="horizontal"
-                        android:weightSum="2">
+                        android:weightSum="3">
 
                         <LinearLayout
-                            android:layout_width="150dp"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
@@ -706,7 +756,7 @@
                                     android:background="#FFFFFF"
                                     android:paddingLeft="3dp"
                                     android:paddingRight="3dp"
-                                    android:text="Dharwad"
+                                    android:text="Within DWD"
                                     android:textColor="@color/beddetailscolor"
                                     android:textSize="10sp" />
                             </RelativeLayout>
@@ -715,7 +765,7 @@
 
 
                         <LinearLayout
-                            android:layout_width="150dp"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
@@ -728,8 +778,7 @@
                                 android:layout_weight="1"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginTop="10dp"
-                                android:layout_marginRight="8dp"
-                                >
+                                android:layout_marginRight="8dp">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -765,18 +814,12 @@
                             </RelativeLayout>
 
                         </LinearLayout>
-
-
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        tools:ignore="MissingConstraints">
+                        <LinearLayout
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            tools:ignore="MissingConstraints">
 
                         <RelativeLayout
                             android:id="@+id/rel12"
@@ -815,11 +858,12 @@
                                 android:background="#FFFFFF"
                                 android:paddingLeft="3dp"
                                 android:paddingRight="3dp"
-                                android:text="Patient"
+                                android:text="Total Patients"
                                 android:textColor="@color/beddetailscolor"
                                 android:textSize="10sp" />
                         </RelativeLayout>
 
+                        </LinearLayout>
                     </LinearLayout>
 
 
@@ -918,7 +962,7 @@
                         android:layout_margin="5dp"
                         android:background="#EDE9E9"
                         android:padding="5dp"
-                        android:text=" Beds occupied"
+                        android:text=" Beds Occupied"
                         android:textColor="#331478"
                         android:textSize="16sp"
                          />
@@ -937,7 +981,7 @@
                             android:gravity="center"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
-                            android:text="Dharwad"
+                            android:text="Within Dharwad"
                             android:textColor="#331478"
                             android:textSize="15sp"
                             />
@@ -1092,7 +1136,7 @@
                             android:layout_gravity="center"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
-                            android:text="Dharwad"
+                            android:text="Within Dharwad"
                             android:textColor="#331478"
                             android:textSize="15sp"
                             android:gravity="center"/>
@@ -1304,7 +1348,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:layout_margin="5dp"
-                android:text="Number of Patients given Remdesivir avials"
+                android:text="Number Of Patients Given Remdesivir Avials"
                 android:textColor="#331478"
                 android:textSize="16sp"
                  />
@@ -1336,11 +1380,11 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:orientation="horizontal"
-                        android:weightSum="2">
+                        android:weightSum="3">
 
 
                         <LinearLayout
-                            android:layout_width="150dp"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
@@ -1350,8 +1394,7 @@
                                 android:id="@+id/rel13"
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
-                                android:layout_weight="1"
-                                >
+                                android:layout_weight="1">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -1390,7 +1433,7 @@
 
 
                         <LinearLayout
-                            android:layout_width="150dp"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
@@ -1438,18 +1481,8 @@
                             </RelativeLayout>
 
                         </LinearLayout>
-                    </LinearLayout>
-
-
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:orientation="horizontal"
-                            android:weightSum="1">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
@@ -1459,7 +1492,6 @@
                                 android:id="@+id/rel15"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
                                 android:background="#EDE9E9">
 
                                 <LinearLayout
@@ -1497,7 +1529,10 @@
                             </RelativeLayout>
 
                         </LinearLayout>
-                        </LinearLayout>
+
+                    </LinearLayout>
+
+
 
 
                 </LinearLayout>
@@ -1567,7 +1602,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="40dp"
                                         android:background="@android:color/transparent"
-                                        android:hint="Remdesivir Available"
+                                        android:hint="Remdesivir"
                                         android:inputType="number"
                                         android:padding="5dp"
                                         android:textColor="#5C5757"
@@ -1584,7 +1619,7 @@
                                     android:background="#FFFFFF"
                                     android:paddingLeft="3dp"
                                     android:paddingRight="3dp"
-                                    android:text="Remdesivir Available"
+                                    android:text="Remdesivir"
                                     android:textColor="@color/beddetailscolor"
                                     android:textSize="10sp" />
                             </RelativeLayout>

@@ -780,6 +780,11 @@ public class MainActivity2 extends AppCompatActivity {
                         setvalues();
 
                     } else {
+                        Log.e("Entered else", "no data");
+                        ClearEditText();
+                        Toast.makeText(MainActivity2.this, class_loginresponse.getMessage(), Toast.LENGTH_SHORT).show();
+
+                        //No User Hospital Data Found
                         progressDoalog.dismiss();
                     }
                 } else {
@@ -804,6 +809,46 @@ public class MainActivity2 extends AppCompatActivity {
                     }
 
                 }
+            }
+
+            private void ClearEditText() {
+                exp_beds_ET.setText("");
+                actual_beds_ET.setText("");
+                ox_beds_ET.setText("");
+                icu_beds_ET.setText("");
+                ventilator_ET.setText("");
+
+                ABARKDWD_ET.setText("");
+                ABARK_Outside_ET.setText("");
+                ABARK_ET.setText("");
+
+                Dharwad_ET.setText("");
+                Outside_DWD_ET.setText("");
+                Patient_ET.setText("");
+
+                beds_occupied_within_dwd_ICU_ET.setText("");
+                beds_occupied_within_dwd_oxygen_ET.setText("");
+                beds_occupied_within_dwd_ventilator_ET.setText("");
+                beds_occupied_out_dwd_ICU_ET.setText("");
+                beds_occupied_out_dwd_oxygen_ET.setText("");
+                beds_occupied_out_dwd_vent_ET.setText("");
+                patientsdischrged_within_dwd_ICU_ET.setText("");
+                patientsdischrged_within_dwd_oxygen_ET.setText("");
+                patientsdischrged_within_dwd_vent_ET.setText("");
+                patientsdischrged_outside_dwd_ICU_ET.setText("");
+                patientsdischrged_out_dwd_oxy_ET.setText("");
+                patientsdischrged_out_dwd_vent_ET.setText("");
+                deaths_ICU_ET.setText("");
+                deaths_oxy_ET.setText("");
+                deaths_vent_ET.setText("");
+
+
+                Rem_withinDWD_ET.setText("");
+                Rem_Outside_DWD_ET.setText("");
+                Remdesivir_Given_ET.setText("");
+                Remdesivir_Available_ET.setText("");
+                Oxygen_in_Litres_ET.setText("");
+
             }
 
             private void setvalues() {
