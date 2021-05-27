@@ -25,10 +25,12 @@
         android:theme="@style/Theme.Login">
         <activity android:name="com.dfcovid.Activity_confirmpin"></activity>
         <activity android:name="com.dfcovid.Activity_setpin" />
+        <activity android:name="com.dfcovid.MainActivity" />
 
-        <activity android:name="com.dfcovid.MainActivity"
+
+        <activity android:name="com.dfcovid.Dashboard_Activity_New"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoActionBar" >
+            android:theme="@style/Theme.Login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
