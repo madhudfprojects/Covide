@@ -11,9 +11,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,9 +29,12 @@ import retrofit2.Response;
 
 //import com.covid.R;
 
-public class Activity_pinlogin extends AppCompatActivity
-{
+public class Activity_confirmoldpin extends AppCompatActivity {
 
+
+    Button verfiy_oldpin_bt;
+    TextView forgotpin_tv;
+    EditText otp1_et,otp2_et,otp3_et,otp4_et;
 
     public static final String sharedpreference_usercredential = "sharedpreferencebook_usercredential";
     public static final String KeyValue_userid = "KeyValue_userid";
@@ -41,38 +43,42 @@ public class Activity_pinlogin extends AppCompatActivity
     public static final String KeyValue_usercategory = "KeyValue_usercategory";
     public static final String KeyValue_usercellno = "KeyValue_usercellno";
     public static final String KeyValue_isuser_setpin = "KeyValue_isuser_setpin";
-    public static final String KeyValue_isuser_changepin = "KeyValue_isuser_changepin";
 
 
     SharedPreferences sharedpreference_usercredential_Obj;
     SharedPreferences.Editor editor_obj;
 
-    TextView forgotpin_tv;
-    EditText otp1_et,otp2_et,otp3_et,otp4_et;
+    public static final String sharedpreference_setpincredential = "sharedpreference_pincredential";
+    public static final String KeyValue_setpin = "KeyValue_setpin";
+    SharedPreferences sharedpreference_setpin_Obj;
+    String str_username,str_userID;
+
 
     Class_InternetDectector internetDectector;
     Boolean isInternetPresent = false;
-
-    String str_userID,str_username,str_loginpin;
+    String str_confirmoldpin;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_otp);
+        setContentView(R.layout.activity_confirmoldpin);
+
+        verfiy_oldpin_bt =(Button) findViewById(R.id.verfiy_oldpin_bt);
         forgotpin_tv=(TextView)findViewById(R.id.forgotpin_tv);
+
         otp1_et=(EditText) findViewById(R.id.otp1_et);
         otp2_et=(EditText) findViewById(R.id.otp2_et);
         otp3_et=(EditText) findViewById(R.id.otp3_et);
         otp4_et=(EditText) findViewById(R.id.otp4_et);
 
+        sharedpreference_setpin_Obj=getSharedPreferences(sharedpreference_setpincredential, Context.MODE_PRIVATE);
+       // str_setpin = sharedpreference_setpin_Obj.getString(KeyValue_setpin, "").trim();
+        str_username= sharedpreference_usercredential_Obj.getString(KeyValue_username, "").trim();
 
 
         sharedpreference_usercredential_Obj=getSharedPreferences(sharedpreference_usercredential, Context.MODE_PRIVATE);
         str_userID= sharedpreference_usercredential_Obj.getString(KeyValue_userid, "").trim();
-        str_username= sharedpreference_usercredential_Obj.getString(KeyValue_username, "").trim();
-
-
-        //otp4_et
+        Log.e("confirmpinuserid",str_userID);
 
 
         otp1_et.addTextChangedListener(new TextWatcher() {
@@ -97,6 +103,7 @@ public class Activity_pinlogin extends AppCompatActivity
 
             }
         });
+
 
 
 
@@ -149,53 +156,41 @@ public class Activity_pinlogin extends AppCompatActivity
             }
         });
 
-        otp4_et.addTextChangedListener(new TextWatcher()
+
+
+
+
+
+
+
+        verfiy_oldpin_bt.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after)
+            public void onClick(View v)
             {
+                if(validation()) {
 
-            }
+                    str_confirmoldpin = otp1_et.getText().toString() +
+                            otp2_et.getText().toString() +
+                            otp3_et.getText().toString() +
+                            otp4_et.getText().toString();
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
-
-                if(s.toString().trim().isEmpty())
-                {
-
-
-                }
-                else
-                {
-
-                    if(validation())
+                    if (2>1)
                     {
+
                         internetDectector = new Class_InternetDectector(getApplicationContext());
                         isInternetPresent = internetDectector.isConnectingToInternet();
-                        if (isInternetPresent)
-                        {
-
-                            str_loginpin=otp1_et.getText().toString()+
-                                    otp2_et.getText().toString()+
-                                    otp3_et.getText().toString()+
-                                    otp4_et.getText().toString();
+                        if (isInternetPresent) {
 
                             AsyncTask_ValidateUserPIN();
-
                         }
 
 
+                }   else{
+                        Toast.makeText(getApplicationContext(),"PIN doesn't match", Toast.LENGTH_LONG).show();
                     }
 
-
                 }
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
             }
         });
 
@@ -207,7 +202,7 @@ public class Activity_pinlogin extends AppCompatActivity
             public void onClick(View v)
             {
 
-                AlertDialog.Builder dialog = new AlertDialog.Builder(Activity_pinlogin.this);
+                AlertDialog.Builder dialog = new AlertDialog.Builder(Activity_confirmoldpin.this);
                 dialog.setCancelable(false);
                 dialog.setTitle(R.string.forgotpin);
                 dialog.setMessage("You need to relogin to the application for set new PIN.\n" +
@@ -221,7 +216,7 @@ public class Activity_pinlogin extends AppCompatActivity
                         editor_obj.putString(KeyValue_isuser_setpin, "");
                         editor_obj.commit();
 
-                        Intent i = new Intent(Activity_pinlogin.this, MainActivity.class);
+                        Intent i = new Intent(Activity_confirmoldpin.this, MainActivity.class);
                         startActivity(i);
                         finish();
                     }
@@ -247,7 +242,10 @@ public class Activity_pinlogin extends AppCompatActivity
             }
         });
 
-    }//On create
+
+
+
+    }//On create()
 
 
 
@@ -276,10 +274,55 @@ public class Activity_pinlogin extends AppCompatActivity
             otp3_et.requestFocus();
             b_otp3 = false;
         }
+        if(otp4_et.getText().toString().trim().length()==0)
+        {
+            otp4_et.setError("Enter OTP");
+            otp4_et.requestFocus();
+            b_otp4=false;
+        }
 
-
-        return (b_otp1 && b_otp2 && b_otp3 );
+        return (b_otp1 && b_otp2 && b_otp3&& b_otp4);
     }
+
+
+
+    @Override
+    public void onBackPressed()
+    {
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(Activity_confirmoldpin.this);
+        dialog.setCancelable(false);
+        dialog.setTitle(R.string.alert);
+        dialog.setMessage("Are you sure want to go back");
+
+        dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id)
+            {
+
+                finish();
+            }
+        })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Action for "Cancel".
+                        dialog.dismiss();
+                    }
+                });
+
+        final AlertDialog alert = dialog.create();
+        alert.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface arg0) {
+                alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED);
+                alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#004D40"));
+            }
+        });
+        alert.show();
+    }
+
+
 
 
 
@@ -290,7 +333,7 @@ public class Activity_pinlogin extends AppCompatActivity
     {
 
         final ProgressDialog progressDialog;
-        progressDialog = new ProgressDialog(Activity_pinlogin.this);
+        progressDialog = new ProgressDialog(Activity_confirmoldpin.this);
         progressDialog.setMessage("Loading....");
         progressDialog.setTitle("Please wait fetching Details....");
         progressDialog.setCancelable(false);
@@ -301,7 +344,7 @@ public class Activity_pinlogin extends AppCompatActivity
 
         Class_loginPinrequest request = new Class_loginPinrequest();
         request.setUsername(str_username);
-        request.setPIN(str_loginpin);
+        request.setPIN(str_confirmoldpin);
 
 
         Interface_userservice userService;
@@ -333,11 +376,14 @@ public class Activity_pinlogin extends AppCompatActivity
                     String str_userstatus=user_object.getMessage().trim().toString();
                     if(str_userstatus.equalsIgnoreCase("Success"))
                     {
-                        Toast.makeText(Activity_pinlogin.this, "PIN Success", Toast.LENGTH_SHORT).show();
 
-                        Intent i = new Intent(Activity_pinlogin.this, Dashboard_Activity.class);
+                        Intent i = new Intent(Activity_confirmoldpin.this, Activity_setpin.class);
+                        i.putExtra("Key_confirmoldpin", "yes");
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(i);
                         finish();
+
+
                     }
                     else{
 
@@ -358,7 +404,7 @@ public class Activity_pinlogin extends AppCompatActivity
                     // … or just log the issue like we’re doing :)
                     Log.d("responseerror", error.getMsg());
 
-                    Toast.makeText(Activity_pinlogin.this, "Wrong PIN", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Activity_confirmoldpin.this, "Wrong PIN", Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                 }
             }
@@ -368,7 +414,7 @@ public class Activity_pinlogin extends AppCompatActivity
             {
 
                 Log.d("retrofiteerror", t.toString());
-                Toast.makeText(Activity_pinlogin.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Activity_confirmoldpin.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });// end of call
 
@@ -377,204 +423,5 @@ public class Activity_pinlogin extends AppCompatActivity
 
 
 
-    @Override
-    public void onBackPressed()
-    {
 
-        AlertDialog.Builder dialog = new AlertDialog.Builder(Activity_pinlogin.this);
-        dialog.setCancelable(false);
-        dialog.setTitle(R.string.alert);
-        dialog.setMessage("Are you sure want to Exit");
-
-        dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id)
-            {
-                finish();
-                System.exit(0);
-
-            }
-        })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //Action for "Cancel".
-                        dialog.dismiss();
-                    }
-                });
-
-        final AlertDialog alert = dialog.create();
-        alert.setOnShowListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(DialogInterface arg0) {
-                alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED);
-                alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#004D40"));
-            }
-        });
-        alert.show();
-    }
-
-
-
-
-
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.home_menu, menu);
-        getMenuInflater().inflate(R.menu.logout_menu, menu);
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
-
-        if(id==R.id.changepin)
-        {
-
-
-            AlertDialog.Builder dialog = new AlertDialog.Builder(Activity_pinlogin.this);
-            dialog.setCancelable(false);
-            dialog.setTitle(R.string.alert);
-            dialog.setMessage("Are you sure you want to Change PIN?");
-
-            dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int id)
-                {
-
-                    editor_obj = sharedpreference_usercredential_Obj.edit();
-                    editor_obj.putString(KeyValue_isuser_setpin, "");
-                    editor_obj.commit();
-
-                    editor_obj = sharedpreference_usercredential_Obj.edit();
-                    editor_obj.putString(KeyValue_isuser_changepin, "yes");
-                    editor_obj.commit();
-
-                    Intent i = new Intent(getApplicationContext(), Activity_confirmoldpin.class);
-                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(i);
-                    finish();
-                }
-            })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //Action for "Cancel".
-                            dialog.dismiss();
-                        }
-                    });
-
-            final AlertDialog alert = dialog.create();
-            alert.setOnShowListener(new DialogInterface.OnShowListener() {
-                @Override
-                public void onShow(DialogInterface arg0) {
-                    alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED);
-                    alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#004D40"));
-                }
-            });
-            alert.show();
-
-            return true;
-        }
-
-       /* if(id==R.id.aboutus)
-        {
-
-
-           *//* internetDectector = new Class_InternetDectector(getApplicationContext());
-            isInternetPresent = internetDectector.isConnectingToInternet();
-
-            if (isInternetPresent)
-            {
-                Intent i = new Intent(Activity_HomeScreen.this, ClusterHomeActivity.class);
-                startActivity(i);
-                finish();
-                return true;
-            }
-            else{
-                Toast.makeText(getApplicationContext(), "No Internet", Toast.LENGTH_SHORT).show();
-            }*//*
-        }
-
-*/
-
-
-        /*if (id == R.id.logout)
-        {
-            // Toast.makeText(CalenderActivity.this, "Action clicked", Toast.LENGTH_LONG).show();
-            internetDectector = new Class_InternetDectector(getApplicationContext());
-            isInternetPresent = internetDectector.isConnectingToInternet();
-
-            if (isInternetPresent)
-            {
-
-
-
-
-                AlertDialog.Builder dialog = new AlertDialog.Builder(Activity_pinlogin.this);
-                dialog.setCancelable(false);
-                dialog.setTitle(R.string.alert);
-                dialog.setMessage("Are you sure want to Logout?");
-
-                dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id)
-                    {
-
-                       *//* SaveSharedPreference.setUserName(Activity_HomeScreen.this, "");
-
-                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                        i.putExtra("Key_Logout", "yes");
-                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(i);
-                        finish();*//*
-
-
-                    }
-                })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                //Action for "Cancel".
-                                dialog.dismiss();
-                            }
-                        });
-
-                final AlertDialog alert = dialog.create();
-                alert.setOnShowListener(new DialogInterface.OnShowListener() {
-                    @Override
-                    public void onShow(DialogInterface arg0) {
-                        alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED);
-                        alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#004D40"));
-                    }
-                });
-                alert.show();
-
-
-                //}
-            } else {
-                Toast.makeText(getApplicationContext(), "No Internet", Toast.LENGTH_SHORT).show();
-            }
-            return true;
-        }*/
-
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
-
-
-
-
-}//end of class
+}

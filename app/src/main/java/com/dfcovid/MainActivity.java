@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity
 
             }else
                 {
-                    Intent i = new Intent(MainActivity.this, Activity_setpin.class);
+                    Intent i = new Intent(MainActivity.this, Activity_confirmoldpin.class);
                     startActivity(i);
                     finish();
             }
