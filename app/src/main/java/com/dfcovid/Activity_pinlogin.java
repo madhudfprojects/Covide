@@ -486,8 +486,8 @@ public class Activity_pinlogin extends AppCompatActivity
 
             return true;
         }
-        if(id==R.id.aboutus)
-        {
+       /* if(id==R.id.aboutus)
+        {*/
 
 
            /* internetDectector = new Class_InternetDectector(getApplicationContext());
@@ -503,12 +503,12 @@ public class Activity_pinlogin extends AppCompatActivity
             else{
                 Toast.makeText(getApplicationContext(), "No Internet", Toast.LENGTH_SHORT).show();
             }*/
-        }
+       // }
 
 
 
 
-        if (id == R.id.logout)
+       /* if (id == R.id.logout)
         {
             // Toast.makeText(CalenderActivity.this, "Action clicked", Toast.LENGTH_LONG).show();
             internetDectector = new Class_InternetDectector(getApplicationContext());
@@ -530,13 +530,13 @@ public class Activity_pinlogin extends AppCompatActivity
                     public void onClick(DialogInterface dialog, int id)
                     {
 
-                       /* SaveSharedPreference.setUserName(Activity_HomeScreen.this, "");
+                       *//* SaveSharedPreference.setUserName(Activity_HomeScreen.this, "");
 
                         Intent i = new Intent(getApplicationContext(), MainActivity.class);
                         i.putExtra("Key_Logout", "yes");
                         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(i);
-                        finish();*/
+                        finish();*//*
 
 
                     }
@@ -565,7 +565,7 @@ public class Activity_pinlogin extends AppCompatActivity
                 Toast.makeText(getApplicationContext(), "No Internet", Toast.LENGTH_SHORT).show();
             }
             return true;
-        }
+        }*/
 
 
         return super.onOptionsItemSelected(item);
