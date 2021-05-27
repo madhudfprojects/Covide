@@ -2,6 +2,7 @@ package com.dfcovid.remote;
 
 
 import com.dfcovid.Class_forgotrequest;
+import com.dfcovid.Class_googleloginRequest;
 import com.dfcovid.Class_loginPinrequest;
 import com.dfcovid.Class_loginrequest;
 import com.dfcovid.Class_normalloginresponse;
@@ -40,6 +41,11 @@ public interface Interface_userservice {
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("Authentication/Post_ValidateNormalLogin")
     Call<Class_normalloginresponse>Post_ValidateNormalLogin(@Body Class_loginrequest request);
+
+    //https://covid.dfindia.org/Api/Authentication/Post_ValidateLogin
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("Authentication/Post_ValidateLogin")
+    Call<Class_normalloginresponse>Post_ValidateGoogleLogin(@Body Class_googleloginRequest request);
 
 
     //https://covid.dfindia.org/api/Authentication/Post_UpdateUserPIN

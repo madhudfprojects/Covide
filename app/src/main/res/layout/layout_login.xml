@@ -67,16 +67,18 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/loginViewsMargin"/>
 
-       <!-- <com.google.android.gms.common.SignInButton
+        <com.google.android.gms.common.SignInButton
             android:id="@+id/google_signin_bt"
-            android:layout_width="182dp"
+            android:layout_width="170dp"
             android:layout_height="54dp"
             android:layout_centerHorizontal="true"
+            android:text="Sign in with DF mail"
+            android:textSize="10dp"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:visibility="visible" />-->
+            android:visibility="visible" />
 
-        <com.google.android.gms.common.SignInButton
+        <!--<com.google.android.gms.common.SignInButton
             android:id="@+id/google_signin_bt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -84,7 +86,7 @@
             android:layout_centerVertical="true"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:visibility="gone" />
+            android:visibility="visible" />-->
 
 
         <TextView
@@ -103,12 +105,12 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="@color/colorPrimary"
-            android:text="Test Ver 0.1"
-            android:layout_gravity="center"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"/>
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="Test Ver 0.4"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold" />
 
 
     </LinearLayout>
