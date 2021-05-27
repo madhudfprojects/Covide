@@ -117,6 +117,7 @@ public class MainActivity extends AppCompatActivity
         setGooglePlusButtonText(google_signin_bt,"  Sign in with DF mail  ");
 
 
+
         sharedpreference_usercredential_Obj=getSharedPreferences(sharedpreference_usercredential, Context.MODE_PRIVATE);
         str_isuser_setpin = sharedpreference_usercredential_Obj.getString(KeyValue_isuser_setpin, "").trim();
 
@@ -396,7 +397,7 @@ public class MainActivity extends AppCompatActivity
 
                             Toast.makeText(MainActivity.this, "User Signed In:"+str_gmailid, Toast.LENGTH_SHORT).show();
 
-                           // AsyncTask_Googleloginverify();
+                           AsyncTask_Googleloginverify();
 
 
                             /*try {
@@ -431,10 +432,10 @@ public class MainActivity extends AppCompatActivity
                 TextView tv = (TextView) v;
                 tv.setText(buttonText);
                 // tv.setBackgroundColor(Color.CYAN);
-                tv.setBackgroundDrawable(
+               /* tv.setBackgroundDrawable(
                         new ColorDrawable(Color.parseColor(COLOR)));
                 tv.setTextColor(Color.WHITE);
-                tv.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/laouibold.ttf"));
+                tv.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/laouibold.ttf"));*/
                 return;
             }
         }
@@ -765,6 +766,115 @@ public class MainActivity extends AppCompatActivity
 
 
 
+    public void AsyncTask_Googleloginverify()
+    {
+
+
+        final ProgressDialog progressDialog;
+        progressDialog = new ProgressDialog(MainActivity.this);
+        progressDialog.setMessage("Loading....");
+        progressDialog.setTitle("Please wait fetching details....");
+        progressDialog.setCancelable(false);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+
+
+        Class_googleloginRequest request = new Class_googleloginRequest();
+        request.setUsername(str_gmailid);
+
+
+
+        Interface_userservice userService;
+        userService = Class_ApiUtils.getUserService();
+        Call<Class_normalloginresponse> call = userService.Post_ValidateGoogleLogin(request);
+
+        Log.e("TAG", "loginreq : " + new Gson().toJson(request));
+
+        call.enqueue(new Callback<Class_normalloginresponse>() {
+            @Override
+            public void onResponse(Call<Class_normalloginresponse> call, Response<Class_normalloginresponse> response)
+            {
+                Log.e("response", response.toString());
+
+                Log.e("TAG", "LoginResponse : " + new Gson().toJson(response));
+                Log.e("tag","LoginResponse body"+ String.valueOf(response.body()));
+                //   DefaultResponse error1 = ErrorUtils.parseError(response);
+               /* Log.e("response new:",error1.getMsg());
+                Log.e("response new status:", String.valueOf(error1.getstatus()));*/
+
+                Class_normalloginresponse user_object;
+                user_object = (Class_normalloginresponse) response.body();
+
+                if (response.isSuccessful())
+                {
+
+                    Toast.makeText(MainActivity.this, user_object.getLst().get(0).getUser_Id().toString(), Toast.LENGTH_SHORT).show();
+
+                    /*"User_Id": "76",
+                        "Username": "9742392362",
+                        "Password": "21232f297a57a5a743894a0e4a801fc3",
+                        "User_Type": "7",*/
+
+                    String str_userid=user_object.getLst().get(0).getUser_Id().toString();
+                    String str_username=user_object.getLst().get(0).getUsername().toString();
+                    String str_userpassword=user_object.getLst().get(0).getPassword().toString();
+                    String str_usertype=user_object.getLst().get(0).getUser_Type().toString();
+
+                    Log.e("userID",str_userid);
+                    Log.e("username",str_username);
+
+                    editor_obj = sharedpreference_usercredential_Obj.edit();
+                    editor_obj.putString(KeyValue_userid,str_userid);
+                    editor_obj.putString(KeyValue_username,str_username);
+                    editor_obj.commit();
+
+
+
+
+                    progressDialog.dismiss();
+
+                    Toast.makeText(MainActivity.this, "successfully", Toast.LENGTH_SHORT).show();
+
+                    if (str_isuser_setpin.isEmpty())
+                    {
+
+                        //  Toast.makeText(getApplicationContext(),"empty",Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(MainActivity.this, Activity_setpin.class);
+                        startActivity(i);
+                        finish();
+
+                    } else {
+                        Intent i = new Intent(MainActivity.this, Activity_pinlogin.class);
+                        startActivity(i);
+                        finish();
+                    }
+
+
+                } else {
+
+
+                    DefaultResponse error = ErrorUtils.parseError(response);
+                    // … and use it to show error information
+
+                    // … or just log the issue like we’re doing :)
+                    Log.d("responseerror", error.getMsg());
+
+                    Toast.makeText(MainActivity.this, "Invaild Crendential", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t)
+            {
+
+                Log.d("retrofiteerror", t.toString());
+                Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });// end of call
+
+
+    }
 
 
 
@@ -779,6 +889,11 @@ public class MainActivity extends AppCompatActivity
 
 
 
+
+
+
+
+}// end of class
 
 
 
@@ -795,5 +910,3 @@ public class MainActivity extends AppCompatActivity
         admin*/
 
 
-
-}// end of class
