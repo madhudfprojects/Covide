@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity
 
         google_signin_bt =(SignInButton)findViewById(R.id.google_signin_bt);
         google_signin_bt.setColorScheme(SignInButton.COLOR_DARK);
-        setGooglePlusButtonText(google_signin_bt,"  Sign in with DF mail  ");
+        setGooglePlusButtonText(google_signin_bt," Sign in with Google ");
 
 
 

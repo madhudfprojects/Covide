@@ -69,10 +69,10 @@
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/google_signin_bt"
-            android:layout_width="170dp"
+            android:layout_width="198dp"
             android:layout_height="54dp"
             android:layout_centerHorizontal="true"
-            android:text="Sign in with DF mail"
+            android:text="Sign in with Google"
             android:textSize="10dp"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
