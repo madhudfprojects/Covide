@@ -1,14 +1,18 @@
 package com.dfcovid;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -36,7 +40,7 @@ public class Activity_setpin extends AppCompatActivity {
 
     Button confirm_pin_bt;
     EditText otp1_et,otp2_et,otp3_et,otp4_et;
-
+    TextView title_tv;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -48,8 +52,25 @@ public class Activity_setpin extends AppCompatActivity {
         otp2_et=(EditText) findViewById(R.id.otp2_et);
         otp3_et=(EditText) findViewById(R.id.otp3_et);
         otp4_et=(EditText) findViewById(R.id.otp4_et);
+        title_tv=(TextView)findViewById(R.id.title_tv);
+
 
         sharedpreference_setpin_Obj=getSharedPreferences(sharedpreference_setpincredential, Context.MODE_PRIVATE);
+
+
+        Intent myIntent = getIntent();
+
+        if(myIntent!=null)
+        {
+
+            String str_fromconfirmoldpin="no";
+            str_fromconfirmoldpin = myIntent.getStringExtra("Key_confirmoldpin");
+            if(str_fromconfirmoldpin!=null && (str_fromconfirmoldpin.equalsIgnoreCase("yes")))
+            {
+                title_tv.setText("Set new PIN");
+            }
+        }
+
 
 
 
@@ -191,5 +212,45 @@ public class Activity_setpin extends AppCompatActivity {
 
         return (b_otp1 && b_otp2 && b_otp3&& b_otp4);
     }
+
+
+
+    @Override
+    public void onBackPressed()
+    {
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(Activity_setpin.this);
+        dialog.setCancelable(false);
+        dialog.setTitle(R.string.alert);
+        dialog.setMessage("Are you sure want to Exit");
+
+        dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id)
+            {
+                finish();
+                System.exit(0);
+
+            }
+        })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Action for "Cancel".
+                        dialog.dismiss();
+                    }
+                });
+
+        final AlertDialog alert = dialog.create();
+        alert.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface arg0) {
+                alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED);
+                alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#004D40"));
+            }
+        });
+        alert.show();
+    }
+
 
 }

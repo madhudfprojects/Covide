@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Confirm PIN"
+                android:text="Enter Old PIN"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:textColor="@color/white"
                 android:textSize="25dp" />
@@ -299,40 +299,37 @@
 
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:layout_gravity="center"
                 android:layout_margin="30dp"
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/reset_pin_bt"
-                    android:layout_width="0dp"
+                    android:id="@+id/verfiy_oldpin_bt"
+                    android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:text=" Re-set PIN "
+                    android:text=" Verify "
                     android:layout_margin="10dp"
-                    android:layout_weight="1"
+
                     android:background="@drawable/background_round"
                     android:textColor="@color/white"
                     android:textSize="15dp" />
-
-
-                <Button
-
-                    android:id="@+id/submit_pin_bt"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:text=" Submit PIN "
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/background_round"
-                    android:textColor="@color/white"
-                    android:textSize="15dp" />
-
 
             </LinearLayout>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:id="@+id/forgotpin_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:text="Forgot PIN?"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:textColor="@color/white"
+                android:textSize="18dp" />
 
 
         </LinearLayout>

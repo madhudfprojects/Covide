@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/lightblues_color"
+    android:background="#47c7c6"
     tools:context="com.dfcovid.Activity_pinlogin">
 
 
@@ -51,7 +51,7 @@
                     android:gravity="center"
                     android:inputType="number"
                     android:maxLength="1"
-                    android:textColor="@color/white"
+                    android:textColor="@color/dark_black"
                     android:textSize="17dp" />
 
 
@@ -65,8 +65,8 @@
                     android:digits="0123456789"
                     android:gravity="center"
                     android:inputType="number"
-                    android:maxLength="4"
-                    android:textColor="@color/white"
+                    android:maxLength="1"
+                    android:textColor="@color/dark_black"
                     android:textSize="17dp" />
 
                 <EditText
@@ -80,7 +80,7 @@
                     android:gravity="center"
                     android:inputType="number"
                     android:maxLength="1"
-                    android:textColor="@color/white"
+                    android:textColor="@color/dark_black"
                     android:textSize="17dp" />
 
                 <EditText
@@ -95,7 +95,7 @@
                     android:gravity="center"
                     android:inputType="number"
                     android:maxLength="1"
-                    android:textColor="@color/white"
+                    android:textColor="@color/dark_black"
                     android:textSize="17dp" />
 
             </LinearLayout>
