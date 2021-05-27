@@ -60,13 +60,13 @@ public class MainActivity2 extends AppCompatActivity {
             str_icu_PatientDischargedOutsideDistrict = "", str_ventilator_PatientDischargedOutsideDistrict = "",
             str_ox_TotalDeath = "", str_icu_TotalDeath = "", str_ventilator_TotalDeath = "", str_ExpectedBeds = "",
             str_actualBeds = "", str_oxBeds = "", str_ICUBeds = "", str_Ventilators = "", str_WithinDistrcitABARK = "",
-            str_OutsideDistrcitABARK = "", str_TotalABARK = "", str_WithinDistrict = "", str_OutsideDistrict = "",
+            str_OutsideDistrcitABARK = "", str_TotalABARK = "0", str_WithinDistrict = "", str_OutsideDistrict = "",
             str_TotalPatients = "", str_getRemdesivirGivenWithinDistrict = "",
             str_getRemdesivirGivenOutsideDistrict = "", str_getTotalRemdesivirGiven = "", str_getAvailableRemdesivir = "",
             str_getAvailableOxygenLiters = "", sp_strHospital_ID = "", str_currentdate = "", str_userID = "", str_fetched_hospital = "", str_fetched_hospitalID = "";
     Spinner hospital_list_SP;
     ImageButton edit_BT, disable_bt;
-    Button save_BTN;
+    Button save_BTN,close_BTN;
     EditText exp_beds_ET, actual_beds_ET, ox_beds_ET, icu_beds_ET, ventilator_ET, ABARKDWD_ET, ABARK_Outside_ET, ABARK_ET, Dharwad_ET, Outside_DWD_ET, Patient_ET, beds_occupied_within_dwd_ICU_ET, beds_occupied_within_dwd_oxygen_ET, beds_occupied_within_dwd_ventilator_ET, beds_occupied_out_dwd_ICU_ET, beds_occupied_out_dwd_oxygen_ET, beds_occupied_out_dwd_vent_ET, patientsdischrged_within_dwd_ICU_ET, patientsdischrged_within_dwd_oxygen_ET, patientsdischrged_within_dwd_vent_ET, patientsdischrged_outside_dwd_ICU_ET, patientsdischrged_out_dwd_oxy_ET, patientsdischrged_out_dwd_vent_ET, deaths_ICU_ET, deaths_oxy_ET, deaths_vent_ET, Rem_withinDWD_ET, Rem_Outside_DWD_ET, Remdesivir_Given_ET, Remdesivir_Available_ET, Oxygen_in_Litres_ET;
     RelativeLayout rel2, rel3, rel4, rel5, rel6;
 
@@ -98,6 +98,7 @@ public class MainActivity2 extends AppCompatActivity {
         edit_BT = (ImageButton) findViewById(R.id.edit_BT);
         disable_bt = (ImageButton) findViewById(R.id.disable_bt);
         save_BTN = (Button) findViewById(R.id.save_BTN);
+        close_BTN= (Button) findViewById(R.id.close_BTN);
         //spinner
         hospital_list_SP = (Spinner) findViewById(R.id.hospital_list_SP);
         //Edittext
@@ -347,11 +348,108 @@ public class MainActivity2 extends AppCompatActivity {
         save_BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isInternetPresent) {
-                    SaveHospitalDetails();
-                } else {
-                    Toast.makeText(MainActivity2.this, "No Internet", Toast.LENGTH_SHORT).show();
-                }
+
+                    if(exp_beds_ET.getText().toString().equals("")){
+                        Toast.makeText(MainActivity2.this, "Please enter Expected Beds", Toast.LENGTH_SHORT).show();
+
+                    }else if(actual_beds_ET.getText().toString().equals("")){
+                        Toast.makeText(MainActivity2.this, "Please enter Actual Beds", Toast.LENGTH_SHORT).show();
+
+                    }else if(ox_beds_ET.getText().toString().equals("")){
+                        Toast.makeText(MainActivity2.this, "Please enter Oxygen Beds", Toast.LENGTH_SHORT).show();
+
+                    }else if(icu_beds_ET.getText().toString().equals("")){
+                        Toast.makeText(MainActivity2.this, "Please enter ICU Beds", Toast.LENGTH_SHORT).show();
+
+                    }else if(ventilator_ET.getText().toString().equals("")){
+                        Toast.makeText(MainActivity2.this, "Please enter Ventilator Beds", Toast.LENGTH_SHORT).show();
+
+                    }else if(ABARKDWD_ET.getText().toString().equals("")){
+                        Toast.makeText(MainActivity2.this, "Please enter Total Beds occupied in AB-ARK within Dharwad", Toast.LENGTH_SHORT).show();
+
+                    }else if(ABARK_Outside_ET.getText().toString().equals("")){
+                        Toast.makeText(MainActivity2.this, "Please enter Total Beds occupied in AB-ARK outside Dharwad", Toast.LENGTH_SHORT).show();
+
+                    }else if(Dharwad_ET.getText().toString().equals("")){
+                        Toast.makeText(MainActivity2.this, "Please enter Total Beds occupied in Dharwad", Toast.LENGTH_SHORT).show();
+
+                    }else if(Outside_DWD_ET.getText().toString().equals("")){
+                        Toast.makeText(MainActivity2.this, "Please enter Total Beds occupied in outside Dharwad", Toast.LENGTH_SHORT).show();
+
+                    }else if(beds_occupied_within_dwd_ICU_ET.getText().toString().equals("")){
+                        Toast.makeText(MainActivity2.this, "Please enter ICU Beds occupied within Dharwad", Toast.LENGTH_SHORT).show();
+
+                    }else if(beds_occupied_within_dwd_oxygen_ET.getText().toString().equals("")){
+                        Toast.makeText(MainActivity2.this, "Please enter Oxygen Beds occupied within Dharwad", Toast.LENGTH_SHORT).show();
+
+                    }else if(beds_occupied_within_dwd_ventilator_ET.getText().toString().equals("")){
+                        Toast.makeText(MainActivity2.this, "Please enter Ventilator Beds occupied within Dharwad", Toast.LENGTH_SHORT).show();
+
+                    }else if(beds_occupied_out_dwd_oxygen_ET.getText().toString().equals("")){
+                        Toast.makeText(MainActivity2.this, "Please enter Oxygen Beds occupied outside Dharwad", Toast.LENGTH_SHORT).show();
+
+                    }else if(beds_occupied_out_dwd_ICU_ET.getText().toString().equals("")){
+                        Toast.makeText(MainActivity2.this, "Please enter ICU Beds occupied outside Dharwad", Toast.LENGTH_SHORT).show();
+
+                    }else if(beds_occupied_out_dwd_vent_ET.getText().toString().equals("")){
+                        Toast.makeText(MainActivity2.this, "Please enter Ventilator Beds occupied outside Dharwad", Toast.LENGTH_SHORT).show();
+
+                    }else if(exp_beds_ET.getText().toString().equals("")){
+                        Toast.makeText(MainActivity2.this, "Please enter patients discharged of oxygen beds within Dharwad", Toast.LENGTH_SHORT).show();
+
+                    }else if(exp_beds_ET.getText().toString().equals("")){
+                        Toast.makeText(MainActivity2.this, "Please enter patients discharged of ICU beds within Dharwad", Toast.LENGTH_SHORT).show();
+
+                    }else if(patientsdischrged_within_dwd_vent_ET.getText().toString().equals("")){
+                        Toast.makeText(MainActivity2.this, "Please enter patients discharged of ventilator beds within Dharwad", Toast.LENGTH_SHORT).show();
+
+                    }else if(patientsdischrged_within_dwd_oxygen_ET.getText().toString().equals("")){
+                        Toast.makeText(MainActivity2.this, "Please enter patients discharged of oxygen beds outside Dharwad", Toast.LENGTH_SHORT).show();
+
+                    }else if(patientsdischrged_within_dwd_ICU_ET.getText().toString().equals("")){
+                        Toast.makeText(MainActivity2.this, "Please enter patients discharged of ICU beds outside Dharwad", Toast.LENGTH_SHORT).show();
+
+                    }else if(patientsdischrged_out_dwd_vent_ET.getText().toString().equals("")){
+                        Toast.makeText(MainActivity2.this, "Please enter patients discharged of ventilator beds outside Dharwad", Toast.LENGTH_SHORT).show();
+
+                    }else if(deaths_oxy_ET.getText().toString().equals("")){
+                        Toast.makeText(MainActivity2.this, "Please enter deaths in oxygen beds", Toast.LENGTH_SHORT).show();
+
+                    }else if(deaths_ICU_ET.getText().toString().equals("")){
+                        Toast.makeText(MainActivity2.this, "Please enter deaths in ICU beds", Toast.LENGTH_SHORT).show();
+
+                    }else if(deaths_vent_ET.getText().toString().equals("")){
+                        Toast.makeText(MainActivity2.this, "Please enter deaths in ventilator beds", Toast.LENGTH_SHORT).show();
+
+                    } else if(Rem_withinDWD_ET.getText().toString().equals("")){
+                        Toast.makeText(MainActivity2.this, "Please enter Number of Patients given Remdesivir avials within Dharwad", Toast.LENGTH_SHORT).show();
+
+                    }else if(Rem_Outside_DWD_ET.getText().toString().equals("")){
+                        Toast.makeText(MainActivity2.this, "Please enter Number of Patients given Remdesivir avials outside Dharwad", Toast.LENGTH_SHORT).show();
+
+                    }else if(Remdesivir_Available_ET.getText().toString().equals("")){
+                        Toast.makeText(MainActivity2.this, "Please enter Remdesivir  Availabel", Toast.LENGTH_SHORT).show();
+
+                    }else if(Oxygen_in_Litres_ET.getText().toString().equals("")){
+                        Toast.makeText(MainActivity2.this, "Please enter Availability of Oxygen in Litres", Toast.LENGTH_SHORT).show();
+
+                    }else {
+                        if (isInternetPresent) {
+                            SaveHospitalDetails();
+                        } else {
+                            Toast.makeText(MainActivity2.this, "No Internet", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+            }
+        });
+
+        close_BTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity2.this, Dashboard_Activity.class);
+                startActivity(i);
+                finish();
 
             }
         });
@@ -647,7 +745,19 @@ public class MainActivity2 extends AppCompatActivity {
 
                 ABARKDWD_ET.setText(str_WithinDistrcitABARK);
                 ABARK_Outside_ET.setText(str_OutsideDistrcitABARK);
-                ABARK_ET.setText(str_TotalABARK);
+
+//                int abark_dwd = Integer.parseInt(ABARKDWD_ET.getText().toString());
+//                int abark_outdwd = Integer.parseInt(ABARK_Outside_ET.getText().toString());
+//                int total_ABARK= abark_dwd + abark_outdwd;
+//                ABARK_ET.setText(total_ABARK);
+
+               ABARK_ET.setText(str_TotalABARK);
+
+//                if(str_TotalABARK.equals("") || str_TotalABARK.equals("null") || str_TotalABARK == null){
+//                    ABARK_ET.setText("0");
+//                }else {
+//                    ABARK_ET.setText(str_TotalABARK);
+//                }
                 Dharwad_ET.setText(str_WithinDistrict);
                 Outside_DWD_ET.setText(str_OutsideDistrict);
                 Patient_ET.setText(str_TotalPatients);
