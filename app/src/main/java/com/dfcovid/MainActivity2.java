@@ -287,6 +287,77 @@ public class MainActivity2 extends AppCompatActivity {
             }
         });
 
+//patients
+        Dharwad_ET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                int patients_withinDWD = 0;
+                int patients_Outside_DWD = 0;
+
+                if (ABARKDWD_ET.getText().toString().equals("")) {
+                    patients_withinDWD = 0;
+                    patients_Outside_DWD = 0;
+                } else {
+                    try {
+                        patients_withinDWD = Integer.parseInt(Dharwad_ET.getText().toString());
+                        patients_Outside_DWD = Integer.parseInt(Outside_DWD_ET.getText().toString());
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+                int total_REM_GIVEN = patients_withinDWD + patients_Outside_DWD;
+                Log.e("total_Patients", String.valueOf(total_REM_GIVEN));
+                Patient_ET.setText(String.valueOf(total_REM_GIVEN));
+            }
+        });
+        Outside_DWD_ET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                int patients_withinDWD = 0;
+                int patients_Outside_DWD = 0;
+
+                if (ABARKDWD_ET.getText().toString().equals("")) {
+                    patients_withinDWD = 0;
+                    patients_Outside_DWD = 0;
+                } else {
+                    try {
+                        patients_withinDWD = Integer.parseInt(Dharwad_ET.getText().toString());
+                        patients_Outside_DWD = Integer.parseInt(Outside_DWD_ET.getText().toString());
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+                int total_REM_GIVEN = patients_withinDWD + patients_Outside_DWD;
+                Log.e("total_Patients", String.valueOf(total_REM_GIVEN));
+                Patient_ET.setText(String.valueOf(total_REM_GIVEN));
+            }
+        });
 
         edit_BT.setOnClickListener(new View.OnClickListener() {
             @Override

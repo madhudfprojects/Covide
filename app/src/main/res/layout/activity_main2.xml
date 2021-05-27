@@ -39,7 +39,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:weightSum="2">
+                android:weightSum="3">
 
 
                 <TextView
@@ -47,8 +47,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:layout_margin="5dp"
-                    android:text="Bed Details"
-                    android:textColor="#677CEF"
+                    android:text="Beds Capacity"
+                    android:textColor="#331478"
                     android:textSize="18sp"
                     />
 
@@ -79,6 +79,8 @@
                     android:layout_gravity="start"
                     android:padding="2dp"
                     android:background="@drawable/layout_background"/>
+
+
 
 
             </LinearLayout>
@@ -123,12 +125,12 @@
                                 android:id="@+id/rel1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp">
+                                >
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="40dp"
-                                    android:background="@drawable/spinner_layout"
+                                    android:background="@drawable/spinner_layout_new"
                                     android:orientation="horizontal">
 
                                     <Spinner
@@ -151,7 +153,7 @@
                                     android:paddingLeft="3dp"
                                     android:paddingRight="3dp"
                                     android:text="Select Hospital"
-                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColor="@color/beddetailscolor"
                                     android:textSize="10sp" />
                             </RelativeLayout>
 
@@ -169,7 +171,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
                                 android:layout_marginLeft="10dp"
-                                android:layout_marginTop="10dp"
                                 android:layout_marginRight="8dp"
                                 android:layout_weight="1"
                                 android:background="#EDE9E9">
@@ -177,7 +178,7 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="40dp"
-                                    android:background="@drawable/spinner_layout"
+                                    android:background="@drawable/spinner_layout_new"
                                     android:orientation="horizontal">
 
                                     <EditText
@@ -204,7 +205,7 @@
                                     android:paddingLeft="3dp"
                                     android:paddingRight="3dp"
                                     android:text="Expected Beds"
-                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColor="@color/beddetailscolor"
                                     android:textSize="10sp" />
                             </RelativeLayout>
 
@@ -238,7 +239,7 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="40dp"
-                                    android:background="@drawable/spinner_layout"
+                                    android:background="@drawable/spinner_layout_new"
                                     android:orientation="horizontal">
 
                                     <EditText
@@ -265,7 +266,7 @@
                                     android:paddingLeft="3dp"
                                     android:paddingRight="3dp"
                                     android:text="Actual Beds"
-                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColor="@color/beddetailscolor"
                                     android:textSize="10sp" />
                             </RelativeLayout>
 
@@ -291,7 +292,7 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="40dp"
-                                    android:background="@drawable/spinner_layout"
+                                    android:background="@drawable/spinner_layout_new"
                                     android:orientation="horizontal">
 
                                     <EditText
@@ -318,7 +319,7 @@
                                     android:paddingLeft="3dp"
                                     android:paddingRight="3dp"
                                     android:text="Oxygen Beds"
-                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColor="@color/beddetailscolor"
                                     android:textSize="10sp" />
                             </RelativeLayout>
 
@@ -353,7 +354,7 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="40dp"
-                                    android:background="@drawable/spinner_layout"
+                                    android:background="@drawable/spinner_layout_new"
                                     android:orientation="horizontal">
 
                                     <EditText
@@ -380,7 +381,7 @@
                                     android:paddingLeft="3dp"
                                     android:paddingRight="3dp"
                                     android:text="ICU Beds"
-                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColor="@color/beddetailscolor"
                                     android:textSize="10sp" />
                             </RelativeLayout>
 
@@ -406,7 +407,7 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="40dp"
-                                    android:background="@drawable/spinner_layout"
+                                    android:background="@drawable/spinner_layout_new"
                                     android:orientation="horizontal">
 
                                     <EditText
@@ -433,7 +434,7 @@
                                     android:paddingLeft="3dp"
                                     android:paddingRight="3dp"
                                     android:text="Ventilator"
-                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColor="@color/beddetailscolor"
                                     android:textSize="10sp" />
                             </RelativeLayout>
 
@@ -454,7 +455,7 @@
                 android:layout_gravity="start"
                 android:layout_margin="5dp"
                 android:text="Total Beds occupied"
-                android:textColor="#677CEF"
+                android:textColor="#331478"
                 android:textSize="16sp"
                  />
 
@@ -499,12 +500,12 @@
                                 android:id="@+id/rel7"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp">
+                                >
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="40dp"
-                                    android:background="@drawable/spinner_layout"
+                                    android:background="@drawable/spinner_layout_new"
                                     android:orientation="horizontal">
 
                                     <EditText
@@ -531,7 +532,7 @@
                                     android:paddingLeft="3dp"
                                     android:paddingRight="3dp"
                                     android:text="AB-ARK DWD"
-                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColor="@color/beddetailscolor"
                                     android:textSize="10sp" />
                             </RelativeLayout>
 
@@ -549,14 +550,13 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
                                 android:layout_marginLeft="10dp"
-                                android:layout_marginTop="10dp"
                                 android:layout_marginRight="8dp"
                                 android:layout_weight="1">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="40dp"
-                                    android:background="@drawable/spinner_layout"
+                                    android:background="@drawable/spinner_layout_new"
                                     android:orientation="horizontal">
 
                                     <EditText
@@ -583,7 +583,7 @@
                                     android:paddingLeft="3dp"
                                     android:paddingRight="3dp"
                                     android:text="AB-ARK Outside"
-                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColor="@color/beddetailscolor"
                                     android:textSize="10sp" />
                             </RelativeLayout>
 
@@ -618,7 +618,7 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="40dp"
-                                    android:background="@drawable/spinner_layout"
+                                    android:background="@drawable/spinner_layout_new"
                                     android:orientation="horizontal">
 
                                     <EditText
@@ -646,7 +646,7 @@
                                     android:paddingLeft="3dp"
                                     android:paddingRight="3dp"
                                     android:text="AB-ARK"
-                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColor="@color/beddetailscolor"
                                     android:textSize="10sp" />
                             </RelativeLayout>
 
@@ -681,7 +681,7 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="40dp"
-                                    android:background="@drawable/spinner_layout"
+                                    android:background="@drawable/spinner_layout_new"
                                     android:orientation="horizontal">
 
                                     <EditText
@@ -707,7 +707,7 @@
                                     android:paddingLeft="3dp"
                                     android:paddingRight="3dp"
                                     android:text="Dharwad"
-                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColor="@color/beddetailscolor"
                                     android:textSize="10sp" />
                             </RelativeLayout>
 
@@ -734,7 +734,7 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="40dp"
-                                    android:background="@drawable/spinner_layout"
+                                    android:background="@drawable/spinner_layout_new"
                                     android:orientation="horizontal">
 
                                     <EditText
@@ -760,7 +760,7 @@
                                     android:paddingLeft="3dp"
                                     android:paddingRight="3dp"
                                     android:text="Outside DWD"
-                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColor="@color/beddetailscolor"
                                     android:textSize="10sp" />
                             </RelativeLayout>
 
@@ -789,7 +789,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
-                                android:background="@drawable/spinner_layout"
+                                android:background="@drawable/spinner_layout_new"
                                 android:orientation="horizontal">
 
                                 <EditText
@@ -816,7 +816,7 @@
                                 android:paddingLeft="3dp"
                                 android:paddingRight="3dp"
                                 android:text="Patient"
-                                android:textColor="@color/colorPrimaryDark"
+                                android:textColor="@color/beddetailscolor"
                                 android:textSize="10sp" />
                         </RelativeLayout>
 
@@ -831,8 +831,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:layout_margin="5dp"
-                android:text="Beds Details"
-                android:textColor="#677CEF"
+                android:text="Bed Details"
+                android:textColor="#331478"
                 android:textSize="16sp"
                 />
 
@@ -853,7 +853,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="10dp"
+                    android:padding="5dp"
                     android:layout_gravity="center"
                     android:gravity="center">
 
@@ -869,7 +869,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_margin="5dp"
+                            android:layout_margin="2dp"
                             android:layout_weight="1"
                             android:text=""
                             android:textColor="#8C9EFF"
@@ -883,7 +883,7 @@
                             android:layout_margin="2dp"
                             android:layout_weight="1"
                             android:text="ICU Bed"
-                            android:textColor="#8C9EFF"
+                            android:textColor="#331478"
                             android:textSize="15sp"
                              />
 
@@ -894,7 +894,7 @@
                             android:layout_margin="2dp"
                             android:layout_weight="1"
                             android:text="Oxygen Bed"
-                            android:textColor="#8C9EFF"
+                            android:textColor="#331478"
                             android:textSize="15sp"
                             />
 
@@ -905,7 +905,7 @@
                             android:layout_margin="2dp"
                             android:layout_weight="1"
                             android:text="Ventilator Bed"
-                            android:textColor="#8C9EFF"
+                            android:textColor="#331478"
                             android:textSize="15sp"
                              />
 
@@ -919,7 +919,7 @@
                         android:background="#EDE9E9"
                         android:padding="5dp"
                         android:text=" Beds occupied"
-                        android:textColor="#8C9EFF"
+                        android:textColor="#331478"
                         android:textSize="16sp"
                          />
 
@@ -938,7 +938,7 @@
                             android:layout_margin="5dp"
                             android:layout_weight="1"
                             android:text="Dharwad"
-                            android:textColor="#8C9EFF"
+                            android:textColor="#331478"
                             android:textSize="15sp"
                             />
 
@@ -946,15 +946,15 @@
                             android:id="@+id/beds_occupied_within_dwd_ICU_ET"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="start"
+                            android:layout_gravity="center"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
-                            android:background="@drawable/spinner_layout"
+                            android:background="@drawable/spinner_layout_new"
                             android:inputType="number"
                             android:text=""
                             android:padding="5dp"
                             android:gravity="center"
-                            android:textColor="#8C9EFF"
+                            android:textColor="#331478"
                             android:textSize="15sp"
                              />
 
@@ -962,15 +962,14 @@
                             android:id="@+id/beds_occupied_within_dwd_oxygen_ET"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="start"
+                            android:layout_gravity="center"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
-                            android:background="@drawable/spinner_layout"
+                            android:background="@drawable/spinner_layout_new"
                             android:inputType="number"
                             android:text=""
-                            android:textColor="#8C9EFF"
+                            android:textColor="#331478"
                             android:textSize="15sp"
-                            
                             android:padding="5dp"
                             android:gravity="center"
                             />
@@ -979,15 +978,14 @@
                             android:id="@+id/beds_occupied_within_dwd_ventilator_ET"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="start"
+                            android:layout_gravity="center"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
-                            android:background="@drawable/spinner_layout"
+                            android:background="@drawable/spinner_layout_new"
                             android:inputType="number"
                             android:text=""
-                            android:textColor="#8C9EFF"
+                            android:textColor="#331478"
                             android:textSize="15sp"
-                            
                             android:padding="5dp"
                             android:gravity="center"
                             />
@@ -1010,7 +1008,7 @@
                             android:layout_margin="5dp"
                             android:layout_weight="1"
                             android:text="Outside Dharwad"
-                            android:textColor="#8C9EFF"
+                            android:textColor="#331478"
                             android:textSize="15sp"
                              />
 
@@ -1018,13 +1016,13 @@
                             android:id="@+id/beds_occupied_out_dwd_ICU_ET"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="start"
+                            android:layout_gravity="center"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
-                            android:background="@drawable/spinner_layout"
+                            android:background="@drawable/spinner_layout_new"
                             android:inputType="number"
                             android:text=""
-                            android:textColor="#8C9EFF"
+                            android:textColor="#331478"
                             android:textSize="15sp"
                             
                             android:padding="5dp"
@@ -1035,13 +1033,13 @@
                             android:id="@+id/beds_occupied_out_dwd_oxygen_ET"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="start"
+                            android:layout_gravity="center"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
-                            android:background="@drawable/spinner_layout"
+                            android:background="@drawable/spinner_layout_new"
                             android:inputType="number"
                             android:text=""
-                            android:textColor="#8C9EFF"
+                            android:textColor="#331478"
                             android:textSize="15sp"
                             
                             android:padding="5dp"
@@ -1052,13 +1050,13 @@
                             android:id="@+id/beds_occupied_out_dwd_vent_ET"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="start"
+                            android:layout_gravity="center"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
-                            android:background="@drawable/spinner_layout"
+                            android:background="@drawable/spinner_layout_new"
                             android:inputType="number"
                             android:text=""
-                            android:textColor="#8C9EFF"
+                            android:textColor="#331478"
                             android:textSize="15sp"
                             
                             android:padding="5dp"
@@ -1077,7 +1075,7 @@
                         android:background="#EDE9E9"
                         android:padding="5dp"
                         android:text="Patients Discharged"
-                        android:textColor="#8C9EFF"
+                        android:textColor="#331478"
                         android:textSize="15sp"
                         />
 
@@ -1095,7 +1093,7 @@
                             android:layout_margin="5dp"
                             android:layout_weight="1"
                             android:text="Dharwad"
-                            android:textColor="#8C9EFF"
+                            android:textColor="#331478"
                             android:textSize="15sp"
                             android:gravity="center"/>
 
@@ -1106,10 +1104,10 @@
                             android:layout_gravity="start"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
-                            android:background="@drawable/spinner_layout"
+                            android:background="@drawable/spinner_layout_new"
                             android:inputType="number"
                             android:text=""
-                            android:textColor="#8C9EFF"
+                            android:textColor="#331478"
                             android:textSize="15sp"
                             
                             android:padding="5dp"
@@ -1123,10 +1121,10 @@
                             android:layout_gravity="start"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
-                            android:background="@drawable/spinner_layout"
+                            android:background="@drawable/spinner_layout_new"
                             android:inputType="number"
                             android:text=""
-                            android:textColor="#8C9EFF"
+                            android:textColor="#331478"
                             android:textSize="15sp"
                             
                             android:padding="5dp"
@@ -1140,10 +1138,10 @@
                             android:layout_gravity="start"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
-                            android:background="@drawable/spinner_layout"
+                            android:background="@drawable/spinner_layout_new"
                             android:inputType="number"
                             android:text=""
-                            android:textColor="#8C9EFF"
+                            android:textColor="#331478"
                             android:textSize="15sp"
                             
                             android:padding="5dp"
@@ -1168,7 +1166,7 @@
                             android:layout_margin="5dp"
                             android:layout_weight="1"
                             android:text="Outside Dharwad"
-                            android:textColor="#8C9EFF"
+                            android:textColor="#331478"
                             android:textSize="15sp"
                             />
 
@@ -1176,13 +1174,13 @@
                             android:id="@+id/patientsdischrged_outside_dwd_ICU_ET"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="start"
+                            android:layout_gravity="center"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
-                            android:background="@drawable/spinner_layout"
+                            android:background="@drawable/spinner_layout_new"
                             android:inputType="number"
                             android:text=""
-                            android:textColor="#8C9EFF"
+                            android:textColor="#331478"
                             android:textSize="15sp"
                             
                             android:padding="5dp"
@@ -1193,13 +1191,13 @@
                             android:id="@+id/patientsdischrged_out_dwd_oxy_ET"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="start"
+                            android:layout_gravity="center"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
-                            android:background="@drawable/spinner_layout"
+                            android:background="@drawable/spinner_layout_new"
                             android:inputType="number"
                             android:text=""
-                            android:textColor="#8C9EFF"
+                            android:textColor="#331478"
                             android:textSize="15sp"
                             
                             android:padding="5dp"
@@ -1210,13 +1208,13 @@
                             android:id="@+id/patientsdischrged_out_dwd_vent_ET"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="start"
+                            android:layout_gravity="center"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
-                            android:background="@drawable/spinner_layout"
+                            android:background="@drawable/spinner_layout_new"
                             android:inputType="number"
                             android:text=""
-                            android:textColor="#8C9EFF"
+                            android:textColor="#331478"
                             android:textSize="15sp"
                             
                             android:padding="5dp"
@@ -1240,7 +1238,7 @@
                             android:layout_margin="5dp"
                             android:layout_weight="1"
                             android:text="Deaths"
-                            android:textColor="#8C9EFF"
+                            android:textColor="#331478"
                             android:textSize="15sp"
                             android:gravity="center"/>
 
@@ -1248,13 +1246,13 @@
                             android:id="@+id/deaths_ICU_ET"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="start"
+                            android:layout_gravity="center"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
-                            android:background="@drawable/spinner_layout"
+                            android:background="@drawable/spinner_layout_new"
                             android:inputType="number"
                             android:text=""
-                            android:textColor="#8C9EFF"
+                            android:textColor="#331478"
                             android:textSize="15sp"
                             
                             android:padding="5dp"
@@ -1265,13 +1263,13 @@
                             android:id="@+id/deaths_oxy_ET"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="start"
+                            android:layout_gravity="center"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
-                            android:background="@drawable/spinner_layout"
+                            android:background="@drawable/spinner_layout_new"
                             android:inputType="number"
                             android:text=""
-                            android:textColor="#8C9EFF"
+                            android:textColor="#331478"
                             android:textSize="15sp"
                             
                             android:padding="5dp"
@@ -1282,13 +1280,13 @@
                             android:id="@+id/deaths_vent_ET"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="start"
+                            android:layout_gravity="center"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
-                            android:background="@drawable/spinner_layout"
+                            android:background="@drawable/spinner_layout_new"
                             android:inputType="number"
                             android:text=""
-                            android:textColor="#8C9EFF"
+                            android:textColor="#331478"
                             android:textSize="15sp"
                             
                             android:padding="5dp"
@@ -1307,7 +1305,7 @@
                 android:layout_gravity="start"
                 android:layout_margin="5dp"
                 android:text="Number of Patients given Remdesivir avials"
-                android:textColor="#677CEF"
+                android:textColor="#331478"
                 android:textSize="16sp"
                  />
 
@@ -1338,27 +1336,27 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:orientation="horizontal"
-                        android:weightSum="3">
+                        android:weightSum="2">
 
 
                         <LinearLayout
-                            android:layout_width="100dp"
+                            android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
-                            android:padding="5dp"
                             tools:ignore="MissingConstraints">
 
                             <RelativeLayout
                                 android:id="@+id/rel13"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp">
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                >
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="40dp"
-                                    android:background="@drawable/spinner_layout"
+                                    android:background="@drawable/spinner_layout_new"
                                     android:orientation="horizontal">
 
                                     <EditText
@@ -1384,18 +1382,18 @@
                                     android:paddingLeft="3dp"
                                     android:paddingRight="3dp"
                                     android:text="Within DWD"
-                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColor="@color/beddetailscolor"
                                     android:textSize="10sp" />
                             </RelativeLayout>
 
                         </LinearLayout>
 
+
                         <LinearLayout
-                            android:layout_width="100dp"
+                            android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
-                            android:padding="5dp"
                             tools:ignore="MissingConstraints">
 
                             <RelativeLayout
@@ -1403,14 +1401,13 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
                                 android:layout_marginLeft="10dp"
-                                android:layout_marginTop="10dp"
                                 android:layout_marginRight="8dp"
                                 android:layout_weight="1">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="40dp"
-                                    android:background="@drawable/spinner_layout"
+                                    android:background="@drawable/spinner_layout_new"
                                     android:orientation="horizontal">
 
                                     <EditText
@@ -1436,18 +1433,26 @@
                                     android:paddingLeft="3dp"
                                     android:paddingRight="3dp"
                                     android:text="Outside DWD"
-                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColor="@color/beddetailscolor"
                                     android:textSize="10sp" />
                             </RelativeLayout>
 
                         </LinearLayout>
+                    </LinearLayout>
+
 
                         <LinearLayout
-                            android:layout_width="100dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
-                            android:padding="5dp"
                             tools:ignore="MissingConstraints">
 
                             <RelativeLayout
@@ -1460,7 +1465,7 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="40dp"
-                                    android:background="@drawable/spinner_layout"
+                                    android:background="@drawable/spinner_layout_new"
                                     android:orientation="horizontal">
 
                                     <EditText
@@ -1487,25 +1492,24 @@
                                     android:paddingLeft="3dp"
                                     android:paddingRight="3dp"
                                     android:text="Total"
-                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColor="@color/beddetailscolor"
                                     android:textSize="10sp" />
                             </RelativeLayout>
 
                         </LinearLayout>
-
-                    </LinearLayout>
+                        </LinearLayout>
 
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:layout_margin="5dp"
                 android:text="Availability Of"
-                android:textColor="#8C9EFF"
+                android:textColor="#331478"
                 android:textSize="16sp"
                  />
 
@@ -1527,20 +1531,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:gravity="center"
                     android:orientation="vertical"
                     android:padding="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:orientation="horizontal"
-                        android:weightSum="3">
+                        android:weightSum="2">
 
 
                         <LinearLayout
-                            android:layout_width="100dp"
+                            android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
@@ -1549,13 +1553,13 @@
                             <RelativeLayout
                                 android:id="@+id/rel16"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp">
+                                android:layout_height="0dp"
+                                android:layout_weight="1">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="40dp"
-                                    android:background="@drawable/spinner_layout"
+                                    android:background="@drawable/spinner_layout_new"
                                     android:orientation="horizontal">
 
                                     <EditText
@@ -1581,14 +1585,14 @@
                                     android:paddingLeft="3dp"
                                     android:paddingRight="3dp"
                                     android:text="Remdesivir Available"
-                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColor="@color/beddetailscolor"
                                     android:textSize="10sp" />
                             </RelativeLayout>
 
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="100dp"
+                            android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
@@ -1599,14 +1603,13 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
                                 android:layout_marginLeft="10dp"
-                                android:layout_marginTop="10dp"
                                 android:layout_marginRight="8dp"
                                 android:layout_weight="1">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="40dp"
-                                    android:background="@drawable/spinner_layout"
+                                    android:background="@drawable/spinner_layout_new"
                                     android:orientation="horizontal">
 
                                     <EditText
@@ -1614,6 +1617,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="40dp"
                                         android:background="@android:color/transparent"
+                                        android:enabled="true"
                                         android:hint="Oxygen in Litres"
                                         android:inputType="number"
                                         android:padding="5dp"
@@ -1632,11 +1636,63 @@
                                     android:paddingLeft="3dp"
                                     android:paddingRight="3dp"
                                     android:text="Oxygen in Litres"
-                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColor="@color/beddetailscolor"
                                     android:textSize="10sp" />
                             </RelativeLayout>
 
                         </LinearLayout>
+
+
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="150dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:orientation="vertical"-->
+<!--                            tools:ignore="MissingConstraints">-->
+
+<!--                            <RelativeLayout-->
+<!--                                android:id="@+id/rel17"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="0dp"-->
+<!--                                android:layout_marginLeft="10dp"-->
+<!--                                android:layout_marginRight="8dp"-->
+<!--                                android:layout_marginTop="10dp"-->
+<!--                                android:layout_weight="1">-->
+
+<!--                                <LinearLayout-->
+<!--                                    android:layout_width="match_parent"-->
+<!--                                    android:layout_height="40dp"-->
+<!--                                    android:background="@drawable/spinner_layout_new"-->
+<!--                                    android:orientation="horizontal">-->
+
+<!--                                    <EditText-->
+<!--                                        android:id="@+id/Oxygen_in_Litres_ET"-->
+<!--                                        android:layout_width="match_parent"-->
+<!--                                        android:layout_height="40dp"-->
+<!--                                        android:background="@android:color/transparent"-->
+<!--                                        android:hint="Oxygen in Litres"-->
+<!--                                        android:inputType="number"-->
+<!--                                        android:padding="5dp"-->
+<!--                                        android:textColor="#5C5757"-->
+<!--                                        android:textSize="13sp" />-->
+
+
+<!--                                </LinearLayout>-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_marginLeft="15dp"-->
+<!--                                    android:layout_marginTop="-4dp"-->
+<!--                                    android:background="#FFFFFF"-->
+<!--                                    android:paddingLeft="3dp"-->
+<!--                                    android:paddingRight="3dp"-->
+<!--                                    android:text="Oxygen in Litres"-->
+<!--                                    android:textColor="@color/beddetailscolor"-->
+<!--                                    android:textSize="10sp" />-->
+<!--                            </RelativeLayout>-->
+
+<!--                        </LinearLayout>-->
 
 
                     </LinearLayout>
