@@ -39,18 +39,20 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:weightSum="3">
-
-
+                android:weightSum="2"
+                android:layout_gravity="center"
+                android:gravity="end">
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:layout_margin="5dp"
-                    android:text="Beds Capacity"
+                    android:text=" Beds Capacity"
                     android:textColor="#331478"
                     android:textSize="18sp"
-                    />
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:padding="2dp"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="center"/>
 
 
                 <ImageButton
@@ -62,9 +64,10 @@
                     android:text=""
                     android:visibility="visible"
                     android:layout_margin="5dp"
-                    android:layout_gravity="start"
+                    android:layout_gravity="end"
                     android:padding="2dp"
-                    android:background="@drawable/layout_background"/>
+                    android:background="#FFFFFF"
+                    android:layout_weight="1" />
 
 
                 <ImageButton
@@ -78,8 +81,23 @@
                     android:layout_margin="5dp"
                     android:layout_gravity="start"
                     android:padding="2dp"
-                    android:background="@drawable/layout_background"/>
+                    android:background="#FFFFFF"
+                    android:layout_weight="1" />
 
+
+
+                <ImageButton
+                    android:id="@+id/close_bt"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:src="@drawable/close"
+                    android:text=""
+                    android:visibility="visible"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="start"
+                    android:background="#FFFFFF"
+                    android:layout_weight="1" />
 
 
 
@@ -490,7 +508,7 @@
 
 
                         <LinearLayout
-                            android:layout_width="80dp"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
@@ -589,7 +607,7 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="80dp"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             tools:ignore="MissingConstraints"
@@ -715,7 +733,7 @@
                         android:weightSum="3">
 
                         <LinearLayout
-                            android:layout_width="80dp"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
@@ -815,7 +833,7 @@
 
                         </LinearLayout>
                         <LinearLayout
-                            android:layout_width="80dp"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
@@ -924,9 +942,10 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:gravity="center"
                             android:layout_margin="2dp"
                             android:layout_weight="1"
-                            android:text="ICU Bed"
+                            android:text="ICU"
                             android:textColor="#331478"
                             android:textSize="15sp"
                              />
@@ -937,10 +956,10 @@
                             android:layout_gravity="center"
                             android:layout_margin="2dp"
                             android:layout_weight="1"
-                            android:text="Oxygen Bed"
+                            android:text="Oxygen"
                             android:textColor="#331478"
                             android:textSize="15sp"
-                            />
+                            android:gravity="center"/>
 
                         <TextView
                             android:layout_width="0dp"
@@ -948,10 +967,10 @@
                             android:layout_gravity="center"
                             android:layout_margin="2dp"
                             android:layout_weight="1"
-                            android:text="Ventilator Bed"
+                            android:text="Ventilator"
                             android:textColor="#331478"
                             android:textSize="15sp"
-                             />
+                             android:gravity="center"/>
 
 
                     </LinearLayout>
@@ -1384,7 +1403,7 @@
 
 
                         <LinearLayout
-                            android:layout_width="80dp"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
@@ -1482,7 +1501,7 @@
 
                         </LinearLayout>
                         <LinearLayout
-                            android:layout_width="80dp"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
