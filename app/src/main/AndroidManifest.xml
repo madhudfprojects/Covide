@@ -26,7 +26,9 @@
         <activity android:name="com.dfcovid.Activity_confirmpin"></activity>
         <activity android:name="com.dfcovid.Activity_setpin" />
 
-        <activity android:name="com.dfcovid.MainActivity">
+        <activity android:name="com.dfcovid.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
