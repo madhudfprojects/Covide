@@ -39,8 +39,7 @@
         </activity>
         <activity
             android:name="com.dfcovid.Activity_pinlogin"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoActionBar" />
+            android:screenOrientation="portrait" />
         <activity android:name="com.dfcovid.HomeActivity" />
         <activity
             android:name="com.dfcovid.Dashboard_Activity" />

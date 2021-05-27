@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity
     public static final String KeyValue_usercategory = "KeyValue_usercategory";
     public static final String KeyValue_usercellno = "KeyValue_usercellno";
     public static final String KeyValue_isuser_setpin = "KeyValue_isuser_setpin";
+    public static final String KeyValue_isuser_changepin = "KeyValue_isuser_changepin";
 
 
     SharedPreferences sharedpreference_usercredential_Obj;
@@ -94,7 +95,7 @@ public class MainActivity extends AppCompatActivity
 
 
     Button login_bt;
-    String str_isuser_setpin,str_forgotusername;
+    String str_isuser_setpin,str_forgotusername,str_isuser_changepin;
     SharedPreferences.Editor editor_obj;
 
     EditText username_et,password_et, dialogusername_et;
@@ -120,6 +121,7 @@ public class MainActivity extends AppCompatActivity
 
         sharedpreference_usercredential_Obj=getSharedPreferences(sharedpreference_usercredential, Context.MODE_PRIVATE);
         str_isuser_setpin = sharedpreference_usercredential_Obj.getString(KeyValue_isuser_setpin, "").trim();
+        str_isuser_changepin=sharedpreference_usercredential_Obj.getString(KeyValue_isuser_changepin, "").trim();
 
 
 
@@ -132,6 +134,15 @@ public class MainActivity extends AppCompatActivity
 
         if (str_isuser_setpin.isEmpty())
         {
+            if(str_isuser_changepin.isEmpty())
+            {
+
+            }else
+                {
+                    Intent i = new Intent(MainActivity.this, Activity_setpin.class);
+                    startActivity(i);
+                    finish();
+            }
 
         }else{
             if (str_isuser_setpin.equalsIgnoreCase("yes"))

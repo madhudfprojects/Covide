@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -39,6 +41,7 @@ public class Activity_pinlogin extends AppCompatActivity
     public static final String KeyValue_usercategory = "KeyValue_usercategory";
     public static final String KeyValue_usercellno = "KeyValue_usercellno";
     public static final String KeyValue_isuser_setpin = "KeyValue_isuser_setpin";
+    public static final String KeyValue_isuser_changepin = "KeyValue_isuser_changepin";
 
 
     SharedPreferences sharedpreference_usercredential_Obj;
@@ -381,7 +384,7 @@ public class Activity_pinlogin extends AppCompatActivity
         AlertDialog.Builder dialog = new AlertDialog.Builder(Activity_pinlogin.this);
         dialog.setCancelable(false);
         dialog.setTitle(R.string.alert);
-        dialog.setMessage("Are you sure want to close");
+        dialog.setMessage("Are you sure want to Exit");
 
         dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
@@ -389,7 +392,7 @@ public class Activity_pinlogin extends AppCompatActivity
             {
                 finish();
                 System.exit(0);
-                
+
             }
         })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -409,6 +412,163 @@ public class Activity_pinlogin extends AppCompatActivity
             }
         });
         alert.show();
+    }
+
+
+
+
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        //getMenuInflater().inflate(R.menu.home_menu, menu);
+        getMenuInflater().inflate(R.menu.logout_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+
+        if(id==R.id.changepin)
+        {
+
+
+            AlertDialog.Builder dialog = new AlertDialog.Builder(Activity_pinlogin.this);
+            dialog.setCancelable(false);
+            dialog.setTitle(R.string.alert);
+            dialog.setMessage("Are you sure want to Change PIN?");
+
+            dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id)
+                {
+
+                    editor_obj = sharedpreference_usercredential_Obj.edit();
+                    editor_obj.putString(KeyValue_isuser_setpin, "");
+                    editor_obj.commit();
+
+                    editor_obj = sharedpreference_usercredential_Obj.edit();
+                    editor_obj.putString(KeyValue_isuser_changepin, "yes");
+                    editor_obj.commit();
+
+                    Intent i = new Intent(getApplicationContext(), Activity_setpin.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(i);
+                    finish();
+                }
+            })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //Action for "Cancel".
+                            dialog.dismiss();
+                        }
+                    });
+
+            final AlertDialog alert = dialog.create();
+            alert.setOnShowListener(new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface arg0) {
+                    alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED);
+                    alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#004D40"));
+                }
+            });
+            alert.show();
+
+            return true;
+        }
+        if(id==R.id.aboutus)
+        {
+
+
+           /* internetDectector = new Class_InternetDectector(getApplicationContext());
+            isInternetPresent = internetDectector.isConnectingToInternet();
+
+            if (isInternetPresent)
+            {
+                Intent i = new Intent(Activity_HomeScreen.this, ClusterHomeActivity.class);
+                startActivity(i);
+                finish();
+                return true;
+            }
+            else{
+                Toast.makeText(getApplicationContext(), "No Internet", Toast.LENGTH_SHORT).show();
+            }*/
+        }
+
+
+
+
+        if (id == R.id.logout)
+        {
+            // Toast.makeText(CalenderActivity.this, "Action clicked", Toast.LENGTH_LONG).show();
+            internetDectector = new Class_InternetDectector(getApplicationContext());
+            isInternetPresent = internetDectector.isConnectingToInternet();
+
+            if (isInternetPresent)
+            {
+
+
+
+
+                AlertDialog.Builder dialog = new AlertDialog.Builder(Activity_pinlogin.this);
+                dialog.setCancelable(false);
+                dialog.setTitle(R.string.alert);
+                dialog.setMessage("Are you sure want to Logout?");
+
+                dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id)
+                    {
+
+                       /* SaveSharedPreference.setUserName(Activity_HomeScreen.this, "");
+
+                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                        i.putExtra("Key_Logout", "yes");
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(i);
+                        finish();*/
+
+
+                    }
+                })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //Action for "Cancel".
+                                dialog.dismiss();
+                            }
+                        });
+
+                final AlertDialog alert = dialog.create();
+                alert.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface arg0) {
+                        alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED);
+                        alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#004D40"));
+                    }
+                });
+                alert.show();
+
+
+                //}
+            } else {
+                Toast.makeText(getApplicationContext(), "No Internet", Toast.LENGTH_SHORT).show();
+            }
+            return true;
+        }
+
+
+        return super.onOptionsItemSelected(item);
     }
 
 
