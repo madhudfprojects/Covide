@@ -486,11 +486,12 @@ public class Activity_pinlogin extends AppCompatActivity
 
             return true;
         }
+
        /* if(id==R.id.aboutus)
-        {*/
+        {
 
 
-           /* internetDectector = new Class_InternetDectector(getApplicationContext());
+           *//* internetDectector = new Class_InternetDectector(getApplicationContext());
             isInternetPresent = internetDectector.isConnectingToInternet();
 
             if (isInternetPresent)
@@ -502,13 +503,13 @@ public class Activity_pinlogin extends AppCompatActivity
             }
             else{
                 Toast.makeText(getApplicationContext(), "No Internet", Toast.LENGTH_SHORT).show();
-            }*/
-       // }
+            }*//*
+        }
+
+*/
 
 
-
-
-       /* if (id == R.id.logout)
+        /*if (id == R.id.logout)
         {
             // Toast.makeText(CalenderActivity.this, "Action clicked", Toast.LENGTH_LONG).show();
             internetDectector = new Class_InternetDectector(getApplicationContext());
