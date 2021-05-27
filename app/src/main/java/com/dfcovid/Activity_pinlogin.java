@@ -374,6 +374,43 @@ public class Activity_pinlogin extends AppCompatActivity
 
 
 
+    @Override
+    public void onBackPressed()
+    {
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(Activity_pinlogin.this);
+        dialog.setCancelable(false);
+        dialog.setTitle(R.string.alert);
+        dialog.setMessage("Are you sure want to close");
+
+        dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id)
+            {
+                finish();
+                System.exit(0);
+                
+            }
+        })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Action for "Cancel".
+                        dialog.dismiss();
+                    }
+                });
+
+        final AlertDialog alert = dialog.create();
+        alert.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface arg0) {
+                alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED);
+                alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#004D40"));
+            }
+        });
+        alert.show();
+    }
+
 
 
 
