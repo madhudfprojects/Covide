@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#47c7c6"
+    android:background="@color/lightblues_color"
     tools:context="com.dfcovid.Activity_pinlogin">
 
 
