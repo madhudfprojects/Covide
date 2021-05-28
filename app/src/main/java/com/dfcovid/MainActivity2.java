@@ -69,14 +69,14 @@ public class MainActivity2 extends AppCompatActivity {
             str_getRemdesivirGivenOutsideDistrict = "", str_getTotalRemdesivirGiven = "", str_getAvailableRemdesivir = "",
             str_getAvailableOxygenLiters = "", sp_strHospital_ID = "", str_currentdate = "", str_userID = "", str_fetched_hospital = "", str_fetched_hospitalID = "";
     Spinner hospital_list_SP;
-    ImageButton edit_BT, disable_bt;
+    ImageButton edit_BT, disable_bt,close_bt;
     Button save_BTN,close_BTN;
     EditText exp_beds_ET, actual_beds_ET, ox_beds_ET, icu_beds_ET, ventilator_ET, ABARKDWD_ET, ABARK_Outside_ET, ABARK_ET, Dharwad_ET, Outside_DWD_ET, Patient_ET, beds_occupied_within_dwd_ICU_ET, beds_occupied_within_dwd_oxygen_ET, beds_occupied_within_dwd_ventilator_ET, beds_occupied_out_dwd_ICU_ET, beds_occupied_out_dwd_oxygen_ET, beds_occupied_out_dwd_vent_ET, patientsdischrged_within_dwd_ICU_ET, patientsdischrged_within_dwd_oxygen_ET, patientsdischrged_within_dwd_vent_ET, patientsdischrged_outside_dwd_ICU_ET, patientsdischrged_out_dwd_oxy_ET, patientsdischrged_out_dwd_vent_ET, deaths_ICU_ET, deaths_oxy_ET, deaths_vent_ET, Rem_withinDWD_ET, Rem_Outside_DWD_ET, Remdesivir_Given_ET, Remdesivir_Available_ET, Oxygen_in_Litres_ET;
     RelativeLayout rel2, rel3, rel4, rel5, rel6;
 
     SharedPreferences sharedpreference_usercredential_Obj;
     SharedPreferences.Editor editor_obj;
-
+    int total_ABARK=0,total_patients=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +101,7 @@ public class MainActivity2 extends AppCompatActivity {
         //button
         edit_BT = (ImageButton) findViewById(R.id.edit_BT);
         disable_bt = (ImageButton) findViewById(R.id.disable_bt);
+        close_bt= (ImageButton) findViewById(R.id.close_bt);
         save_BTN = (Button) findViewById(R.id.save_BTN);
         close_BTN= (Button) findViewById(R.id.close_BTN);
         //spinner
@@ -174,7 +175,7 @@ public class MainActivity2 extends AppCompatActivity {
 
                 }
 
-                int total_ABARK = ABARK_WithinDWD + ABARK_OutsideDWD;
+                total_ABARK = ABARK_WithinDWD + ABARK_OutsideDWD;
                 Log.e("total_ABARK", String.valueOf(total_ABARK));
                 ABARK_ET.setText(String.valueOf(total_ABARK));
             }
@@ -210,7 +211,7 @@ public class MainActivity2 extends AppCompatActivity {
 
                 }
 
-                int total_ABARK = ABARK_WithinDWD + ABARK_OutsideDWD;
+                total_ABARK = ABARK_WithinDWD + ABARK_OutsideDWD;
                 Log.e("total_ABARK", String.valueOf(total_ABARK));
                 ABARK_ET.setText(String.valueOf(total_ABARK));
             }
@@ -322,9 +323,9 @@ public class MainActivity2 extends AppCompatActivity {
 
                 }
 
-                int total_REM_GIVEN = patients_withinDWD + patients_Outside_DWD;
-                Log.e("total_Patients", String.valueOf(total_REM_GIVEN));
-                Patient_ET.setText(String.valueOf(total_REM_GIVEN));
+                 total_patients = patients_withinDWD + patients_Outside_DWD;
+                Log.e("total_Patients", String.valueOf(total_patients));
+                Patient_ET.setText(String.valueOf(total_patients));
             }
         });
         Outside_DWD_ET.addTextChangedListener(new TextWatcher() {
@@ -357,9 +358,9 @@ public class MainActivity2 extends AppCompatActivity {
 
                 }
 
-                int total_REM_GIVEN = patients_withinDWD + patients_Outside_DWD;
-                Log.e("total_Patients", String.valueOf(total_REM_GIVEN));
-                Patient_ET.setText(String.valueOf(total_REM_GIVEN));
+                 total_patients= patients_withinDWD + patients_Outside_DWD;
+                Log.e("total_Patients", String.valueOf(total_patients));
+                Patient_ET.setText(String.valueOf(total_patients));
             }
         });
 
@@ -423,6 +424,49 @@ public class MainActivity2 extends AppCompatActivity {
         save_BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                int actual_beds= 0;int ox_beds_intval= 0;int icu_beds_intval=0;int ventilator_intval=0,total_AB=0;
+                int beds_occupied_within_dwd_ICU_intval= 0,beds_occupied_within_dwd_oxygen_intval=-0,beds_occupied_within_dwd_ventilator_intval=0,beds_occupied_out_dwd_oxygen_intval=0,beds_occupied_out_dwd_ICU_intval=0,beds_occupied_out_dwd_vent_intval=0,icutotal=0,oxtotal=0,venttotal=0;
+                if(actual_beds_ET.getText().toString().equals("") || ox_beds_ET.getText().toString().equals("") || icu_beds_ET.getText().toString().equals("") || ventilator_ET.getText().toString().equals("") ){
+                    ox_beds_intval=0;
+                    icu_beds_intval=0;
+                    ventilator_intval=0;
+
+                    beds_occupied_within_dwd_ICU_intval=0;
+                    beds_occupied_within_dwd_oxygen_intval=0;
+                    beds_occupied_within_dwd_ventilator_intval=0;
+                    beds_occupied_out_dwd_ICU_intval=0;
+                    beds_occupied_out_dwd_oxygen_intval=0;
+                    beds_occupied_out_dwd_vent_intval=0;
+                    oxtotal=0;
+                    icutotal=0;
+                    venttotal=0;
+
+                }else {
+                    try {
+                        actual_beds = Integer.parseInt(actual_beds_ET.getText().toString());
+                        ox_beds_intval= Integer.parseInt(ox_beds_ET.getText().toString());
+                        icu_beds_intval= Integer.parseInt(icu_beds_ET.getText().toString());
+                        ventilator_intval= Integer.parseInt(ventilator_ET.getText().toString());
+
+                        beds_occupied_within_dwd_ICU_intval = Integer.parseInt(beds_occupied_within_dwd_ICU_ET.getText().toString());
+                        beds_occupied_within_dwd_oxygen_intval = Integer.parseInt(beds_occupied_within_dwd_oxygen_ET.getText().toString());
+                        beds_occupied_within_dwd_ventilator_intval = Integer.parseInt(beds_occupied_within_dwd_ventilator_ET.getText().toString());
+
+                        beds_occupied_out_dwd_ICU_intval= Integer.parseInt(beds_occupied_out_dwd_ICU_ET.getText().toString());
+                        beds_occupied_out_dwd_oxygen_intval = Integer.parseInt(beds_occupied_out_dwd_oxygen_ET.getText().toString());
+                        beds_occupied_out_dwd_vent_intval = Integer.parseInt(beds_occupied_out_dwd_vent_ET.getText().toString());
+
+                    }catch (Exception exception){
+                        exception.printStackTrace();
+                    }
+
+                }
+                total_AB = ox_beds_intval + icu_beds_intval + ventilator_intval;
+                icutotal=beds_occupied_within_dwd_ICU_intval+beds_occupied_out_dwd_ICU_intval;
+                oxtotal=beds_occupied_within_dwd_oxygen_intval+beds_occupied_out_dwd_oxygen_intval;
+                venttotal=beds_occupied_within_dwd_ventilator_intval+beds_occupied_out_dwd_vent_intval;
+
 
                     if(exp_beds_ET.getText().toString().equals("")){
                         Toast.makeText(MainActivity2.this, "Please enter Expected Beds", Toast.LENGTH_SHORT).show();
@@ -503,12 +547,24 @@ public class MainActivity2 extends AppCompatActivity {
                         Toast.makeText(MainActivity2.this, "Please enter Number of Patients given Remdesivir avials outside Dharwad", Toast.LENGTH_SHORT).show();
 
                     }else if(Remdesivir_Available_ET.getText().toString().equals("")){
-                        Toast.makeText(MainActivity2.this, "Please enter Remdesivir  Availabel", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity2.this, "Please enter Remdesivir Availabel", Toast.LENGTH_SHORT).show();
 
                     }else if(Oxygen_in_Litres_ET.getText().toString().equals("")){
                         Toast.makeText(MainActivity2.this, "Please enter Availability of Oxygen in Litres", Toast.LENGTH_SHORT).show();
 
-                    }else {
+                    }else if(actual_beds!=total_AB){
+                        Toast.makeText(MainActivity2.this, "Actual Bed count is not matching with detailed entries", Toast.LENGTH_SHORT).show();
+                    } else if(total_ABARK>actual_beds){
+                        Toast.makeText(MainActivity2.this, "Total AB-ARK count is more than the Actual Beds count", Toast.LENGTH_SHORT).show();
+                    }else if(total_patients>actual_beds){
+                        Toast.makeText(MainActivity2.this, "Total Patients count is more than the Actual Beds count", Toast.LENGTH_SHORT).show();
+                    }else if(icutotal>icu_beds_intval){
+                        Toast.makeText(MainActivity2.this, "ICU Bed count is more than the ICU bed details entered", Toast.LENGTH_SHORT).show();
+                    }else if(oxtotal>ox_beds_intval){
+                        Toast.makeText(MainActivity2.this, "Oxygen Bed count is more than the Oxygen bed details entered", Toast.LENGTH_SHORT).show();
+                    }else if(venttotal>ventilator_intval){
+                        Toast.makeText(MainActivity2.this, "Ventilator Bed count is more than the Ventilator bed details entered", Toast.LENGTH_SHORT).show();
+                    }else{
                         if (isInternetPresent) {
                             SaveHospitalDetails();
                         } else {
@@ -520,6 +576,16 @@ public class MainActivity2 extends AppCompatActivity {
         });
 
         close_BTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity2.this, Dashboard_Activity.class);
+                startActivity(i);
+                finish();
+
+            }
+        });
+
+        close_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity2.this, Dashboard_Activity.class);
@@ -793,6 +859,9 @@ public class MainActivity2 extends AppCompatActivity {
                     }
                 } else {
                     progressDoalog.dismiss();
+                    ClearEditText();
+                    Toast.makeText(MainActivity2.this, "Hospital Data Not Found", Toast.LENGTH_SHORT).show();
+
                     Log.e("Entered resp else", "");
                     DefaultResponse error = ErrorUtils.parseError(response);
                     // … and use it to show error information
@@ -1029,6 +1098,8 @@ public class MainActivity2 extends AppCompatActivity {
                         finish();
 
                     } else {
+                        Toast.makeText(MainActivity2.this, class_loginresponse.getMessage(), Toast.LENGTH_SHORT).show();
+
                         progressDoalog.dismiss();
                     }
                 } else {
@@ -1084,78 +1155,78 @@ public class MainActivity2 extends AppCompatActivity {
 
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.home_menu, menu);
-        getMenuInflater().inflate(R.menu.logout_menu, menu);
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
-
-        if(id==R.id.changepin)
-        {
-
-
-            AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity2.this);
-            dialog.setCancelable(false);
-            dialog.setTitle(R.string.alert);
-            dialog.setMessage("Are you sure you want to Change PIN?");
-
-            dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int id)
-                {
-
-                   /* editor_obj = sharedpreference_usercredential_Obj.edit();
-                    editor_obj.putString(KeyValue_isuser_setpin, "");
-                    editor_obj.commit();
-
-                    editor_obj = sharedpreference_usercredential_Obj.edit();
-                    editor_obj.putString(KeyValue_isuser_changepin, "yes");
-                    editor_obj.commit();*/
-
-                    Intent i = new Intent(getApplicationContext(), Activity_confirmoldpin.class);
-                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(i);
-                    finish();
-                }
-            })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //Action for "Cancel".
-                            dialog.dismiss();
-                        }
-                    });
-
-            final AlertDialog alert = dialog.create();
-            alert.setOnShowListener(new DialogInterface.OnShowListener() {
-                @Override
-                public void onShow(DialogInterface arg0) {
-                    alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED);
-                    alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#004D40"));
-                }
-            });
-            alert.show();
-
-            return true;
-        }
-
-
-
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        //getMenuInflater().inflate(R.menu.home_menu, menu);
+//        getMenuInflater().inflate(R.menu.logout_menu, menu);
+//
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item)
+//    {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//        //noinspection SimplifiableIfStatement
+//
+//        if(id==R.id.changepin)
+//        {
+//
+//
+//            AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity2.this);
+//            dialog.setCancelable(false);
+//            dialog.setTitle(R.string.alert);
+//            dialog.setMessage("Are you sure you want to Change PIN?");
+//
+//            dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int id)
+//                {
+//
+//                   editor_obj = sharedpreference_usercredential_Obj.edit();
+//                    editor_obj.putString(KeyValue_isuser_setpin, "");
+//                    editor_obj.commit();
+//
+//                    editor_obj = sharedpreference_usercredential_Obj.edit();
+//                    editor_obj.putString(KeyValue_isuser_changepin, "yes");
+//                    editor_obj.commit();
+//
+//                    Intent i = new Intent(getApplicationContext(), Activity_confirmoldpin.class);
+//                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                    startActivity(i);
+//                    finish();
+//                }
+//            })
+//                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            //Action for "Cancel".
+//                            dialog.dismiss();
+//                        }
+//                    });
+//
+//            final AlertDialog alert = dialog.create();
+//            alert.setOnShowListener(new DialogInterface.OnShowListener() {
+//                @Override
+//                public void onShow(DialogInterface arg0) {
+//                    alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED);
+//                    alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#004D40"));
+//                }
+//            });
+//            alert.show();
+//
+//            return true;
+//        }
+//
+//
+//
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
 
 
