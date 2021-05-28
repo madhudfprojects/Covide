@@ -20,8 +20,10 @@
 
         android:id="@+id/changepin"
         android:icon="@mipmap/ic_launcher"
-        android:iconTint="@color/colorwhite"
+        android:iconTint="@color/colorPrimary"
+        android:colorBackground="@color/colorPrimary"
         android:title="Change PIN"
+
     app:showAsAction="never"/>
     <!--<item
         android:id="@+id/aboutus"

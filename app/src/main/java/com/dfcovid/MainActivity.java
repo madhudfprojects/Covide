@@ -63,6 +63,8 @@ public class MainActivity extends AppCompatActivity
     public static final String KeyValue_usercellno = "KeyValue_usercellno";
     public static final String KeyValue_isuser_setpin = "KeyValue_isuser_setpin";
     public static final String KeyValue_isuser_changepin = "KeyValue_isuser_changepin";
+    public static final String KeyValue_loggedfromgoogle = "KeyValue_loggedfromgoogle";
+
 
 
     SharedPreferences sharedpreference_usercredential_Obj;
@@ -95,7 +97,7 @@ public class MainActivity extends AppCompatActivity
 
 
     Button login_bt;
-    String str_isuser_setpin,str_forgotusername,str_isuser_changepin;
+    String str_isuser_setpin,str_forgotusername,str_isuser_changepin,str_isuser_loggedfromgoogle;
     SharedPreferences.Editor editor_obj;
 
     EditText username_et,password_et, dialogusername_et;
@@ -122,7 +124,7 @@ public class MainActivity extends AppCompatActivity
         sharedpreference_usercredential_Obj=getSharedPreferences(sharedpreference_usercredential, Context.MODE_PRIVATE);
         str_isuser_setpin = sharedpreference_usercredential_Obj.getString(KeyValue_isuser_setpin, "").trim();
         str_isuser_changepin=sharedpreference_usercredential_Obj.getString(KeyValue_isuser_changepin, "").trim();
-
+        str_isuser_loggedfromgoogle=sharedpreference_usercredential_Obj.getString(KeyValue_loggedfromgoogle, "").trim();
 
 
 
@@ -144,6 +146,8 @@ public class MainActivity extends AppCompatActivity
                     finish();
             }
 
+
+
         }else{
             if (str_isuser_setpin.equalsIgnoreCase("yes"))
             {
@@ -153,6 +157,9 @@ public class MainActivity extends AppCompatActivity
             }
 
         }
+
+
+
 
 
 
@@ -203,6 +210,19 @@ public class MainActivity extends AppCompatActivity
                 .build();
         googlesigninclient_obj = GoogleSignIn.getClient(this, gso);
         //Google Sign initializing
+
+
+
+
+        // Signout function
+
+        if(str_isuser_loggedfromgoogle.isEmpty())
+        {
+
+        }else{
+
+            signOut();
+        }
 
 
 
@@ -468,13 +488,19 @@ public class MainActivity extends AppCompatActivity
 
 
 
-    private void signOut() {
+    private void signOut()
+    {
         googlesigninclient_obj.signOut()
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
+                    public void onComplete(@NonNull Task<Void> task)
+                    {
                         // ...
                         Toast.makeText(MainActivity.this,"Sigined Out Successfully", Toast.LENGTH_SHORT).show();
+
+                        editor_obj = sharedpreference_usercredential_Obj.edit();
+                        editor_obj.putString(KeyValue_loggedfromgoogle, "");
+                        editor_obj.commit();
                     }
                 });
     }
@@ -841,6 +867,11 @@ public class MainActivity extends AppCompatActivity
                         editor_obj.putString(KeyValue_userid, str_userid);
                         editor_obj.putString(KeyValue_username, str_username);
                         editor_obj.commit();
+
+                        editor_obj = sharedpreference_usercredential_Obj.edit();
+                        editor_obj.putString(KeyValue_loggedfromgoogle, "yes");
+                        editor_obj.commit();
+
 
 
                         progressDialog.dismiss();
