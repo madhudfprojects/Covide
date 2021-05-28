@@ -1,6 +1,7 @@
 package com.dfcovid.remote;
 
 
+import com.dfcovid.Class_GetAppVersion;
 import com.dfcovid.Class_forgotrequest;
 import com.dfcovid.Class_googleloginRequest;
 import com.dfcovid.Class_loginPinrequest;
@@ -64,6 +65,11 @@ public interface Interface_userservice {
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("Authentication/Post_ForgetPassword")
     Call<Class_normalloginresponse>Post_ForgetPassword(@Body Class_forgotrequest request);
+
+
+    //https://covid.dfindia.org/api/Authentication/Get_App_Version
+    @GET("Authentication/Get_App_Version")
+    Call<Class_GetAppVersion> Get_App_Version();
 
 
     @GET("Authentication/Get_UserHospitalList")

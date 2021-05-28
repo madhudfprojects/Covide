@@ -55,6 +55,7 @@ public class Activity_pinlogin extends AppCompatActivity
     Boolean isInternetPresent = false;
 
     String str_userID,str_username,str_loginpin,str_isuser_loggedfromgoogle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
