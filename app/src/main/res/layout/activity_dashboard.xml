@@ -173,7 +173,7 @@
             android:textStyle="bold"
             android:padding="5dp"
             android:textColor="@color/white"
-            style="@style/MyButton" />
+            android:theme="@style/MyButton" />
     </LinearLayout>
     <!--<ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
