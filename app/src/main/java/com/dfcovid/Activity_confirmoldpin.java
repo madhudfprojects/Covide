@@ -73,6 +73,8 @@ public class Activity_confirmoldpin extends AppCompatActivity {
 
         sharedpreference_setpin_Obj=getSharedPreferences(sharedpreference_setpincredential, Context.MODE_PRIVATE);
        // str_setpin = sharedpreference_setpin_Obj.getString(KeyValue_setpin, "").trim();
+
+        sharedpreference_usercredential_Obj=getSharedPreferences(sharedpreference_usercredential, Context.MODE_PRIVATE);
         str_username= sharedpreference_usercredential_Obj.getString(KeyValue_username, "").trim();
 
 

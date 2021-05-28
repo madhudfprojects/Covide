@@ -12,6 +12,8 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <!-- To change the background of options menu-->
+        <item name="android:itemBackground">@color/blue_500</item>
     </style>
 
 
