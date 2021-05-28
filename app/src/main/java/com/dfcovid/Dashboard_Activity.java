@@ -31,10 +31,12 @@ import com.dfcovid.model.Class_Get_UserHospitalListResponse;
 import com.dfcovid.remote.Class_ApiUtils;
 import com.dfcovid.remote.Interface_userservice;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -76,6 +78,8 @@ public class Dashboard_Activity extends AppCompatActivity {
     String str_userID,str_username,str_loginpin,str_hospitelId="",str_SelectedHospitalName="";
 
     ListView lv_summary;
+    String str_edt_fromdate_display="",str_edt_fromdate_sendTOAPI="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,8 +101,8 @@ public class Dashboard_Activity extends AppCompatActivity {
 
         Log.e("tAG","str_userID="+str_userID+"str_username="+str_username);
 
-        edt_fromdate.setEnabled(false);
-        edt_fromdate.setFocusable(false);
+        edt_fromdate.setEnabled(true);
+        edt_fromdate.setFocusable(true);
         dashboard_list =new ArrayList<Class_DashboardHospitalData_List>();
 
         dashboardHospitalListViewAdapter = new DashboardHospitalListViewAdapter(Dashboard_Activity.this, dashboard_list);
@@ -117,64 +121,99 @@ public class Dashboard_Activity extends AppCompatActivity {
 
         edt_fromdate.setText(formattedDate);
 
+//        edt_fromdate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                final Calendar c = Calendar.getInstance();
+//
+//                mYear = c.get(Calendar.YEAR);
+//                mMonth = c.get(Calendar.MONTH);
+//                mDay = c.get(Calendar.DAY_OF_MONTH);
+//
+//                DatePickerDialog datePickerDialog = new DatePickerDialog(getApplication(), R.style.DatePickerTheme,
+//                        new DatePickerDialog.OnDateSetListener() {
+//
+//                            @Override
+//                            public void onDateSet(DatePicker view, int year,
+//                                                  int monthOfYear, int dayOfMonth) {
+//
+//                                cDay = dayOfMonth;
+//                                cMonth = monthOfYear;
+//                                cYear = year;
+//
+//                                // String date =dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+//                                //  String date =year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+//                                String date =dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+//
+//
+//                                SimpleDateFormat dateFormat= new SimpleDateFormat("dd-MM-yyyy");
+//                                // SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
+//
+//
+//                                try {
+//                                    Date d=dateFormat.parse(date);
+//                                    System.out.println("Formated from"+dateFormat.format(d));
+//                                    fromdateseterror_TV.setVisibility(View.GONE);
+//                                    edt_fromdate.setText(dateFormat.format(d).toString());
+//
+//                                }
+//                                catch(Exception e) {
+//                                    //java.text.ParseException: Unparseable date: Geting error
+//                                    System.out.println("Excep"+e);
+//                                }
+//                                //TextView txtExactDate = (TextView) findViewById(R.id.txt_exactDate);
+//
+//
+//                                //txtDate.edita
+//                            }
+//                        }, mYear, mMonth, mDay);
+//
+//                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+//                //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis()-(1000 * 60 * 60 * 24 * 365 * 14));
+//                // - (1000 * 60 * 60 * 24 * 365.25 * 14)
+////------
+//
+//                datePickerDialog.show();
+//                //  originalList.clear();
+//                hospital_list_SP.setSelection(0);
+//                //adapter.notifyDataSetChanged();
+//            }
+//        });
+
+        //added by shivaleela
         edt_fromdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 final Calendar c = Calendar.getInstance();
-
-                mYear = c.get(Calendar.YEAR);
-                mMonth = c.get(Calendar.MONTH);
-                mDay = c.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog datePickerDialog = new DatePickerDialog(getApplication(), R.style.DatePickerTheme,
-                        new DatePickerDialog.OnDateSetListener() {
-
-                            @Override
-                            public void onDateSet(DatePicker view, int year,
-                                                  int monthOfYear, int dayOfMonth) {
-
-                                cDay = dayOfMonth;
-                                cMonth = monthOfYear;
-                                cYear = year;
-
-                                // String date =dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
-                                //  String date =year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
-                                String date =dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+                int mYear = c.get(Calendar.YEAR);
+                int mMonth = c.get(Calendar.MONTH);
+                int mDay = c.get(Calendar.DAY_OF_MONTH);
 
 
-                                SimpleDateFormat dateFormat= new SimpleDateFormat("dd-MM-yyyy");
-                                // SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
+                final DatePickerDialog datePickerDialog_receiveddate = new DatePickerDialog(Dashboard_Activity.this, R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                        Calendar cal = new GregorianCalendar(i, i1, i2);
 
 
-                                try {
-                                    Date d=dateFormat.parse(date);
-                                    System.out.println("Formated from"+dateFormat.format(d));
-                                    fromdateseterror_TV.setVisibility(View.GONE);
-                                    edt_fromdate.setText(dateFormat.format(d).toString());
-
-                                }
-                                catch(Exception e) {
-                                    //java.text.ParseException: Unparseable date: Geting error
-                                    System.out.println("Excep"+e);
-                                }
-                                //TextView txtExactDate = (TextView) findViewById(R.id.txt_exactDate);
+                        DatePickerDialog dialog = new DatePickerDialog(Dashboard_Activity.this, this, i, i1, i2);
+                        dialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                        fromdateseterror_TV.setVisibility(View.GONE);
 
 
-                                //txtDate.edita
-                            }
-                        }, mYear, mMonth, mDay);
+                        setReceivedstartDate(cal);
 
-                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
-                //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis()-(1000 * 60 * 60 * 24 * 365 * 14));
-                // - (1000 * 60 * 60 * 24 * 365.25 * 14)
-//------
+                    }
+                }, mYear, mMonth, mDay);
+                datePickerDialog_receiveddate.getDatePicker().setMaxDate(System.currentTimeMillis());
 
-                datePickerDialog.show();
-                //  originalList.clear();
+                datePickerDialog_receiveddate.show();
                 hospital_list_SP.setSelection(0);
-                //adapter.notifyDataSetChanged();
             }
         });
+        /////////////////////////////////////////
+
         hospital_list_SP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -216,6 +255,27 @@ public class Dashboard_Activity extends AppCompatActivity {
         });
     }
 
+
+    public void setReceivedstartDate (Calendar calendar){
+        final DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM);
+
+        edt_fromdate.setText(dateFormat.format(calendar.getTime()));
+        str_edt_fromdate_display = dateFormat.format(calendar.getTime());
+        Log.e("stredtfromdatedisplay.", dateFormat.format(calendar.getTime()));
+        edt_fromdate.setText(str_edt_fromdate_display);
+
+        SimpleDateFormat mdyFormat = new SimpleDateFormat("yyyy-MM-dd");
+        //SimpleDateFormat mdyFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+        str_edt_fromdate_sendTOAPI = mdyFormat.format(calendar.getTime());
+        Log.e("str_edate_sendTOAPI..", str_edt_fromdate_sendTOAPI);
+        Calendar c = Calendar.getInstance();
+        DateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Log.e("outputFormat..", String.valueOf(outputFormat));
+        Get_LoadHospitalDashboard();
+
+
+    }
     public void GetUserHospitalList() {
         Call<Class_Get_UserHospitalListResponse> call = userService1.GetUserHospitalList(str_userID);
 
@@ -300,7 +360,7 @@ public class Dashboard_Activity extends AppCompatActivity {
     }
 
     public void Get_LoadHospitalDashboard() {
-        Call<Class_DashboardHospitalData> call = userService1.Get_LoadHospitalDashboard(str_hospitelId);
+        Call<Class_DashboardHospitalData> call = userService1.Get_LoadHospitalDataDate(str_hospitelId,str_edt_fromdate_sendTOAPI);
 
         // Set up progress before call
         final ProgressDialog progressDoalog;
