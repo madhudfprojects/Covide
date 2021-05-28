@@ -187,25 +187,25 @@ public class Activity_setpin extends AppCompatActivity {
 
 
         if (otp1_et.getText().toString().trim().length() == 0) {
-            otp1_et.setError("Enter OTP");
+            otp1_et.setError("Enter PIN");
             otp1_et.requestFocus();
             b_otp1 = false;
         }
 
         if (otp2_et.getText().toString().trim().length() == 0) {
-            otp2_et.setError("Enter OTP");
+            otp2_et.setError("Enter PIN");
             otp2_et.requestFocus();
             b_otp2 = false;
         }
 
         if (otp3_et.getText().toString().trim().length() == 0) {
-            otp3_et.setError("Enter OTP");
+            otp3_et.setError("Enter PIN");
             otp3_et.requestFocus();
             b_otp3 = false;
         }
         if(otp4_et.getText().toString().trim().length()==0)
         {
-            otp4_et.setError("Enter OTP");
+            otp4_et.setError("Enter PIN");
             otp4_et.requestFocus();
             b_otp4=false;
         }

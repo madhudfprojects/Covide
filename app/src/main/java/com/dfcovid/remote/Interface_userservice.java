@@ -1,6 +1,7 @@
 package com.dfcovid.remote;
 
 
+import com.dfcovid.Class_GetAppVersion;
 import com.dfcovid.Class_forgotrequest;
 import com.dfcovid.Class_googleloginRequest;
 import com.dfcovid.Class_loginPinrequest;
@@ -68,6 +69,11 @@ public interface Interface_userservice {
     Call<Class_normalloginresponse>Post_ForgetPassword(@Body Class_forgotrequest request);
 
 
+    //https://covid.dfindia.org/api/Authentication/Get_App_Version
+    @GET("Authentication/Get_App_Version")
+    Call<Class_GetAppVersion> Get_App_Version();
+
+
     @GET("Authentication/Get_UserHospitalList")
     Call<Class_Get_UserHospitalListResponse>GetUserHospitalList(@Query("User_ID") String UserId);
 
@@ -81,8 +87,8 @@ public interface Interface_userservice {
 //changed by shivaleela
    // https://covid.dfindia.org//Api/Authentication/Get_LoadHospitalDataDate?Hospital_Id=42&dates=2021-05-27
     //dates
-    @GET("Authentication/Get_LoadHospitalDataDate")
-    Call<Class_DashboardHospitalData>Get_LoadHospitalDataDate(@Query("Hospital_Id") String Hospital_Id,@Query("dates") String dates);
+    @GET("Authentication/Get_LoadHospitalDashboardDate")
+    Call<Class_DashboardHospitalData>Get_LoadHospitalDataDate(@Query("Hospital_Id") String Hospital_Id,@Query("Entry_Date") String dates);
 
     @Headers("Content-Type: application/json;charset=utf-8")
     @POST("Authentication/Post_SaveHospital")

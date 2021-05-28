@@ -206,6 +206,7 @@
                                         android:background="@android:color/transparent"
                                         android:enabled="false"
                                         android:hint="Expected Beds"
+                                        android:textColorHint="@android:color/darker_gray"
                                         android:inputType="number"
                                         android:padding="5dp"
                                         android:textColor="#5C5757"
@@ -266,6 +267,7 @@
                                         android:layout_height="40dp"
                                         android:background="@android:color/transparent"
                                         android:enabled="false"
+                                        android:textColorHint="@android:color/darker_gray"
                                         android:hint="Actual Beds"
                                         android:inputType="number"
                                         android:padding="5dp"
@@ -319,6 +321,7 @@
                                         android:layout_height="40dp"
                                         android:background="@android:color/transparent"
                                         android:enabled="false"
+                                        android:textColorHint="@android:color/darker_gray"
                                         android:hint="Oxygen Beds"
                                         android:inputType="number"
                                         android:padding="5dp"
@@ -381,6 +384,7 @@
                                         android:layout_height="40dp"
                                         android:background="@android:color/transparent"
                                         android:enabled="false"
+                                        android:textColorHint="@android:color/darker_gray"
                                         android:hint="ICU Beds"
                                         android:inputType="number"
                                         android:padding="5dp"
@@ -434,6 +438,7 @@
                                         android:layout_height="40dp"
                                         android:background="@android:color/transparent"
                                         android:enabled="false"
+                                        android:textColorHint="@android:color/darker_gray"
                                         android:hint="Ventilator"
                                         android:inputType="number"
                                         android:padding="5dp"
@@ -531,6 +536,7 @@
                                         android:layout_height="40dp"
                                         android:background="@android:color/transparent"
                                         android:hint="AB-ARK DWD"
+                                        android:textColorHint="@android:color/darker_gray"
                                         android:inputType="number"
                                         android:padding="5dp"
                                         android:text="0"
@@ -583,6 +589,7 @@
                                         android:background="@android:color/transparent"
                                         android:hint="AB-ARK Outside"
                                         android:inputType="number"
+                                        android:textColorHint="@android:color/darker_gray"
                                         android:padding="5dp"
                                         android:text="0"
                                         android:textColor="#5C5757"
@@ -634,6 +641,7 @@
                                         android:background="@android:color/transparent"
                                         android:enabled="false"
                                         android:hint="AB-ARK"
+                                        android:textColorHint="@android:color/darker_gray"
                                         android:text="0"
                                         android:inputType="number"
                                         android:padding="5dp"
@@ -758,6 +766,7 @@
                                         android:layout_height="40dp"
                                         android:background="@android:color/transparent"
                                         android:hint="Dharwad"
+                                        android:textColorHint="@android:color/darker_gray"
                                         android:inputType="number"
                                         android:padding="5dp"
                                         android:textColor="#5C5757"
@@ -810,6 +819,7 @@
                                         android:layout_height="40dp"
                                         android:background="@android:color/transparent"
                                         android:hint="Outside DWD "
+                                        android:textColorHint="@android:color/darker_gray"
                                         android:inputType="number"
                                         android:padding="5dp"
                                         android:textColor="#5C5757"
@@ -859,6 +869,7 @@
                                     android:layout_height="40dp"
                                     android:background="@android:color/transparent"
                                     android:enabled="false"
+                                    android:textColorHint="@android:color/darker_gray"
                                     android:hint="Patient"
                                     android:inputType="number"
                                     android:padding="5dp"
@@ -1012,6 +1023,7 @@
                             android:layout_gravity="center"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
+                            android:textColorHint="@android:color/darker_gray"
                             android:background="@drawable/spinner_layout_new"
                             android:inputType="number"
                             android:text=""
@@ -1030,6 +1042,7 @@
                             android:layout_weight="1"
                             android:background="@drawable/spinner_layout_new"
                             android:inputType="number"
+                            android:textColorHint="@android:color/darker_gray"
                             android:text=""
                             android:textColor="#331478"
                             android:textSize="15sp"
@@ -1044,6 +1057,7 @@
                             android:layout_gravity="center"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
+                            android:textColorHint="@android:color/darker_gray"
                             android:background="@drawable/spinner_layout_new"
                             android:inputType="number"
                             android:text=""
@@ -1084,6 +1098,7 @@
                             android:layout_weight="1"
                             android:background="@drawable/spinner_layout_new"
                             android:inputType="number"
+                            android:textColorHint="@android:color/darker_gray"
                             android:text=""
                             android:textColor="#331478"
                             android:textSize="15sp"
@@ -1104,7 +1119,7 @@
                             android:text=""
                             android:textColor="#331478"
                             android:textSize="15sp"
-                            
+                            android:textColorHint="@android:color/darker_gray"
                             android:padding="5dp"
                             android:gravity="center"
                             />
@@ -1121,7 +1136,7 @@
                             android:text=""
                             android:textColor="#331478"
                             android:textSize="15sp"
-                            
+                            android:textColorHint="@android:color/darker_gray"
                             android:padding="5dp"
                             android:gravity="center"
                             />
@@ -1167,6 +1182,7 @@
                             android:layout_gravity="start"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
+                            android:textColorHint="@android:color/darker_gray"
                             android:background="@drawable/spinner_layout_new"
                             android:inputType="number"
                             android:text=""
@@ -1189,7 +1205,8 @@
                             android:text=""
                             android:textColor="#331478"
                             android:textSize="15sp"
-                            
+                            android:textColorHint="@android:color/darker_gray"
+
                             android:padding="5dp"
                             android:gravity="center"
                             />
@@ -1206,7 +1223,8 @@
                             android:text=""
                             android:textColor="#331478"
                             android:textSize="15sp"
-                            
+                            android:textColorHint="@android:color/darker_gray"
+
                             android:padding="5dp"
                             android:gravity="center"
                             />
@@ -1257,12 +1275,13 @@
                             android:layout_gravity="center"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
+                            android:textColorHint="@android:color/darker_gray"
                             android:background="@drawable/spinner_layout_new"
                             android:inputType="number"
                             android:text=""
                             android:textColor="#331478"
                             android:textSize="15sp"
-                            
+
                             android:padding="5dp"
                             android:gravity="center"
                             />
@@ -1317,7 +1336,8 @@
                             android:text=""
                             android:textColor="#331478"
                             android:textSize="15sp"
-                            
+                            android:textColorHint="@android:color/darker_gray"
+
                             android:padding="5dp"
                             android:gravity="center"
                             />
@@ -1334,7 +1354,8 @@
                             android:text=""
                             android:textColor="#331478"
                             android:textSize="15sp"
-                            
+                            android:textColorHint="@android:color/darker_gray"
+
                             android:padding="5dp"
                             android:gravity="center"
                             />
@@ -1351,7 +1372,8 @@
                             android:text=""
                             android:textColor="#331478"
                             android:textSize="15sp"
-                            
+                            android:textColorHint="@android:color/darker_gray"
+
                             android:padding="5dp"
                             android:gravity="center"
                             />
@@ -1427,6 +1449,8 @@
                                         android:layout_height="40dp"
                                         android:background="@android:color/transparent"
                                         android:hint="Within DWD"
+                                        android:textColorHint="@android:color/darker_gray"
+
                                         android:inputType="number"
                                         android:padding="5dp"
                                         android:textColor="#5C5757"
@@ -1477,6 +1501,8 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="40dp"
                                         android:background="@android:color/transparent"
+                                        android:textColorHint="@android:color/darker_gray"
+
                                         android:hint="Outside DWD"
                                         android:inputType="number"
                                         android:padding="5dp"
@@ -1526,6 +1552,8 @@
                                         android:background="@android:color/transparent"
                                         android:enabled="false"
                                         android:hint="Total"
+                                        android:textColorHint="@android:color/darker_gray"
+
                                         android:inputType="number"
                                         android:padding="5dp"
                                         android:textColor="#5C5757"
@@ -1622,6 +1650,8 @@
                                         android:layout_height="40dp"
                                         android:background="@android:color/transparent"
                                         android:hint="Remdesivir"
+                                        android:textColorHint="@android:color/darker_gray"
+
                                         android:inputType="number"
                                         android:padding="5dp"
                                         android:textColor="#5C5757"
@@ -1672,6 +1702,8 @@
                                         android:layout_height="40dp"
                                         android:background="@android:color/transparent"
                                         android:enabled="true"
+                                        android:textColorHint="@android:color/darker_gray"
+
                                         android:hint="Oxygen in Litres"
                                         android:inputType="number"
                                         android:padding="5dp"
@@ -1766,7 +1798,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/layout_background"
+                android:theme="@style/MyButton"
                 android:text="Save"
                 android:textColor="#fff"
                 android:textSize="15sp"
@@ -1779,7 +1811,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/layout_background"
+                android:theme="@style/MyButton"
                 android:text="Close"
                 android:textSize="15sp"
                 android:textAllCaps="false"

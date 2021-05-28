@@ -43,6 +43,8 @@ public class Activity_confirmoldpin extends AppCompatActivity {
     public static final String KeyValue_usercategory = "KeyValue_usercategory";
     public static final String KeyValue_usercellno = "KeyValue_usercellno";
     public static final String KeyValue_isuser_setpin = "KeyValue_isuser_setpin";
+    public static final String KeyValue_isuser_changepin = "KeyValue_isuser_changepin";
+    public static final String KeyValue_loggedfromgoogle = "KeyValue_loggedfromgoogle";
 
 
     SharedPreferences sharedpreference_usercredential_Obj;
@@ -56,7 +58,7 @@ public class Activity_confirmoldpin extends AppCompatActivity {
 
     Class_InternetDectector internetDectector;
     Boolean isInternetPresent = false;
-    String str_confirmoldpin;
+    String str_confirmoldpin,str_isuser_loggedfromgoogle;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -76,6 +78,7 @@ public class Activity_confirmoldpin extends AppCompatActivity {
 
         sharedpreference_usercredential_Obj=getSharedPreferences(sharedpreference_usercredential, Context.MODE_PRIVATE);
         str_username= sharedpreference_usercredential_Obj.getString(KeyValue_username, "").trim();
+        str_isuser_loggedfromgoogle=sharedpreference_usercredential_Obj.getString(KeyValue_loggedfromgoogle, "").trim();
 
 
         sharedpreference_usercredential_Obj=getSharedPreferences(sharedpreference_usercredential, Context.MODE_PRIVATE);
@@ -214,13 +217,37 @@ public class Activity_confirmoldpin extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int id)
                     {
-                        editor_obj = sharedpreference_usercredential_Obj.edit();
-                        editor_obj.putString(KeyValue_isuser_setpin, "");
-                        editor_obj.commit();
+                        internetDectector = new Class_InternetDectector(getApplicationContext());
+                        isInternetPresent = internetDectector.isConnectingToInternet();
+                        if (isInternetPresent) {
+                            editor_obj = sharedpreference_usercredential_Obj.edit();
+                            editor_obj.putString(KeyValue_isuser_setpin, "");
+                            editor_obj.commit();
 
-                        Intent i = new Intent(Activity_confirmoldpin.this, MainActivity.class);
-                        startActivity(i);
-                        finish();
+                            editor_obj = sharedpreference_usercredential_Obj.edit();
+                            editor_obj.putString(KeyValue_isuser_changepin, "");
+                            editor_obj.commit();
+
+
+                            if(str_isuser_loggedfromgoogle.isEmpty())
+                            {
+
+                            }else{
+                                editor_obj = sharedpreference_usercredential_Obj.edit();
+                                editor_obj.putString(KeyValue_loggedfromgoogle, "yes");
+                                editor_obj.commit();
+                            }
+
+
+                            Intent i = new Intent(Activity_confirmoldpin.this, MainActivity.class);
+                            startActivity(i);
+                            finish();
+
+                        }
+                        else
+                        {
+                            Toast.makeText(Activity_confirmoldpin.this, "Kindly connect to internet", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -260,25 +287,25 @@ public class Activity_confirmoldpin extends AppCompatActivity {
 
 
         if (otp1_et.getText().toString().trim().length() == 0) {
-            otp1_et.setError("Enter OTP");
+            otp1_et.setError("Enter PIN");
             otp1_et.requestFocus();
             b_otp1 = false;
         }
 
         if (otp2_et.getText().toString().trim().length() == 0) {
-            otp2_et.setError("Enter OTP");
+            otp2_et.setError("Enter PIN");
             otp2_et.requestFocus();
             b_otp2 = false;
         }
 
         if (otp3_et.getText().toString().trim().length() == 0) {
-            otp3_et.setError("Enter OTP");
+            otp3_et.setError("Enter PIN");
             otp3_et.requestFocus();
             b_otp3 = false;
         }
         if(otp4_et.getText().toString().trim().length()==0)
         {
-            otp4_et.setError("Enter OTP");
+            otp4_et.setError("Enter PIN");
             otp4_et.requestFocus();
             b_otp4=false;
         }
