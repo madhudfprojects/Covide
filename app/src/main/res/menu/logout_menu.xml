@@ -22,7 +22,7 @@
         android:icon="@mipmap/ic_launcher"
         android:iconTint="@color/colorwhite"
         android:title="Change PIN"
-        app:showAsAction="never"/>
+    app:showAsAction="never"/>
     <!--<item
         android:id="@+id/aboutus"
         android:icon="@mipmap/ic_launcher"

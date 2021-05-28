@@ -1155,78 +1155,78 @@ public class MainActivity2 extends AppCompatActivity {
 
 
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        //getMenuInflater().inflate(R.menu.home_menu, menu);
-//        getMenuInflater().inflate(R.menu.logout_menu, menu);
-//
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item)
-//    {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//        //noinspection SimplifiableIfStatement
-//
-//        if(id==R.id.changepin)
-//        {
-//
-//
-//            AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity2.this);
-//            dialog.setCancelable(false);
-//            dialog.setTitle(R.string.alert);
-//            dialog.setMessage("Are you sure you want to Change PIN?");
-//
-//            dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialog, int id)
-//                {
-//
-//                   editor_obj = sharedpreference_usercredential_Obj.edit();
-//                    editor_obj.putString(KeyValue_isuser_setpin, "");
-//                    editor_obj.commit();
-//
-//                    editor_obj = sharedpreference_usercredential_Obj.edit();
-//                    editor_obj.putString(KeyValue_isuser_changepin, "yes");
-//                    editor_obj.commit();
-//
-//                    Intent i = new Intent(getApplicationContext(), Activity_confirmoldpin.class);
-//                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                    startActivity(i);
-//                    finish();
-//                }
-//            })
-//                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            //Action for "Cancel".
-//                            dialog.dismiss();
-//                        }
-//                    });
-//
-//            final AlertDialog alert = dialog.create();
-//            alert.setOnShowListener(new DialogInterface.OnShowListener() {
-//                @Override
-//                public void onShow(DialogInterface arg0) {
-//                    alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED);
-//                    alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#004D40"));
-//                }
-//            });
-//            alert.show();
-//
-//            return true;
-//        }
-//
-//
-//
-//
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        //getMenuInflater().inflate(R.menu.home_menu, menu);
+        getMenuInflater().inflate(R.menu.logout_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+
+        if(id==R.id.changepin)
+        {
+
+
+            AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity2.this);
+            dialog.setCancelable(false);
+            dialog.setTitle(R.string.alert);
+            dialog.setMessage("Are you sure you want to Change PIN?");
+
+            dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id)
+                {
+
+                  /* editor_obj = sharedpreference_usercredential_Obj.edit();
+                    editor_obj.putString(KeyValue_isuser_setpin, "");
+                    editor_obj.commit();
+
+                    editor_obj = sharedpreference_usercredential_Obj.edit();
+                    editor_obj.putString(KeyValue_isuser_changepin, "yes");
+                    editor_obj.commit();*/
+
+                    Intent i = new Intent(getApplicationContext(), Activity_confirmoldpin.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(i);
+                    finish();
+                }
+            })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //Action for "Cancel".
+                            dialog.dismiss();
+                        }
+                    });
+
+            final AlertDialog alert = dialog.create();
+            alert.setOnShowListener(new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface arg0) {
+                    alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED);
+                    alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#004D40"));
+                }
+            });
+            alert.show();
+
+            return true;
+        }
+
+
+
+
+        return super.onOptionsItemSelected(item);
+    }
 
 
 
