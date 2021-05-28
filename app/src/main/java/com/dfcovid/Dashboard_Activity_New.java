@@ -29,10 +29,12 @@ import com.dfcovid.model.Class_Get_UserHospitalListResponse;
 import com.dfcovid.remote.Class_ApiUtils;
 import com.dfcovid.remote.Interface_userservice;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -139,8 +141,8 @@ public class Dashboard_Activity_New extends AppCompatActivity {
                                 // String date =dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
                                 //  String date =year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
                                 String date =dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
-
-
+//                                 str_edt_fromdate_sendTOAPI =year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+//                                 Log.e("str_edate_sendTOAPI..", str_edt_fromdate_sendTOAPI);
                                 SimpleDateFormat dateFormat= new SimpleDateFormat("dd-MM-yyyy");
                                 // SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
 
@@ -214,6 +216,8 @@ public class Dashboard_Activity_New extends AppCompatActivity {
             }
         });
     }
+
+
 
     public void GetUserHospitalList() {
         Call<Class_Get_UserHospitalListResponse> call = userService1.GetUserHospitalList("0");
