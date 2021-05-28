@@ -34,6 +34,7 @@ public class Activity_confirmpin extends AppCompatActivity {
 
     Button submit_pin_bt,reset_pin_bt;
     EditText otp1_et,otp2_et,otp3_et,otp4_et;
+
     
 
     public static final String sharedpreference_usercredential = "sharedpreferencebook_usercredential";
