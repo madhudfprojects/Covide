@@ -8,7 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorHint">@color/colorPrimary</item>
         <!-- To change the background of options menu-->
-        <item name="android:itemBackground">@color/blue_500</item>
+       <!-- <item name="android:itemBackground">@color/colorPrimary</item>-->
+
+        <item name="overlapAnchor">false</item>
+        <item name="android:dropDownVerticalOffset">?attr/actionBarSize</item>
+        <item name="android:listPreferredItemHeightSmall">32dp</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
