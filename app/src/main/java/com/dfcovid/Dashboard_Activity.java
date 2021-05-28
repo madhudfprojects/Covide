@@ -120,6 +120,12 @@ public class Dashboard_Activity extends AppCompatActivity {
         String formattedDate = df.format(c);
 
         edt_fromdate.setText(formattedDate);
+        SimpleDateFormat mdyFormat = new SimpleDateFormat("yyyy-MM-dd",Locale.getDefault());
+        str_edt_fromdate_sendTOAPI=mdyFormat.format(c);
+        //SimpleDateFormat mdyFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+
+        Log.e("tag","str_edate_sendTOAPI 1st.."+str_edt_fromdate_sendTOAPI);
 
 //        edt_fromdate.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -233,8 +239,9 @@ public class Dashboard_Activity extends AppCompatActivity {
                 }
                 str_hospitelId = class_getUserHospitalList.getHospitalId().toString();
                 str_SelectedHospitalName = class_getUserHospitalList.getHospitalName().toString();
-
-                Get_LoadHospitalDashboard();
+                if(isInternetPresent) {
+                    Get_LoadHospitalDashboard();
+                }
                 // Toast.makeText(getApplicationContext(),"str_Programsid: "+str_programid,Toast.LENGTH_SHORT).show();
             }
 
@@ -360,6 +367,7 @@ public class Dashboard_Activity extends AppCompatActivity {
     }
 
     public void Get_LoadHospitalDashboard() {
+        Log.e("tag","str_hospitelId="+str_hospitelId+"selected date="+str_edt_fromdate_sendTOAPI);
         Call<Class_DashboardHospitalData> call = userService1.Get_LoadHospitalDataDate(str_hospitelId,str_edt_fromdate_sendTOAPI);
 
         // Set up progress before call

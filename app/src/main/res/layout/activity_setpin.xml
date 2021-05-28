@@ -268,7 +268,7 @@
                 android:layout_gravity="center"
                 android:text="  Set PIN  "
                 android:background="@drawable/background_round"
-                android:textColor="@color/dark_black"
+                android:textColor="@color/white"
                 android:textSize="15dp" />
 
 

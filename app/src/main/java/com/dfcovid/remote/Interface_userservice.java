@@ -79,8 +79,8 @@ public interface Interface_userservice {
 //changed by shivaleela
    // https://covid.dfindia.org//Api/Authentication/Get_LoadHospitalDataDate?Hospital_Id=42&dates=2021-05-27
     //dates
-    @GET("Authentication/Get_LoadHospitalDataDate")
-    Call<Class_DashboardHospitalData>Get_LoadHospitalDataDate(@Query("Hospital_Id") String Hospital_Id,@Query("dates") String dates);
+    @GET("Authentication/Get_LoadHospitalDashboardDate")
+    Call<Class_DashboardHospitalData>Get_LoadHospitalDataDate(@Query("Hospital_Id") String Hospital_Id,@Query("Entry_Date") String dates);
 
     @Headers("Content-Type: application/json;charset=utf-8")
     @POST("Authentication/Post_SaveHospital")
