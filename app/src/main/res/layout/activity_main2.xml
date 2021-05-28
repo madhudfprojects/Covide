@@ -58,7 +58,7 @@
                 <ImageButton
                     android:id="@+id/edit_BT"
                     android:layout_width="40dp"
-                    android:layout_height="30dp"
+                    android:layout_height="40dp"
                     android:gravity="center"
                     android:src="@drawable/edit"
                     android:text=""
@@ -73,7 +73,7 @@
                 <ImageButton
                     android:id="@+id/disable_bt"
                     android:layout_width="40dp"
-                    android:layout_height="30dp"
+                    android:layout_height="40dp"
                     android:gravity="center"
                     android:src="@drawable/block"
                     android:text=""
@@ -89,7 +89,7 @@
                 <ImageButton
                     android:id="@+id/close_bt"
                     android:layout_width="40dp"
-                    android:layout_height="30dp"
+                    android:layout_height="40dp"
                     android:gravity="center"
                     android:src="@drawable/close"
                     android:text=""
@@ -508,7 +508,7 @@
 
 
                         <LinearLayout
-                            android:layout_width="70dp"
+                            android:layout_width="60dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
@@ -607,7 +607,7 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="70dp"
+                            android:layout_width="60dp"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             tools:ignore="MissingConstraints"
@@ -733,7 +733,7 @@
                         android:weightSum="3">
 
                         <LinearLayout
-                            android:layout_width="70dp"
+                            android:layout_width="60dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
@@ -833,7 +833,7 @@
 
                         </LinearLayout>
                         <LinearLayout
-                            android:layout_width="70dp"
+                            android:layout_width="60dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
