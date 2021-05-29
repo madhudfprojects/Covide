@@ -16,13 +16,16 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Class_GetAppVersion {
+public class Class_GetAppVersion
+{
     @SerializedName("Status")
     @Expose
     private Boolean status;
+
     @SerializedName("Message")
     @Expose
     private String message;
+
     @SerializedName("listVersion")
     @Expose
     private List<Class_GetAppVersionList> listVersion = null;

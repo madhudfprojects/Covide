@@ -25,12 +25,12 @@
         android:title="Change PIN"
 
     app:showAsAction="never"/>
-    <!--<item
+    <item
         android:id="@+id/aboutus"
         android:icon="@mipmap/ic_launcher"
         android:iconTint="@color/colorwhite"
-        android:title="AboutUs"
-        app:showAsAction="never"/>-->
+        android:title="About Us"
+        app:showAsAction="never"/>
 
    <!-- <item
         android:id="@+id/logout"
