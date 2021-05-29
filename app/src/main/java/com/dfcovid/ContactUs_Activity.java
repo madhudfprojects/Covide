@@ -28,7 +28,6 @@ import com.dfcovid.model.Class_gethelp_resplist;
 
 public class ContactUs_Activity extends AppCompatActivity {
 
-   // Toolbar toolbar;
     ImageView add_newfarmpond_iv;
 
     Class_gethelp_resplist[] class_gethelp_resplist_arrayObj;
