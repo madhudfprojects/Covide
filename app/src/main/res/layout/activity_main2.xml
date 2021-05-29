@@ -934,7 +934,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="#EDE9E9"
+                        android:background="@color/blue_100"
                         android:orientation="horizontal"
                         android:weightSum="4">
 
@@ -990,7 +990,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:background="#EDE9E9"
+                        android:background="@color/blue_100"
                         android:padding="5dp"
                         android:text=" Beds Occupied"
                         android:textColor="#331478"
@@ -1150,7 +1150,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:layout_margin="5dp"
-                        android:background="#EDE9E9"
+                        android:background="@color/blue_100"
                         android:padding="5dp"
                         android:text="Patients Discharged"
                         android:textColor="#331478"

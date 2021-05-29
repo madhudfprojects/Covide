@@ -702,97 +702,13 @@ public class ContactUs_Activity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.logout_menu, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.logout_menu, menu);
+//        return true;
+//    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        // Show toast when menu items selected
-        switch (item.getItemId()) {
-//            case R.id.logout_menu:
-//                Class_SaveSharedPreference.setUserName(getApplicationContext(), "");
-//                Class_SaveSharedPreference.setPREF_MENU_link(getApplicationContext(), "");
-//                Class_SaveSharedPreference.setPrefFlagUsermanual(getApplicationContext(), "");
-//                Class_SaveSharedPreference.setSupportEmail(getApplicationContext(), "");
-//                Class_SaveSharedPreference.setUserMailID(getApplicationContext(), "");
-//                Class_SaveSharedPreference.setSupportPhone(getApplicationContext(), "");
-//
-//                SharedPreferences.Editor myprefs_UserImg = sharedpref_userimage_Obj.edit();
-//                myprefs_UserImg.putString(key_userimage, "");
-//                myprefs_UserImg.apply();
-//                SharedPreferences.Editor myprefs_Username = sharedpref_username_Obj.edit();
-//                myprefs_Username.putString(Key_username, "");
-//                myprefs_Username.apply();
-//
-//
-//                deleteStateRestTable_B4insertion();
-//                deleteDistrictRestTable_B4insertion();
-//                deleteTalukRestTable_B4insertion();
-//                deleteVillageRestTable_B4insertion();
-//                deleteYearRestTable_B4insertion();
-//                deleteSchoolRestTable_B4insertion();
-//                deleteSandboxRestTable_B4insertion();
-//                deleteInstituteRestTable_B4insertion();
-//                deleteLevelRestTable_B4insertion();
-//                deleteClusterRestTable_B4insertion();
-//
-//                AlertDialog.Builder dialog = new AlertDialog.Builder(ContactUs_Activity.this);
-//                dialog.setCancelable(false);
-//                dialog.setTitle(R.string.alert);
-//                dialog.setMessage("Are you sure want to Logout?");
-//
-//                dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int id)
-//                    {
-//
-//                        //   SaveSharedPreference.setUserName(Activity_HomeScreen.this, "");
-//                        Class_SaveSharedPreference.setUserName(getApplicationContext(),"");
-//
-//                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
-//                        i.putExtra("logout_key1", "yes");
-//                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                        startActivity(i);
-//                        finish();
-//
-//
-//                    }
-//                })
-//                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                //Action for "Cancel".
-//                                dialog.dismiss();
-//                            }
-//                        });
-//
-//                final AlertDialog alert = dialog.create();
-//                alert.setOnShowListener(new DialogInterface.OnShowListener() {
-//                    @Override
-//                    public void onShow(DialogInterface arg0) {
-//                        alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED);
-//                        alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#004D40"));
-//                    }
-//                });
-//                alert.show();
-//                break;
-//            case android.R.id.home:
-//                Intent intent = new Intent(ContactUs_Activity.this, Activity_HomeScreen.class);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                startActivity(intent);
-//                finish();
-//
-//
-//                break;
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void onBackPressed() {
