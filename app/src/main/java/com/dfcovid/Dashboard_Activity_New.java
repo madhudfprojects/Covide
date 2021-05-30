@@ -84,7 +84,7 @@ public class Dashboard_Activity_New extends AppCompatActivity {
 
     ListView lv_summary;
     String str_versioncode;
-    LinearLayout helplinecenter_LL,maps_LL;
+    LinearLayout helplinecenter_LL,googlemaps_LL;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,7 +101,7 @@ public class Dashboard_Activity_New extends AppCompatActivity {
         lv_summary = (ListView) findViewById(R.id.lv_summary);
 
         helplinecenter_LL=(LinearLayout)findViewById(R.id.helplinecenter_LL);
-        maps_LL=(LinearLayout)findViewById(R.id.maps_LL);
+        googlemaps_LL=(LinearLayout)findViewById(R.id.googlemaps_LL);
 
         Add_bt.setVisibility(View.GONE);
         sharedpreference_usercredential_Obj=getSharedPreferences(sharedpreference_usercredential, Context.MODE_PRIVATE);
@@ -252,10 +252,13 @@ public class Dashboard_Activity_New extends AppCompatActivity {
             }
         });
 
-        maps_LL.setOnClickListener(new View.OnClickListener() {
+        googlemaps_LL.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 Toast.makeText(Dashboard_Activity_New.this, "Coming Soon!", Toast.LENGTH_SHORT).show();
+
 
             }
         });
