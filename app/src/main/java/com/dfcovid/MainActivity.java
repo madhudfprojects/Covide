@@ -55,6 +55,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity
 {
 
+    public static final int RequestPermissionCode = 7;
     public static final String sharedpreference_usercredential = "sharedpreferencebook_usercredential";
     public static final String KeyValue_userid = "KeyValue_userid";
     public static final String KeyValue_username = "KeyValue_username";
@@ -158,6 +159,18 @@ public class MainActivity extends AppCompatActivity
 
         }
 
+
+        if (CheckingPermissionIsEnabledOrNot()) {
+            // Toast.makeText(LoginActivity.this, "All Permissions Granted Successfully", Toast.LENGTH_LONG).show();
+        }
+        // If, If permission is not enabled then else condition will execute.
+        else {
+
+            //Calling method to enable permission.
+            //Toast.makeText(LoginActivity.this, "Requesting", Toast.LENGTH_LONG).show();
+            RequestMultiplePermission();
+
+        }
 
 
 
@@ -322,6 +335,58 @@ public class MainActivity extends AppCompatActivity
 
 
 
+    public boolean CheckingPermissionIsEnabledOrNot() {
+
+        int FirstPermissionResult = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE);
+        int SecondPermissionResult = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int ThirdPermissionResult = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.INTERNET);
+        int FourthPermissionResult = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_PHONE_STATE);
+        int FifthPermissionResult = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_NETWORK_STATE);
+        int SixthPermissionResult = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CALL_PHONE);
+        int SeventhPermissionResult = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WAKE_LOCK);
+        return FirstPermissionResult == PackageManager.PERMISSION_GRANTED &&
+                SecondPermissionResult == PackageManager.PERMISSION_GRANTED && ThirdPermissionResult == PackageManager.PERMISSION_GRANTED && FourthPermissionResult == PackageManager.PERMISSION_GRANTED && FifthPermissionResult == PackageManager.PERMISSION_GRANTED && SixthPermissionResult == PackageManager.PERMISSION_GRANTED && SeventhPermissionResult == PackageManager.PERMISSION_GRANTED;
+    }
+
+    //Added by Sripad
+    private void RequestMultiplePermission() {
+
+        // Creating String Array with Permissions.
+        ActivityCompat.requestPermissions(MainActivity.this, new String[]
+                {
+                        Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.INTERNET, Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.CALL_PHONE
+                }, RequestPermissionCode);
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+
+            case RequestPermissionCode:
+
+                if (grantResults.length > 0) {
+
+                    boolean WriteExternalStoragePermission = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    boolean ReadExternalStoragePermission = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+                    boolean InternetPermission = grantResults[2] == PackageManager.PERMISSION_GRANTED;
+                    boolean ReadPhonePermission = grantResults[3] == PackageManager.PERMISSION_GRANTED;
+                    boolean AccessNetworkPermission = grantResults[4] == PackageManager.PERMISSION_GRANTED;
+                    boolean CallPhonePermission = grantResults[5] == PackageManager.PERMISSION_GRANTED;
+
+                    if (WriteExternalStoragePermission && ReadExternalStoragePermission && InternetPermission && ReadPhonePermission && AccessNetworkPermission && CallPhonePermission) {
+
+                        //Toast.makeText(MainActivity.this, "Permission Granted", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Permission Denied", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                break;
+        }
+
+    }
 
 
     public boolean forgotpassword_validation()
