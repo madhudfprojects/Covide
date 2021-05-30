@@ -257,7 +257,9 @@ public class Dashboard_Activity_New extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Toast.makeText(Dashboard_Activity_New.this, "Coming Soon!", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(Dashboard_Activity_New.this, Activity_GoogleMaps.class);
+                startActivity(i);
+                finish();
 
 
             }

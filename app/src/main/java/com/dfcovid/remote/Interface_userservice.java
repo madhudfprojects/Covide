@@ -1,7 +1,7 @@
 package com.dfcovid.remote;
 
 
-import com.Class_servicesdetailsResp;
+import com.dfcovid.Class_servicesdetailsResp;
 import com.dfcovid.Class_GetAppVersion;
 import com.dfcovid.Class_forgotrequest;
 import com.dfcovid.Class_googleloginRequest;
@@ -19,8 +19,6 @@ import com.dfcovid.model.Class_gethelp_Response;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;

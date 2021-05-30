@@ -1,4 +1,4 @@
-package com;
+package com.dfcovid;
 /*{
 "Status": true,
         "Message": "success",
