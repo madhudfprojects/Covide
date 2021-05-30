@@ -88,6 +88,9 @@ public class MainActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Bed Details");
+
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         internetDectector = new Class_InternetDectector(getApplicationContext());
         isInternetPresent = internetDectector.isConnectingToInternet();
@@ -1168,6 +1171,9 @@ public class MainActivity2 extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         //getMenuInflater().inflate(R.menu.home_menu, menu);
         getMenuInflater().inflate(R.menu.logout_menu, menu);
+        MenuItem action_editProfile = menu.findItem(R.id.aboutus);
+        action_editProfile.setVisible(false);
+
 
         return true;
     }
@@ -1181,8 +1187,7 @@ public class MainActivity2 extends AppCompatActivity {
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
 
-        if(id==R.id.changepin)
-        {
+        if(id==R.id.changepin) {
 
 
             AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity2.this);
@@ -1192,8 +1197,7 @@ public class MainActivity2 extends AppCompatActivity {
 
             dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int id)
-                {
+                public void onClick(DialogInterface dialog, int id) {
 
                   /* editor_obj = sharedpreference_usercredential_Obj.edit();
                     editor_obj.putString(KeyValue_isuser_setpin, "");
@@ -1228,12 +1232,18 @@ public class MainActivity2 extends AppCompatActivity {
             alert.show();
 
             return true;
-        }else if(id==R.id.aboutus){
-            Intent i = new Intent(getApplicationContext(), ContactUs_Activity.class);
+        }else if (id == android.R.id.home) {
+            Intent i = new Intent(MainActivity2.this, Dashboard_Activity.class);
             startActivity(i);
             finish();
 
         }
+//        }else if(id==R.id.aboutus){
+//            Intent i = new Intent(getApplicationContext(), ContactUs_Activity.class);
+//            startActivity(i);
+//            finish();
+//
+//        }
 
 
 

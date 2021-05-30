@@ -203,18 +203,16 @@
 
     <LinearLayout
         android:id="@+id/footer"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="10dp"
             card_view:cardCornerRadius="10dp"
             card_view:cardElevation="8dp"
             card_view:contentPadding="5dp"
@@ -228,7 +226,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="5dp">
+                android:background="#B3D9EA">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -244,9 +242,7 @@
                         android:layout_weight="1"
                         android:orientation="vertical"
                         tools:ignore="MissingConstraints"
-                        android:layout_margin="5dp"
-                        android:background="#A0DAF4"
-                        android:padding="5dp" >
+                        android:background="#A0DAF4">
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -257,7 +253,6 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:padding="5dp"
                             android:text="Dashboard"
                             android:gravity="center"
                             android:textColor="#FFFFFF"
@@ -272,9 +267,8 @@
                         android:layout_weight="1"
                         android:orientation="vertical"
                         tools:ignore="MissingConstraints"
-                        android:layout_margin="5dp"
-                        android:background="#56BEED"
-                        android:padding="5dp">
+                        android:background="@color/colorPrimary"
+                        >
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -285,7 +279,6 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:padding="5dp"
                             android:text="Helpline center"
                             android:gravity="center"
                             android:textColor="#FFFFFF"
@@ -300,9 +293,8 @@
                         android:layout_weight="1"
                         android:orientation="vertical"
                         tools:ignore="MissingConstraints"
-                        android:layout_margin="5dp"
-                        android:background="#56BEED"
-                        android:padding="5dp">
+                        android:background="@color/colorPrimary"
+                        >
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -313,7 +305,6 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:padding="5dp"
                             android:text="Google maps"
                             android:gravity="center"
                             android:textColor="#FFFFFF"
