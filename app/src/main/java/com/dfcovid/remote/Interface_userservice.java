@@ -1,6 +1,7 @@
 package com.dfcovid.remote;
 
 
+import com.Class_servicesdetailsResp;
 import com.dfcovid.Class_GetAppVersion;
 import com.dfcovid.Class_forgotrequest;
 import com.dfcovid.Class_googleloginRequest;
@@ -72,6 +73,17 @@ public interface Interface_userservice {
     //https://covid.dfindia.org/api/Authentication/Get_App_Version
     @GET("Authentication/Get_App_Version")
     Call<Class_GetAppVersion> Get_App_Version();
+
+
+    //https://covid.dfindia.org/api/Get_Services
+    @GET("Authentication/Get_Services")
+    Call<Class_servicesdetailsResp>Get_Services();
+
+
+    //https://covid.dfindia.org/api/Hospital_Details?Service_Id=1
+    @GET("Authentication/Hospital_Details")
+    Call<Class_servicesdetailsResp>Get_Hospital_DetailsServices(@Query("Service_Id") String Service_Id);
+
 
 
     @GET("Authentication/Get_UserHospitalList")
