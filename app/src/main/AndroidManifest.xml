@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dfcovid">
 
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -9,9 +10,27 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+
+
+    <!--
+        The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+        Google Maps Android API v2, but you must specify either coarse or fine
+        location permissions for the "MyLocation" functionality.
+   -->
+
+    <uses-permission
+        android:name="android.permission.ACCESS_FINE_LOCATION"
+        android:protectionLevel="signature" />
+
+    <permission
+        android:name="com.dfcovid.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="com.dfcovid..MAPS_RECEIVE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+
 
     <application
         android:allowBackup="true"
@@ -21,45 +40,57 @@
         android:roundIcon="@drawable/launch_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity_WebLink"></activity>
-        <activity android:name=".Activity_HelpLineCenter" />
-        <activity
-            android:name=".Activity_confirmpin"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activity_setpin"
-            android:screenOrientation="portrait" />
-        <activity android:name=".MainActivity" />
-        <activity
-            android:name=".Dashboard_Activity_New"
+
+        <!--
+                    The API key for Google Maps-based APIs is defined as a string resource.
+                    (See the file "res/values/google_maps_api.xml").
+                    Note that the API key is linked to the encryption key used to sign the APK.
+                    You need a different API key for each encryption key, including the release key that is used to
+                    sign the APK for publishing.
+                    You can define the keys for the debug and release targets in src/debug/ and src/release/.
+               -->
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity android:name="com.dfcovid.Dashboard_Activity_New"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <activity android:name="com.dfcovid.Activity_confirmpin"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name="com.dfcovid.Activity_setpin"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name="com.dfcovid.MainActivity" />
+
+
         <activity
-            android:name=".Activity_pinlogin"
+            android:name="com.dfcovid.Activity_pinlogin"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity_confirmoldpin"
+            android:name="com.dfcovid.Activity_confirmoldpin"
             android:screenOrientation="portrait" />
-        <activity android:name=".HomeActivity" />
+        <activity android:name="com.dfcovid.HomeActivity"/>
         <activity
-            android:name=".Dashboard_Activity"
-            android:theme="@style/AppTheme" />
+            android:name="com.dfcovid.Dashboard_Activity" />
+
         <activity
-            android:name=".MainActivity2"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".ContactUs_Activity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ContactCenter"
-            android:screenOrientation="portrait" />
+            android:name="com.dfcovid.MainActivity2" />
+
     </application>
 
 </manifest>
