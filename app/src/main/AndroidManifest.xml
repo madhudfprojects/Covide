@@ -110,14 +110,12 @@
 
         <activity
             android:name="com.dfcovid.Activity_GoogleMaps"
-            android:screenOrientation="portrait" />
-
-
-
-        <activity
-            android:name=".Activity_GoogleMaps"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"/>
+
+
+
+        
 
     </application>
 
