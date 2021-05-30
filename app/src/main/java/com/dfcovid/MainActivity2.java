@@ -3,10 +3,13 @@ package com.dfcovid;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -31,6 +34,10 @@ import com.dfcovid.model.Class_Get_UserHospitalListResponse;
 import com.dfcovid.model.Class_LoadHospitalDataList;
 import com.dfcovid.model.Class_PostSaveHospitalResponse;
 import com.dfcovid.model.Class_PostSaveHospitalResponseRequest;
+import com.dfcovid.model.Class_getdemo_Response;
+import com.dfcovid.model.Class_getdemo_resplist;
+import com.dfcovid.model.Class_gethelp_Response;
+import com.dfcovid.model.Class_gethelp_resplist;
 import com.dfcovid.remote.Class_ApiUtils;
 import com.dfcovid.remote.Interface_userservice;
 import com.google.gson.Gson;
@@ -81,6 +88,9 @@ public class MainActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Bed Details");
+
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         internetDectector = new Class_InternetDectector(getApplicationContext());
         isInternetPresent = internetDectector.isConnectingToInternet();
@@ -602,6 +612,7 @@ public class MainActivity2 extends AppCompatActivity {
         }
 
         setcurrentdate();
+//        gethelp();
     }
 
     public void setcurrentdate() {
@@ -1160,6 +1171,9 @@ public class MainActivity2 extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         //getMenuInflater().inflate(R.menu.home_menu, menu);
         getMenuInflater().inflate(R.menu.logout_menu, menu);
+        MenuItem action_editProfile = menu.findItem(R.id.aboutus);
+        action_editProfile.setVisible(false);
+
 
         return true;
     }
@@ -1173,8 +1187,7 @@ public class MainActivity2 extends AppCompatActivity {
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
 
-        if(id==R.id.changepin)
-        {
+        if(id==R.id.changepin) {
 
 
             AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity2.this);
@@ -1184,8 +1197,7 @@ public class MainActivity2 extends AppCompatActivity {
 
             dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int id)
-                {
+                public void onClick(DialogInterface dialog, int id) {
 
                   /* editor_obj = sharedpreference_usercredential_Obj.edit();
                     editor_obj.putString(KeyValue_isuser_setpin, "");
@@ -1220,7 +1232,18 @@ public class MainActivity2 extends AppCompatActivity {
             alert.show();
 
             return true;
+        }else if (id == android.R.id.home) {
+            Intent i = new Intent(MainActivity2.this, Dashboard_Activity.class);
+            startActivity(i);
+            finish();
+
         }
+//        }else if(id==R.id.aboutus){
+//            Intent i = new Intent(getApplicationContext(), ContactUs_Activity.class);
+//            startActivity(i);
+//            finish();
+//
+//        }
 
 
 
@@ -1232,6 +1255,213 @@ public class MainActivity2 extends AppCompatActivity {
 
 
 
+
+    //////////change it later
+//    public void gethelp() {
+//        internetDectector = new Class_InternetDectector(getApplicationContext());
+//        isInternetPresent = internetDectector.isConnectingToInternet();
+//
+//        if (isInternetPresent) {
+//            gethelp_api();
+//            //getdemo();
+//        }
+//    }
+//
+//    private void gethelp_api() {
+//        final ProgressDialog progressDoalog;
+//        progressDoalog = new ProgressDialog(MainActivity2.this);
+//        progressDoalog.setMessage("Loading....");
+//        progressDoalog.setTitle("Please wait....");
+//        progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//        progressDoalog.show();
+//
+//        Interface_userservice userService;
+//        userService = Class_ApiUtils.getUserService();
+//
+//        Call<Class_gethelp_Response> call = userService.GetHelp(str_userID);
+//
+//
+//        call.enqueue(new Callback<Class_gethelp_Response>() {
+//            @Override
+//            public void onResponse(Call<Class_gethelp_Response> call, Response<Class_gethelp_Response> response) {
+//
+//                // Toast.makeText(MainActivity.this, ""+response.toString(), Toast.LENGTH_SHORT).show();
+//
+//                Log.e("response_gethelp", "response_gethelp: " + new Gson().toJson(response));
+//
+//               /* Class_gethelp_Response gethelp_response_obj = new Class_gethelp_Response();
+//                gethelp_response_obj = (Class_gethelp_Response) response.body();*/
+//
+//
+//                if (response.isSuccessful()) {
+//                    DBCreate_Helpdetails();
+//                    Class_gethelp_Response gethelp_response_obj = response.body();
+//                    Log.e("response.body", response.body().getLst().toString());
+//
+//
+//                    if (gethelp_response_obj.getStatus().equals(true)) {
+//
+//                        List<Class_gethelp_resplist> helplist = response.body().getLst();
+//                        Log.e("length", String.valueOf(helplist.size()));
+//                        int int_helpcount = helplist.size();
+//
+//                        for (int i = 0; i < int_helpcount; i++) {
+//                            Log.e("title", helplist.get(i).getTitle().toString());
+//
+//                            String str_title = helplist.get(i).getTitle().toString();
+//                            String str_content = helplist.get(i).getContent().toString();
+//                            DBCreate_HelpDetails_insert_2sqliteDB(str_title, str_content);
+//                            Log.e("str_content", helplist.get(i).getContent().toString());
+//
+//                        }
+//
+//
+//                        // Data_from_HelpDetails_table();
+//
+//                        //helplist.get(0).
+//                        progressDoalog.dismiss();
+//
+//                        getdemo();
+//                    }
+//                    // Log.e("response.body", response.body().size);
+//
+//                }
+//
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call call, Throwable t) {
+//                progressDoalog.dismiss();
+//                Log.e("WS", "error" + t.getMessage());
+//                Toast.makeText(MainActivity2.this, "WS:" + t.getMessage(), Toast.LENGTH_LONG).show();
+//            }
+//        });
+//
+//    }
+//
+//    public void getdemo() {
+//        internetDectector = new Class_InternetDectector(getApplicationContext());
+//        isInternetPresent = internetDectector.isConnectingToInternet();
+//
+//        if (isInternetPresent) {
+//            getdemo_api();
+//        }
+//    }
+//
+//    private void getdemo_api() {
+//        final ProgressDialog progressDoalog;
+//        progressDoalog = new ProgressDialog(MainActivity2.this);
+//        progressDoalog.setMessage("Loading....");
+//        progressDoalog.setTitle("Please wait....");
+//        progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//        progressDoalog.show();
+//
+//        Interface_userservice userService;
+//        userService = Class_ApiUtils.getUserService();
+//
+//        Call<Class_getdemo_Response> call = userService.GetDemo(str_userID);//str_userid
+//
+//
+//        call.enqueue(new Callback<Class_getdemo_Response>() {
+//            @Override
+//            public void onResponse(Call<Class_getdemo_Response> call, Response<Class_getdemo_Response> response) {
+//                Log.e("response_gethelp", "response_gethelp: " + new Gson().toJson(response));
+//
+//               /* Class_gethelp_Response gethelp_response_obj = new Class_gethelp_Response();
+//                gethelp_response_obj = (Class_gethelp_Response) response.body();*/
+//
+//
+//                if (response.isSuccessful()) {
+//                    DBCreate_Demodetails();
+//                    Class_getdemo_Response getdemo_response_obj = response.body();
+//                    Log.e("response.body", response.body().getLst().toString());
+//
+//
+//                    if (getdemo_response_obj.getStatus().equals(true)) {
+//
+//                        List<Class_getdemo_resplist> demolist = response.body().getLst();
+//                        Log.e("length", String.valueOf(demolist.size()));
+//                        int int_helpcount = demolist.size();
+//
+//                        for (int i = 0; i < int_helpcount; i++) {
+//                            Log.e("language", demolist.get(i).getLanguage_Name().toString());
+//
+//                            String str_languagename = demolist.get(i).getLanguage_Name().toString();
+//                            String str_languagelink = demolist.get(i).getLanguage_Link().toString();
+//                            DBCreate_DemoDetails_insert_2sqliteDB(str_languagename, str_languagelink);
+//                        }
+//
+//                        //Data_from_HelpDetails_table();
+//
+//                        //helplist.get(0).
+//                        progressDoalog.dismiss();
+//                    }
+//                    // Log.e("response.body", response.body().size);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call call, Throwable t) {
+//                progressDoalog.dismiss();
+//                Log.e("WS", "error" + t.getMessage());
+//                Toast.makeText(MainActivity2.this, "WS:" + t.getMessage(), Toast.LENGTH_LONG).show();
+//            }
+//        });
+//
+//    }
+//
+//    public void DBCreate_Helpdetails() {
+//
+//        SQLiteDatabase db2 = this.openOrCreateDatabase("DFCOVID_DB", Context.MODE_PRIVATE, null);
+//        db2.execSQL("CREATE TABLE IF NOT EXISTS HelpDetails_table(SlNo INTEGER PRIMARY KEY AUTOINCREMENT,TitleDB VARCHAR,ContentDB VARCHAR);");
+//        Cursor cursor = db2.rawQuery("SELECT * FROM HelpDetails_table", null);
+//        int x = cursor.getCount();
+//        if (x > 0) {
+//            db2.delete("HelpDetails_table", null, null);
+//        }
+//        db2.close();
+//    }
+//
+//    public void DBCreate_HelpDetails_insert_2sqliteDB(String title, String content) {
+//        SQLiteDatabase db2 = this.openOrCreateDatabase("DFCOVID_DB", Context.MODE_PRIVATE, null);
+//        db2.execSQL("CREATE TABLE IF NOT EXISTS HelpDetails_table(SlNo INTEGER PRIMARY KEY AUTOINCREMENT,TitleDB VARCHAR,ContentDB VARCHAR);");
+//
+//        ContentValues cv = new ContentValues();
+//        cv.put("TitleDB", title);
+//        cv.put("ContentDB", content);
+//        db2.insert("HelpDetails_table", null, cv);
+//        db2.close();
+//
+//        Log.e("insert", "DBCreate_HelpDetails_insert_2sqliteDB");
+//
+//    }
+//
+//    public void DBCreate_Demodetails() {
+//
+//        SQLiteDatabase db2 = this.openOrCreateDatabase("DFCOVID_DB", Context.MODE_PRIVATE, null);
+//        db2.execSQL("CREATE TABLE IF NOT EXISTS DemoDetails_table(SlNo INTEGER PRIMARY KEY AUTOINCREMENT,LanguageDB VARCHAR,LinkDB VARCHAR);");
+//        Cursor cursor = db2.rawQuery("SELECT * FROM DemoDetails_table", null);
+//        int x = cursor.getCount();
+//        if (x > 0) {
+//            db2.delete("DemoDetails_table", null, null);
+//        }
+//        db2.close();
+//    }
+//
+//    public void DBCreate_DemoDetails_insert_2sqliteDB(String str_languagename, String str_languagelink) {
+//        SQLiteDatabase db2 = this.openOrCreateDatabase("DFCOVID_DB", Context.MODE_PRIVATE, null);
+//        db2.execSQL("CREATE TABLE IF NOT EXISTS DemoDetails_table(SlNo INTEGER PRIMARY KEY AUTOINCREMENT,LanguageDB VARCHAR,LinkDB VARCHAR);");
+//
+//        ContentValues cv = new ContentValues();
+//        cv.put("LanguageDB", str_languagename);
+//        cv.put("LinkDB", str_languagelink);
+//        db2.insert("DemoDetails_table", null, cv);
+//        db2.close();
+//
+//        Log.e("insert", "DBCreate_DemoDetails_insert_2sqliteDB");
+//
+//    }
 
 
 

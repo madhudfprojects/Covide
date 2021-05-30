@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/blue_500"
+    android:background="#ffffff"
     tools:context="com.dfcovid.Activity_confirmpin">
 
 
@@ -25,9 +25,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:textStyle="bold"
                 android:text="Confirm PIN"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                android:textColor="@color/white"
+                android:textColor="@color/blue_500"
                 android:textSize="25dp" />
             <!--android:background="@drawable/spinner_boader"-->
 

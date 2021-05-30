@@ -155,7 +155,7 @@
                 android:background="#FFFFFF"
                 android:paddingLeft="3dp"
                 android:paddingRight="3dp"
-                android:text="Hospitel"
+                android:text="Hospital"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="10sp" />
         </RelativeLayout>

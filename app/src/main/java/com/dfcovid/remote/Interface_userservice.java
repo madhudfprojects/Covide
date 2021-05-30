@@ -13,6 +13,8 @@ import com.dfcovid.model.Class_Get_LoadHospitalDataResponse;
 import com.dfcovid.model.Class_Get_UserHospitalListResponse;
 import com.dfcovid.model.Class_PostSaveHospitalResponse;
 import com.dfcovid.model.Class_PostSaveHospitalResponseRequest;
+import com.dfcovid.model.Class_getdemo_Response;
+import com.dfcovid.model.Class_gethelp_Response;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -92,5 +94,14 @@ public interface Interface_userservice {
     @POST("Authentication/Post_SaveHospital")
     Call<Class_PostSaveHospitalResponse>PostSaveHospital(@Body Class_PostSaveHospitalResponseRequest request);
 
+
+    @Headers("Content-Type: application/json;charset=utf-8")
+    @GET("Authentication/GetHelp")
+    Call<Class_gethelp_Response>GetHelp(@Query("User_ID") String User_ID);
+
+
+    @Headers("Content-Type: application/json;charset=utf-8")
+    @GET("Authentication/GetDemo")
+    Call<Class_getdemo_Response>GetDemo(@Query("User_ID") String User_ID);
 
 }
