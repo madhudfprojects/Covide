@@ -259,7 +259,7 @@ public class Dashboard_Activity_New extends AppCompatActivity {
             {
                 Intent i = new Intent(Dashboard_Activity_New.this, Activity_GoogleMaps.class);
                 startActivity(i);
-                finish();
+
 
 
             }

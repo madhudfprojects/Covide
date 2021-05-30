@@ -33,9 +33,9 @@ public class Class_servicesdetailsResp
     @Expose
     private String message;
 
-    @SerializedName("lst")
+    @SerializedName("list")
     @Expose
-    private List<Class_serviceslistResp> lst = null;
+    private List<Class_serviceslistResp> list = null;
 
 
     public Boolean getStatus() {
@@ -54,11 +54,11 @@ public class Class_servicesdetailsResp
         this.message = message;
     }
 
-    public List<Class_serviceslistResp> getLst() {
-        return lst;
+    public List<Class_serviceslistResp> getList() {
+        return list;
     }
 
-    public void setLst(List<Class_serviceslistResp> lst) {
-        this.lst = lst;
+    public void setList(List<Class_serviceslistResp> list) {
+        this.list = list;
     }
 }

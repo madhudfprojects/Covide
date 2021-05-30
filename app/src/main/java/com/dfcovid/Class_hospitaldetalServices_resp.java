@@ -29,7 +29,7 @@ public class Class_hospitaldetalServices_resp
 
     @SerializedName("Status")
     @Expose
-    private String Status;
+    private Boolean Status;
 
     @SerializedName("Message")
     @Expose
@@ -40,11 +40,11 @@ public class Class_hospitaldetalServices_resp
     private List<Class_hsptaldetalServices_listResp> Hospital_Details = null;
 
 
-    public String getStatus() {
+    public Boolean getStatus() {
         return Status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Boolean status) {
         Status = status;
     }
 

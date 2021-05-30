@@ -91,6 +91,11 @@
         <activity
             android:name="com.dfcovid.MainActivity2" />
 
+        <activity
+            android:name=".Activity_GoogleMaps"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"/>
+
     </application>
 
 </manifest>

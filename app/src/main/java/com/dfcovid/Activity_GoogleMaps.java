@@ -1,6 +1,7 @@
 package com.dfcovid;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,15 +11,22 @@ import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import com.dfcovid.model.Class_GetUserHospitalList;
+import com.dfcovid.remote.Class_ApiUtils;
+import com.dfcovid.remote.Interface_userservice;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,10 +35,15 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 //import androidx.core.app.FragmentActivity;
 /*import com.google.android.gms.location.places.Place;
@@ -59,11 +72,20 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
 
     String str_lat, str_long;
 
-    PlaceAutocompleteFragment searchautocomplete_fragment;
+    Class_serviceslistResp[] class_serviceslistresp_arrayObj;
+    Class_serviceslistResp class_serviceslistresp_Obj;
+
+    Class_hsptaldetalServices_listResp[] class_hosptlDetal_listServis_arrayObj;
+    Class_hsptaldetalServices_listResp class_hosptlDetal_listServis_Obj;
+
+
+    Spinner hospitalservices_sp;
+
     SupportMapFragment mapFragment;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_googlemaps);
         //Places.initialize(getApplicationContext(), "YOUR_API_KEY");
@@ -72,8 +94,8 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        searchautocomplete_fragment = (PlaceAutocompleteFragment) getFragmentManager().findFragmentById(R.id.searchautocomplete_fragment);
 
+        hospitalservices_sp=(Spinner)findViewById(R.id.hospitalservices_sp);
 
         submit_bt = (Button) findViewById(R.id.submit_bt);
         cancel_bt = (Button) findViewById(R.id.cancel_bt);
@@ -81,12 +103,23 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
 
 
 
+        hospitalservices_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
+            {
+                class_serviceslistresp_Obj = (Class_serviceslistResp) hospitalservices_sp.getSelectedItem();
 
-        Intent intent = getIntent();
-        str_fromname = intent.getStringExtra("from");
+                Toast.makeText(getApplicationContext(),class_serviceslistresp_Obj.getService_Id().toString(),Toast.LENGTH_SHORT).show();
 
+                String str_serviceid=class_serviceslistresp_Obj.getService_Id().toString();
+                AsyncTask_HospitalDetails_withService(str_serviceid);
+            }
 
-        str_pondmarked = "no";
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
 
 
@@ -108,8 +141,9 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
 
-                        dialog.dismiss();
                         finish();
+                        /*dialog.dismiss();
+                        finish();*/
                     }
                 })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -133,6 +167,14 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
                 // finish();
             }
         });
+
+
+
+
+        AsyncTask_HospitalServicesList();
+
+
+
 
 
     }// end of OnCreate()
@@ -184,26 +226,16 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Currentlocation, zoomLevel));*/
 
 
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        googleMap.setMyLocationEnabled(true);
 
-        googleMap.getUiSettings().setMyLocationButtonEnabled(true);
 
         mMap = googleMap;
         //15.363289994348667, 75.132790658344
         double_currentlatitude=15.363289994348667;
         double_currentlongitude=75.132790658344;
         // Add a marker in Sydney and move the camera
-        LatLng Currentlocation = new LatLng(double_currentlatitude, double_currentlongitude);
+        //LatLng Currentlocation = new LatLng(double_currentlatitude, double_currentlongitude);
+
+        LatLng Currentlocation = new LatLng(15.363289994348667, 75.132790658344);
 
 
         /*myMarker = googleMap.addMarker(new MarkerOptions()
@@ -212,25 +244,10 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
                 .snippet(String.valueOf(Currentlocation)));*/
 
 
-        Geocoder geocoder;
-        List<Address> addresses = null;
-        geocoder = new Geocoder(this, Locale.getDefault());
-        try {
-            addresses = geocoder.getFromLocation(double_currentlatitude, double_currentlongitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        String address = (addresses.get(0).getAddressLine(0));
-        String city = addresses.get(0).getLocality();
-        String state = addresses.get(0).getAdminArea();
-        String knownName = addresses.get(0).getFeatureName();
-
-        Log.e("Address",address+"|City "+city+"|State "+state+"knownName"+knownName);
 
         myMarker = googleMap.addMarker(new MarkerOptions()
                 .position(Currentlocation)
-                .title("You are here"));
+                .title("KIMS"));
 
 
 
@@ -246,22 +263,12 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
 
 
 
-        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+    /*    mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener()
+        {
             @Override
             public void onMapLongClick(LatLng latLng)
             {
-               /* googleMap.addMarker(new MarkerOptions()
-                        .position(latLng)
-                        .title("Your marker title")
-                        .snippet("Your marker snippet"));*/
 
-               /* googleMap.addMarker(new MarkerOptions()
-                        .position(latLng)
-                        .title("You are here"));
-
-                Toast.makeText(getApplicationContext(),""+String.valueOf(latLng),Toast.LENGTH_SHORT).show();*/
-
-              //  myMarker=null;
 
                 if (myMarker == null)
                 {
@@ -288,14 +295,11 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
                             .snippet(String.valueOf(latLng)));
 
                     // Marker already exists, just update it's position
-                   /* myMarker.setPosition(latLng);
+                   *//* myMarker.setPosition(latLng);
                     myMarker.setTitle("You are here");
-                   myMarker.setSnippet(String.valueOf(latLng));*/
+                   myMarker.setSnippet(String.valueOf(latLng));*//*
 
-                    str_pondmarked="yes";
-                    str_latlong= String.valueOf(latLng);
-                   // Log.e("else",String.valueOf(latLng));
-                    //lat/lng: (15.370835294151595,75.1237140968442)
+
 
                 }
 
@@ -304,10 +308,213 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
             }
 
 
-        });
+        });*/
+
+
+
+
 
 
     }
+
+
+
+
+    public void AsyncTask_HospitalServicesList()
+    {
+
+        final ProgressDialog progressDialog;
+        progressDialog = new ProgressDialog(Activity_GoogleMaps.this);
+        progressDialog.setMessage("Loading....");
+        progressDialog.setTitle("Please wait fetching Details....");
+        progressDialog.setCancelable(false);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+
+
+
+
+        Interface_userservice userService;
+        userService = Class_ApiUtils.getUserService();
+        Call<Class_servicesdetailsResp> call = userService.Get_ServicesList();
+
+
+        call.enqueue(new Callback<Class_servicesdetailsResp>() {
+            @Override
+            public void onResponse(Call<Class_servicesdetailsResp> call, Response<Class_servicesdetailsResp> response)
+            {
+                Log.e("response", response.toString());
+
+                Log.e("TAG", "HospRes: " + new Gson().toJson(response));
+                Log.e("tag","HospResponse body"+ String.valueOf(response.body()));
+                //   DefaultResponse error1 = ErrorUtils.parseError(response);
+               /* Log.e("response new:",error1.getMsg());
+                Log.e("response new status:", String.valueOf(error1.getstatus()));*/
+
+                Class_servicesdetailsResp user_object;
+                user_object = (Class_servicesdetailsResp) response.body();
+
+                if (response.isSuccessful())
+                {
+
+                    progressDialog.dismiss();
+
+                   // String str_userstatus=user_object.getMessage().trim().toString();
+                    if(user_object.getStatus())
+                    {
+
+
+                        List<Class_serviceslistResp> serviceslistResp_list = response.body().getList();
+
+
+                        class_serviceslistresp_arrayObj= new Class_serviceslistResp[serviceslistResp_list.size()];
+
+                        for (int i = 0; i < serviceslistResp_list.size(); i++)
+                        {
+
+                            Class_serviceslistResp  serviceslistResp_innerObj = new Class_serviceslistResp();
+
+                            serviceslistResp_innerObj.setService_Id(user_object.getList().get(i).getService_Id());
+                            serviceslistResp_innerObj.setServices_Name(user_object.getList().get(i).getServices_Name());
+                            class_serviceslistresp_arrayObj[i]=serviceslistResp_innerObj;
+                        }
+
+                        if(serviceslistResp_list.size()>0) {
+                            ArrayAdapter dataAdapter = new ArrayAdapter(Activity_GoogleMaps.this, R.layout.support_simple_spinner_dropdown_item, class_serviceslistresp_arrayObj);
+                            dataAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                            hospitalservices_sp.setAdapter(dataAdapter);
+                        }
+
+                    }
+
+
+
+
+                } else {
+
+
+                    DefaultResponse error = ErrorUtils.parseError(response);
+                    // … and use it to show error information
+
+                    // … or just log the issue like we’re doing :)
+                    Log.d("responseerror", error.getMsg());
+
+                    Toast.makeText(Activity_GoogleMaps.this, "WS:error", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t)
+            {
+                progressDialog.dismiss();
+                Log.d("retrofiteerror", t.toString());
+                Toast.makeText(Activity_GoogleMaps.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });// end of call
+
+    }
+
+
+
+//AsyncTask_HospitalDetails_withService
+
+
+
+    public void AsyncTask_HospitalDetails_withService(String str_serviceid)
+    {
+
+        final ProgressDialog progressDialog;
+        progressDialog = new ProgressDialog(Activity_GoogleMaps.this);
+        progressDialog.setMessage("Loading....");
+        progressDialog.setTitle("Please wait fetching Details....");
+        progressDialog.setCancelable(false);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+
+
+
+
+        Interface_userservice userService;
+        userService = Class_ApiUtils.getUserService();
+        Call<Class_hospitaldetalServices_resp> call = userService.Get_Hospital_DetailsServices(str_serviceid);
+
+
+        call.enqueue(new Callback<Class_hospitaldetalServices_resp>() {
+            @Override
+            public void onResponse(Call<Class_hospitaldetalServices_resp> call, Response<Class_hospitaldetalServices_resp> response)
+            {
+                Log.e("response", response.toString());
+
+                Log.e("TAG", "HospDetRes: " + new Gson().toJson(response));
+                Log.e("tag","HospDetResponse body"+ String.valueOf(response.body()));
+                //   DefaultResponse error1 = ErrorUtils.parseError(response);
+               /* Log.e("response new:",error1.getMsg());
+                Log.e("response new status:", String.valueOf(error1.getstatus()));*/
+
+                Class_hospitaldetalServices_resp user_object;
+                user_object = (Class_hospitaldetalServices_resp) response.body();
+
+                if (response.isSuccessful())
+                {
+
+                    progressDialog.dismiss();
+
+                    // String str_userstatus=user_object.getMessage().trim().toString();
+                    if(user_object.getStatus())
+                    {
+
+
+                        List<Class_hsptaldetalServices_listResp> hsptaldetalServices_listResp_list = response.body().getHospital_Details();
+
+
+                        class_hosptlDetal_listServis_arrayObj= new Class_hsptaldetalServices_listResp[hsptaldetalServices_listResp_list.size()];
+
+                        for (int i = 0; i < hsptaldetalServices_listResp_list.size(); i++)
+                        {
+
+                            Class_hsptaldetalServices_listResp  hsptaldetalServices_listResp_innerObj = new Class_hsptaldetalServices_listResp();
+
+                            hsptaldetalServices_listResp_innerObj.setHospitalName(user_object.getHospital_Details().get(i).getHospitalName());
+
+                            class_hosptlDetal_listServis_arrayObj[i]=hsptaldetalServices_listResp_innerObj;
+                        }
+
+
+                    }
+
+
+
+
+                } else {
+
+
+                    DefaultResponse error = ErrorUtils.parseError(response);
+                    // … and use it to show error information
+
+                    // … or just log the issue like we’re doing :)
+                    Log.d("responseerror", error.getMsg());
+
+                    Toast.makeText(Activity_GoogleMaps.this, "WS:error", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t)
+            {
+                progressDialog.dismiss();
+                Log.d("retrofiteerror", t.toString());
+                Toast.makeText(Activity_GoogleMaps.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });// end of call
+
+    }
+
+
+
+
+
 
 
 
