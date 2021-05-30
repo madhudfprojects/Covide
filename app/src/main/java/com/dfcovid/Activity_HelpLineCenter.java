@@ -88,7 +88,9 @@ public class Activity_HelpLineCenter extends AppCompatActivity {
         maps_LL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(Activity_HelpLineCenter.this, "Coming Soon!", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(Activity_HelpLineCenter.this, Activity_GoogleMaps.class);
+                startActivity(i);
+                finish();
 
             }
         });

@@ -89,7 +89,30 @@
             android:name="com.dfcovid.Dashboard_Activity" />
 
         <activity
-            android:name="com.dfcovid.MainActivity2" />
+            android:name="com.dfcovid.MainActivity2"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.dfcovid.Activity_HelpLineCenter"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.dfcovid.ContactCenter"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.dfcovid.ContactUs_Activity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.dfcovid.Activity_WebLink"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.dfcovid.Activity_GoogleMaps"
+            android:screenOrientation="portrait" />
+
+
 
     </application>
 
