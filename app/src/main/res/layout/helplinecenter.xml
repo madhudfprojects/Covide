@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="#F0F9FA">
+    android:background="#F0F9FA"
+    tools:context=".Activity_HelpLineCenter">
 
     <ScrollView
         android:id="@+id/sw_layout"
@@ -20,17 +21,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="vertical"
-            tools:context=".Activity_HelpLineCenter">
+            android:orientation="vertical">
 
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_view"
-                android:layout_width="350dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@drawable/button_selector"
+                android:background="@drawable/spinner_layout"
                 android:padding="10dp"
+                android:layout_margin="10dp"
                 card_view:cardCornerRadius="10dp"
                 card_view:contentPadding="0dp">
 
@@ -58,12 +59,12 @@
 
                         <TextView
                             android:id="@+id/phone_tv"
-                            android:layout_width="300dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="To get Hospital Bed Assitance and Doctor Guidance,call Helpline No: "
                             android:textColor="@color/dark_black_red"
-                            android:textSize="15sp" />
+                            android:textSize="18sp" />
 
                         <LinearLayout
                             android:id="@+id/cont_ll"
@@ -71,6 +72,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
+                            android:layout_marginTop="10dp"
                             android:orientation="horizontal"
                             android:visibility="visible">
 
@@ -91,9 +93,8 @@
                                 android:gravity="center"
                                 android:layout_marginLeft="5dp"
                                 android:text="Click Here To call"
-                                android:textColor="#EF6A40"
-                                android:textSize="15sp"
-                                android:textStyle="italic"/>
+                                android:textColor="#4656AE"
+                                android:textSize="15sp" />
 
                         </LinearLayout>
 
@@ -104,7 +105,7 @@
                             android:gravity="center"
                             android:text="080-47168111"
                             android:textColor="@color/color_red"
-                            android:textSize="20sp" />
+                            android:textSize="25sp" />
 
 
                     </LinearLayout>
@@ -118,14 +119,14 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_view_2"
-                android:layout_width="350dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="50dp"
-                android:background="@drawable/button_selector"
+                android:background="@drawable/spinner_layout"
                 android:padding="10dp"
                 card_view:cardCornerRadius="10dp"
-                card_view:contentPadding="0dp">
+                card_view:contentPadding="0dp"
+                android:layout_margin="10dp">
 
 
                 <LinearLayout
@@ -136,7 +137,8 @@
                     android:layout_marginBottom="10dp"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:padding="5dp">
+                    android:padding="5dp"
+                    >
 
 
                     <LinearLayout
@@ -150,19 +152,21 @@
                         android:visibility="visible">
 
                         <TextView
-                            android:layout_width="300dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="For more Information on Vaccination Center,Test Center,Fever Clinic,Hospital List,"
+                            android:layout_gravity="center"
+                            android:text=" For more Information on Vaccination Center, Test Center, Fever Clinic, Hospital List,"
                             android:textColor="@color/dark_black_red"
-                            android:textSize="15sp" />
+                            android:textSize="18sp" />
                         <TextView
-                            android:layout_width="300dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="Please visit the website :"
                             android:textColor="@color/dark_black_red"
-                            android:textSize="15sp" />
+                            android:textSize="18sp"
+                            android:layout_marginTop="10dp"/>
 
 
                         <LinearLayout
@@ -172,7 +176,7 @@
                             android:gravity="center"
                             android:orientation="horizontal"
                             android:visibility="visible"
-                            android:layout_marginTop="5dp">
+                            android:layout_marginTop="10dp">
 
 
                             <!--                    <ImageView-->
@@ -190,8 +194,8 @@
                                 android:gravity="center"
                                 android:text="https://hdmitra.org/"
                                 android:textColor="@color/white"
-                                android:textSize="18sp"
-                                android:padding="5dp"
+                                android:textSize="20sp"
+                                android:padding="10dp"
                                 android:background="@color/colorPrimary"/>
 
                         </LinearLayout>
