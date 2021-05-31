@@ -84,7 +84,7 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
 
     SupportMapFragment mapFragment;
 
-
+    String str_flag;
     LinearLayout dashboard_LL,helplinecenter_LL,googlemaps_LL;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -104,22 +104,48 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
         hospitalservices_sp=(Spinner)findViewById(R.id.hospitalservices_sp);
 
 
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            str_flag= extras.getString("flag");
+            Log.e("str_flag", str_flag);
+        }
+
         dashboard_LL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
-                Intent i = new Intent(Activity_GoogleMaps.this, Dashboard_Activity_New.class);
-                startActivity(i);
-                finish();
+                if(str_flag.equals("1"))
+                {
+                    Intent i = new Intent(Activity_GoogleMaps.this, Dashboard_Activity.class);
+                    startActivity(i);
+                    finish();
+                }
+                else{
+
+                    Intent i = new Intent(Activity_GoogleMaps.this, Dashboard_Activity_New.class);
+                    startActivity(i);
+                    finish();
+            }
             }
         });
 
         helplinecenter_LL.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent i = new Intent(Activity_GoogleMaps.this, Activity_HelpLineCenter.class);
-                startActivity(i);
-                finish();
+            public void onClick(View view)
+            {
+                if(str_flag.equals("1"))
+                {
+                    Intent i = new Intent(Activity_GoogleMaps.this, Dashboard_Activity.class);
+                    startActivity(i);
+                    finish();
+                }
+                else{
+
+                    Intent i = new Intent(Activity_GoogleMaps.this, Dashboard_Activity_New.class);
+                    startActivity(i);
+                    finish();
+                }
+
             }
         });
 
@@ -242,7 +268,8 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
         //float zoomLevel = 16.0f; //This goes up to 21
-        float zoomLevel = 20.0f; //This goes up to 21
+        //float zoomLevel = 20.0f; //This goes up to 21
+        float zoomLevel = 18.0f;
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Currentlocation, zoomLevel));
 
 
@@ -369,8 +396,10 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
 
         Interface_userservice userService;
         userService = Class_ApiUtils.getUserService();
-        Call<Class_hospitaldetalServices_resp> call = userService.Get_Hospital_DetailsServices(str_serviceid);
+      //  Call<Class_hospitaldetalServices_resp> call = userService.Get_Hospital_DetailsServices1(str_serviceid);
 
+
+        Call<Class_hospitaldetalServices_resp> call = userService.Get_Hospital_DetailsServices2(str_serviceid);
 
         call.enqueue(new Callback<Class_hospitaldetalServices_resp>() {
             @Override
@@ -399,7 +428,6 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
 
                         List<Class_hsptaldetalServices_listResp> hsptaldetalServices_listResp_list = response.body().getHospital_Details();
 
-
                         class_hosptlDetal_listServis_arrayObj= new Class_hsptaldetalServices_listResp[hsptaldetalServices_listResp_list.size()];
 
                         for (int i = 0; i < hsptaldetalServices_listResp_list.size(); i++)
@@ -408,12 +436,16 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
                             Class_hsptaldetalServices_listResp  hsptaldetalServices_listResp_innerObj = new Class_hsptaldetalServices_listResp();
 
                             hsptaldetalServices_listResp_innerObj.setHospitalName(user_object.getHospital_Details().get(i).getHospitalName());
+                            
+
 
                             class_hosptlDetal_listServis_arrayObj[i]=hsptaldetalServices_listResp_innerObj;
                         }
 
+                        mapFragment.getMapAsync(Activity_GoogleMaps.this::onMapReady);
 
                     }
+
 
 
 
@@ -425,7 +457,7 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
                     // … and use it to show error information
 
                     // … or just log the issue like we’re doing :)
-                    Log.d("responseerror", error.getMsg());
+                    Log.e("responseerror", error.getMsg());
 
                     Toast.makeText(Activity_GoogleMaps.this, "WS:error", Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
@@ -436,7 +468,7 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
             public void onFailure(Call call, Throwable t)
             {
                 progressDialog.dismiss();
-                Log.d("retrofiteerror", t.toString());
+                Log.e("retrofiteerror", t.toString());
                 Toast.makeText(Activity_GoogleMaps.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });// end of call

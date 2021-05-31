@@ -24,7 +24,7 @@
         android:colorBackground="@color/colorPrimary"
         android:title="Change PIN"
 
-    app:showAsAction="never"/>
+        app:showAsAction="never"/>
     <item
         android:id="@+id/aboutus"
         android:icon="@mipmap/ic_launcher"
@@ -32,13 +32,19 @@
         android:title="About Us"
         app:showAsAction="never"/>
 
+    <item
+        android:id="@+id/action_notification"
+        android:title="notification"
+        app:actionLayout="@layout/custom_action_item_layout"
+        app:showAsAction="ifRoom"
+        android:visible="true" />
 
-   <!-- <item
-        android:id="@+id/logout"
-        android:icon="@mipmap/ic_launcher"
-        android:iconTint="@color/colorwhite"
-        android:title="Logout"
-        app:showAsAction="never"/>-->
+    <!-- <item
+         android:id="@+id/logout"
+         android:icon="@mipmap/ic_launcher"
+         android:iconTint="@color/colorwhite"
+         android:title="Logout"
+         app:showAsAction="never"/>-->
 
 </menu>
 
