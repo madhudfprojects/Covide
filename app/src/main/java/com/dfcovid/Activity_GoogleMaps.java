@@ -269,7 +269,7 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
 
         //float zoomLevel = 16.0f; //This goes up to 21
         //float zoomLevel = 20.0f; //This goes up to 21
-        float zoomLevel = 11.0f;
+        float zoomLevel = 18.0f;
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Currentlocation, zoomLevel));
 
 
@@ -396,8 +396,10 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
 
         Interface_userservice userService;
         userService = Class_ApiUtils.getUserService();
-        Call<Class_hospitaldetalServices_resp> call = userService.Get_Hospital_DetailsServices(str_serviceid);
+      //  Call<Class_hospitaldetalServices_resp> call = userService.Get_Hospital_DetailsServices1(str_serviceid);
 
+
+        Call<Class_hospitaldetalServices_resp> call = userService.Get_Hospital_DetailsServices2(str_serviceid);
 
         call.enqueue(new Callback<Class_hospitaldetalServices_resp>() {
             @Override
@@ -434,6 +436,8 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
                             Class_hsptaldetalServices_listResp  hsptaldetalServices_listResp_innerObj = new Class_hsptaldetalServices_listResp();
 
                             hsptaldetalServices_listResp_innerObj.setHospitalName(user_object.getHospital_Details().get(i).getHospitalName());
+                            
+
 
                             class_hosptlDetal_listServis_arrayObj[i]=hsptaldetalServices_listResp_innerObj;
                         }

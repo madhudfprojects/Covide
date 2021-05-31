@@ -84,8 +84,12 @@ public interface Interface_userservice {
 
     //https://covid.dfindia.org/api/Hospital_Details?Service_Id=1
     @GET("Hospital_Details")
-    Call<Class_hospitaldetalServices_resp>Get_Hospital_DetailsServices(@Query("Service_Id") String Service_Id);
+    Call<Class_hospitaldetalServices_resp>Get_Hospital_DetailsServices1(@Query("Service_Id") String Service_Id);
 
+
+    //https://covid.dfindia.org/api/Get_Hospitals?Service_Id=1
+    @GET("Get_Hospitals")
+    Call<Class_hospitaldetalServices_resp>Get_Hospital_DetailsServices2(@Query("Service_Id") String Service_Id);
 
 
     @GET("Authentication/Get_UserHospitalList")
