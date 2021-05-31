@@ -128,6 +128,7 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
             }
             }
         });
+        
 
         helplinecenter_LL.setOnClickListener(new View.OnClickListener() {
             @Override
