@@ -105,10 +105,16 @@ public class Activity_HelpLineCenter extends AppCompatActivity {
         dashboard_LL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Activity_HelpLineCenter.this, Dashboard_Activity_New.class);
-                startActivity(i);
-                finish();
+                if(str_flag.equals("1")) {
+                    Intent i = new Intent(Activity_HelpLineCenter.this, Dashboard_Activity.class);
+                    startActivity(i);
+                    finish();
+                }else{
+                    Intent i = new Intent(Activity_HelpLineCenter.this, Dashboard_Activity_New.class);
+                    startActivity(i);
+                    finish();
 
+                }
             }
         });
 

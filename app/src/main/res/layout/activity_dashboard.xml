@@ -215,8 +215,7 @@
             card_view:cardElevation="8dp"
             card_view:contentPadding="5dp"
             tools:ignore="MissingConstraints"
-            style="@style/MyButton"
-            android:background="@color/colorPrimary">
+            style="@style/MyButton">
 
             <LinearLayout
                 android:layout_width="match_parent"
