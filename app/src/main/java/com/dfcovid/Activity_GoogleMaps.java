@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -83,6 +84,8 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
 
     SupportMapFragment mapFragment;
 
+
+    LinearLayout dashboard_LL,helplinecenter_LL,googlemaps_LL;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -95,12 +98,40 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
         mapFragment.getMapAsync(this);
 
 
+        dashboard_LL=(LinearLayout) findViewById(R.id.dashboard_LL);
+        helplinecenter_LL=(LinearLayout) findViewById(R.id.helplinecenter_LL);
+        googlemaps_LL=(LinearLayout) findViewById(R.id.googlemaps_LL);;
         hospitalservices_sp=(Spinner)findViewById(R.id.hospitalservices_sp);
 
         submit_bt = (Button) findViewById(R.id.submit_bt);
         cancel_bt = (Button) findViewById(R.id.cancel_bt);
 
+        dashboard_LL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Intent i = new Intent(Activity_GoogleMaps.this, Dashboard_Activity_New.class);
+                startActivity(i);
+                finish();
+            }
+        });
 
+        helplinecenter_LL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Activity_GoogleMaps.this, Activity_HelpLineCenter.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
+        googlemaps_LL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+            Toast.makeText(getApplicationContext(),"Already in this Page",Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         hospitalservices_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

@@ -245,7 +245,8 @@ public class Dashboard_Activity_New extends AppCompatActivity {
         //added by shivaleela
         helplinecenter_LL.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 Intent i = new Intent(Dashboard_Activity_New.this, Activity_HelpLineCenter.class);
                 startActivity(i);
                 finish();
