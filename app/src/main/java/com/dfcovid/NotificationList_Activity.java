@@ -1,6 +1,8 @@
 package com.dfcovid;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -30,6 +32,12 @@ public class NotificationList_Activity extends AppCompatActivity implements Swip
     TextView title;
     ImageView backbtn_iv;
     public static int count_ofnotifications;
+
+    public static final String sharedpreference_notification = "sharedpreferencebook_notification";
+    public static final String KeyValue_flag = "KeyValue_flag";
+    SharedPreferences.Editor editor_obj;
+    SharedPreferences sharedpreference_notification_Obj;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +61,11 @@ public class NotificationList_Activity extends AppCompatActivity implements Swip
                 finish();
             }
         });*/
+        sharedpreference_notification_Obj=getSharedPreferences(sharedpreference_notification, Context.MODE_PRIVATE);
+
+        editor_obj = sharedpreference_notification_Obj.edit();
+        editor_obj.putString(KeyValue_flag, "0");
+        editor_obj.commit();
 
         notificationsRecycler = (RecyclerView) findViewById(R.id.notificationsRecycler);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
