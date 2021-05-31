@@ -65,7 +65,7 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
 
 
     String location;
-    Button search_bt, submit_bt, cancel_bt;
+   
 
     Marker myMarker;
 
@@ -103,8 +103,6 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
         googlemaps_LL=(LinearLayout) findViewById(R.id.googlemaps_LL);;
         hospitalservices_sp=(Spinner)findViewById(R.id.hospitalservices_sp);
 
-        submit_bt = (Button) findViewById(R.id.submit_bt);
-        cancel_bt = (Button) findViewById(R.id.cancel_bt);
 
         dashboard_LL.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,48 +154,6 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
 
        // Places.initialize(getApplicationContext(), "YOUR_API_KEY");
        // Places.initialize(getApplicationContext(),"@string/API_KEY");
-
-        cancel_bt.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-
-                AlertDialog.Builder dialog = new AlertDialog.Builder(Activity_GoogleMaps.this);
-                dialog.setCancelable(false);
-                dialog.setTitle(R.string.alert);
-                dialog.setMessage("Are you sure want to go back");
-
-                dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-
-                        finish();
-                        /*dialog.dismiss();
-                        finish();*/
-                    }
-                })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                //Action for "Cancel".
-                                dialog.dismiss();
-                            }
-                        });
-
-                final AlertDialog alert = dialog.create();
-                alert.setOnShowListener(new DialogInterface.OnShowListener() {
-                    @Override
-                    public void onShow(DialogInterface arg0) {
-                        alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED);
-                        alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#004D40"));
-                    }
-                });
-                alert.show();
-
-                // finish();
-            }
-        });
 
 
 
@@ -288,61 +244,6 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
         //float zoomLevel = 16.0f; //This goes up to 21
         float zoomLevel = 20.0f; //This goes up to 21
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Currentlocation, zoomLevel));
-
-
-
-
-
-
-    /*    mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener()
-        {
-            @Override
-            public void onMapLongClick(LatLng latLng)
-            {
-
-
-                if (myMarker == null)
-                {
-                    Log.e("if","if");
-                    str_latlong="";
-                    // Marker was not set yet. Add marker:
-                    myMarker = googleMap.addMarker(new MarkerOptions()
-                            .position(latLng)
-                            .title("You are here")
-                            .snippet(String.valueOf(latLng)));
-
-                    str_pondmarked="yes";
-                    str_latlong= String.valueOf(latLng);
-                }
-                else {
-                    Log.e("else","else");
-
-                    str_latlong="";
-                    myMarker.remove();
-
-                    myMarker = googleMap.addMarker(new MarkerOptions()
-                            .position(latLng)
-                            .title("You are here")
-                            .snippet(String.valueOf(latLng)));
-
-                    // Marker already exists, just update it's position
-                   *//* myMarker.setPosition(latLng);
-                    myMarker.setTitle("You are here");
-                   myMarker.setSnippet(String.valueOf(latLng));*//*
-
-
-
-                }
-
-
-
-            }
-
-
-        });*/
-
-
-
 
 
 
@@ -555,10 +456,55 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
     public void onBackPressed()
     {
 
-       Toast.makeText(getApplicationContext(),"Kindly Click on Back Button", Toast.LENGTH_LONG).show();
+       Toast.makeText(getApplicationContext(),"Kindly Click on Bottom button", Toast.LENGTH_LONG).show();
     }
 
 
+
+
+
+
+   /*  cancel_bt.setOnClickListener(new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View v) {
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(Activity_GoogleMaps.this);
+        dialog.setCancelable(false);
+        dialog.setTitle(R.string.alert);
+        dialog.setMessage("Are you sure want to go back");
+
+        dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+
+                finish();
+                        *//*dialog.dismiss();
+                        finish();*//*
+            }
+        })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Action for "Cancel".
+                        dialog.dismiss();
+                    }
+                });
+
+        final AlertDialog alert = dialog.create();
+        alert.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface arg0) {
+                alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED);
+                alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#004D40"));
+            }
+        });
+        alert.show();
+
+        // finish();
+    }
+    });*/
 
 
 }
