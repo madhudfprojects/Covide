@@ -22,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -88,6 +89,8 @@ public class Dashboard_Activity extends AppCompatActivity {
     ListView lv_summary;
     String str_edt_fromdate_display="",str_edt_fromdate_sendTOAPI="";
 
+    LinearLayout helplinecenter_LL,googlemaps_LL;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,6 +105,9 @@ public class Dashboard_Activity extends AppCompatActivity {
         edt_fromdate=(TextView) findViewById(R.id.edt_fromdate);
         fromdateseterror_TV=(EditText) findViewById(R.id.fromdateseterror_TV);
         lv_summary = (ListView) findViewById(R.id.lv_summary);
+
+        helplinecenter_LL=(LinearLayout)findViewById(R.id.helplinecenter_LL);
+        googlemaps_LL=(LinearLayout)findViewById(R.id.googlemaps_LL);
 
         sharedpreference_usercredential_Obj=getSharedPreferences(sharedpreference_usercredential, Context.MODE_PRIVATE);
         str_userID= sharedpreference_usercredential_Obj.getString(KeyValue_userid, "").trim();
@@ -266,6 +272,29 @@ public class Dashboard_Activity extends AppCompatActivity {
                 i.putExtra("hospitalId",str_hospitelId);
                 i.putExtra("hospital",str_SelectedHospitalName);
                 startActivity(i);
+            }
+        });
+//added by shivaleela
+        helplinecenter_LL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Dashboard_Activity.this, Activity_HelpLineCenter.class);
+                i.putExtra("flag","1");
+                startActivity(i);
+                finish();
+            }
+        });
+
+        googlemaps_LL.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent i = new Intent(Dashboard_Activity.this, Activity_GoogleMaps.class);
+                startActivity(i);
+                finish();
+
+
             }
         });
 
