@@ -39,7 +39,7 @@ public class Activity_HelpLineCenter extends AppCompatActivity {
         setContentView(R.layout.helplinecenter);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Helpline Center");
+        getSupportActionBar().setTitle("Helpline");
 
         sharedpreference_usercredential_Obj = getSharedPreferences(sharedpreference_usercredential, Context.MODE_PRIVATE);
         str_userID = sharedpreference_usercredential_Obj.getString(KeyValue_userid, "").trim();

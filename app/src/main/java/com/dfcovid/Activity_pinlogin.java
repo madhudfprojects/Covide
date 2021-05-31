@@ -456,6 +456,8 @@ public class Activity_pinlogin extends AppCompatActivity
         // Inflate the menu; this adds items to the action bar if it is present.
         //getMenuInflater().inflate(R.menu.home_menu, menu);
         getMenuInflater().inflate(R.menu.logout_menu, menu);
+        MenuItem action_editProfile = menu.findItem(R.id.aboutus);
+        action_editProfile.setVisible(false);
 
         return true;
     }

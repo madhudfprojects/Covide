@@ -101,6 +101,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:src="@drawable/help"
+                        android:visibility="gone"
                         card_view:tint="@android:color/holo_purple" />
                     <TextView
                         android:id="@+id/help_new_tv"
