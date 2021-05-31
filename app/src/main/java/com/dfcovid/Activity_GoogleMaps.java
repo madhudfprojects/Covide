@@ -250,6 +250,7 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
 
         LatLng Currentlocation = new LatLng(15.363289994348667, 75.132790658344);
 
+        LatLng Currentlocation1 = new LatLng( 15.352417641487971, 75.12442586841604);
 
         /*myMarker = googleMap.addMarker(new MarkerOptions()
                 .position(Currentlocation)
@@ -260,7 +261,14 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
 
         myMarker = googleMap.addMarker(new MarkerOptions()
                 .position(Currentlocation)
-                .title("KIMS"));
+                .title("KIMS")
+                .snippet("Govt Hospital,Vidya Nagar, Hubli, Karnataka 580021"));
+
+
+        myMarker = googleMap.addMarker(new MarkerOptions()
+                .position(Currentlocation1)
+                .title("Suchirayu")
+                .snippet("Gokul Rd, opposite KSRTC Bus Depot,Kallur Layout, Hubli, Karnataka 580030"));
 
 
 
@@ -269,7 +277,7 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
 
         //float zoomLevel = 16.0f; //This goes up to 21
         //float zoomLevel = 20.0f; //This goes up to 21
-        float zoomLevel = 18.0f;
+        float zoomLevel = 17.0f;
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Currentlocation, zoomLevel));
 
 
@@ -436,7 +444,7 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
                             Class_hsptaldetalServices_listResp  hsptaldetalServices_listResp_innerObj = new Class_hsptaldetalServices_listResp();
 
                             hsptaldetalServices_listResp_innerObj.setHospitalName(user_object.getHospital_Details().get(i).getHospitalName());
-                            
+
 
 
                             class_hosptlDetal_listServis_arrayObj[i]=hsptaldetalServices_listResp_innerObj;
