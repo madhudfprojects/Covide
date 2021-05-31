@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:background="@color/colorPrimary">
+       >
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -108,7 +108,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="Helpline center"
+                            android:text="Helpline"
                             android:gravity="center"
                             android:textColor="#FFFFFF"
                             />
@@ -134,7 +134,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="Google maps"
+                            android:text="Locations"
                             android:gravity="center"
                             android:textColor="#FFFFFF"
                             />
