@@ -242,7 +242,8 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
         //float zoomLevel = 16.0f; //This goes up to 21
-        float zoomLevel = 20.0f; //This goes up to 21
+        //float zoomLevel = 20.0f; //This goes up to 21
+        float zoomLevel = 11.0f;
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Currentlocation, zoomLevel));
 
 
