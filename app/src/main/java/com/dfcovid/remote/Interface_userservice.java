@@ -4,12 +4,15 @@ package com.dfcovid.remote;
 import com.dfcovid.Class_hospitaldetalServices_resp;
 import com.dfcovid.Class_servicesdetailsResp;
 import com.dfcovid.Class_GetAppVersion;
+import com.dfcovid.Class_devicedetails;
 import com.dfcovid.Class_forgotrequest;
 import com.dfcovid.Class_googleloginRequest;
 import com.dfcovid.Class_loginPinrequest;
 import com.dfcovid.Class_loginrequest;
 import com.dfcovid.Class_normalloginresponse;
 import com.dfcovid.Class_pinrequest;
+import com.dfcovid.Class_postuserdevicedetailsRequest;
+import com.dfcovid.Class_postuserdevicedetailsResponse;
 import com.dfcovid.model.Class_DashboardHospitalData;
 import com.dfcovid.model.Class_Get_LoadHospitalDataResponse;
 import com.dfcovid.model.Class_Get_UserHospitalListResponse;
@@ -115,4 +118,7 @@ public interface Interface_userservice {
     @GET("Authentication/GetDemo")
     Call<Class_getdemo_Response>GetDemo(@Query("User_ID") String User_ID);
 
+    @Headers("Content-Type: application/json;charset=utf-8")
+    @POST("Save_DeviceDetails")
+    Call<Class_postuserdevicedetailsResponse>postuserdevicedetails(@Body Class_devicedetails request);
 }
