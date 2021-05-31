@@ -114,18 +114,16 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
             @Override
             public void onClick(View view)
             {
-                if(str_flag.equals("1"))
-                {
+                if(str_flag.equals("1")) {
                     Intent i = new Intent(Activity_GoogleMaps.this, Dashboard_Activity.class);
                     startActivity(i);
                     finish();
-                }
-                else{
-
+                } else{
                     Intent i = new Intent(Activity_GoogleMaps.this, Dashboard_Activity_New.class);
                     startActivity(i);
                     finish();
-            }
+
+                }
             }
         });
         
@@ -134,18 +132,23 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
             @Override
             public void onClick(View view)
             {
-                if(str_flag.equals("1"))
-                {
-                    Intent i = new Intent(Activity_GoogleMaps.this, Dashboard_Activity.class);
-                    startActivity(i);
-                    finish();
-                }
-                else{
+//                if(str_flag.equals("1"))
+//                {
+//                    Intent i = new Intent(Activity_GoogleMaps.this, Dashboard_Activity.class);
+//                    startActivity(i);
+//                    finish();
+//                }
+//                else{
+//
+//                    Intent i = new Intent(Activity_GoogleMaps.this, Dashboard_Activity_New.class);
+//                    startActivity(i);
+//                    finish();
+//                }
 
-                    Intent i = new Intent(Activity_GoogleMaps.this, Dashboard_Activity_New.class);
-                    startActivity(i);
-                    finish();
-                }
+                Intent i = new Intent(Activity_GoogleMaps.this, Activity_HelpLineCenter.class);
+                i.putExtra("flag","2");
+                startActivity(i);
+                finish();
 
             }
         });

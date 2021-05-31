@@ -96,6 +96,7 @@ public class Activity_HelpLineCenter extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Activity_HelpLineCenter.this, Activity_GoogleMaps.class);
+                i.putExtra("flag","2");
                 startActivity(i);
                 finish();
 
@@ -189,6 +190,11 @@ public class Activity_HelpLineCenter extends AppCompatActivity {
                 Intent i = new Intent(Activity_HelpLineCenter.this, Dashboard_Activity.class);
                 startActivity(i);
                 finish();
+            }else if(str_flag.equals("2")){
+                Intent i = new Intent(Activity_HelpLineCenter.this, Activity_GoogleMaps.class);
+                i.putExtra("flag","2");
+                startActivity(i);
+                finish();
             }else{
                 Intent i = new Intent(Activity_HelpLineCenter.this, Dashboard_Activity_New.class);
                 startActivity(i);
@@ -216,13 +222,17 @@ public class Activity_HelpLineCenter extends AppCompatActivity {
             Intent i = new Intent(Activity_HelpLineCenter.this, Dashboard_Activity.class);
             startActivity(i);
             finish();
+        }else if(str_flag.equals("2")){
+            Intent i = new Intent(Activity_HelpLineCenter.this, Activity_GoogleMaps.class);
+            i.putExtra("flag","2");
+            startActivity(i);
+            finish();
         }else{
             Intent i = new Intent(Activity_HelpLineCenter.this, Dashboard_Activity_New.class);
             startActivity(i);
             finish();
 
         }
-
     }
 }
 

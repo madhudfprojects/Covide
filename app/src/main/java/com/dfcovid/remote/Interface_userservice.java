@@ -111,7 +111,7 @@ public interface Interface_userservice {
     @Headers("Content-Type: application/json;charset=utf-8")
     @POST("Authentication/Post_SaveHospital")
     Call<Class_PostSaveHospitalResponse>PostSaveHospital(@Body Class_PostSaveHospitalResponseRequest request);
-
+   // https://covid.dfindia.org//Api/Authentication/PostSaveHospital
 
     @Headers("Content-Type: application/json;charset=utf-8")
     @GET("Authentication/GetHelp")

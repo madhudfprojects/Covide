@@ -264,8 +264,6 @@ public class Dashboard_Activity_New extends AppCompatActivity {
                 startActivity(i);
                 finish();
 
-
-
             }
         });
     }
