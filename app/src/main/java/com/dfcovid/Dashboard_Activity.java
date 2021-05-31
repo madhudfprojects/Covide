@@ -1,5 +1,7 @@
 package com.dfcovid;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
@@ -8,25 +10,40 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.graphics.Point;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.view.MenuItemCompat;
+
+import android.provider.Settings;
+import android.telephony.TelephonyManager;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dfcovid.Constants.Database;
 import com.dfcovid.model.Class_DashboardHospitalData;
 import com.dfcovid.model.Class_DashboardHospitalData_List;
 import com.dfcovid.model.Class_GetUserHospitalList;
@@ -37,6 +54,7 @@ import com.dfcovid.model.Class_gethelp_Response;
 import com.dfcovid.model.Class_gethelp_resplist;
 import com.dfcovid.remote.Class_ApiUtils;
 import com.dfcovid.remote.Interface_userservice;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 
 import java.text.DateFormat;
@@ -47,16 +65,20 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import static com.dfcovid.NotificationList_Activity.count_ofnotifications;
 
 public class Dashboard_Activity extends AppCompatActivity {
 
     Boolean isInternetPresent = false;
     Class_InternetDectector internetDectector;
     Interface_userservice userService1;
+
+    private final int REQUEST_READ_PHONE_STATE = 1;
 
     Class_GetUserHospitalList[] arrayObj_class_studentpaymentresp;
     Spinner hospital_list_SP;
@@ -66,12 +88,15 @@ public class Dashboard_Activity extends AppCompatActivity {
     Button Add_bt;
     EditText fromdateseterror_TV;
     TextView edt_fromdate;
-    String FromDate,ToDate;
+    String FromDate, ToDate;
     private int mYear, mMonth, mDay;
     private int cYear, cMonth, cDay;
     Class_DashboardHospitalData_List[] array_class_dashboardHospitalData_lists;
 
-
+    TextView textCartItemCount;
+    int mCartItemCount = 0;
+    // public static int count_ofnotifications;
+    MenuItem menuItem;
 
     DashboardHospitalListViewAdapter dashboardHospitalListViewAdapter;
     private ArrayList<Class_DashboardHospitalData_List> dashboard_list;
@@ -83,10 +108,32 @@ public class Dashboard_Activity extends AppCompatActivity {
 
     SharedPreferences sharedpreference_usercredential_Obj;
     SharedPreferences.Editor editor_obj;
-    String str_userID,str_username,str_loginpin,str_hospitelId="",str_SelectedHospitalName="";
+    String str_userID, str_username, str_loginpin, str_hospitelId = "", str_SelectedHospitalName = "", str_versioncode = "";
 
     ListView lv_summary;
-    String str_edt_fromdate_display="",str_edt_fromdate_sendTOAPI="";
+    String str_edt_fromdate_display = "", str_edt_fromdate_sendTOAPI = "";
+
+    TelephonyManager tm1 = null;
+   /* String myVersion, deviceBRAND, deviceHARDWARE, devicePRODUCT, deviceUSER, deviceModelName, deviceId, tmDevice, tmSerial, androidId, simOperatorName, sdkver, mobileNumber;
+    int sdkVersion, Measuredwidth = 0, Measuredheight = 0, update_flage = 0;
+    AsyncTask<Void, Void, Void> mRegisterTask;
+    String regId = "dfagriXZ", str_userid;
+    private String versioncode;*/
+
+    String str_login_username = "", str_AUTH_token = "", str_login_empid = "", simOperatorName = "", tmDevice = "", mobileNumber = "", tmSerial = "", androidId = "",
+            deviceId = "", deviceModelName = "", deviceUSER = "", devicePRODUCT = "",
+            deviceHARDWARE = "", deviceBRAND = "", myVersion = "", sdkver = "", regId = "", str_loginEmailID = "";
+    int sdkVersion, Measuredwidth, Measuredheight;
+    int versionCodes;
+    Database database;
+
+    LinearLayout helplinecenter_LL,googlemaps_LL;
+
+    public static final String sharedpreference_notification = "sharedpreferencebook_notification";
+    public static final String KeyValue_flag = "KeyValue_flag";
+    //SharedPreferences.Editor editor_obj;
+    SharedPreferences sharedpreference_notification_Obj;
+    String str_flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,29 +143,64 @@ public class Dashboard_Activity extends AppCompatActivity {
         internetDectector = new Class_InternetDectector(getApplicationContext());
         isInternetPresent = internetDectector.isConnectingToInternet();
         userService1 = Class_ApiUtils.getUserService();
-        hospital_list_SP=(Spinner)findViewById(R.id.hospital_list_SP);
-        date_time_TV=(TextView)findViewById(R.id.date_time_TV);
-        Add_bt=(Button)findViewById(R.id.Add_bt);
-        edt_fromdate=(TextView) findViewById(R.id.edt_fromdate);
-        fromdateseterror_TV=(EditText) findViewById(R.id.fromdateseterror_TV);
+        hospital_list_SP = (Spinner) findViewById(R.id.hospital_list_SP);
+        date_time_TV = (TextView) findViewById(R.id.date_time_TV);
+        Add_bt = (Button) findViewById(R.id.Add_bt);
+        edt_fromdate = (TextView) findViewById(R.id.edt_fromdate);
+        fromdateseterror_TV = (EditText) findViewById(R.id.fromdateseterror_TV);
         lv_summary = (ListView) findViewById(R.id.lv_summary);
 
-        sharedpreference_usercredential_Obj=getSharedPreferences(sharedpreference_usercredential, Context.MODE_PRIVATE);
-        str_userID= sharedpreference_usercredential_Obj.getString(KeyValue_userid, "").trim();
-        str_username= sharedpreference_usercredential_Obj.getString(KeyValue_username, "").trim();
+        sharedpreference_usercredential_Obj = getSharedPreferences(sharedpreference_usercredential, Context.MODE_PRIVATE);
+        str_userID = sharedpreference_usercredential_Obj.getString(KeyValue_userid, "").trim();
+        str_username = sharedpreference_usercredential_Obj.getString(KeyValue_username, "").trim();
 
-        Log.e("tAG","str_userID="+str_userID+"str_username="+str_username);
+        Log.e("tAG", "str_userID=" + str_userID + "str_username=" + str_username);
+
+        sharedpreference_notification_Obj = getSharedPreferences(sharedpreference_notification, Context.MODE_PRIVATE);
+        str_flag = sharedpreference_notification_Obj.getString(KeyValue_flag, "").trim();
+
+        Log.e("tag","str_flag="+str_flag);
+
+
+            database = new Database(getApplicationContext());
+            count_ofnotifications = database.getCursorSize();
+            Log.e("tag", "count=" + count_ofnotifications);
+        //}
+
+        try {
+            versionCodes = getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
+
+            helplinecenter_LL=(LinearLayout)findViewById(R.id.helplinecenter_LL);
+            googlemaps_LL=(LinearLayout)findViewById(R.id.googlemaps_LL);
+
+            sharedpreference_usercredential_Obj=getSharedPreferences(sharedpreference_usercredential, Context.MODE_PRIVATE);
+            str_userID= sharedpreference_usercredential_Obj.getString(KeyValue_userid, "").trim();
+            str_username= sharedpreference_usercredential_Obj.getString(KeyValue_username, "").trim();
+
+        } catch (PackageManager.NameNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        str_versioncode = Integer.toString(versionCodes);
+        Log.e("tag", "str_versioncode=" + str_versioncode);
+
+        internetDectector = new Class_InternetDectector(getApplicationContext());
+        isInternetPresent = internetDectector.isConnectingToInternet();
+
+        if (isInternetPresent) {
+            InsertDeviceDetails();
+        }
 
         edt_fromdate.setEnabled(true);
         edt_fromdate.setFocusable(true);
-        dashboard_list =new ArrayList<Class_DashboardHospitalData_List>();
+        dashboard_list = new ArrayList<Class_DashboardHospitalData_List>();
 
         dashboardHospitalListViewAdapter = new DashboardHospitalListViewAdapter(Dashboard_Activity.this, dashboard_list);
 
-        if(isInternetPresent){
+        if (isInternetPresent) {
             GetUserHospitalList();
-        }else{
-            Toast.makeText(Dashboard_Activity.this,"No Internet", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(Dashboard_Activity.this, "No Internet", Toast.LENGTH_SHORT).show();
         }
 
         Date c = Calendar.getInstance().getTime();
@@ -128,12 +210,12 @@ public class Dashboard_Activity extends AppCompatActivity {
         String formattedDate = df.format(c);
 
         edt_fromdate.setText(formattedDate);
-        SimpleDateFormat mdyFormat = new SimpleDateFormat("yyyy-MM-dd",Locale.getDefault());
-        str_edt_fromdate_sendTOAPI=mdyFormat.format(c);
+        SimpleDateFormat mdyFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        str_edt_fromdate_sendTOAPI = mdyFormat.format(c);
         //SimpleDateFormat mdyFormat = new SimpleDateFormat("dd-MM-yyyy");
 
 
-        Log.e("tag","str_edate_sendTOAPI 1st.."+str_edt_fromdate_sendTOAPI);
+        Log.e("tag", "str_edate_sendTOAPI 1st.." + str_edt_fromdate_sendTOAPI);
 
 //        edt_fromdate.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -231,30 +313,30 @@ public class Dashboard_Activity extends AppCompatActivity {
         hospital_list_SP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
-            public void onItemSelected (AdapterView< ? > parent, View view,
-                                        int position, long id){
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
                 // TODO Auto-generated method stub
                 //   obj_Class_Project_FundMain = (Class_Project_FundMain) spin_ticketStatus.getSelectedItem();
 
                 class_getUserHospitalList = (Class_GetUserHospitalList) hospital_list_SP.getSelectedItem();
 
-                if(class_getUserHospitalList.getEntryDate()==null||class_getUserHospitalList.getEntryDate().equalsIgnoreCase("")) {
+                if (class_getUserHospitalList.getEntryDate() == null || class_getUserHospitalList.getEntryDate().equalsIgnoreCase("")) {
                     date_time_TV.setText("");
-                }else{
+                } else {
                     Date_time = class_getUserHospitalList.getEntryDate().toString();
-                    Log.e("tag","Date_time="+Date_time);
+                    Log.e("tag", "Date_time=" + Date_time);
                     date_time_TV.setText(Date_time);
                 }
                 str_hospitelId = class_getUserHospitalList.getHospitalId().toString();
                 str_SelectedHospitalName = class_getUserHospitalList.getHospitalName().toString();
-                if(isInternetPresent) {
+                if (isInternetPresent) {
                     Get_LoadHospitalDashboard();
                 }
                 // Toast.makeText(getApplicationContext(),"str_Programsid: "+str_programid,Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onNothingSelected (AdapterView< ? > parent){
+            public void onNothingSelected(AdapterView<?> parent) {
                 // TODO Auto-generated method stub
             }
         });
@@ -262,10 +344,33 @@ public class Dashboard_Activity extends AppCompatActivity {
         Add_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Dashboard_Activity.this,MainActivity2.class);
-                i.putExtra("hospitalId",str_hospitelId);
-                i.putExtra("hospital",str_SelectedHospitalName);
+                Intent i = new Intent(Dashboard_Activity.this, MainActivity2.class);
+                i.putExtra("hospitalId", str_hospitelId);
+                i.putExtra("hospital", str_SelectedHospitalName);
                 startActivity(i);
+            }
+        });
+//added by shivaleela
+        helplinecenter_LL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Dashboard_Activity.this, Activity_HelpLineCenter.class);
+                i.putExtra("flag","1");
+                startActivity(i);
+                finish();
+            }
+        });
+
+        googlemaps_LL.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent i = new Intent(Dashboard_Activity.this, Activity_GoogleMaps.class);
+                startActivity(i);
+                finish();
+
+
             }
         });
 
@@ -273,7 +378,7 @@ public class Dashboard_Activity extends AppCompatActivity {
     }
 
 
-    public void setReceivedstartDate (Calendar calendar){
+    public void setReceivedstartDate(Calendar calendar) {
         final DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM);
 
         edt_fromdate.setText(dateFormat.format(calendar.getTime()));
@@ -293,6 +398,7 @@ public class Dashboard_Activity extends AppCompatActivity {
 
 
     }
+
     public void GetUserHospitalList() {
         Call<Class_Get_UserHospitalListResponse> call = userService1.GetUserHospitalList(str_userID);
 
@@ -363,7 +469,6 @@ public class Dashboard_Activity extends AppCompatActivity {
             }
 
 
-
             @Override
             public void onFailure(Call call, Throwable t) {
                 progressDoalog.dismiss();
@@ -377,8 +482,8 @@ public class Dashboard_Activity extends AppCompatActivity {
     }
 
     public void Get_LoadHospitalDashboard() {
-        Log.e("tag","str_hospitelId="+str_hospitelId+"selected date="+str_edt_fromdate_sendTOAPI);
-        Call<Class_DashboardHospitalData> call = userService1.Get_LoadHospitalDataDate(str_hospitelId,str_edt_fromdate_sendTOAPI);
+        Log.e("tag", "str_hospitelId=" + str_hospitelId + "selected date=" + str_edt_fromdate_sendTOAPI);
+        Call<Class_DashboardHospitalData> call = userService1.Get_LoadHospitalDataDate(str_hospitelId, str_edt_fromdate_sendTOAPI);
 
         // Set up progress before call
         final ProgressDialog progressDoalog;
@@ -405,7 +510,7 @@ public class Dashboard_Activity extends AppCompatActivity {
                         array_class_dashboardHospitalData_lists = new Class_DashboardHospitalData_List[arrayObj_Class_monthcontents.length];
                         dashboard_list.clear();
                         for (int i = 0; i < arrayObj_Class_monthcontents.length; i++) {
-                            Log.e("tag","Class_DashboardHospitalData=="+ String.valueOf(class_loginresponse.getLst().get(i).getBedType()));
+                            Log.e("tag", "Class_DashboardHospitalData==" + String.valueOf(class_loginresponse.getLst().get(i).getBedType()));
 
                             Class_DashboardHospitalData_List innerObj_Class_academic = new Class_DashboardHospitalData_List();
                             innerObj_Class_academic.setAvailable(class_loginresponse.getLst().get(i).getAvailable());
@@ -417,7 +522,7 @@ public class Dashboard_Activity extends AppCompatActivity {
                             array_class_dashboardHospitalData_lists[i] = innerObj_Class_academic;
 
                             Class_DashboardHospitalData_List item1 = null;
-                            item1 = new Class_DashboardHospitalData_List( array_class_dashboardHospitalData_lists[i].getBedTypeId(),  array_class_dashboardHospitalData_lists[i].getBedType(),  array_class_dashboardHospitalData_lists[i].getTotal(), array_class_dashboardHospitalData_lists[i].getOccupied(),  array_class_dashboardHospitalData_lists[i].getAvailable());
+                            item1 = new Class_DashboardHospitalData_List(array_class_dashboardHospitalData_lists[i].getBedTypeId(), array_class_dashboardHospitalData_lists[i].getBedType(), array_class_dashboardHospitalData_lists[i].getTotal(), array_class_dashboardHospitalData_lists[i].getOccupied(), array_class_dashboardHospitalData_lists[i].getAvailable());
 
                             dashboard_list.add(item1);
                         }//for loop end
@@ -461,7 +566,6 @@ public class Dashboard_Activity extends AppCompatActivity {
             }
 
 
-
             @Override
             public void onFailure(Call call, Throwable t) {
                 progressDoalog.dismiss();
@@ -484,31 +588,33 @@ public class Dashboard_Activity extends AppCompatActivity {
     }
 
 
-
-
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         //getMenuInflater().inflate(R.menu.home_menu, menu);
-        getMenuInflater().inflate(R.menu.logout_menu, menu);
-
+        getMenuInflater().inflate(R.menu.dashboard_menu, menu);
+        menuItem = menu.findItem(R.id.action_notification);
+        setupBadge();
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
+        if(id == R.id.action_notification){
+            Intent i = new Intent(Dashboard_Activity.this, NotificationList_Activity.class);
+            startActivity(i);
+            finish();
 
-        if(id==R.id.changepin)
-        {
+            return true;
+        }
+
+        if (id == R.id.changepin) {
 
 
             AlertDialog.Builder dialog = new AlertDialog.Builder(Dashboard_Activity.this);
@@ -518,8 +624,7 @@ public class Dashboard_Activity extends AppCompatActivity {
 
             dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int id)
-                {
+                public void onClick(DialogInterface dialog, int id) {
 
                   /* editor_obj = sharedpreference_usercredential_Obj.edit();
                     editor_obj.putString(KeyValue_isuser_setpin, "");
@@ -554,7 +659,7 @@ public class Dashboard_Activity extends AppCompatActivity {
             alert.show();
 
             return true;
-        }else if(id==R.id.aboutus){
+        } else if (id == R.id.aboutus) {
             Intent i = new Intent(getApplicationContext(), ContactUs_Activity.class);
             startActivity(i);
             finish();
@@ -562,24 +667,48 @@ public class Dashboard_Activity extends AppCompatActivity {
         }
 
 
-
-
         return super.onOptionsItemSelected(item);
     }
 
+    private void setupBadge() {
 
+        View actionView = MenuItemCompat.getActionView(menuItem);
+        textCartItemCount = actionView.findViewById(R.id.cart_badge);
+        mCartItemCount=count_ofnotifications;
 
+        if (textCartItemCount != null) {
 
-//added by shivaleela\
-public void gethelp() {
-    internetDectector = new Class_InternetDectector(getApplicationContext());
-    isInternetPresent = internetDectector.isConnectingToInternet();
-
-    if (isInternetPresent) {
-        gethelp_api();
-        //getdemo();
+           // if (mCartItemCount == 0) {
+            if(str_flag.equalsIgnoreCase("0")) {
+                if (textCartItemCount.getVisibility() != View.GONE) {
+                    textCartItemCount.setVisibility(View.GONE);
+                }
+            } else {
+                textCartItemCount.setText(String.valueOf(Math.min(mCartItemCount, count_ofnotifications)));
+                if (textCartItemCount.getVisibility() != View.VISIBLE) {
+                    textCartItemCount.setVisibility(View.VISIBLE);
+                }
+            }
+        }
+        actionView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onOptionsItemSelected(menuItem);
+            }
+        });
     }
-}
+
+
+    //added by shivaleela\
+    public void gethelp() {
+        internetDectector = new Class_InternetDectector(getApplicationContext());
+        isInternetPresent = internetDectector.isConnectingToInternet();
+
+        if (isInternetPresent) {
+            gethelp_api();
+            //getdemo();
+        }
+    }
 
     private void gethelp_api() {
         final ProgressDialog progressDoalog;
@@ -778,10 +907,709 @@ public void gethelp() {
     }
 
 
+//-------------------------------------------------
+    //  --------------------Notification--------------------------
+
+    /*private void Add_setGCM1() {
+        Interface_userservice userService;
+        userService = Class_ApiUtils.getUserService();
+
+        tm1 = (TelephonyManager) getBaseContext()
+                .getSystemService(Context.TELEPHONY_SERVICE);
+
+        String NetworkType;
+        simOperatorName = tm1.getSimOperatorName();
+        Log.e("Operator", "" + simOperatorName);
+        NetworkType = "GPRS";
+
+
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        int simSpeed = tm1.getNetworkType();
+        if (simSpeed == 1)
+            NetworkType = "Gprs";
+        else if (simSpeed == 4)
+            NetworkType = "Edge";
+        else if (simSpeed == 8)
+            NetworkType = "HSDPA";
+        else if (simSpeed == 13)
+            NetworkType = "LTE";
+        else if (simSpeed == 3)
+            NetworkType = "UMTS";
+        else
+            NetworkType = "Unknown";
+
+        Log.e("SIM_INTERNET_SPEED", "" + NetworkType);
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        //  tmDevice = "" + tm1.getDeviceId();
+        String tmDevice = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+        Log.e("DeviceIMEI", "" + tmDevice);
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_PHONE_NUMBERS) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        mobileNumber = "" + tm1.getLine1Number();
+        Log.e("getLine1Number value", "" + mobileNumber);
+
+        String mobileNumber1 = "" + tm1.getPhoneType();
+        Log.e("getPhoneType value", "" + mobileNumber1);
+        //tmSerial = "" + tm1.getSimSerialNumber();
+
+        TelephonyManager tMgr = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+        try {
+            tmSerial = "" + tMgr.getSimSerialNumber();
+        }catch(Exception ex)
+        {
+            tmSerial="inaccessible";
+        }
+
+        //  Log.v("GSM devices Serial Number[simcard] ", "" + tmSerial);
+        androidId = "" + android.provider.Settings.Secure.getString(getContentResolver(),
+                android.provider.Settings.Secure.ANDROID_ID);
+        Log.e("androidId CDMA devices", "" + androidId);
+        UUID deviceUuid = new UUID(androidId.hashCode(),
+                ((long) tmDevice.hashCode() << 32) | tmSerial.hashCode());
+        deviceId = deviceUuid.toString();
+        //  Log.v("deviceIdUUID universally unique identifier", "" + deviceId);
+
+
+        deviceModelName = Build.MODEL;
+        Log.v("Model Name", "" + deviceModelName);
+        deviceUSER = Build.USER;
+        Log.v("Name USER", "" + deviceUSER);
+        devicePRODUCT = Build.PRODUCT;
+        Log.v("PRODUCT", "" + devicePRODUCT);
+        deviceHARDWARE = Build.HARDWARE;
+        Log.v("HARDWARE", "" + deviceHARDWARE);
+        deviceBRAND = Build.BRAND;
+        Log.v("BRAND", "" + deviceBRAND);
+        myVersion = Build.VERSION.RELEASE;
+        Log.v("VERSION.RELEASE", "" + myVersion);
+        sdkVersion = Build.VERSION.SDK_INT;
+        Log.v("VERSION.SDK_INT", "" + sdkVersion);
+        sdkver = Integer.toString(sdkVersion);
+        // Get display details
+
+        Measuredwidth = 0;
+        Measuredheight = 0;
+        Point size = new Point();
+        WindowManager w = getWindowManager();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            //   w.getDefaultDisplay().getSize(size);
+            Measuredwidth = w.getDefaultDisplay().getWidth();//size.x;
+            Measuredheight = w.getDefaultDisplay().getHeight();//size.y;
+        } else {
+            Display d = w.getDefaultDisplay();
+            Measuredwidth = d.getWidth();
+            Measuredheight = d.getHeight();
+        }
+
+        Log.e("SCREEN_Width", "" + Measuredwidth);
+        Log.e("SCREEN_Height", "" + Measuredheight);
+
+
+        regId = FirebaseInstanceId.getInstance().getToken();
+
+
+
+        Log.e("regId_DeviceID", "" + regId);
+
+        Class_devicedetails request = new Class_devicedetails();
+        request.setUser_ID(str_userID);
+        request.setDeviceId(regId);
+        request.setOSVersion(myVersion);
+        request.setManufacturer(deviceBRAND);
+        request.setModelNo(deviceModelName);
+        request.setSDKVersion(sdkver);
+        request.setDeviceSrlNo(tmDevice);
+        request.setServiceProvider(simOperatorName);
+        request.setSIMSrlNo(tmSerial);
+        request.setDeviceWidth(String.valueOf(Measuredwidth));
+        request.setDeviceHeight(String.valueOf(Measuredheight));
+        request.setAppVersion(versioncode);
+
+
+
+        {
+            retrofit2.Call call = userService.Post_ActionDeviceDetails(request);
+
+            call.enqueue(new Callback<Class_devicedetails>()
+            {
+                @Override
+                public void onResponse(retrofit2.Call<Class_devicedetails> call, Response<Class_devicedetails> response) {
+
+
+                    Log.e("response device", response.toString());
+                    Log.e("response_body", String.valueOf(response.body()));
+
+                    if (response.isSuccessful())
+                    {
+                        //  progressDoalog.dismiss();
+
+
+                        Class_devicedetails class_addfarmponddetailsresponse = response.body();
+
+                        if (class_addfarmponddetailsresponse.getStatus().equals("true"))
+                        {
+                            Log.e("devicedetails", "devicedetails_Added");
+
+                            gethelp();
+
+                        } else if (class_addfarmponddetailsresponse.getStatus().equals("false")) {
+                            //     progressDoalog.dismiss();
+                            Toast.makeText(Dashboard_Activity.this, class_addfarmponddetailsresponse.getMessage(), Toast.LENGTH_SHORT).show();
+                            gethelp();
+                        }
+                    } else {
+                        //   progressDoalog.dismiss();
+                        DefaultResponse error = ErrorUtils.parseError(response);
+                        Log.e("devicedetailserror", error.getMsg());
+                        Toast.makeText(Dashboard_Activity.this, "devicedetails"+error.getMsg(), Toast.LENGTH_SHORT).show();
+                        gethelp();
+
+
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call call, Throwable t) {
+                    //Toast.makeText(Activity_HomeScreen.this, "error" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Dashboard_Activity.this, "It looks like the Internet Bandwidth is very LOW,\n please connect in good network area and Re-Try", Toast.LENGTH_SHORT).show();
+                    Log.e("response_error", t.getMessage().toString());
+                }
+            });
+
+        }
+    }*/
+
+
+    private void InsertDeviceDetails() {
+        Log.e("ENtered", "InsertDeviceDetails");
+        String str_token = "Bearer " + str_AUTH_token;
+        Log.e("str_tokendevicedetails", str_token);
+        setGCM1();
+        // setInputParametersForInsertDeviceDetails();
+       /* Class_postuserdevicedetailsRequest request = new Class_postuserdevicedetailsRequest();
+        request.setDeviceID(regId);
+        Log.e("regId", regId);
+        request.setOSVersion(myVersion);
+        Log.e("myVersion", myVersion);
+        request.setManufacturer(deviceBRAND);
+        Log.e("deviceBRAND", deviceBRAND);
+        request.setModelNo(deviceModelName);
+        Log.e("deviceModelName", deviceModelName);
+        request.setSDKVersion(sdkver);
+        Log.e("sdkver", sdkver);
+        request.setDeviceSrlNo(tmDevice);
+        Log.e("tmDevice", tmDevice);
+        request.setServiceProvider(simOperatorName);
+        Log.e("simOperatorName", simOperatorName);
+        request.setSIMSrlNo(tmSerial);
+        Log.e("tmSerial", tmSerial);
+        request.setDeviceWidth(String.valueOf(Measuredwidth));
+        Log.e("Measuredwidth", String.valueOf(Measuredwidth));
+        request.setDeviceHeight(String.valueOf(Measuredheight));
+        Log.e("Measuredheight", String.valueOf(Measuredheight));
+        request.setAppVersion(str_versioncode);
+        Log.e("str_versioncode", str_versioncode);
+        request.setUserId(Integer.valueOf(str_userID));
+        Log.e("str_login_userid", str_userID);
+        request.setEmployeeId(Integer.valueOf(str_userID));
+        Log.e("str_login_empid", str_userID);
+        request.setEmailId(str_loginEmailID);
+        Log.e("str_loginEmailID", str_loginEmailID);*/
+
+        Class_devicedetails request = new Class_devicedetails();
+        request.setUser_ID(str_userID);
+        request.setDeviceId(regId);
+        request.setOSVersion(myVersion);
+        request.setManufacturer(deviceBRAND);
+        request.setModelNo(deviceModelName);
+        request.setSDKVersion(sdkver);
+        request.setDeviceSrlNo(tmDevice);
+        request.setServiceProvider(simOperatorName);
+        request.setSIMSrlNo(tmSerial);
+        request.setDeviceWidth(String.valueOf(Measuredwidth));
+        request.setDeviceHeight(String.valueOf(Measuredheight));
+        request.setAppVersion(str_versioncode);
+        Log.e("tag", "save device request=" + new Gson().toJson(request));
+
+        Call<Class_postuserdevicedetailsResponse> call = userService1.postuserdevicedetails(request);
+
+        // Set up progress before call
+        final ProgressDialog progressDoalog;
+        progressDoalog = new ProgressDialog(Dashboard_Activity.this);
+        // progressDoalog.setMax(100);
+        // progressDoalog.setMessage("Loading....");
+        progressDoalog.setTitle("Please wait....");
+        progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        // show it
+        progressDoalog.show();
+
+        call.enqueue(new Callback<Class_postuserdevicedetailsResponse>() {
+            @Override
+            public void onResponse(Call<Class_postuserdevicedetailsResponse> call, Response<Class_postuserdevicedetailsResponse> response) {
+                if (response.isSuccessful()) {
+                    progressDoalog.dismiss();
+                    Class_postuserdevicedetailsResponse class_postuserdevicedetailsResponse = response.body();
+                    if (class_postuserdevicedetailsResponse.getStatus()) {
+//                        if(!str_login_username.equals("")) {
+//                            Class_SaveSharedPreference.setUserName(Login.this, str_login_username);
+//                        }
+
+//                        Toast.makeText(Login.this, class_postuserdevicedetailsResponse.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        progressDoalog.dismiss();
+                        Log.e("tag", "Error:" + class_postuserdevicedetailsResponse.getMessage());
+                        Toast.makeText(Dashboard_Activity.this, class_postuserdevicedetailsResponse.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+
+
+                } else {
+                    progressDoalog.dismiss();
+                    DefaultResponse error = ErrorUtils.parseError(response);
+                    // … and use it to show error information
+
+                    // … or just log the issue like we’re doing :)
+                    Log.d("error message", error.getMsg());
+
+                    Toast.makeText(Dashboard_Activity.this, error.getMsg(), Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                progressDoalog.dismiss();
+                Toast.makeText(Dashboard_Activity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });// end of call
+
+
+    }
+
+   /* @SuppressLint("HardwareIds")
+    private void setInputParametersForInsertDeviceDetails() {
+        final TelephonyManager tm1 = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+
+//        tm1 = (TelephonyManager) getBaseContext()
+//                .getSystemService(Context.TELEPHONY_SERVICE);
+
+        //   final String tmDevice, tmSerial, androidId;
+        String NetworkType;
+        //TelephonyManager telephonyManager = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE));
+        simOperatorName = tm1.getSimOperatorName();
+        Log.v("Operator", "" + simOperatorName);
+        NetworkType = "GPRS";
+
+
+        int simSpeed = tm1.getNetworkType();
+        if (simSpeed == 1)
+            NetworkType = "Gprs";
+        else if (simSpeed == 4)
+            NetworkType = "Edge";
+        else if (simSpeed == 8)
+            NetworkType = "HSDPA";
+        else if (simSpeed == 13)
+            NetworkType = "LTE";
+        else if (simSpeed == 3)
+            NetworkType = "UMTS";
+        else
+            NetworkType = "Unknown";
+
+        Log.v("SIM_INTERNET_SPEED", "" + NetworkType);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+
+//        //added by shivaleela on nov 25th 2020
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//
+//            if (ContextCompat.checkSelfPermission(Login.this,
+//                    Manifest.permission.READ_PHONE_STATE)
+//                    != PackageManager.PERMISSION_GRANTED) {
+//
+//                // Should we show an explanation?
+//                if (ActivityCompat.shouldShowRequestPermissionRationale(Login.this,
+//                        Manifest.permission.READ_PHONE_STATE)) {
+//
+//                    // Show an explanation to the user *asynchronously* -- don't block
+//                    // this thread waiting for the user's response! After the user
+//                    // sees the explanation, try again to request the permission.
+//
+//                    showPermissionMessage();
+//
+//                } else {
+//
+//                    // No explanation needed, we can request the permission.
+//                    ActivityCompat.requestPermissions(Login.this,
+//                            new String[]{Manifest.permission.READ_PHONE_STATE},
+//                            REQUEST_PHONE_STATE);
+//                }
+//            } else {
+//                getDeviceUuId(Login.this);
+//
+//            }
+//        } else {
+//            getDeviceUuId(Login.this);
+//
+//        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            tmDevice = "" + tm1.getImei();
+//        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//
+//            tmDevice = "" + tm1.getDeviceId();
+//            Log.e("DeviceIMEI", "" + tmDevice);
+//        }
+
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//
+//            tmDevice = tm1.getImei();
+//        } else {
+//            tmDevice = tm1.getDeviceId();
+//        }
+
+
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            tmDevice = Settings.Secure.getString(
+                    getContentResolver(),
+                    Settings.Secure.ANDROID_ID);
+        } else {
+            if (tm1.getDeviceId() != null) {
+                tmDevice = tm1.getDeviceId();
+            } else {
+                tmDevice = Settings.Secure.getString(
+                        getContentResolver(),
+                        Settings.Secure.ANDROID_ID);
+            }
+        }
+
+        Log.e("DeviceIMEI", "" + tmDevice);
+
+        mobileNumber = "" + tm1.getLine1Number();
+        Log.v("getLine1Number value", "" + mobileNumber);
+
+        String mobileNumber1 = "" + tm1.getPhoneType();
+        Log.v("getPhoneType value", "" + mobileNumber1);
+
+//        tmSerial = "" + tm1.getSimSerialNumber();
+        //  Log.v("GSM devices Serial Number[simcard] ", "" + tmSerial);
+
+        *//*added by shivaleela *//*
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            tmSerial = Settings.Secure.getString(
+                    getContentResolver(),
+                    Settings.Secure.ANDROID_ID);
+
+            // tmSerial = "" + tm1.getSimSerialNumber();
+
+        } else {
+            if (tm1.getSimSerialNumber() != null) {
+                tmSerial = tm1.getSimSerialNumber();
+            } else {
+                tmSerial = Settings.Secure.getString(
+                        getContentResolver(),
+                        Settings.Secure.ANDROID_ID);
+            }
+        }
 
 
 
 
 
+
+
+
+
+
+
+        androidId = "" + Settings.Secure.getString(getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+        Log.v("androidId CDMA devices", "" + androidId);
+        UUID deviceUuid = new UUID(androidId.hashCode(),
+                ((long) tmDevice.hashCode() << 32) | tmSerial.hashCode());
+        deviceId = deviceUuid.toString();
+        //  Log.v("deviceIdUUID universally unique identifier", "" + deviceId);
+
+        deviceModelName = Build.MODEL;
+        Log.v("Name USER", "" + deviceUSER);
+        devicePRODUCT = Build.PRODUCT;
+        Log.v("PRODUCT", "" + devicePRODUCT);
+        deviceHARDWARE = Build.HARDWARE;
+        Log.v("HARDWARE", "" + deviceHARDWARE);
+        deviceBRAND = Build.BRAND;
+        Log.v("BRAND", "" + deviceBRAND);
+        myVersion = Build.VERSION.RELEASE;
+        Log.v("VERSION.RELEASE", "" + myVersion);
+
+        sdkVersion = Build.VERSION.SDK_INT;
+        Log.v("VERSION.SDK_INT", "" + sdkVersion);
+        sdkver = Integer.toString(sdkVersion);
+        // Get display details
+
+        Measuredwidth = 0;
+        Measuredheight = 0;
+        Point size = new Point();
+        WindowManager w = getWindowManager();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            getWindowManager().getDefaultDisplay().getSize(size);
+            Measuredwidth = size.x;
+            Measuredheight = size.y;
+
+        } else {
+            Display d = w.getDefaultDisplay();
+//                Measuredwidth = d.getWidth();
+//                Measuredheight = d.getHeight();
+
+            getWindowManager().getDefaultDisplay().getSize(size);
+            Measuredwidth = size.x;
+            Measuredheight = size.y;
+
+        }
+
+        Log.v("SCREEN_Width", "" + Measuredwidth);
+        Log.v("SCREEN_Height", "" + Measuredheight);
+        regId = FirebaseInstanceId.getInstance().getToken();
+        Log.e("regId_DeviceID", "" + regId);
+
+    }*/
+
+    @SuppressLint("HardwareIds")
+    public void setGCM1() {
+
+
+//
+
+        // Fetch Device info
+
+       /* final TelephonyManager tm = (TelephonyManager) getBaseContext()
+                .getSystemService(Context.TELEPHONY_SERVICE);*/
+
+        tm1 = (TelephonyManager) getBaseContext()
+                .getSystemService(Context.TELEPHONY_SERVICE);
+
+        //   final String tmDevice, tmSerial, androidId;
+        String NetworkType;
+        //TelephonyManager telephonyManager = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE));
+        simOperatorName = tm1.getSimOperatorName();
+        Log.v("Operator", "" + simOperatorName);
+        NetworkType = "GPRS";
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+
+            int simSpeed = tm1.getNetworkType();
+            if (simSpeed == 1)
+                NetworkType = "Gprs";
+            else if (simSpeed == 4)
+                NetworkType = "Edge";
+            else if (simSpeed == 8)
+                NetworkType = "HSDPA";
+            else if (simSpeed == 13)
+                NetworkType = "LTE";
+            else if (simSpeed == 3)
+                NetworkType = "UMTS";
+            else
+                NetworkType = "Unknown";
+
+            Log.v("SIM_INTERNET_SPEED", "" + NetworkType);
+
+            //tmDevice = "" + tm1.getDeviceId();
+            String tmDevice = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+            Log.v("DeviceIMEI", "" + tmDevice);
+            mobileNumber = "" + tm1.getLine1Number();
+            Log.v("getLine1Number value", "" + mobileNumber);
+
+            String mobileNumber1 = "" + tm1.getPhoneType();
+            Log.v("getPhoneType value", "" + mobileNumber1);
+            return;
+        }
+        // tmSerial = "" + tm1.getSimSerialNumber();
+        TelephonyManager tMgr = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+        try {
+            tmSerial = "" + tMgr.getSimSerialNumber();
+        }catch(Exception ex)
+        {
+            tmSerial="inaccessible";
+        }
+
+
+
+        //  Log.v("GSM devices Serial Number[simcard] ", "" + tmSerial);
+        androidId = "" + Settings.Secure.getString(getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+        Log.v("androidId CDMA devices", "" + androidId);
+        UUID deviceUuid = new UUID(androidId.hashCode(),
+                ((long) tmDevice.hashCode() << 32) | tmSerial.hashCode());
+        deviceId = deviceUuid.toString();
+        Log.v("deviceIdUUID", "" + deviceId);
+
+
+        deviceModelName = Build.MODEL;
+        Log.v("Model Name", "" + deviceModelName);
+        deviceUSER = Build.USER;
+        Log.v("Name USER", "" + deviceUSER);
+        devicePRODUCT = Build.PRODUCT;
+        Log.v("PRODUCT", "" + devicePRODUCT);
+        deviceHARDWARE = Build.HARDWARE;
+        Log.v("HARDWARE", "" + deviceHARDWARE);
+        deviceBRAND = Build.BRAND;
+        Log.v("BRAND", "" + deviceBRAND);
+        myVersion = Build.VERSION.RELEASE;
+        Log.v("VERSION.RELEASE", "" + myVersion);
+        sdkVersion = Build.VERSION.SDK_INT;
+        Log.v("VERSION.SDK_INT", "" + sdkVersion);
+        sdkver = Integer.toString(sdkVersion);
+        // Get display details
+
+        Measuredwidth = 0;
+        Measuredheight = 0;
+        Point size = new Point();
+        // WindowManager w = getWindowManager();
+
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        this.getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        /*int screenWidth = displaymetrics.widthPixels;
+        int screenHeight = displaymetrics.heightPixels;*/
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            //   w.getDefaultDisplay().getSize(size);
+           /* Measuredwidth = w.getDefaultDisplay().getWidth();//size.x;
+            Measuredheight = w.getDefaultDisplay().getHeight();//size.y;*/
+
+            Measuredwidth = displaymetrics.widthPixels;//size.x;
+            Measuredheight = displaymetrics.heightPixels;//size.y;
+        } else {
+            // Display d = w.getDefaultDisplay();
+            /*Measuredwidth = d.getWidth();
+            Measuredheight = d.getHeight();*/
+            Measuredwidth = displaymetrics.widthPixels;//size.x;
+            Measuredheight = displaymetrics.heightPixels;//size.y;
+        }
+
+        Log.v("SCREEN_Width", "" + Measuredwidth);
+        Log.v("SCREEN_Height", "" + Measuredheight);
+
+
+        regId = FirebaseInstanceId.getInstance().getToken();
+
+
+
+        Log.e("regId_DeviceID", "" + regId);
+
+/*<username>string</username>
+      <DeviceId>string</DeviceId>
+      <OSVersion>string</OSVersion>
+      <Manufacturer>string</Manufacturer>
+      <ModelNo>string</ModelNo>
+      <SDKVersion>string</SDKVersion>
+      <DeviceSrlNo>string</DeviceSrlNo>
+      <ServiceProvider>string</ServiceProvider>
+      <SIMSrlNo>string</SIMSrlNo>
+      <DeviceWidth>string</DeviceWidth>
+      <DeviceHeight>string</DeviceHeight>
+      <AppVersion>string</AppVersion>*/
+
+        //if (!regId.equals("")){
+        /*if (2>1){
+            // String WEBSERVICE_NAME = "http://dfhrms.cloudapp.net/PMSservice.asmx?WSDL";
+            String SOAP_ACTION1 = "http://mis.leadcampus.org/SaveDeviceDetails";
+            String METHOD_NAME1 = "SaveDeviceDetails";
+            String MAIN_NAMESPACE = "http://mis.leadcampus.org/";
+            String URI = Class_URL.URL_Login.toString().trim();
+
+
+            SoapObject request = new SoapObject(MAIN_NAMESPACE, METHOD_NAME1);
+
+            //	request.addProperty("LeadId", Password1);
+            request.addProperty("username",Str_FCMName );
+
+            request.addProperty("DeviceId", regId);
+            request.addProperty("OSVersion", myVersion);
+            request.addProperty("Manufacturer", deviceBRAND);
+            request.addProperty("ModelNo", deviceModelName);
+            request.addProperty("SDKVersion", sdkver);
+            request.addProperty("DeviceSrlNo", tmDevice);
+            request.addProperty("ServiceProvider", simOperatorName);
+            request.addProperty("SIMSrlNo", tmSerial);
+            request.addProperty("DeviceWidth", Measuredwidth);
+            request.addProperty("DeviceHeight", Measuredheight);
+            request.addProperty("AppVersion", versioncode);
+            //request.addProperty("AppVersion","4.0");
+
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+                    SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            // Set output SOAP object
+            envelope.setOutputSoapObject(request);
+            Log.e("deviceDetails Request","deviceDetail"+request.toString());
+            // Create HTTP call object
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(URI);
+
+            try {
+                androidHttpTransport.call(SOAP_ACTION1, envelope);
+                SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
+
+                System.out.println("Device Res"+response);
+
+                Log.i("sending device detail", response.toString());
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.i("err",e.toString());
+            }
+        }*/
+
+
+
+
+
+
+    }//end of GCM()
 
 }

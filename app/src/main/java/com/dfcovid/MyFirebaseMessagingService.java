@@ -69,6 +69,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService
     String str_loginTrack;
     String NOTIFICATION_CHANNEL_ID = "my_channel_id_01";
 
+
+    public static final String sharedpreference_notification = "sharedpreferencebook_notification";
+    public static final String KeyValue_flag = "KeyValue_flag";
+    SharedPreferences.Editor editor_obj;
+    SharedPreferences sharedpreference_notification_Obj;
+
+
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage)
     {
@@ -108,6 +115,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService
 
         shardprefLoginTrack_obj=getSharedPreferences(PREFBook_LoginTrack, Context.MODE_PRIVATE);
         str_loginTrack = shardprefLoginTrack_obj.getString(PrefID_WhereToGo, "").trim();
+
+        sharedpreference_notification_Obj=getSharedPreferences(sharedpreference_notification, Context.MODE_PRIVATE);
 
         Log.e("logintrack",str_loginTrack);
 
@@ -213,6 +222,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService
              int count=database.getCursorSize();
              Log.e("tag","count myfirebase="+count);
 
+             editor_obj = sharedpreference_notification_Obj.edit();
+             editor_obj.putString(KeyValue_flag, "1");
+             editor_obj.commit();
     }
 
     }
