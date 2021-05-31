@@ -185,7 +185,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService
              Log.e("SplitString",splittedmessagex.toString());
              Log.e("MessageString",messageBody.toString());*/
 
-             intent = new Intent(this, Dashboard_Activity.class);
+             intent = new Intent(this, NotificationList_Activity.class);
 
 
             x++;
@@ -204,8 +204,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService
                         .setColor(Color.RED)
                         .setStyle(new NotificationCompat.BigTextStyle().bigText(messageBody))
                         .setAutoCancel(true)
-                        .setSound(defaultSoundUri);
-                        //.setContentIntent(pendingIntent);
+                        .setSound(defaultSoundUri)
+                        .setContentIntent(pendingIntent);
 
                 NotificationManager notificationManager =
                         (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -217,10 +217,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService
              Log.e("currentDateTimeString", " : " + messageBody);
 
              Database database = new Database(getApplicationContext());
-             database.insertNotificationData(messageBody,currentDateTimeString);
-
              int count=database.getCursorSize();
              Log.e("tag","count myfirebase="+count);
+             if(count>0) {
+                 database.deleteNotifications();
+                 database.insertNotificationData(messageBody, currentDateTimeString);
+             }else {
+                 database.insertNotificationData(messageBody, currentDateTimeString);
+             }
+             int count1=database.getCursorSize();
+             Log.e("tag","count myfirebase1="+count1);
 
              editor_obj = sharedpreference_notification_Obj.edit();
              editor_obj.putString(KeyValue_flag, "1");
