@@ -367,6 +367,7 @@ public class Dashboard_Activity extends AppCompatActivity {
             public void onClick(View v)
             {
                 Intent i = new Intent(Dashboard_Activity.this, Activity_GoogleMaps.class);
+                i.putExtra("flag","1");
                 startActivity(i);
                 finish();
 
