@@ -74,7 +74,11 @@ public class MainActivity2 extends AppCompatActivity {
             str_OutsideDistrcitABARK = "", str_TotalABARK = "0", str_WithinDistrict = "", str_OutsideDistrict = "",
             str_TotalPatients = "", str_getRemdesivirGivenWithinDistrict = "",
             str_getRemdesivirGivenOutsideDistrict = "", str_getTotalRemdesivirGiven = "", str_getAvailableRemdesivir = "",
-            str_getAvailableOxygenLiters = "", sp_strHospital_ID = "", str_currentdate = "", str_userID = "", str_fetched_hospital = "", str_fetched_hospitalID = "";
+            str_getAvailableOxygenLiters = "", sp_strHospital_ID = "", str_currentdate = "",
+            str_userID = "", str_fetched_hospital = "", str_fetched_hospitalID = "",
+            str_Totl_Gen_Bed="",str_general="",str_gen_ID="",str_general_BedOccupiedWithinDistrict="",
+            str_general_BedOccupiedOutsideDistrict="",str_general_PatientDischargedWithinDistrict="",
+            str_general_PatientDischargedOutsideDistrict="",str_general_TotalDeath="";
     Spinner hospital_list_SP;
     ImageButton edit_BT, disable_bt,close_bt;
     Button save_BTN,close_BTN;
@@ -84,6 +88,7 @@ public class MainActivity2 extends AppCompatActivity {
     SharedPreferences sharedpreference_usercredential_Obj;
     SharedPreferences.Editor editor_obj;
     int total_ABARK=0,total_patients=0;
+    EditText general_beds_ET,beds_occupied_within_dwd_Gen_ET,beds_occupied_out_dwd_Gen_ET,patientsdischrged_within_dwd_Gen_ET,patientsdischrged_outside_dwd_Gen_ET,deaths_Gen_ET;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -148,6 +153,14 @@ public class MainActivity2 extends AppCompatActivity {
         Remdesivir_Given_ET = (EditText) findViewById(R.id.Remdesivir_Given_ET);
         Remdesivir_Available_ET = (EditText) findViewById(R.id.Remdesivir_Available_ET);
         Oxygen_in_Litres_ET = (EditText) findViewById(R.id.Oxygen_in_Litres_ET);
+
+//gen bed
+        general_beds_ET= (EditText) findViewById(R.id.general_beds_ET);
+        beds_occupied_within_dwd_Gen_ET= (EditText) findViewById(R.id.beds_occupied_within_dwd_Gen_ET);
+        beds_occupied_out_dwd_Gen_ET= (EditText) findViewById(R.id.beds_occupied_out_dwd_Gen_ET);
+        patientsdischrged_within_dwd_Gen_ET= (EditText) findViewById(R.id.patientsdischrged_within_dwd_Gen_ET);
+        patientsdischrged_outside_dwd_Gen_ET= (EditText) findViewById(R.id.patientsdischrged_outside_dwd_Gen_ET);
+        deaths_Gen_ET= (EditText) findViewById(R.id.deaths_Gen_ET);
 
         //rel2
         rel2 = (RelativeLayout) findViewById(R.id.rel2);
@@ -772,11 +785,15 @@ public class MainActivity2 extends AppCompatActivity {
                             innerObj_Class_academic.setICUBeds(class_loginresponse.getLst().get(i).getICUBeds());
                             innerObj_Class_academic.setVentilators(class_loginresponse.getLst().get(i).getVentilators());
 
+                            //genbed
+                            innerObj_Class_academic.setTotal_General_Beds(class_loginresponse.getLst().get(i).getVentilators());
+
                             str_ExpectedBeds = class_loginresponse.getLst().get(i).getExpectedBeds();
                             str_actualBeds = class_loginresponse.getLst().get(i).getActualBeds();
                             str_oxBeds = class_loginresponse.getLst().get(i).getOxygenBeds();
                             str_ICUBeds = class_loginresponse.getLst().get(i).getICUBeds();
                             str_Ventilators = class_loginresponse.getLst().get(i).getVentilators();
+                            str_Totl_Gen_Bed = class_loginresponse.getLst().get(i).getTotal_General_Beds();
 
                             //total beds occupied
                             innerObj_Class_academic.setWithinDistrcitABARK(class_loginresponse.getLst().get(i).getWithinDistrcitABARK());
@@ -803,36 +820,59 @@ public class MainActivity2 extends AppCompatActivity {
                             innerObj_Class_academic.setPatientDischargedOutsideDistrict(class_loginresponse.getLst().get(i).getPatientDischargedOutsideDistrict());
                             innerObj_Class_academic.setTotalDeath(class_loginresponse.getLst().get(i).getTotalDeath());
 
+
+
+                            //gen bed
+                            innerObj_Class_academic.setGEN_Bed_Occupied_Within_District(class_loginresponse.getLst().get(i).getGEN_Bed_Occupied_Within_District());
+                            innerObj_Class_academic.setGEN_Bed_Occupied_Outside_District(class_loginresponse.getLst().get(i).getGEN_Bed_Occupied_Outside_District());
+                            innerObj_Class_academic.setPatientDischargedWithinDistrict(class_loginresponse.getLst().get(i).getPatientDischargedWithinDistrict());
+                            innerObj_Class_academic.setPatientDischargedOutsideDistrict(class_loginresponse.getLst().get(i).getPatientDischargedOutsideDistrict());
+                            innerObj_Class_academic.setGEN_Total_Death(class_loginresponse.getLst().get(i).getGEN_Total_Death());
+
+
+
                             str_ox = class_loginresponse.getLst().get(0).getBedType();
                             str_icu = class_loginresponse.getLst().get(1).getBedType();
                             str_ventilator = class_loginresponse.getLst().get(2).getBedType();
+                            str_general= class_loginresponse.getLst().get(3).getBedType();
 
 
                             str_ox_ID = class_loginresponse.getLst().get(0).getBedTypeId();
                             str_icu_ID = class_loginresponse.getLst().get(1).getBedTypeId();
                             str_ventilator_ID = class_loginresponse.getLst().get(2).getBedTypeId();
+                            str_gen_ID = class_loginresponse.getLst().get(3).getBedTypeId();
+
+
 
                             str_ox_BedOccupiedWithinDistrict = class_loginresponse.getLst().get(0).getBedOccupiedWithinDistrict();
                             str_icu_BedOccupiedWithinDistrict = class_loginresponse.getLst().get(1).getBedOccupiedWithinDistrict();
                             str_ventilator_BedOccupiedWithinDistrict = class_loginresponse.getLst().get(2).getBedOccupiedWithinDistrict();
+                            str_general_BedOccupiedWithinDistrict = class_loginresponse.getLst().get(3).getBedOccupiedWithinDistrict();
 
 
                             str_ox_BedOccupiedOutsideDistrict = class_loginresponse.getLst().get(0).getBedOccupiedOutsideDistrict();
                             str_icu_BedOccupiedOutsideDistrict = class_loginresponse.getLst().get(1).getBedOccupiedOutsideDistrict();
                             str_ventilator_BedOccupiedOutsideDistrict = class_loginresponse.getLst().get(2).getBedOccupiedOutsideDistrict();
+                            str_general_BedOccupiedOutsideDistrict = class_loginresponse.getLst().get(3).getBedOccupiedOutsideDistrict();
+
+
+
 
                             str_ox_PatientDischargedWithinDistrict = class_loginresponse.getLst().get(0).getPatientDischargedWithinDistrict();
                             str_icu_PatientDischargedWithinDistrict = class_loginresponse.getLst().get(1).getPatientDischargedWithinDistrict();
                             str_ventilator_PatientDischargedWithinDistrict = class_loginresponse.getLst().get(2).getPatientDischargedWithinDistrict();
+                            str_general_PatientDischargedWithinDistrict = class_loginresponse.getLst().get(3).getPatientDischargedWithinDistrict();
 
 
                             str_ox_PatientDischargedOutsideDistrict = class_loginresponse.getLst().get(0).getPatientDischargedOutsideDistrict();
                             str_icu_PatientDischargedOutsideDistrict = class_loginresponse.getLst().get(1).getPatientDischargedOutsideDistrict();
                             str_ventilator_PatientDischargedOutsideDistrict = class_loginresponse.getLst().get(2).getPatientDischargedOutsideDistrict();
+                            str_general_PatientDischargedOutsideDistrict = class_loginresponse.getLst().get(3).getPatientDischargedOutsideDistrict();
 
                             str_ox_TotalDeath = class_loginresponse.getLst().get(0).getTotalDeath();
                             str_icu_TotalDeath = class_loginresponse.getLst().get(1).getTotalDeath();
                             str_ventilator_TotalDeath = class_loginresponse.getLst().get(2).getTotalDeath();
+                            str_general_TotalDeath = class_loginresponse.getLst().get(3).getTotalDeath();
 
                             //no.of patients rem given
                             innerObj_Class_academic.setRemdesivirGivenWithinDistrict(class_loginresponse.getLst().get(i).getRemdesivirGivenWithinDistrict());
@@ -901,6 +941,8 @@ public class MainActivity2 extends AppCompatActivity {
                 ox_beds_ET.setText("");
                 icu_beds_ET.setText("");
                 ventilator_ET.setText("");
+                //gen bed
+                general_beds_ET.setText("");
 
                 ABARKDWD_ET.setText("");
                 ABARK_Outside_ET.setText("");
@@ -926,6 +968,13 @@ public class MainActivity2 extends AppCompatActivity {
                 deaths_oxy_ET.setText("");
                 deaths_vent_ET.setText("");
 
+                //gen bed
+                beds_occupied_within_dwd_Gen_ET.setText("");
+                beds_occupied_out_dwd_Gen_ET.setText("");
+                patientsdischrged_within_dwd_Gen_ET.setText("");
+                patientsdischrged_outside_dwd_Gen_ET.setText("");
+                deaths_Gen_ET.setText("");
+
 
                 Rem_withinDWD_ET.setText("");
                 Rem_Outside_DWD_ET.setText("");
@@ -941,7 +990,7 @@ public class MainActivity2 extends AppCompatActivity {
                 ox_beds_ET.setText(str_oxBeds);
                 icu_beds_ET.setText(str_ICUBeds);
                 ventilator_ET.setText(str_Ventilators);
-
+                general_beds_ET.setText(str_Totl_Gen_Bed);
 
                 ABARKDWD_ET.setText(str_WithinDistrcitABARK);
                 ABARK_Outside_ET.setText(str_OutsideDistrcitABARK);
@@ -978,6 +1027,13 @@ public class MainActivity2 extends AppCompatActivity {
                 deaths_oxy_ET.setText(str_ox_TotalDeath);
                 deaths_vent_ET.setText(str_ventilator_TotalDeath);
 
+
+
+                beds_occupied_within_dwd_Gen_ET.setText(str_general_BedOccupiedWithinDistrict);
+                beds_occupied_out_dwd_Gen_ET.setText(str_general_BedOccupiedOutsideDistrict);
+                patientsdischrged_within_dwd_Gen_ET.setText(str_general_PatientDischargedWithinDistrict);
+                patientsdischrged_outside_dwd_Gen_ET.setText(str_general_PatientDischargedOutsideDistrict);
+                deaths_Gen_ET.setText(str_general_TotalDeath);
 
                 Rem_withinDWD_ET.setText(str_getRemdesivirGivenWithinDistrict);
                 Rem_Outside_DWD_ET.setText(str_getRemdesivirGivenOutsideDistrict);
@@ -1074,6 +1130,27 @@ public class MainActivity2 extends AppCompatActivity {
 
         request.setVEN_Bed_Type("Ventilator");
         request.setVEN_Bed_Type_Id("4");
+
+
+
+//        public string GEN_Bed_Type_Id { get; set; }
+//        public string GEN_Bed_Type { get; set; }
+//        public string GEN_Bed_Occupied_Within_District { get; set; }
+//        public string GEN_Bed_Occupied_Outside_District { get; set; }
+//        public string GEN_Patient_Discharged_Within_District { get; set; }
+//        public string GEN_Patient_Discharged_Outside_District { get; set; }
+//        public string GEN_Total_Death { get; set; }
+
+
+        request.setGEN_Bed_Type_Id("5");
+        request.setGEN_Bed_Type("General");
+        request.setGEN_Bed_Occupied_Within_District(beds_occupied_within_dwd_Gen_ET.getText().toString());
+        request.setGEN_Bed_Occupied_Outside_District(beds_occupied_out_dwd_Gen_ET.getText().toString());
+        request.setGEN_Patient_Discharged_Within_District(patientsdischrged_within_dwd_Gen_ET.getText().toString());
+        request.setGEN_Patient_Discharged_Outside_District(patientsdischrged_outside_dwd_Gen_ET.getText().toString());
+        request.setGEN_Total_Death(deaths_Gen_ET.getText().toString());
+
+
 
 
         Call<Class_PostSaveHospitalResponse> call = userService1.PostSaveHospital(request);
