@@ -94,7 +94,8 @@ public class Activity_HelpLineCenter extends AppCompatActivity {
 
         maps_LL.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 Intent i = new Intent(Activity_HelpLineCenter.this, Activity_GoogleMaps.class);
                 i.putExtra("flag","2");
                 startActivity(i);
