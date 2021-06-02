@@ -64,7 +64,7 @@ public class ContactUs_Activity extends AppCompatActivity {
             // Set upon the actionbar
 
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            getSupportActionBar().setTitle("Help");
+            getSupportActionBar().setTitle("About Us");
 
           /*  TextView title = (TextView) toolbar.findViewById(R.id.title_name);
             add_newfarmpond_iv = (ImageView) toolbar.findViewById(R.id.add_newfarmpond_iv);
@@ -350,6 +350,17 @@ public class ContactUs_Activity extends AppCompatActivity {
                         }
                     });
 
+                    phone_tv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            Intent intent = new Intent(Intent.ACTION_DIAL);
+                            intent.setData(Uri.parse("tel:" + content_tv.getText().toString()));
+                            startActivity(intent);
+                        }
+                    });
+
+
 
                 }
                 if (title_tv.getText().equals("Email")) {
@@ -539,7 +550,8 @@ public class ContactUs_Activity extends AppCompatActivity {
                 /////////////////////////////////////
                 Log.e("forlanguagename",forlanguagename_tv.getText().toString());
                 if (language_tv.getText().equals("Kannada")) {
-                    kan_ll.setVisibility(View.VISIBLE);
+                    kan_ll.setVisibility(View.GONE);
+
                     language_tv.setVisibility(View.GONE);
                     link_tv.setVisibility(View.GONE);
                     forlanguagename_tv.setVisibility(View.GONE);
@@ -618,7 +630,7 @@ public class ContactUs_Activity extends AppCompatActivity {
                 }
 
                 if (language_tv.getText().equals("Telagu")) {
-                    telgu_ll.setVisibility(View.VISIBLE);
+                    telgu_ll.setVisibility(View.GONE);
                     language_tv.setVisibility(View.GONE);
                     link_tv.setVisibility(View.GONE);
                     forlanguagename_tv.setVisibility(View.GONE);

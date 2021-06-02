@@ -249,6 +249,7 @@ public class Dashboard_Activity_New extends AppCompatActivity {
             {
                 Intent i = new Intent(Dashboard_Activity_New.this, Activity_HelpLineCenter.class);
                 i.putExtra("flag","0");
+                i.putExtra("loggedinflag","loggegdout");
                 startActivity(i);
                 finish();
             }
@@ -261,6 +262,7 @@ public class Dashboard_Activity_New extends AppCompatActivity {
             {
                 Intent i = new Intent(Dashboard_Activity_New.this, Activity_GoogleMaps.class);
                 i.putExtra("flag","0");
+                i.putExtra("loggedinflag","loggegdout");
                 startActivity(i);
                 finish();
 

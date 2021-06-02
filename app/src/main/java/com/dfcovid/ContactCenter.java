@@ -28,6 +28,8 @@ public class ContactCenter extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_center);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setTitle("User Manual");
 
         webView = (WebView) findViewById(R.id.webView);
         activity = this;

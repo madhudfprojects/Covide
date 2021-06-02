@@ -108,7 +108,7 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:text="Test Ver 0.12"
+            android:text="Version 1.0"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold" />
 

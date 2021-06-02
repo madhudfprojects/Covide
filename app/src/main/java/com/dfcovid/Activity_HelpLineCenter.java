@@ -31,7 +31,7 @@ public class Activity_HelpLineCenter extends AppCompatActivity {
     LinearLayout maps_LL, dashboard_LL;
     SharedPreferences sharedpreference_usercredential_Obj;
     SharedPreferences.Editor editor_obj;
-    String str_userID = "",str_flag="0";
+    String str_userID = "",str_flag="0",loggedinflag="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,11 @@ public class Activity_HelpLineCenter extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             str_flag= extras.getString("flag");
+            loggedinflag= extras.getString("loggedinflag");
+
+           // i.putExtra("loggedinflag","loggegdout");
             Log.e("str_flag", str_flag);
+            Log.e("loggedinflag", loggedinflag);
         }
 
 
@@ -98,6 +102,7 @@ public class Activity_HelpLineCenter extends AppCompatActivity {
             {
                 Intent i = new Intent(Activity_HelpLineCenter.this, Activity_GoogleMaps.class);
                 i.putExtra("flag","2");
+                i.putExtra("loggedinflag",loggedinflag);
                 startActivity(i);
                 finish();
 
@@ -107,15 +112,14 @@ public class Activity_HelpLineCenter extends AppCompatActivity {
         dashboard_LL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(str_flag.equals("1")) {
+                if(loggedinflag.equals("loggegdin")) {
                     Intent i = new Intent(Activity_HelpLineCenter.this, Dashboard_Activity.class);
                     startActivity(i);
                     finish();
-                }else{
+                }else if(loggedinflag.equals("loggegdout")) {
                     Intent i = new Intent(Activity_HelpLineCenter.this, Dashboard_Activity_New.class);
                     startActivity(i);
                     finish();
-
                 }
             }
         });
