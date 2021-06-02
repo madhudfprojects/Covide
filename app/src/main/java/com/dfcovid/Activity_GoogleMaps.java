@@ -59,6 +59,9 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
     Double double_currentlatitude = 0.0;
     Double double_currentlongitude = 0.0;
 
+    Double double_lastlatitude=0.0;
+    Double double_lastlongitude=0.0;
+
 
     Toolbar toolbar;
     ImageView add_newfarmpond_iv;
@@ -86,6 +89,7 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
 
     String str_flag="",loggedinflag="";
     LinearLayout dashboard_LL,helplinecenter_LL,googlemaps_LL;
+    String str_response;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -103,6 +107,7 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
         googlemaps_LL=(LinearLayout) findViewById(R.id.googlemaps_LL);;
         hospitalservices_sp=(Spinner)findViewById(R.id.hospitalservices_sp);
 
+        str_response="false";
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -130,24 +135,12 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
                 }
             }
         });
-        
+
 
         helplinecenter_LL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
-//                if(str_flag.equals("1"))
-//                {
-//                    Intent i = new Intent(Activity_GoogleMaps.this, Dashboard_Activity.class);
-//                    startActivity(i);
-//                    finish();
-//                }
-//                else{
-//
-//                    Intent i = new Intent(Activity_GoogleMaps.this, Dashboard_Activity_New.class);
-//                    startActivity(i);
-//                    finish();
-//                }
 
                 Intent i = new Intent(Activity_GoogleMaps.this, Activity_HelpLineCenter.class);
                 i.putExtra("flag","2");
@@ -268,30 +261,158 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
 
 
 
-        myMarker = googleMap.addMarker(new MarkerOptions()
+       /* myMarker = googleMap.addMarker(new MarkerOptions()
                 .position(Currentlocation)
                 .title("KIMS")
-                .snippet("Govt Hospital,Vidya Nagar, Hubli, Karnataka 580021"));
-
-
-        myMarker = googleMap.addMarker(new MarkerOptions()
-                .position(Currentlocation1)
-                .title("Suchirayu")
-                .snippet("Gokul Rd, opposite KSRTC Bus Depot,Kallur Layout, Hubli, Karnataka 580030"));
+                .snippet("Govt Hospital,Vidya Nagar, Hubli, Karnataka 580021"));*/
 
 
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(Currentlocation));
+       if(str_response.equalsIgnoreCase("true"))
+       {
+           if (class_hosptlDetal_listServis_arrayObj.equals(null)) {
+
+           } else {
+               int size = class_hosptlDetal_listServis_arrayObj.length;
+
+               Log.e("size", String.valueOf(class_hosptlDetal_listServis_arrayObj.length));
+
+               if (class_hosptlDetal_listServis_arrayObj[0].getWebsite()==null
+                       || class_hosptlDetal_listServis_arrayObj[0].getWebsite().equals(""))
+               {
+                   Log.e("null", "null appeared");
+               }
+
+
+               for (int i = 0; i < size; i++)
+               {
+
+                  // Log.e("lat",class_hosptlDetal_listServis_arrayObj[i].getLatitude().toString());
+                  drawMarker(googleMap,class_hosptlDetal_listServis_arrayObj[i],i);
+               }
+
+           }
+       }
+
+       Log.e("entered","here");
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(Currentlocation));
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
         //float zoomLevel = 16.0f; //This goes up to 21
         //float zoomLevel = 20.0f; //This goes up to 21
-        float zoomLevel = 17.0f;
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Currentlocation, zoomLevel));
+        float zoomLevel = 14.0f;
+        if (Double.compare(double_lastlatitude, double_lastlongitude) == 0)
+        {
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Currentlocation, zoomLevel));
+        }else{
+            LatLng Hospitallocationmap= new LatLng( double_lastlatitude, double_lastlongitude);
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Hospitallocationmap, zoomLevel));
+        }
+
+
+
+
 
 
 
     }
+
+
+
+//class_hosptlDetal_listServis_arrayObj
+    //private void drawMarker(LatLng point)
+    private void drawMarker(final GoogleMap googleMap,
+                            Class_hsptaldetalServices_listResp class_hosptlDetal_listServis_arrayObj,int i)
+    {
+
+       // LatLng point=null;
+        Double double_hospitallatitude = 0.0;
+        Double double_hospitalongitude = 0.0;
+
+
+
+        int int_lat,int_long;
+        int_lat=int_long=0;
+
+        if(class_hosptlDetal_listServis_arrayObj.getLatitude().isEmpty())
+        {
+        }
+          else
+           {
+               if (class_hosptlDetal_listServis_arrayObj.getLongitude().isEmpty()) {
+
+               }
+               else {
+
+                   char c = '.';
+                   String str_lat = class_hosptlDetal_listServis_arrayObj.getLatitude().toString();
+                   String str_long = class_hosptlDetal_listServis_arrayObj.getLongitude().toString();
+
+                   /*Log.e("str_lat", String.valueOf(str_lat.length()));
+                   Log.e("str_long", String.valueOf(str_long.length()));*/
+
+                   for (int j = 0; j < str_lat.length(); j++) {
+                    //   Log.e("str_latChar", String.valueOf(str_lat.charAt(j)));
+                       if (str_lat.charAt(j) == c)
+                       {
+                           int_lat++;
+                       }
+                   }
+                   //Log.e("int_lat", String.valueOf(int_lat));
+
+                   for (int k = 0; k < str_long.length(); k++) {
+                       if (str_long.charAt(k) == c) {
+                           int_long++;
+                       }
+                   }
+
+                   //Log.e("str_long", String.valueOf(str_long));
+
+                   if (int_lat == 1 && int_long == 1) {
+
+                      /* Log.e("lat", class_hosptlDetal_listServis_arrayObj.getLatitude().trim());
+                       Log.e("long", class_hosptlDetal_listServis_arrayObj.getLongitude().trim());
+*/
+                       double_hospitallatitude = Double.valueOf(class_hosptlDetal_listServis_arrayObj.getLatitude());
+                       double_hospitalongitude = Double.valueOf(class_hosptlDetal_listServis_arrayObj.getLongitude());
+                       String str_title = class_hosptlDetal_listServis_arrayObj.getHospitalName();
+                       String str_address = class_hosptlDetal_listServis_arrayObj.getHospitalAddress();
+                       LatLng Hospitallocation = new LatLng(double_hospitallatitude, double_hospitalongitude);
+
+                       if(i==0)
+                       {
+                           double_lastlatitude=double_hospitallatitude;
+                           double_lastlongitude=double_hospitalongitude;
+
+                       }
+       /* myMarker = googleMap.addMarker(new MarkerOptions()
+                .position(Currentlocation1)
+                .title("Suchirayu")
+                .snippet("Gokul Rd, opposite KSRTC Bus Depot,Kallur Layout, Hubli, Karnataka 580030"));*/
+
+                       // Creating an instance of MarkerOptions
+                       MarkerOptions markerOptions = new MarkerOptions();
+
+                       // Setting latitude and longitude for the marker
+                       markerOptions.position(Hospitallocation);
+                       markerOptions.title(str_title);
+                       markerOptions.snippet(str_address);
+
+                       // Adding marker on the Google Map
+                       googleMap.addMarker(markerOptions);
+
+                   }
+
+
+            }
+        }
+
+
+    }
+
+
+
+
 
 
 
@@ -453,11 +574,20 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
                             Class_hsptaldetalServices_listResp  hsptaldetalServices_listResp_innerObj = new Class_hsptaldetalServices_listResp();
 
                             hsptaldetalServices_listResp_innerObj.setHospitalName(user_object.getHospital_Details().get(i).getHospitalName());
-
+                            hsptaldetalServices_listResp_innerObj.setLatitude(user_object.getHospital_Details().get(i).getLatitude());
+                            hsptaldetalServices_listResp_innerObj.setLongitude(user_object.getHospital_Details().get(i).getLongitude());
+                            hsptaldetalServices_listResp_innerObj.setHospitalAddress(user_object.getHospital_Details().get(i).getHospitalAddress());
 
 
                             class_hosptlDetal_listServis_arrayObj[i]=hsptaldetalServices_listResp_innerObj;
+
+
                         }
+
+                        str_response="true";
+
+
+                        Log.e("Lenght", String.valueOf(class_hosptlDetal_listServis_arrayObj.length));
 
                         mapFragment.getMapAsync(Activity_GoogleMaps.this::onMapReady);
 
