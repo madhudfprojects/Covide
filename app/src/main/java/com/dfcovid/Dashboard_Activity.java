@@ -684,7 +684,11 @@ public class Dashboard_Activity extends AppCompatActivity {
                 if (textCartItemCount.getVisibility() != View.GONE) {
                     textCartItemCount.setVisibility(View.GONE);
                 }
-            } else {
+            } else if(str_flag.equalsIgnoreCase("")) {
+                if (textCartItemCount.getVisibility() != View.GONE) {
+                    textCartItemCount.setVisibility(View.GONE);
+                }
+            }else {
                 textCartItemCount.setText(String.valueOf(Math.min(mCartItemCount, count_ofnotifications)));
                 if (textCartItemCount.getVisibility() != View.VISIBLE) {
                     textCartItemCount.setVisibility(View.VISIBLE);
