@@ -356,6 +356,7 @@ public class Dashboard_Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(Dashboard_Activity.this, Activity_HelpLineCenter.class);
                 i.putExtra("flag","1");
+                i.putExtra("loggedinflag","loggegdin");
                 startActivity(i);
                 finish();
             }
@@ -368,6 +369,7 @@ public class Dashboard_Activity extends AppCompatActivity {
             {
                 Intent i = new Intent(Dashboard_Activity.this, Activity_GoogleMaps.class);
                 i.putExtra("flag","1");
+                i.putExtra("loggedinflag","loggegdin");
                 startActivity(i);
                 finish();
 

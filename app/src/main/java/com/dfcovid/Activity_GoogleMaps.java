@@ -84,7 +84,7 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
 
     SupportMapFragment mapFragment;
 
-    String str_flag;
+    String str_flag="",loggedinflag="";
     LinearLayout dashboard_LL,helplinecenter_LL,googlemaps_LL;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -107,7 +107,11 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             str_flag= extras.getString("flag");
+            loggedinflag= extras.getString("loggedinflag");
+
+            // i.putExtra("loggedinflag","loggegdout");
             Log.e("str_flag", str_flag);
+            Log.e("loggedinflag", loggedinflag);
         }
 
         dashboard_LL.setOnClickListener(new View.OnClickListener() {
@@ -147,6 +151,7 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
 
                 Intent i = new Intent(Activity_GoogleMaps.this, Activity_HelpLineCenter.class);
                 i.putExtra("flag","2");
+                i.putExtra("loggedinflag",loggedinflag);
                 startActivity(i);
                 finish();
 
