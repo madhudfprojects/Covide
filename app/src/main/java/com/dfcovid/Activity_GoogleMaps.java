@@ -295,7 +295,7 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
 
         //float zoomLevel = 16.0f; //This goes up to 21
         //float zoomLevel = 20.0f; //This goes up to 21
-        float zoomLevel = 14.0f;
+        float zoomLevel = 12.0f;
         if (Double.compare(double_lastlatitude, double_lastlongitude) == 0)
         {
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Currentlocation, zoomLevel));
