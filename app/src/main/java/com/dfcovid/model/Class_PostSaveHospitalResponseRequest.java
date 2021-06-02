@@ -230,6 +230,18 @@ public string GEN_Bed_Type_Id { get; set; }
     @Expose
     private String GEN_Total_Death;
 
+    //General_Beds
+    @SerializedName("General_Beds")
+    @Expose
+    private String General_Beds;
+
+    public String getGeneral_Beds() {
+        return General_Beds;
+    }
+
+    public void setGeneral_Beds(String general_Beds) {
+        General_Beds = general_Beds;
+    }
 
     public String getGEN_Bed_Type_Id() {
         return GEN_Bed_Type_Id;

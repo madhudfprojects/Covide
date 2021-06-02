@@ -19,9 +19,17 @@ public class Class_LoadHospitalDataList {
     @SerializedName("ICU_Beds")
     @Expose
     private String iCUBeds;
+
+
     @SerializedName("Ventilators")
     @Expose
     private String ventilators;
+
+
+    @SerializedName("General_Beds")
+    @Expose
+    private String General_Beds;
+
     @SerializedName("Within_Distrcit_AB_ARK")
     @Expose
     private String withinDistrcitABARK;
@@ -91,9 +99,9 @@ public class Class_LoadHospitalDataList {
 
 
 
-    @SerializedName("Total_General_Beds")
-    @Expose
-    private String Total_General_Beds;
+//    @SerializedName("Total_General_Beds")
+//    @Expose
+//    private String Total_General_Beds;
 
 
     @SerializedName("GEN_Bed_Type_Id")
@@ -123,13 +131,21 @@ public class Class_LoadHospitalDataList {
     @Expose
     private String GEN_Total_Death;
 
-    public String getTotal_General_Beds() {
-        return Total_General_Beds;
+    public String getGeneral_Beds() {
+        return General_Beds;
     }
 
-    public void setTotal_General_Beds(String total_General_Beds) {
-        Total_General_Beds = total_General_Beds;
+    public void setGeneral_Beds(String general_Beds) {
+        General_Beds = general_Beds;
     }
+
+//    public String getTotal_General_Beds() {
+//        return Total_General_Beds;
+//    }
+//
+//    public void setTotal_General_Beds(String total_General_Beds) {
+//        Total_General_Beds = total_General_Beds;
+//    }
 
     public String getGEN_Bed_Type_Id() {
         return GEN_Bed_Type_Id;
