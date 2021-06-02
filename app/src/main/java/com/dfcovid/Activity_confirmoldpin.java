@@ -85,6 +85,7 @@ public class Activity_confirmoldpin extends AppCompatActivity {
         str_userID= sharedpreference_usercredential_Obj.getString(KeyValue_userid, "").trim();
         Log.e("confirmpinuserid",str_userID);
 
+        otp1_et.requestFocus();
 
         otp1_et.addTextChangedListener(new TextWatcher() {
             @Override

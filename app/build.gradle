@@ -13,12 +13,23 @@ android {
 
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+       /* ndk {
+            abiFilters "armeabi-v7a", "armeabi" // includes ARM SO files only, so no x86 SO file
+        }*/
     }
+
+
+
+
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
+            /*minifyEnabled false*/
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
         }
     }
 

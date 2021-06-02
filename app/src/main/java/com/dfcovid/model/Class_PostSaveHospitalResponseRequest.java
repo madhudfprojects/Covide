@@ -189,6 +189,116 @@ public class Class_PostSaveHospitalResponseRequest {
     @Expose
     private String User_ID;
 
+/*
+public string GEN_Bed_Type_Id { get; set; }
+       public string GEN_Bed_Type { get; set; }
+       public string GEN_Bed_Occupied_Within_District { get; set; }
+       public string GEN_Bed_Occupied_Outside_District { get; set; }
+       public string GEN_Patient_Discharged_Within_District { get; set; }
+       public string GEN_Patient_Discharged_Outside_District { get; set; }
+       public string GEN_Total_Death { get; set; }
+
+ */
+
+    @SerializedName("GEN_Bed_Type_Id")
+    @Expose
+    private String GEN_Bed_Type_Id;
+
+    @SerializedName("GEN_Bed_Type")
+    @Expose
+    private String GEN_Bed_Type;
+
+    @SerializedName("GEN_Bed_Occupied_Within_District")
+    @Expose
+    private String GEN_Bed_Occupied_Within_District;
+
+    @SerializedName("GEN_Bed_Occupied_Outside_District")
+    @Expose
+    private String GEN_Bed_Occupied_Outside_District;
+
+
+    @SerializedName("GEN_Patient_Discharged_Within_District")
+    @Expose
+    private String GEN_Patient_Discharged_Within_District;
+
+
+    @SerializedName("GEN_Patient_Discharged_Outside_District")
+    @Expose
+    private String GEN_Patient_Discharged_Outside_District;
+
+    @SerializedName("GEN_Total_Death")
+    @Expose
+    private String GEN_Total_Death;
+
+    //General_Beds
+    @SerializedName("General_Beds")
+    @Expose
+    private String General_Beds;
+
+    public String getGeneral_Beds() {
+        return General_Beds;
+    }
+
+    public void setGeneral_Beds(String general_Beds) {
+        General_Beds = general_Beds;
+    }
+
+    public String getGEN_Bed_Type_Id() {
+        return GEN_Bed_Type_Id;
+    }
+
+    public void setGEN_Bed_Type_Id(String GEN_Bed_Type_Id) {
+        this.GEN_Bed_Type_Id = GEN_Bed_Type_Id;
+    }
+
+    public String getGEN_Bed_Type() {
+        return GEN_Bed_Type;
+    }
+
+    public void setGEN_Bed_Type(String GEN_Bed_Type) {
+        this.GEN_Bed_Type = GEN_Bed_Type;
+    }
+
+    public String getGEN_Bed_Occupied_Within_District() {
+        return GEN_Bed_Occupied_Within_District;
+    }
+
+    public void setGEN_Bed_Occupied_Within_District(String GEN_Bed_Occupied_Within_District) {
+        this.GEN_Bed_Occupied_Within_District = GEN_Bed_Occupied_Within_District;
+    }
+
+    public String getGEN_Bed_Occupied_Outside_District() {
+        return GEN_Bed_Occupied_Outside_District;
+    }
+
+    public void setGEN_Bed_Occupied_Outside_District(String GEN_Bed_Occupied_Outside_District) {
+        this.GEN_Bed_Occupied_Outside_District = GEN_Bed_Occupied_Outside_District;
+    }
+
+    public String getGEN_Patient_Discharged_Within_District() {
+        return GEN_Patient_Discharged_Within_District;
+    }
+
+    public void setGEN_Patient_Discharged_Within_District(String GEN_Patient_Discharged_Within_District) {
+        this.GEN_Patient_Discharged_Within_District = GEN_Patient_Discharged_Within_District;
+    }
+
+    public String getGEN_Patient_Discharged_Outside_District() {
+        return GEN_Patient_Discharged_Outside_District;
+    }
+
+    public void setGEN_Patient_Discharged_Outside_District(String GEN_Patient_Discharged_Outside_District) {
+        this.GEN_Patient_Discharged_Outside_District = GEN_Patient_Discharged_Outside_District;
+    }
+
+    public String getGEN_Total_Death() {
+        return GEN_Total_Death;
+    }
+
+    public void setGEN_Total_Death(String GEN_Total_Death) {
+        this.GEN_Total_Death = GEN_Total_Death;
+    }
+
     public String getHospitalId() {
         return hospitalId;
     }

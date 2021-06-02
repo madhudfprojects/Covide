@@ -77,6 +77,7 @@ public class Activity_pinlogin extends AppCompatActivity
 
         //otp4_et
 
+        otp1_et.requestFocus();
 
         otp1_et.addTextChangedListener(new TextWatcher() {
             @Override
