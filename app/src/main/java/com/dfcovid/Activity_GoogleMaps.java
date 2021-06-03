@@ -631,14 +631,37 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
 
 
 
-    @Override
+  /*  @Override
     public void onBackPressed()
     {
 
        Toast.makeText(getApplicationContext(),"Kindly Click on Bottom button", Toast.LENGTH_LONG).show();
+    }*/
+
+
+
+   
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(str_flag.equals("1")) {
+            Intent i = new Intent(Activity_GoogleMaps.this, Dashboard_Activity.class);
+            startActivity(i);
+            finish();
+        }else if(str_flag.equals("2"))
+        {
+            Intent i = new Intent(Activity_GoogleMaps.this, Activity_HelpLineCenter.class);
+            i.putExtra("flag","2");
+            i.putExtra("loggedinflag",loggedinflag);
+        }else{
+
+            Intent i = new Intent(Activity_GoogleMaps.this, Dashboard_Activity_New.class);
+            startActivity(i);
+            finish();
+        }
     }
-
-
 
 
 
