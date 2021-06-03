@@ -191,21 +191,42 @@ public class Activity_HelpLineCenter extends AppCompatActivity {
 
             return true;
         }else if (id == android.R.id.home) {
-            if(str_flag.equals("1")) {
+
+            if(loggedinflag.equals("loggegdin")) {
                 Intent i = new Intent(Activity_HelpLineCenter.this, Dashboard_Activity.class);
+                startActivity(i);
+                finish();
+            }else if(loggedinflag.equals("loggegdout")) {
+                Intent i = new Intent(Activity_HelpLineCenter.this, Dashboard_Activity_New.class);
                 startActivity(i);
                 finish();
             }else if(str_flag.equals("2")){
                 Intent i = new Intent(Activity_HelpLineCenter.this, Activity_GoogleMaps.class);
                 i.putExtra("flag","2");
-                startActivity(i);
-                finish();
-            }else{
-                Intent i = new Intent(Activity_HelpLineCenter.this, Dashboard_Activity_New.class);
+                i.putExtra("loggedinflag",loggedinflag);
                 startActivity(i);
                 finish();
 
             }
+
+
+
+//            if(str_flag.equals("1")) {
+//                Intent i = new Intent(Activity_HelpLineCenter.this, Dashboard_Activity.class);
+//                startActivity(i);
+//                finish();
+//            }else if(str_flag.equals("2")){
+//                Intent i = new Intent(Activity_HelpLineCenter.this, Activity_GoogleMaps.class);
+//                i.putExtra("flag","2");
+//                i.putExtra("loggedinflag",loggedinflag);
+//                startActivity(i);
+//                finish();
+//            }else{
+//                Intent i = new Intent(Activity_HelpLineCenter.this, Dashboard_Activity_New.class);
+//                startActivity(i);
+//                finish();
+//
+//            }
         }
 
 //        else if(id==R.id.aboutus){
@@ -223,21 +244,39 @@ public class Activity_HelpLineCenter extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(str_flag.equals("1")) {
+
+        if(loggedinflag.equals("loggegdin")) {
             Intent i = new Intent(Activity_HelpLineCenter.this, Dashboard_Activity.class);
+            startActivity(i);
+            finish();
+        }else if(loggedinflag.equals("loggegdout")) {
+            Intent i = new Intent(Activity_HelpLineCenter.this, Dashboard_Activity_New.class);
             startActivity(i);
             finish();
         }else if(str_flag.equals("2")){
             Intent i = new Intent(Activity_HelpLineCenter.this, Activity_GoogleMaps.class);
             i.putExtra("flag","2");
-            startActivity(i);
-            finish();
-        }else{
-            Intent i = new Intent(Activity_HelpLineCenter.this, Dashboard_Activity_New.class);
+            i.putExtra("loggedinflag",loggedinflag);
             startActivity(i);
             finish();
 
         }
+//        if(str_flag.equals("1")) {
+//            Intent i = new Intent(Activity_HelpLineCenter.this, Dashboard_Activity.class);
+//            startActivity(i);
+//            finish();
+//        }else if(str_flag.equals("2")){
+//            Intent i = new Intent(Activity_HelpLineCenter.this, Activity_GoogleMaps.class);
+//            i.putExtra("flag","2");
+//            i.putExtra("loggedinflag",loggedinflag);
+//            startActivity(i);
+//            finish();
+//        }else{
+//            Intent i = new Intent(Activity_HelpLineCenter.this, Dashboard_Activity_New.class);
+//            startActivity(i);
+//            finish();
+//
+//        }
     }
 }
 
