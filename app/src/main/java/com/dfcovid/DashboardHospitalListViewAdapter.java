@@ -121,6 +121,19 @@ public class DashboardHospitalListViewAdapter extends BaseAdapter
             holder.headavailable_tv.setTextColor(Color.parseColor("#47a049"));
             holder.headtotal_tv.setTextColor(Color.parseColor("#3a7be4"));
             holder.headoccupied_tv.setTextColor(Color.parseColor("#fdaa42"));
+        }else{
+            holder.card_view.setCardBackgroundColor(Color.parseColor("#ecf3fe"));
+
+            holder.card_view1.setCardBackgroundColor(Color.parseColor("#3a7be4"));
+            holder.card_view2.setCardBackgroundColor(Color.parseColor("#fdaa42"));
+            holder.card_view3.setCardBackgroundColor(Color.parseColor("#47a049"));
+            holder.Title_tv.setTextColor(Color.parseColor("#3a7be4"));
+            holder.available_tv.setTextColor(Color.WHITE);
+            holder.total_tv.setTextColor(Color.WHITE);
+            holder.occupied_tv.setTextColor(Color.WHITE);
+            holder.headavailable_tv.setTextColor(Color.WHITE);
+            holder.headtotal_tv.setTextColor(Color.WHITE);
+            holder.headoccupied_tv.setTextColor(Color.WHITE);
         }
         return convertView;
     }
