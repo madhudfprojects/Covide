@@ -87,7 +87,7 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
 
     SupportMapFragment mapFragment;
 
-    String str_flag="",loggedinflag="";
+    String str_flag,loggedinflag;
     LinearLayout dashboard_LL,helplinecenter_LL,googlemaps_LL;
     String str_response;
     @Override
@@ -123,15 +123,26 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
             @Override
             public void onClick(View view)
             {
-                if(str_flag.equals("1")) {
+                //commented and added by shivaleela on 3rd june 2021
+//                if(str_flag.equals("1")) {
+//                    Intent i = new Intent(Activity_GoogleMaps.this, Dashboard_Activity.class);
+//                    startActivity(i);
+//                    finish();
+//                } else{
+//                    Intent i = new Intent(Activity_GoogleMaps.this, Dashboard_Activity_New.class);
+//                    startActivity(i);
+//                    finish();
+//
+//                }
+
+                if(loggedinflag.equals("loggegdin")) {
                     Intent i = new Intent(Activity_GoogleMaps.this, Dashboard_Activity.class);
                     startActivity(i);
                     finish();
-                } else{
+                }else if(loggedinflag.equals("loggegdout")) {
                     Intent i = new Intent(Activity_GoogleMaps.this, Dashboard_Activity_New.class);
                     startActivity(i);
                     finish();
-
                 }
             }
         });
@@ -646,20 +657,38 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(str_flag.equals("1")) {
+        //commented and added by shivaleela on 3rd june 2021
+//        if(str_flag.equals("1")) {
+//            Intent i = new Intent(Activity_GoogleMaps.this, Dashboard_Activity.class);
+//            startActivity(i);
+//            finish();
+//        }else if(str_flag.equals("2"))
+//        {
+//            Intent i = new Intent(Activity_GoogleMaps.this, Activity_HelpLineCenter.class);
+//            i.putExtra("flag","2");
+//            i.putExtra("loggedinflag",loggedinflag);
+//        }else{
+//
+//            Intent i = new Intent(Activity_GoogleMaps.this, Dashboard_Activity_New.class);
+//            startActivity(i);
+//            finish();
+//        }
+
+        if(loggedinflag.equals("loggegdin") && str_flag.equals("1")) {
             Intent i = new Intent(Activity_GoogleMaps.this, Dashboard_Activity.class);
             startActivity(i);
             finish();
-        }else if(str_flag.equals("2"))
-        {
-            Intent i = new Intent(Activity_GoogleMaps.this, Activity_HelpLineCenter.class);
-            i.putExtra("flag","2");
-            i.putExtra("loggedinflag",loggedinflag);
-        }else{
-
+        }else if(loggedinflag.equals("loggegdout") && str_flag.equals("0")) {
             Intent i = new Intent(Activity_GoogleMaps.this, Dashboard_Activity_New.class);
             startActivity(i);
             finish();
+        }else if(str_flag.equals("2")){
+            Intent i = new Intent(Activity_GoogleMaps.this, Activity_HelpLineCenter.class);
+            i.putExtra("flag","2");
+            i.putExtra("loggedinflag",loggedinflag);
+            startActivity(i);
+            finish();
+
         }
     }
 
