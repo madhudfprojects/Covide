@@ -88,6 +88,7 @@ public class Activity_HelpLineCenter extends AppCompatActivity {
         weblink_TV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //added flag
                 Intent i = new Intent(Activity_HelpLineCenter.this, Activity_WebLink.class);
                 i.putExtra("flag",str_flag);
                 i.putExtra("loggedinflag",loggedinflag);
