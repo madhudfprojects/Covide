@@ -411,6 +411,7 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
                        markerOptions.title(str_title);
                        markerOptions.snippet(str_address);
 
+                       
                        // Adding marker on the Google Map
                        googleMap.addMarker(markerOptions);
 
