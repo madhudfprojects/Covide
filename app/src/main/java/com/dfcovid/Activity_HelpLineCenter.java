@@ -192,11 +192,11 @@ public class Activity_HelpLineCenter extends AppCompatActivity {
             return true;
         }else if (id == android.R.id.home) {
 
-            if(loggedinflag.equals("loggegdin")) {
+            if(loggedinflag.equals("loggegdin") && str_flag.equals("1")) {
                 Intent i = new Intent(Activity_HelpLineCenter.this, Dashboard_Activity.class);
                 startActivity(i);
                 finish();
-            }else if(loggedinflag.equals("loggegdout")) {
+            }else if(loggedinflag.equals("loggegdout") && str_flag.equals("0")) {
                 Intent i = new Intent(Activity_HelpLineCenter.this, Dashboard_Activity_New.class);
                 startActivity(i);
                 finish();
@@ -245,11 +245,12 @@ public class Activity_HelpLineCenter extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
 
-        if(loggedinflag.equals("loggegdin")) {
+        if(loggedinflag.equals("loggegdin")&& str_flag.equals("1")) {
             Intent i = new Intent(Activity_HelpLineCenter.this, Dashboard_Activity.class);
             startActivity(i);
             finish();
-        }else if(loggedinflag.equals("loggegdout")) {
+
+        }else if(loggedinflag.equals("loggegdout") && str_flag.equals("0")) {
             Intent i = new Intent(Activity_HelpLineCenter.this, Dashboard_Activity_New.class);
             startActivity(i);
             finish();
