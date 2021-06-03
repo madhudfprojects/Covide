@@ -405,7 +405,11 @@ public class Dashboard_Activity_New extends AppCompatActivity {
 
                     } else {
                         progressDoalog.dismiss();
-                                           }
+                        dashboard_list.clear();
+                        dashboardHospitalListViewAdapter.notifyDataSetChanged();
+                        Toast.makeText(Dashboard_Activity_New.this, "Hospital Data Not Found", Toast.LENGTH_SHORT).show();
+
+                    }
                 } else {
                     progressDoalog.dismiss();
                     dashboard_list.clear();
