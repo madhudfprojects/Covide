@@ -33,6 +33,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -420,6 +421,7 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
                        markerOptions.position(Hospitallocation);
                        markerOptions.title(str_title);
                        markerOptions.snippet(str_address);
+                       markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.hospital));
 
 
                        /*Class_hsptaldetalServices_listResp hsptaldetalServices_listResp_obj= new Class_hsptaldetalServices_listResp();
