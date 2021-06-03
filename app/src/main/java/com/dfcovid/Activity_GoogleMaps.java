@@ -280,7 +280,7 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
                 .snippet("Govt Hospital,Vidya Nagar, Hubli, Karnataka 580021"));*/
 
 
-
+            mMap.clear();
        if(str_response.equalsIgnoreCase("true"))
        {
            if (class_hosptlDetal_listServis_arrayObj.equals(null)) {
@@ -390,6 +390,16 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
                        double_hospitalongitude = Double.valueOf(class_hosptlDetal_listServis_arrayObj.getLongitude());
                        String str_title = class_hosptlDetal_listServis_arrayObj.getHospitalName();
                        String str_address = class_hosptlDetal_listServis_arrayObj.getHospitalAddress();
+                       String str_cellno="";
+                       if(class_hosptlDetal_listServis_arrayObj.getContactNo().equalsIgnoreCase("0"))
+                       {
+                           str_cellno="";
+                       }else{
+                           str_cellno="Cell No: ";
+                           str_cellno= str_cellno+class_hosptlDetal_listServis_arrayObj.getContactNo();
+                       }
+
+                       str_address=str_address+"\n"+str_cellno;
                        LatLng Hospitallocation = new LatLng(double_hospitallatitude, double_hospitalongitude);
 
                        if(i==0)
@@ -410,6 +420,17 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
                        markerOptions.position(Hospitallocation);
                        markerOptions.title(str_title);
                        markerOptions.snippet(str_address);
+
+
+                       /*Class_hsptaldetalServices_listResp hsptaldetalServices_listResp_obj= new Class_hsptaldetalServices_listResp();
+                       hsptaldetalServices_listResp_obj.setHospitalName("test");
+                       hsptaldetalServices_listResp_obj.setHospitalAddress("test2");
+                       hsptaldetalServices_listResp_obj.setContactNo("test3");*/
+
+                       CustomInfoWindowGoogleMap_Adapter customInfoWindow = new CustomInfoWindowGoogleMap_Adapter(this);
+                       mMap.setInfoWindowAdapter(customInfoWindow);
+                       Marker m = mMap.addMarker(markerOptions);
+                      // m.setTag(hsptaldetalServices_listResp_obj);
 
                        // Adding marker on the Google Map
                        googleMap.addMarker(markerOptions);
@@ -486,6 +507,7 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
 
                             serviceslistResp_innerObj.setService_Id(user_object.getList().get(i).getService_Id());
                             serviceslistResp_innerObj.setServices_Name(user_object.getList().get(i).getServices_Name());
+
                             class_serviceslistresp_arrayObj[i]=serviceslistResp_innerObj;
                         }
 
@@ -590,6 +612,8 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
                             hsptaldetalServices_listResp_innerObj.setLatitude(user_object.getHospital_Details().get(i).getLatitude());
                             hsptaldetalServices_listResp_innerObj.setLongitude(user_object.getHospital_Details().get(i).getLongitude());
                             hsptaldetalServices_listResp_innerObj.setHospitalAddress(user_object.getHospital_Details().get(i).getHospitalAddress());
+
+                            hsptaldetalServices_listResp_innerObj.setContactNo(user_object.getHospital_Details().get(i).getContactNo());
 
 
                             class_hosptlDetal_listServis_arrayObj[i]=hsptaldetalServices_listResp_innerObj;
