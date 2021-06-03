@@ -249,6 +249,7 @@ public class Activity_HelpLineCenter extends AppCompatActivity {
             Intent i = new Intent(Activity_HelpLineCenter.this, Dashboard_Activity.class);
             startActivity(i);
             finish();
+
         }else if(loggedinflag.equals("loggegdout")) {
             Intent i = new Intent(Activity_HelpLineCenter.this, Dashboard_Activity_New.class);
             startActivity(i);
