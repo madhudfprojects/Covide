@@ -166,7 +166,7 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
             {
                 class_serviceslistresp_Obj = (Class_serviceslistResp) hospitalservices_sp.getSelectedItem();
 
-                Toast.makeText(getApplicationContext(),class_serviceslistresp_Obj.getService_Id().toString(),Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(getApplicationContext(),class_serviceslistresp_Obj.getService_Id().toString(),Toast.LENGTH_SHORT).show();
 
                 String str_serviceid=class_serviceslistresp_Obj.getService_Id().toString();
                 AsyncTask_HospitalDetails_withService(str_serviceid);
@@ -640,7 +640,7 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
 
 
 
-   
+
 
 
     @Override
