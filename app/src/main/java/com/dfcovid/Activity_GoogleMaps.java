@@ -107,6 +107,8 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
         googlemaps_LL=(LinearLayout) findViewById(R.id.googlemaps_LL);;
         hospitalservices_sp=(Spinner)findViewById(R.id.hospitalservices_sp);
 
+        str_flag=loggedinflag="";
+
         str_response="false";
 
         Bundle extras = getIntent().getExtras();
