@@ -89,6 +89,8 @@ public class Activity_HelpLineCenter extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Activity_HelpLineCenter.this, Activity_WebLink.class);
+                i.putExtra("flag",str_flag);
+                i.putExtra("loggedinflag",loggedinflag);
                 startActivity(i);
                 finish();
 
