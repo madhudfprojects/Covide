@@ -27,7 +27,7 @@ public class Activity_WebLink extends AppCompatActivity {
 
     SharedPreferences sharedpreference_usercredential_Obj;
     SharedPreferences.Editor editor_obj;
-    String str_userID = "";
+    String str_userID = "",str_flag="",loggedinflag="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +36,16 @@ public class Activity_WebLink extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("HD Mitra");
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            str_flag= extras.getString("flag");
+            loggedinflag= extras.getString("loggedinflag");
+
+            // i.putExtra("loggedinflag","loggegdout");
+            Log.e("str_flag", str_flag);
+            Log.e("loggedinflag", loggedinflag);
+        }
 
         sharedpreference_usercredential_Obj = getSharedPreferences(sharedpreference_usercredential, Context.MODE_PRIVATE);
         str_userID = sharedpreference_usercredential_Obj.getString(KeyValue_userid, "").trim();
@@ -138,6 +148,8 @@ public class Activity_WebLink extends AppCompatActivity {
             return true;
         } else if (id == android.R.id.home) {
             Intent i = new Intent(Activity_WebLink.this, Activity_HelpLineCenter.class);
+            i.putExtra("flag",str_flag);
+            i.putExtra("loggedinflag",loggedinflag);
             startActivity(i);
             finish();
 
@@ -153,6 +165,8 @@ public class Activity_WebLink extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         Intent i = new Intent(Activity_WebLink.this, Activity_HelpLineCenter.class);
+        i.putExtra("flag",str_flag);
+        i.putExtra("loggedinflag",loggedinflag);
         startActivity(i);
         finish();
 
