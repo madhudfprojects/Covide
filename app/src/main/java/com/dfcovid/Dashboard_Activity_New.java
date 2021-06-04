@@ -556,9 +556,9 @@ public class Dashboard_Activity_New extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int id)
             {
-               /* Intent	intent = new Intent(Intent.ACTION_VIEW);
+                Intent	intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.dfcovid"));
-                startActivity(intent);*/
+                startActivity(intent);
             }
         });
 

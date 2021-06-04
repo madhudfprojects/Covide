@@ -434,7 +434,7 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
                        Marker m = mMap.addMarker(markerOptions);
                       // m.setTag(hsptaldetalServices_listResp_obj);
 
-                       
+
                        // Adding marker on the Google Map
                        googleMap.addMarker(markerOptions);
 

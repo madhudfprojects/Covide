@@ -15,6 +15,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -197,7 +198,9 @@ public class Dashboard_Activity extends AppCompatActivity {
 
         dashboardHospitalListViewAdapter = new DashboardHospitalListViewAdapter(Dashboard_Activity.this, dashboard_list);
 
-        if (isInternetPresent) {
+        if (isInternetPresent)
+        {
+            Get_App_Version();
             GetUserHospitalList();
         } else {
             Toast.makeText(Dashboard_Activity.this, "No Internet", Toast.LENGTH_SHORT).show();
@@ -483,6 +486,137 @@ public class Dashboard_Activity extends AppCompatActivity {
         });// end of call
 
     }
+
+
+
+
+    private void Get_App_Version()
+    {
+
+
+
+        final ProgressDialog progressDoalog;
+        progressDoalog = new ProgressDialog(Dashboard_Activity.this);
+        progressDoalog.setMessage("Loading....");
+        progressDoalog.setTitle("Please wait....");
+        progressDoalog.setCancelable(false);
+        progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+        retrofit2.Call call = userService1.Get_App_Version();
+        // show it
+        progressDoalog.show();
+        call.enqueue(new Callback<Class_GetAppVersion>()
+        {
+            @Override
+            public void onResponse(Call<Class_GetAppVersion> call, Response<Class_GetAppVersion> response)
+            {
+
+                Log.e("VerResponse", new Gson().toJson(response) );
+
+
+                if(response.isSuccessful())
+                {
+
+                    Class_GetAppVersion  class_getappversion = response.body();
+                    Log.e("Response",class_getappversion.toString());
+
+                    if(class_getappversion.getStatus())
+                    {
+
+                        List<Class_GetAppVersionList> getAppVersionList=response.body().getlistVersion();
+                        String str_releaseVer=getAppVersionList.get(0).getAppVersion();
+
+                        int int_versioncode= Integer.parseInt(str_versioncode);
+                        int int_releaseVer= Integer.parseInt(str_releaseVer);
+
+                        Log.e("str_releaseVer",str_releaseVer);
+                        progressDoalog.dismiss();
+
+                        if(int_releaseVer>int_versioncode)
+                        {
+                            alerts_dialog_playstoreupdate();
+                        }
+                        else{
+
+                        }
+
+                    }else{
+                        progressDoalog.dismiss();
+                        Toast.makeText(Dashboard_Activity.this, class_getappversion.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                } else {
+                    progressDoalog.dismiss();
+
+                    DefaultResponse error = ErrorUtils.parseError(response);
+                    // … and use it to show error information
+                    // … or just log the issue like we’re doing :)
+                    Log.d("error message", error.getMsg());
+
+                    Toast.makeText(Dashboard_Activity.this, error.getMsg(), Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t)
+            {
+                progressDoalog.dismiss();
+                Log.e("TAG", "onFailure: "+t.toString() );
+
+                Log.e("tag","Error:"+t.getMessage());
+                Toast.makeText(Dashboard_Activity.this, "WS:ErrorVercheck:"+t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+    public  void alerts_dialog_playstoreupdate()
+    {
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(Dashboard_Activity.this);
+        dialog.setCancelable(false);
+        dialog.setTitle(R.string.alert);
+        dialog.setMessage("Kindly update from playstore");
+
+        dialog.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id)
+            {
+                Intent	intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.dfcovid"));
+                startActivity(intent);
+            }
+        });
+
+
+        final AlertDialog alert = dialog.create();
+        alert.setOnShowListener( new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface arg0) {
+                alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#004D40"));
+            }
+        });
+        alert.show();
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void Get_LoadHospitalDashboard() {
         Log.e("tag", "str_hospitelId=" + str_hospitelId + "selected date=" + str_edt_fromdate_sendTOAPI);

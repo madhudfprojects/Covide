@@ -93,6 +93,7 @@ public class Activity_pinlogin extends AppCompatActivity
                 if(otp1_et.getText().toString().length()>=1)
                 {
                     otp2_et.requestFocus();
+                    otp4_et.setText("");
                 }
             }
 
@@ -118,6 +119,7 @@ public class Activity_pinlogin extends AppCompatActivity
                 if(otp2_et.getText().toString().length()>=1)
                 {
                     otp3_et.requestFocus();
+                    otp4_et.setText("");
                 }
             }
 
@@ -144,6 +146,7 @@ public class Activity_pinlogin extends AppCompatActivity
                 if(otp3_et.getText().toString().length()>=1)
                 {
                     otp4_et.requestFocus();
+                    otp4_et.setText("");
                 }
             }
 
