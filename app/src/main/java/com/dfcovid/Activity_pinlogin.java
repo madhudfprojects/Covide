@@ -55,6 +55,7 @@ public class Activity_pinlogin extends AppCompatActivity
     Boolean isInternetPresent = false;
 
     String str_userID,str_username,str_loginpin,str_isuser_loggedfromgoogle;
+    String str_pin1,str_pin2,str_pin3,str_pin4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -67,7 +68,7 @@ public class Activity_pinlogin extends AppCompatActivity
         otp3_et=(EditText) findViewById(R.id.otp3_et);
         otp4_et=(EditText) findViewById(R.id.otp4_et);
 
-
+        str_pin1=str_pin2=str_pin3=str_pin4="";
 
         sharedpreference_usercredential_Obj=getSharedPreferences(sharedpreference_usercredential, Context.MODE_PRIVATE);
         str_userID= sharedpreference_usercredential_Obj.getString(KeyValue_userid, "").trim();
@@ -92,6 +93,8 @@ public class Activity_pinlogin extends AppCompatActivity
 
                 if(otp1_et.getText().toString().length()>=1)
                 {
+                    str_pin1=otp1_et.getText().toString().trim();
+                    otp1_et.setText("#");
                     otp2_et.requestFocus();
                     otp4_et.setText("");
                 }
@@ -118,6 +121,8 @@ public class Activity_pinlogin extends AppCompatActivity
 
                 if(otp2_et.getText().toString().length()>=1)
                 {
+                    str_pin2=otp2_et.getText().toString().trim();
+                    otp2_et.setText("#");
                     otp3_et.requestFocus();
                     otp4_et.setText("");
                 }
@@ -145,6 +150,8 @@ public class Activity_pinlogin extends AppCompatActivity
 
                 if(otp3_et.getText().toString().length()>=1)
                 {
+                    str_pin3=otp3_et.getText().toString().trim();
+                    otp3_et.setText("#");
                     otp4_et.requestFocus();
                     otp4_et.setText("");
                 }
@@ -183,10 +190,16 @@ public class Activity_pinlogin extends AppCompatActivity
                         if (isInternetPresent)
                         {
 
-                            str_loginpin=otp1_et.getText().toString()+
+                           /* str_loginpin=otp1_et.getText().toString()+
                                     otp2_et.getText().toString()+
                                     otp3_et.getText().toString()+
+                                    otp4_et.getText().toString();*/
+
+                            str_loginpin=str_pin1.trim()+
+                                    str_pin2.trim()+
+                                    str_pin3.trim()+
                                     otp4_et.getText().toString();
+
 
                             AsyncTask_ValidateUserPIN();
 

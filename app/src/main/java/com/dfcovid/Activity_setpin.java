@@ -41,6 +41,8 @@ public class Activity_setpin extends AppCompatActivity {
     Button confirm_pin_bt;
     EditText otp1_et,otp2_et,otp3_et,otp4_et;
     TextView title_tv;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -53,6 +55,7 @@ public class Activity_setpin extends AppCompatActivity {
         otp3_et=(EditText) findViewById(R.id.otp3_et);
         otp4_et=(EditText) findViewById(R.id.otp4_et);
         title_tv=(TextView)findViewById(R.id.title_tv);
+
 
 
         sharedpreference_setpin_Obj=getSharedPreferences(sharedpreference_setpincredential, Context.MODE_PRIVATE);
@@ -87,6 +90,7 @@ public class Activity_setpin extends AppCompatActivity {
 
                 if(otp1_et.getText().toString().length()>=1)
                 {
+
                     otp2_et.requestFocus();
                 }
             }
