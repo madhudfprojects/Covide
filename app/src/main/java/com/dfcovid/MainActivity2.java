@@ -393,8 +393,8 @@ public class MainActivity2 extends AppCompatActivity {
             public void onClick(View v) {
                 disable_bt.setVisibility(View.VISIBLE);
                 edit_BT.setVisibility(View.GONE);
-                exp_beds_ET.setEnabled(true);
-                actual_beds_ET.setEnabled(true);
+                exp_beds_ET.setEnabled(false);
+                actual_beds_ET.setEnabled(false);
                 ox_beds_ET.setEnabled(true);
                 icu_beds_ET.setEnabled(true);
                 ventilator_ET.setEnabled(true);
@@ -496,7 +496,7 @@ public class MainActivity2 extends AppCompatActivity {
                     }
 
                 }
-                total_AB = ox_beds_intval + icu_beds_intval + ventilator_intval+gen_beds_intval;
+              //  total_AB = ox_beds_intval + icu_beds_intval + ventilator_intval+gen_beds_intval;
                 icutotal=beds_occupied_within_dwd_ICU_intval+beds_occupied_out_dwd_ICU_intval;
                 oxtotal=beds_occupied_within_dwd_oxygen_intval+beds_occupied_out_dwd_oxygen_intval;
                 venttotal=beds_occupied_within_dwd_ventilator_intval+beds_occupied_out_dwd_vent_intval;
@@ -601,9 +601,9 @@ public class MainActivity2 extends AppCompatActivity {
                     }else if(deaths_Gen_ET.getText().toString().equals("")){
                         Toast.makeText(MainActivity2.this, "Please enter deaths in General beds", Toast.LENGTH_SHORT).show();
 
-                    } else if(actual_beds!=total_AB){
+                    } /*else if(actual_beds!=total_AB){
                         Toast.makeText(MainActivity2.this, "Actual Bed count is not matching with detailed entries", Toast.LENGTH_SHORT).show();
-                    } else if(total_ABARK>actual_beds){
+                    }*/ else if(total_ABARK>actual_beds){
                         Toast.makeText(MainActivity2.this, "Total AB-ARK count is more than the Actual Beds count", Toast.LENGTH_SHORT).show();
                     }else if(total_patients>actual_beds){
                         Toast.makeText(MainActivity2.this, "Total Patients count is more than the Actual Beds count", Toast.LENGTH_SHORT).show();
