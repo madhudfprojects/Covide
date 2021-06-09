@@ -671,14 +671,14 @@ public class Dashboard_Activity extends AppCompatActivity {
                         progressDoalog.dismiss();
                         dashboard_list.clear();
                         dashboardHospitalListViewAdapter.notifyDataSetChanged();
-                        Toast.makeText(Dashboard_Activity.this, "Hospital Data Not Found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Dashboard_Activity.this, "Hospital Data Not Found for Selected Date", Toast.LENGTH_SHORT).show();
 
                     }
                 } else {
                     progressDoalog.dismiss();
                     dashboard_list.clear();
                     dashboardHospitalListViewAdapter.notifyDataSetChanged();
-                    Toast.makeText(Dashboard_Activity.this, "Hospital Data Not Found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Dashboard_Activity.this, "Hospital Data Not Found for Selected Date", Toast.LENGTH_SHORT).show();
 
                     Log.e("Entered resp else", "");
                     DefaultResponse error = ErrorUtils.parseError(response);
