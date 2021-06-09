@@ -2,6 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:mask="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -48,7 +49,6 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/pinbg"
-                    android:digits="0123456789"
                     android:gravity="center"
                     android:inputType="number"
                     android:maxLength="1"
@@ -57,16 +57,50 @@
 
 
                 <EditText
+                    android:id="@+id/pin1masked_et"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/pinbg"
+                    android:gravity="center"
+                    android:digits="0123456789#"
+                    android:inputType="phone"
+                    android:maxLength="1"
+                    android:visibility="gone"
+                    android:text="#"
+                    android:textColor="@color/dark_black"
+                    android:textSize="17dp" />
+
+                <EditText
                     android:id="@+id/otp2_et"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/pinbg"
-                    android:digits="0123456789"
+                    android:digits="0123456789#"
                     android:gravity="center"
                     android:inputType="number"
                     android:maxLength="1"
+                    android:textColor="@color/dark_black"
+                    android:textSize="17dp" />
+
+
+
+                <EditText
+                    android:id="@+id/pin2masked_et"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/pinbg"
+                    android:gravity="center"
+                    android:digits="0123456789#"
+                    android:inputType="phone"
+                    android:maxLength="1"
+                    android:visibility="gone"
+                    android:text="#"
                     android:textColor="@color/dark_black"
                     android:textSize="17dp" />
 
@@ -77,10 +111,27 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/pinbg"
-                    android:digits="0123456789"
+                    android:digits="0123456789#"
                     android:gravity="center"
                     android:inputType="number"
                     android:maxLength="1"
+                    android:textColor="@color/dark_black"
+                    android:textSize="17dp" />
+
+
+                <EditText
+                    android:id="@+id/pin3masked_et"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/pinbg"
+                    android:gravity="center"
+                    android:digits="0123456789#"
+                    android:inputType="phone"
+                    android:maxLength="1"
+                    android:visibility="gone"
+                    android:text="#"
                     android:textColor="@color/dark_black"
                     android:textSize="17dp" />
 
@@ -92,7 +143,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/pinbg"
-                    android:digits="0123456789"
+                    android:digits="0123456789#"
                     android:gravity="center"
                     android:inputType="number"
                     android:maxLength="1"

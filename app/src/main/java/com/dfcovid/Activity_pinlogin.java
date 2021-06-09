@@ -24,6 +24,7 @@ import com.dfcovid.remote.Class_ApiUtils;
 import com.dfcovid.remote.Interface_userservice;
 import com.google.gson.Gson;
 
+//import br.com.sapereaude.maskedEditText.MaskedEditText;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -49,7 +50,9 @@ public class Activity_pinlogin extends AppCompatActivity
     SharedPreferences.Editor editor_obj;
 
     TextView forgotpin_tv;
+    //EditText otp1_et,otp2_et,otp3_et,otp4_et;
     EditText otp1_et,otp2_et,otp3_et,otp4_et;
+    EditText pin1masked_et,pin2masked_et,pin3masked_et;
 
     Class_InternetDectector internetDectector;
     Boolean isInternetPresent = false;
@@ -57,16 +60,20 @@ public class Activity_pinlogin extends AppCompatActivity
     String str_userID,str_username,str_loginpin,str_isuser_loggedfromgoogle;
     String str_pin1,str_pin2,str_pin3,str_pin4;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp);
         forgotpin_tv=(TextView)findViewById(R.id.forgotpin_tv);
-        otp1_et=(EditText) findViewById(R.id.otp1_et);
+        otp1_et= (EditText) findViewById(R.id.otp1_et);
         otp2_et=(EditText) findViewById(R.id.otp2_et);
         otp3_et=(EditText) findViewById(R.id.otp3_et);
         otp4_et=(EditText) findViewById(R.id.otp4_et);
+        pin1masked_et=(EditText)findViewById(R.id.pin1masked_et);
+        pin2masked_et=(EditText)findViewById(R.id.pin2masked_et);
+        pin3masked_et=(EditText)findViewById(R.id.pin3masked_et);
 
         str_pin1=str_pin2=str_pin3=str_pin4="";
 
@@ -93,18 +100,59 @@ public class Activity_pinlogin extends AppCompatActivity
 
                 if(otp1_et.getText().toString().length()>=1)
                 {
-                    str_pin1=otp1_et.getText().toString().trim();
-                    otp1_et.setText("#");
+
+
+                    pin1masked_et.setVisibility(View.VISIBLE);
+                    otp1_et.setVisibility(View.GONE);
+                    pin1masked_et.setText("#");
+
+
                     otp2_et.requestFocus();
                     otp4_et.setText("");
                 }
+
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
+               // Toast.makeText(getApplicationContext(),"afterTextchanged",Toast.LENGTH_SHORT).show();
 
             }
         });
+
+
+
+
+
+        pin1masked_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2)
+            {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable)
+            {
+                if(pin1masked_et.getText().toString().length()==0)
+                {
+
+                    pin1masked_et.setVisibility(View.GONE);
+                    otp1_et.setVisibility(View.VISIBLE);
+                    otp1_et.setText("");
+                    otp4_et.setText("");
+                    otp1_et.requestFocus();
+                }
+            }
+        });
+
+
+
 
 
 
@@ -121,8 +169,10 @@ public class Activity_pinlogin extends AppCompatActivity
 
                 if(otp2_et.getText().toString().length()>=1)
                 {
-                    str_pin2=otp2_et.getText().toString().trim();
-                    otp2_et.setText("#");
+                    pin2masked_et.setVisibility(View.VISIBLE);
+                    otp2_et.setVisibility(View.GONE);
+                    pin2masked_et.setText("#");
+
                     otp3_et.requestFocus();
                     otp4_et.setText("");
                 }
@@ -133,6 +183,44 @@ public class Activity_pinlogin extends AppCompatActivity
 
             }
         });
+
+
+
+
+
+
+        pin2masked_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable)
+            {
+
+                if(pin2masked_et.getText().toString().length()==0)
+                {
+
+                    pin2masked_et.setVisibility(View.GONE);
+                    otp2_et.setVisibility(View.VISIBLE);
+                    otp2_et.setText("");
+                    otp4_et.setText("");
+                    otp2_et.requestFocus();
+                }
+
+            }
+        });
+
+
+
+
+
 
 
 
@@ -150,8 +238,15 @@ public class Activity_pinlogin extends AppCompatActivity
 
                 if(otp3_et.getText().toString().length()>=1)
                 {
-                    str_pin3=otp3_et.getText().toString().trim();
-                    otp3_et.setText("#");
+
+
+                    pin3masked_et.setVisibility(View.VISIBLE);
+                    otp3_et.setVisibility(View.GONE);
+                    pin3masked_et.setText("#");
+
+
+
+
                     otp4_et.requestFocus();
                     otp4_et.setText("");
                 }
@@ -162,6 +257,40 @@ public class Activity_pinlogin extends AppCompatActivity
 
             }
         });
+
+
+
+        pin3masked_et.addTextChangedListener(new TextWatcher()
+        {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2)
+            {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable)
+            {
+
+                if(pin3masked_et.getText().toString().length()==0)
+                {
+
+                    pin3masked_et.setVisibility(View.GONE);
+                    otp3_et.setVisibility(View.VISIBLE);
+                    otp3_et.setText("");
+                    otp4_et.setText("");
+                    otp3_et.requestFocus();
+                }
+            }
+        });
+
+
+
 
         otp4_et.addTextChangedListener(new TextWatcher()
         {
@@ -190,15 +319,15 @@ public class Activity_pinlogin extends AppCompatActivity
                         if (isInternetPresent)
                         {
 
-                           /* str_loginpin=otp1_et.getText().toString()+
+                            str_loginpin=otp1_et.getText().toString()+
                                     otp2_et.getText().toString()+
                                     otp3_et.getText().toString()+
-                                    otp4_et.getText().toString();*/
+                                    otp4_et.getText().toString();
 
-                            str_loginpin=str_pin1.trim()+
+                            /*str_loginpin=str_pin1.trim()+
                                     str_pin2.trim()+
                                     str_pin3.trim()+
-                                    otp4_et.getText().toString();
+                                    otp4_et.getText().toString();*/
 
 
                             AsyncTask_ValidateUserPIN();
