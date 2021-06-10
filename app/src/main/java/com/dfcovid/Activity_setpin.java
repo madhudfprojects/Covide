@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -41,7 +42,7 @@ public class Activity_setpin extends AppCompatActivity {
     Button confirm_pin_bt;
     EditText otp1_et,otp2_et,otp3_et,otp4_et;
     TextView title_tv;
-
+    EditText pin1masked_et,pin2masked_et,pin3masked_et,pin4masked_et;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -56,9 +57,19 @@ public class Activity_setpin extends AppCompatActivity {
         otp4_et=(EditText) findViewById(R.id.otp4_et);
         title_tv=(TextView)findViewById(R.id.title_tv);
 
+        pin1masked_et=(EditText)findViewById(R.id.pin1masked_et);
+        pin2masked_et=(EditText)findViewById(R.id.pin2masked_et);
+        pin3masked_et=(EditText)findViewById(R.id.pin3masked_et);
+        pin4masked_et=(EditText)findViewById(R.id.pin4masked_et);
 
+        otp1_et.setInputType(InputType.TYPE_CLASS_NUMBER);
+        otp2_et.setInputType(InputType.TYPE_CLASS_NUMBER);
+        otp3_et.setInputType(InputType.TYPE_CLASS_NUMBER);
+        otp4_et.setInputType(InputType.TYPE_CLASS_NUMBER);
 
         sharedpreference_setpin_Obj=getSharedPreferences(sharedpreference_setpincredential, Context.MODE_PRIVATE);
+
+
 
 
         Intent myIntent = getIntent();
@@ -91,6 +102,10 @@ public class Activity_setpin extends AppCompatActivity {
                 if(otp1_et.getText().toString().length()>=1)
                 {
 
+                    pin1masked_et.setVisibility(View.VISIBLE);
+                    otp1_et.setVisibility(View.GONE);
+                    pin1masked_et.setText("#");
+
                     otp2_et.requestFocus();
                 }
             }
@@ -100,6 +115,34 @@ public class Activity_setpin extends AppCompatActivity {
 
             }
         });
+
+
+
+
+        pin1masked_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable)
+            {
+                if(pin1masked_et.getText().toString().length()==0)
+                {
+                    pin1masked_et.setVisibility(View.GONE);
+                    otp1_et.setVisibility(View.VISIBLE);
+                    otp1_et.setText("");
+                    otp1_et.requestFocus();
+                }
+            }
+        });
+
 
 
 
@@ -117,7 +160,11 @@ public class Activity_setpin extends AppCompatActivity {
 
                 if(otp2_et.getText().toString().length()>=1)
                 {
-                    otp3_et.requestFocus();
+                        pin2masked_et.setVisibility(View.VISIBLE);
+                        otp2_et.setVisibility(View.GONE);
+                        pin2masked_et.setText("#");
+
+                        otp3_et.requestFocus();
                 }
             }
 
@@ -127,6 +174,32 @@ public class Activity_setpin extends AppCompatActivity {
             }
         });
 
+
+
+        pin2masked_et.addTextChangedListener(new TextWatcher()
+        {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable)
+            {
+                if(pin2masked_et.getText().toString().length()==0)
+                {
+                    pin2masked_et.setVisibility(View.GONE);
+                    otp2_et.setVisibility(View.VISIBLE);
+                    otp2_et.setText("");
+                    otp2_et.requestFocus();
+                }
+            }
+        });
 
 
 
@@ -143,6 +216,11 @@ public class Activity_setpin extends AppCompatActivity {
 
                 if(otp3_et.getText().toString().length()>=1)
                 {
+
+                        pin3masked_et.setVisibility(View.VISIBLE);
+                        otp3_et.setVisibility(View.GONE);
+                        pin3masked_et.setText("#");
+
                     otp4_et.requestFocus();
                 }
             }
@@ -152,6 +230,93 @@ public class Activity_setpin extends AppCompatActivity {
 
             }
         });
+
+        pin3masked_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable)
+            {
+                if(pin3masked_et.getText().toString().length()==0)
+                {
+                    pin3masked_et.setVisibility(View.GONE);
+                    otp3_et.setVisibility(View.VISIBLE);
+                    otp3_et.setText("");
+                    otp3_et.requestFocus();
+                }
+            }
+        });
+
+
+
+
+
+        otp4_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2)
+            {
+
+                if(otp4_et.getText().toString().length()>=1)
+                {
+
+                    pin4masked_et.setVisibility(View.VISIBLE);
+                    otp4_et.setVisibility(View.GONE);
+                    pin4masked_et.setText("#");
+
+                    otp4_et.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable)
+            {
+
+            }
+        });
+
+
+
+    pin4masked_et.addTextChangedListener(new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable)
+        {
+
+            if(pin4masked_et.getText().toString().length()==0)
+            {
+                pin4masked_et.setVisibility(View.GONE);
+                otp4_et.setVisibility(View.VISIBLE);
+                otp4_et.setText("");
+                otp4_et.requestFocus();
+            }
+        }
+    });
+
+
+
+
 
         confirm_pin_bt.setOnClickListener(new View.OnClickListener()
         {

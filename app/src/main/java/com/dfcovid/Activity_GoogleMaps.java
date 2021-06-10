@@ -98,6 +98,8 @@ public class Activity_GoogleMaps extends FragmentActivity implements OnMapReadyC
         setContentView(R.layout.activity_googlemaps);
         //Places.initialize(getApplicationContext(), "YOUR_API_KEY");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+
+
          mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
