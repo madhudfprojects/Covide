@@ -723,27 +723,32 @@ public class Activity_pinlogin extends AppCompatActivity
 
             return true;
         }
-
-       /* if(id==R.id.aboutus)
-        {
-
-
-           *//* internetDectector = new Class_InternetDectector(getApplicationContext());
-            isInternetPresent = internetDectector.isConnectingToInternet();
-
-            if (isInternetPresent)
+        else if(id==R.id.aboutus)
             {
-                Intent i = new Intent(Activity_HomeScreen.this, ClusterHomeActivity.class);
-                startActivity(i);
-                finish();
-                return true;
-            }
-            else{
-                Toast.makeText(getApplicationContext(), "No Internet", Toast.LENGTH_SHORT).show();
-            }*//*
-        }
 
-*/
+
+                internetDectector = new Class_InternetDectector(getApplicationContext());
+                isInternetPresent = internetDectector.isConnectingToInternet();
+
+                if (isInternetPresent)
+                {
+                    Intent i = new Intent(Activity_pinlogin.this, Activity_HelpLineCenter.class);
+                    i.putExtra("flag","from_Activity_pinlogin");
+                    i.putExtra("loggedinflag","loggegdin");
+                    startActivity(i);
+                    finish();
+                    return true;
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "No Internet", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+
+
+
+
+
 
 
         /*if (id == R.id.logout)
