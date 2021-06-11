@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.text.Html;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
@@ -185,49 +186,96 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService
              Log.e("SplitString",splittedmessagex.toString());
              Log.e("MessageString",messageBody.toString());*/
 
-             intent = new Intent(this, NotificationList_Activity.class);
 
 
             x++;
             int id = (int) System.currentTimeMillis();
+if(title.equalsIgnoreCase("Alert")) {
+    intent = new Intent(this, NotificationList_Activity.class);
 
-            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                        PendingIntent.FLAG_ONE_SHOT);
+    PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+            PendingIntent.FLAG_ONE_SHOT);
 
-                Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+    Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-                NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this,NOTIFICATION_CHANNEL_ID)
-                /*.setSmallIcon(R.mipmap.ic_launcher_round)*/
+    String help = messageBody;
+    help = help.replace("Alert On Usage", "<font color='#EE0000'>Alert On Usage</font>");
+    help = help.replace("Oxy Beds", "<font color='#3a7be4'>Oxy Beds</font>");
+    help = help.replace("ICU Beds", "<font color='#3a7be4'>ICU Beds</font>");
+    help = help.replace("Vent Beds", "<font color='#3a7be4'>Vent Beds</font>");
+    help = help.replace("..", "<br>");
+
+    //   txtDesc.setText(Html.fromHtml(help));
+    //   holder.itemName.setText(Html.fromHtml(help));
+
+    NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+            /*.setSmallIcon(R.mipmap.ic_launcher_round)*/
             //notificationBuilders
-                        .setSmallIcon(R.drawable.launch_icon)
-                        .setContentTitle(title)
-                        .setColor(Color.RED)
-                        .setStyle(new NotificationCompat.BigTextStyle().bigText(messageBody))
-                        .setAutoCancel(true)
-                        .setSound(defaultSoundUri)
-                        .setContentIntent(pendingIntent);
+            .setSmallIcon(R.drawable.launch_icon)
+           // .setContentTitle(title)
+            .setColor(Color.BLUE)
+            .setStyle(new NotificationCompat.BigTextStyle().bigText(Html.fromHtml(help)))
+            .setAutoCancel(true)
+            .setSound(defaultSoundUri)
+            .setContentIntent(pendingIntent);
 
-                NotificationManager notificationManager =
-                        (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+    NotificationManager notificationManager =
+            (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-                notificationManager.notify(id /* ID of notification */, notificationBuilder.build());
+    notificationManager.notify(id /* ID of notification */, notificationBuilder.build());
 
-             String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
+    String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
 
-             Log.e("currentDateTimeString", " : " + messageBody);
+    Log.e("currentDateTimeString", " : " + messageBody);
 
-             Database database = new Database(getApplicationContext());
-             int count=database.getCursorSize();
-             Log.e("tag","count myfirebase="+count);
-             if(count>0) {
-                 database.deleteNotifications();
-                 database.insertNotificationData(messageBody, currentDateTimeString);
-             }else {
-                 database.insertNotificationData(messageBody, currentDateTimeString);
-             }
-             int count1=database.getCursorSize();
-             Log.e("tag","count myfirebase1="+count1);
+    Database database = new Database(getApplicationContext());
+    int count = database.getCursorSize();
+    Log.e("tag", "count myfirebase=" + count);
+    if (count > 3) {
+        database.deleteNotifications();
+        database.insertNotificationData(messageBody, currentDateTimeString);
+    } else {
+        database.insertNotificationData(messageBody, currentDateTimeString);
+    }
+    int count1 = database.getCursorSize();
+    Log.e("tag", "count myfirebase1=" + count1);
+}else{
+    intent = new Intent(this, NotificationList_Activity.class);
 
+    PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+            PendingIntent.FLAG_ONE_SHOT);
+
+    Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+    NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this,NOTIFICATION_CHANNEL_ID)
+            /*.setSmallIcon(R.mipmap.ic_launcher_round)*/
+            // notificationBuilders
+            .setSmallIcon(R.drawable.launch_icon)
+           // .setContentTitle("LEADCampus")
+            /*.setContentText(messageBody)*/
+            .setColor(Color.BLUE)
+            .setStyle(new NotificationCompat.BigTextStyle().bigText(messageBody))
+            .setAutoCancel(true)
+            .setSound(defaultSoundUri)
+            .setContentIntent(pendingIntent);
+
+    NotificationManager notificationManager =
+            (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+    notificationManager.notify(id /* ID of notification */, notificationBuilder.build());
+
+    String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
+
+    Log.e("currentDateTimeString", " : " + messageBody);
+    Database database = new Database(getApplicationContext());
+    int count = database.getCursorSize();
+    Log.e("tag", "count myfirebase=" + count);
+    if (count > 3) {
+        database.deleteNotifications();
+        database.insertNotificationData(messageBody, currentDateTimeString);
+    } else {
+        database.insertNotificationData(messageBody, currentDateTimeString);
+    }}
              editor_obj = sharedpreference_notification_Obj.edit();
              editor_obj.putString(KeyValue_flag, "1");
              editor_obj.commit();
