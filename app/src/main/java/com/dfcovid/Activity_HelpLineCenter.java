@@ -50,6 +50,7 @@ public class Activity_HelpLineCenter extends AppCompatActivity {
             str_flag= extras.getString("flag");
             loggedinflag= extras.getString("loggedinflag");
 
+
            // i.putExtra("loggedinflag","loggegdout");
             Log.e("str_flag", str_flag);
             Log.e("loggedinflag", loggedinflag);
@@ -136,7 +137,21 @@ public class Activity_HelpLineCenter extends AppCompatActivity {
         //getMenuInflater().inflate(R.menu.home_menu, menu);
         getMenuInflater().inflate(R.menu.logout_menu, menu);
         MenuItem action_editProfile = menu.findItem(R.id.aboutus);
-        action_editProfile.setVisible(false);
+
+        if(loggedinflag.isEmpty())
+        {
+            action_editProfile.setVisible(false);
+        }else{
+            if(loggedinflag.equalsIgnoreCase("loggegdin"))
+            {
+                action_editProfile.setVisible(true);
+            }
+            if(loggedinflag.equalsIgnoreCase("loggegdout"))
+            {
+                action_editProfile.setVisible(false);
+            }
+        }
+
         return true;
     }
 
@@ -148,7 +163,8 @@ public class Activity_HelpLineCenter extends AppCompatActivity {
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
 
-        if (id == R.id.changepin) {
+        if (id == R.id.changepin)
+        {
 
 
             AlertDialog.Builder dialog = new AlertDialog.Builder(Activity_HelpLineCenter.this);
@@ -232,12 +248,12 @@ public class Activity_HelpLineCenter extends AppCompatActivity {
 //            }
         }
 
-//        else if(id==R.id.aboutus){
-//            Intent i = new Intent(Activity_HelpLineCenter.this, ContactUs_Activity.class);
-//            startActivity(i);
-//            finish();
-//
-//        }
+        else if(id==R.id.aboutus){
+            Intent i = new Intent(Activity_HelpLineCenter.this, ContactUs_Activity.class);
+            startActivity(i);
+            finish();
+
+        }
 
 
         return super.onOptionsItemSelected(item);
@@ -263,7 +279,14 @@ public class Activity_HelpLineCenter extends AppCompatActivity {
             i.putExtra("loggedinflag",loggedinflag);
             startActivity(i);
             finish();
-
+        }
+        else if(loggedinflag.equals("loggegdin") && str_flag.equals("from_Activity_pinlogin"))
+        {
+            Intent i = new Intent(Activity_HelpLineCenter.this, Activity_GoogleMaps.class);
+            i.putExtra("flag","from_Activity_HelpLineCenter");
+            i.putExtra("loggedinflag",loggedinflag);
+            startActivity(i);
+            finish();
         }
 //        if(str_flag.equals("1")) {
 //            Intent i = new Intent(Activity_HelpLineCenter.this, Dashboard_Activity.class);
